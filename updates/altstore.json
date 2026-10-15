@@ -13,11 +13,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.3.0",
+          "version": "0.4.0",
           "date": "2026-10-15",
-          "localizedDescription": "Notificações em segundo plano, QR para instalar no iPhone, fonte no tamanho do sistema e login do Google mais bonito.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.3.0/Bots.ipa",
-          "size": 7004638,
+          "localizedDescription": "Laterais redimensionáveis no Mac, novo mascote Bix, perfil do Bot reorganizado no iPhone e QR para instalar.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.4.0/Bots.ipa",
+          "size": 7085813,
           "minOSVersion": "18.0"
         }
       ]

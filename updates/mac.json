@@ -1,7 +1,7 @@
 {
-  "version": "0.3.0",
-  "build": 3,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.3.0/Bots-mac.zip",
-  "signature": "OvKABK4SJPr2YfWq3qtlAtEXQz+apIL4CYQv/C/k8EHRj+A8VHcLnw92CWETim3k2hqC+NJANL4BBUIJxGpCCw==",
-  "notes": "Notificações em segundo plano, QR para instalar no iPhone, fonte no tamanho do sistema e login do Google mais bonito."
+  "version": "0.4.0",
+  "build": 4,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.4.0/Bots-mac.zip",
+  "signature": "1fQSceNRWuBEONO+d7cqsCIZdkDYGwhZ1EO7BvIRmbZalWUIkS2ihUBULF+UQmgm67anj1ExaaGyY0l0o6bVAA==",
+  "notes": "Laterais redimensionáveis no Mac, novo mascote Bix, perfil do Bot reorganizado no iPhone e QR para instalar."
 }
