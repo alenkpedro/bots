@@ -2,6 +2,10 @@
   "name": "Bots",
   "identifier": "io.github.alenkpedro.bots",
   "sourceURL": "https://alenkpedro.github.io/bots/updates/altstore.json",
+  "iconURL": "https://alenkpedro.github.io/bots/updates/icon.png",
+  "subtitle": "Seus Bots no iPhone",
+  "website": "https://alenkpedro.github.io/bots",
+  "description": "A fonte oficial do Bots: o app para conversar com os seus Bots e acompanhar o que eles fazem no seu Mac.",
   "apps": [
     {
       "name": "Bots",
