@@ -13,11 +13,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.5.3",
+          "version": "0.5.4",
           "date": "2026-10-15",
-          "localizedDescription": "Nos grupos, cada Bot é ele mesmo (eles se confundiam e respondiam como outro). Mensagem sua nunca espera: o Bot deixa o que estiver fazendo, te atende e depois retoma. Nos apps conectados, a opção Pergunta só o que muda: o Bot lê sozinho e pede antes de mudar. Novo conector RevenueCat, só leitura. Os logos dos apps voltam a carregar em Macs novos, e Procurar atualizações fica no topo de Ajustes → Geral.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.5.3/Bots.ipa",
-          "size": 7216777,
+          "localizedDescription": "Cada arquivo aparece no chat do Bot que o criou. Na ligação, o Bot responde mais rápido e o que ele manda por escrito (um caminho, um link) chega no chat na hora. Mensagens longas por voz não se perdem. A tela do computador dos Bots funciona em Macs novos. Comandos no seu Mac: o meio-termo agora se chama Decidir por mim. No Mac, dá para selecionar parte do texto das mensagens, os arquivos têm Abrir com, e o perfil do Bot ficou organizado em cartões. O Claude sem login avisa o que fazer, e /login abre o login.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.5.4/Bots.ipa",
+          "size": 7225565,
           "minOSVersion": "18.0"
         }
       ]
