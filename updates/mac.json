@@ -1,7 +1,11 @@
 {
-  "version": "0.5.4",
-  "build": 10,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.5.4/Bots-mac.zip",
-  "signature": "ug1kalx2ee0jwB0PvDSQkorf5ABWyRNz0aTXRH2SLvbQPxt6RDPLUZhx8wcvdEsD7Td2qGK9ubXB9JB2u7ziBw==",
-  "notes": "Cada arquivo aparece no chat do Bot que o criou. Na ligação, o Bot responde mais rápido e o que ele manda por escrito (um caminho, um link) chega no chat na hora. Mensagens longas por voz não se perdem. A tela do computador dos Bots funciona em Macs novos. Comandos no seu Mac: o meio-termo agora se chama Decidir por mim. No Mac, dá para selecionar parte do texto das mensagens, os arquivos têm Abrir com, e o perfil do Bot ficou organizado em cartões. O Claude sem login avisa o que fazer, e /login abre o login."
+  "version": "0.5.5",
+  "build": 11,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.5.5/Bots-mac.zip",
+  "signature": "NSih77PoMuCc/KYikPkNJEVWD9jgWtzHbGZx7Pb5KxcOpgdnx4Xjb55/9WofRNDp5FWOCEjqctlAmefuX9f1Bg==",
+  "notes": "Novidades depois de cada atualização, botão de parar o Bot, Bots que não travam mais na fila nem ficam surdos na ligação, aprovação de acesso para contas novas, lista de conversas mais limpa e atualizações com metade do tamanho.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.5.5/Bots-mac-arm64.zip",
+  "signature_arm64": "7h9mEyE6lNZe8Zkwqe7vS2g+Q1I4kqCs0ajrO+2miyGgyMaSWUbaNsaxtaAXPS7k3tCDrsgzuJO1cH5VZiSoBA==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.5.5/Bots-mac-x86_64.zip",
+  "signature_x86_64": "vrMeacehdcAeTCr09bJX7PVRnUutJpRa5TaWcIOy3jEauxpoGq4o3WpuOjZdEojco+NQmzVy/rc7rOTRPI4FBw=="
 }

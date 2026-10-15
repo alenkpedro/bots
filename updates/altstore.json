@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.5.4",
+          "version": "0.5.5",
           "date": "2026-10-15",
-          "localizedDescription": "Cada arquivo aparece no chat do Bot que o criou. Na ligação, o Bot responde mais rápido e o que ele manda por escrito (um caminho, um link) chega no chat na hora. Mensagens longas por voz não se perdem. A tela do computador dos Bots funciona em Macs novos. Comandos no seu Mac: o meio-termo agora se chama Decidir por mim. No Mac, dá para selecionar parte do texto das mensagens, os arquivos têm Abrir com, e o perfil do Bot ficou organizado em cartões. O Claude sem login avisa o que fazer, e /login abre o login.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.5.4/Bots.ipa",
-          "size": 7225565,
+          "localizedDescription": "Novidades depois de cada atualização, botão de parar o Bot, Bots que não travam mais na fila nem ficam surdos na ligação, aprovação de acesso para contas novas, lista de conversas mais limpa e atualizações com metade do tamanho.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.5.5/Bots.ipa",
+          "size": 7296929,
           "minOSVersion": "18.0"
         }
       ]
