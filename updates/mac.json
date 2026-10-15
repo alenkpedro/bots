@@ -1,7 +1,7 @@
 {
-  "version": "0.5.1",
-  "build": 7,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.5.1/Bots-mac.zip",
-  "signature": "9iGbn1vakgHlqgkYqwwd9nbZOnp+EaQ7BpZPO2q/j/ImLhHVF3F3agNhrpRLTd6LebYh2bMtIPt9AZj/Ais9Bg==",
-  "notes": "Corrige o app fechando logo depois de entrar com Google ou GitHub e o agente que não religava (agora ele volta sozinho, e o aviso tem o botão Ligar o agente). A instalação do Claude Code, do computador dos Bots e da voz acontece dentro do app, com o andamento na tela. Nas ligações, o Bot espera você pensar e para quando você fala por cima; novas vozes em português: Lia, Bia, Caio e Rui. No iPhone, as mensagens sobem junto com o teclado e o campo de mensagem ficou centralizado."
+  "version": "0.5.2",
+  "build": 8,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.5.2/Bots-mac.zip",
+  "signature": "uxTgzeU+iQzrJpblYTUUgvK/eioufI5ogETjFu0WO4F6b2g8Y1som7AsGI2XuDvQzK6m5iWuNqfMtmzJlkDTAg==",
+  "notes": "Escolha do cérebro: Claude, ChatGPT, os que já estão no seu Mac, o grátis ou um modelo local, cada um com o login do Mac ou uma conta só dos Bots. Novo modo Permitir tudo para os comandos, e a revisão automática deixa passar o que os apps só leem. Mensagem nova no meio de uma tarefa é lida na hora. Shift+Enter quebra linha, a função de cada Bot aparece ao lado do nome, e dá para mudar o acesso de cada Bot direto no perfil."
 }
