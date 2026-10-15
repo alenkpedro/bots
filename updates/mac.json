@@ -1,7 +1,7 @@
 {
-  "version": "0.4.1",
-  "build": 5,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.4.1/Bots-mac.zip",
-  "signature": "nppA8Z4Pde3J+O+sJ6rnbnQJZM+amx3/oM5eTvfI4UmiRMzq1P1d9WivgfR51m+nF7GeYDAuxIj7yOYiYm5kCQ==",
-  "notes": "App do Mac assinado com certificado de desenvolvedor."
+  "version": "0.5.0",
+  "build": 6,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.5.0/Bots-mac.zip",
+  "signature": "2qs8GsbefDtFuhRTHqQFMg7qeuh/8U9M7Cdk08SC3eK3oStaNOBKFMvJJmuu5fpLa5wMwKVP8KDITtXUl4X5DQ==",
+  "notes": "Animações do Bot pensando e chegando, novo mascote Bix, laterais redimensionáveis, motor DeepSeek grátis no computador dos Bots, loja do iPhone dentro do app e mais."
 }

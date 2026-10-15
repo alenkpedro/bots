@@ -13,11 +13,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.4.1",
+          "version": "0.5.0",
           "date": "2026-10-15",
-          "localizedDescription": "App do Mac assinado com certificado de desenvolvedor.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.4.1/Bots.ipa",
-          "size": 7085813,
+          "localizedDescription": "Animações do Bot pensando e chegando, novo mascote Bix, laterais redimensionáveis, motor DeepSeek grátis no computador dos Bots, loja do iPhone dentro do app e mais.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.5.0/Bots.ipa",
+          "size": 7153076,
           "minOSVersion": "18.0"
         }
       ]
