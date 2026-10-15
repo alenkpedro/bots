@@ -13,11 +13,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.5.2",
+          "version": "0.5.3",
           "date": "2026-10-15",
-          "localizedDescription": "Escolha do cérebro: Claude, ChatGPT, os que já estão no seu Mac, o grátis ou um modelo local, cada um com o login do Mac ou uma conta só dos Bots. Novo modo Permitir tudo para os comandos, e a revisão automática deixa passar o que os apps só leem. Mensagem nova no meio de uma tarefa é lida na hora. Shift+Enter quebra linha, a função de cada Bot aparece ao lado do nome, e dá para mudar o acesso de cada Bot direto no perfil.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.5.2/Bots.ipa",
-          "size": 7211284,
+          "localizedDescription": "Nos grupos, cada Bot é ele mesmo (eles se confundiam e respondiam como outro). Mensagem sua nunca espera: o Bot deixa o que estiver fazendo, te atende e depois retoma. Nos apps conectados, a opção Pergunta só o que muda: o Bot lê sozinho e pede antes de mudar. Novo conector RevenueCat, só leitura. Os logos dos apps voltam a carregar em Macs novos, e Procurar atualizações fica no topo de Ajustes → Geral.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.5.3/Bots.ipa",
+          "size": 7216777,
           "minOSVersion": "18.0"
         }
       ]
