@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.5.5",
+          "version": "0.5.6",
           "date": "2026-10-15",
-          "localizedDescription": "Novidades depois de cada atualização, botão de parar o Bot, Bots que não travam mais na fila nem ficam surdos na ligação, aprovação de acesso para contas novas, lista de conversas mais limpa e atualizações com metade do tamanho.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.5.5/Bots.ipa",
-          "size": 7296929,
+          "localizedDescription": "Mensagens não somem mais depois de abrir a conversa pela notificação, o campo de texto não fica cortado com o perfil aberto e conversas longas abrem na última mensagem.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.5.6/Bots.ipa",
+          "size": 7303881,
           "minOSVersion": "18.0"
         }
       ]

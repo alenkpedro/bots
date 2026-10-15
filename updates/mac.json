@@ -1,11 +1,11 @@
 {
-  "version": "0.5.5",
-  "build": 11,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.5.5/Bots-mac.zip",
-  "signature": "NSih77PoMuCc/KYikPkNJEVWD9jgWtzHbGZx7Pb5KxcOpgdnx4Xjb55/9WofRNDp5FWOCEjqctlAmefuX9f1Bg==",
-  "notes": "Novidades depois de cada atualização, botão de parar o Bot, Bots que não travam mais na fila nem ficam surdos na ligação, aprovação de acesso para contas novas, lista de conversas mais limpa e atualizações com metade do tamanho.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.5.5/Bots-mac-arm64.zip",
-  "signature_arm64": "7h9mEyE6lNZe8Zkwqe7vS2g+Q1I4kqCs0ajrO+2miyGgyMaSWUbaNsaxtaAXPS7k3tCDrsgzuJO1cH5VZiSoBA==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.5.5/Bots-mac-x86_64.zip",
-  "signature_x86_64": "vrMeacehdcAeTCr09bJX7PVRnUutJpRa5TaWcIOy3jEauxpoGq4o3WpuOjZdEojco+NQmzVy/rc7rOTRPI4FBw=="
+  "version": "0.5.6",
+  "build": 12,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.5.6/Bots-mac.zip",
+  "signature": "vrSz3RfOCDQvN09ikYpYIfS9B9uWYadV3XlKurhvOpGX+LspYfhAJAKBlY7FRDXLOqR962CVXtjaVL9z4z8JCw==",
+  "notes": "Mensagens não somem mais depois de abrir a conversa pela notificação, o campo de texto não fica cortado com o perfil aberto e conversas longas abrem na última mensagem.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.5.6/Bots-mac-arm64.zip",
+  "signature_arm64": "vpIBQP+/aHVtys5DKI8opVBF9oIktiu4FmJfiPCPylWNOAA6KAD6XsaWVtrb3P/v6G9u8T2gu/bH9huIEOS8Bg==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.5.6/Bots-mac-x86_64.zip",
+  "signature_x86_64": "9UwmXXr+bkedxnR9Ipd7G/obSIn1XSogP8baRCHVVg+JXAOWdHX1hUZBh0WbwotzI6/W+iCcV3CLMVuO+BH7Aw=="
 }
