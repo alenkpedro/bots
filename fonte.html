@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bots no iPhone</title>
+<meta name="description" content="Adicione a fonte do Bots na sua loja do iPhone.">
+<link rel="stylesheet" href="style.css">
+<style>
+  .card { margin: 24px 0; padding: 20px; border: 1px solid var(--line); border-radius: 18px; }
+  .src { display:block; font: 15px/1.4 ui-monospace, Menlo, monospace; word-break: break-all; color: var(--text); margin: 0 0 16px; }
+  .btn { display:block; width:100%; box-sizing:border-box; padding: 14px 16px; border-radius: 14px; border: 0;
+         font: 600 17px/1.2 -apple-system, system-ui, sans-serif; text-align:center; text-decoration:none; cursor:pointer; }
+  .primary { background: var(--accent); color: #fff; }
+  .secondary { background: transparent; color: var(--accent); border: 1px solid var(--line); margin-top: 10px; }
+  .stores { display:grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+  .stores .btn { margin: 0; }
+  ol li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Bots no iPhone</h1>
+  <p class="lead">Copie a fonte e adicione na loja que você usa para instalar apps fora da App Store.</p>
+
+  <div class="card">
+    <code class="src" id="src">https://alenkpedro.github.io/bots/updates/altstore.json</code>
+    <button class="btn primary" id="copy" type="button">Copiar link da fonte</button>
+    <div class="stores">
+      <a class="btn secondary" href="altstore://source?url=https://alenkpedro.github.io/bots/updates/altstore.json">Abrir na AltStore</a>
+      <a class="btn secondary" href="sidestore://source?url=https://alenkpedro.github.io/bots/updates/altstore.json">Abrir na SideStore</a>
+      <a class="btn secondary" href="feather://source/https://alenkpedro.github.io/bots/updates/altstore.json">Abrir na Feather</a>
+      <a class="btn secondary" href="livecontainer://source?url=https://alenkpedro.github.io/bots/updates/altstore.json">Abrir no LiveContainer</a>
+    </div>
+  </div>
+
+  <h2>Na FlareStore</h2>
+  <ol>
+    <li>Toque em <em>Copiar link da fonte</em>, aqui em cima.</li>
+    <li>Abra a FlareStore e vá na aba de fontes (Sources ou Repos).</li>
+    <li>Toque em <strong>+</strong>, cole o link e confirme.</li>
+    <li>Procure o Bots na fonte e toque em instalar. As novas versões aparecem por lá.</li>
+  </ol>
+
+  <p class="small">Ainda não tem uma loja? Veja <a href="index.html#instalar">como instalar o Bots</a>.</p>
+</main>
+<script>
+  const button = document.getElementById('copy');
+  const text = document.getElementById('src').textContent.trim();
+  button.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(text); }
+    catch {
+      const r = document.createRange(); r.selectNodeContents(document.getElementById('src'));
+      const s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand('copy'); s.removeAllRanges();
+    }
+    button.textContent = 'Copiado';
+    setTimeout(() => { button.textContent = 'Copiar link da fonte'; }, 1800);
+  });
+</script>
+</body>
+</html>
