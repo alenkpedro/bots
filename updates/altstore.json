@@ -13,10 +13,10 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.4.0",
+          "version": "0.4.1",
           "date": "2026-10-15",
-          "localizedDescription": "Laterais redimensionáveis no Mac, novo mascote Bix, perfil do Bot reorganizado no iPhone e QR para instalar.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.4.0/Bots.ipa",
+          "localizedDescription": "App do Mac assinado com certificado de desenvolvedor.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.4.1/Bots.ipa",
           "size": 7085813,
           "minOSVersion": "18.0"
         }

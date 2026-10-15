@@ -1,7 +1,7 @@
 {
-  "version": "0.4.0",
-  "build": 4,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.4.0/Bots-mac.zip",
-  "signature": "1fQSceNRWuBEONO+d7cqsCIZdkDYGwhZ1EO7BvIRmbZalWUIkS2ihUBULF+UQmgm67anj1ExaaGyY0l0o6bVAA==",
-  "notes": "Laterais redimensionáveis no Mac, novo mascote Bix, perfil do Bot reorganizado no iPhone e QR para instalar."
+  "version": "0.4.1",
+  "build": 5,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.4.1/Bots-mac.zip",
+  "signature": "nppA8Z4Pde3J+O+sJ6rnbnQJZM+amx3/oM5eTvfI4UmiRMzq1P1d9WivgfR51m+nF7GeYDAuxIj7yOYiYm5kCQ==",
+  "notes": "App do Mac assinado com certificado de desenvolvedor."
 }
