@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.5.6",
+          "version": "0.5.7",
           "date": "2026-10-15",
-          "localizedDescription": "Mensagens não somem mais depois de abrir a conversa pela notificação, o campo de texto não fica cortado com o perfil aberto e conversas longas abrem na última mensagem.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.5.6/Bots.ipa",
-          "size": 7303881,
+          "localizedDescription": "Criptografia de ponta a ponta (Ajustes › Privacidade no Mac; o iPhone recebe a chave por QR), avatares de grupo que seguem a forma de cada Bot e a tela de Novidades no tamanho certo.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.5.7/Bots.ipa",
+          "size": 7418593,
           "minOSVersion": "18.0"
         }
       ]

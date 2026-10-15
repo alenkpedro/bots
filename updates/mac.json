@@ -1,11 +1,11 @@
 {
-  "version": "0.5.6",
-  "build": 12,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.5.6/Bots-mac.zip",
-  "signature": "vrSz3RfOCDQvN09ikYpYIfS9B9uWYadV3XlKurhvOpGX+LspYfhAJAKBlY7FRDXLOqR962CVXtjaVL9z4z8JCw==",
-  "notes": "Mensagens não somem mais depois de abrir a conversa pela notificação, o campo de texto não fica cortado com o perfil aberto e conversas longas abrem na última mensagem.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.5.6/Bots-mac-arm64.zip",
-  "signature_arm64": "vpIBQP+/aHVtys5DKI8opVBF9oIktiu4FmJfiPCPylWNOAA6KAD6XsaWVtrb3P/v6G9u8T2gu/bH9huIEOS8Bg==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.5.6/Bots-mac-x86_64.zip",
-  "signature_x86_64": "9UwmXXr+bkedxnR9Ipd7G/obSIn1XSogP8baRCHVVg+JXAOWdHX1hUZBh0WbwotzI6/W+iCcV3CLMVuO+BH7Aw=="
+  "version": "0.5.7",
+  "build": 13,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.5.7/Bots-mac.zip",
+  "signature": "8Pt7ZiCMBeHecdi5+DMT96D+JcWExNruP8D9WCoaKwMGojTaLWgRIZDSYGP6D4x6s2jsX2zNXay4U70rMsBqBg==",
+  "notes": "Criptografia de ponta a ponta (Ajustes › Privacidade no Mac; o iPhone recebe a chave por QR), avatares de grupo que seguem a forma de cada Bot e a tela de Novidades no tamanho certo.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.5.7/Bots-mac-arm64.zip",
+  "signature_arm64": "GHrV/sU6Ivbwor1eGp0d+7UmKb/+Kse2IJomZYNlV8pPtMi53xM+7fztJ+q80EZio9psUhhmXuxMyRZh+9HhBQ==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.5.7/Bots-mac-x86_64.zip",
+  "signature_x86_64": "C9itzJhdbBxaRHpODgdKbgsG8QAL7Gk0NbGkJcZXFQ2wS7aJ0CqObGgVkOjZcZs3sOxf4bx+uWJo4WjmxfjMCA=="
 }
