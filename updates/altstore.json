@@ -1,0 +1,27 @@
+{
+  "name": "Bots",
+  "identifier": "io.github.alenkpedro.bots",
+  "sourceURL": "https://alenkpedro.github.io/bots/updates/altstore.json",
+  "apps": [
+    {
+      "name": "Bots",
+      "bundleIdentifier": "com.pedroalencar.botclone.ios",
+      "developerName": "Pedro Alencar",
+      "subtitle": "Seus Bots no iPhone",
+      "localizedDescription": "Converse com os seus Bots, acompanhe o que eles fazem no seu Mac e aprove o que precisar.",
+      "iconURL": "https://alenkpedro.github.io/bots/updates/icon.png",
+      "tintColor": "2F6FE4",
+      "versions": [
+        {
+          "version": "0.2.0",
+          "date": "2026-10-15",
+          "localizedDescription": "Importar Bots do marketplace, aviso de mensagens dentro do app e tela Sobre no iPhone.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.2.0/Bots.ipa",
+          "size": 7016177,
+          "minOSVersion": "18.0"
+        }
+      ]
+    }
+  ],
+  "news": []
+}
