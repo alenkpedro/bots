@@ -13,11 +13,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.5.0",
+          "version": "0.5.1",
           "date": "2026-10-15",
-          "localizedDescription": "Animações do Bot pensando e chegando, novo mascote Bix, laterais redimensionáveis, motor DeepSeek grátis no computador dos Bots, loja do iPhone dentro do app e mais.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.5.0/Bots.ipa",
-          "size": 7153076,
+          "localizedDescription": "Corrige o app fechando logo depois de entrar com Google ou GitHub e o agente que não religava (agora ele volta sozinho, e o aviso tem o botão Ligar o agente). A instalação do Claude Code, do computador dos Bots e da voz acontece dentro do app, com o andamento na tela. Nas ligações, o Bot espera você pensar e para quando você fala por cima; novas vozes em português: Lia, Bia, Caio e Rui. No iPhone, as mensagens sobem junto com o teclado e o campo de mensagem ficou centralizado.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.5.1/Bots.ipa",
+          "size": 7176399,
           "minOSVersion": "18.0"
         }
       ]

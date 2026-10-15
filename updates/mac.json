@@ -1,7 +1,7 @@
 {
-  "version": "0.5.0",
-  "build": 6,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.5.0/Bots-mac.zip",
-  "signature": "2qs8GsbefDtFuhRTHqQFMg7qeuh/8U9M7Cdk08SC3eK3oStaNOBKFMvJJmuu5fpLa5wMwKVP8KDITtXUl4X5DQ==",
-  "notes": "Animações do Bot pensando e chegando, novo mascote Bix, laterais redimensionáveis, motor DeepSeek grátis no computador dos Bots, loja do iPhone dentro do app e mais."
+  "version": "0.5.1",
+  "build": 7,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.5.1/Bots-mac.zip",
+  "signature": "9iGbn1vakgHlqgkYqwwd9nbZOnp+EaQ7BpZPO2q/j/ImLhHVF3F3agNhrpRLTd6LebYh2bMtIPt9AZj/Ais9Bg==",
+  "notes": "Corrige o app fechando logo depois de entrar com Google ou GitHub e o agente que não religava (agora ele volta sozinho, e o aviso tem o botão Ligar o agente). A instalação do Claude Code, do computador dos Bots e da voz acontece dentro do app, com o andamento na tela. Nas ligações, o Bot espera você pensar e para quando você fala por cima; novas vozes em português: Lia, Bia, Caio e Rui. No iPhone, as mensagens sobem junto com o teclado e o campo de mensagem ficou centralizado."
 }
