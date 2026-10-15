@@ -1,11 +1,11 @@
 {
-  "version": "0.5.7",
-  "build": 13,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.5.7/Bots-mac.zip",
-  "signature": "8Pt7ZiCMBeHecdi5+DMT96D+JcWExNruP8D9WCoaKwMGojTaLWgRIZDSYGP6D4x6s2jsX2zNXay4U70rMsBqBg==",
-  "notes": "Criptografia de ponta a ponta (Ajustes › Privacidade no Mac; o iPhone recebe a chave por QR), avatares de grupo que seguem a forma de cada Bot e a tela de Novidades no tamanho certo.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.5.7/Bots-mac-arm64.zip",
-  "signature_arm64": "GHrV/sU6Ivbwor1eGp0d+7UmKb/+Kse2IJomZYNlV8pPtMi53xM+7fztJ+q80EZio9psUhhmXuxMyRZh+9HhBQ==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.5.7/Bots-mac-x86_64.zip",
-  "signature_x86_64": "C9itzJhdbBxaRHpODgdKbgsG8QAL7Gk0NbGkJcZXFQ2wS7aJ0CqObGgVkOjZcZs3sOxf4bx+uWJo4WjmxfjMCA=="
+  "version": "0.5.8",
+  "build": 14,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.5.8/Bots-mac.zip",
+  "signature": "cimceQ0m1CVncdCsrybN5o+0Y61E3sKcgnpDfCGi8O1pJIx4LcRwYzVpUZemh1KXxGA16sjnM/kjSOcbpH1gCg==",
+  "notes": "No iPhone: anexar PDFs e arquivos do iCloud, e abrir os arquivos que os Bots entregam. Com a criptografia ligada, nem o nome dos arquivos fica no servidor.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.5.8/Bots-mac-arm64.zip",
+  "signature_arm64": "pe3PnrajXce1097yzjXNEmu+Tvc9rMTtLpJKTS+nwXLswFsaBPbIRKbUIeJ7NpQYHO2VZbjmIujeUkDcrGgLCQ==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.5.8/Bots-mac-x86_64.zip",
+  "signature_x86_64": "hpIhQvjNIk06EzT6iHhqRdtuAVzPPNU9YuZpOSU/C94gngnmzVUkoYNgGLTIA96IsNcq3W1FtnIRujq44snxBQ=="
 }

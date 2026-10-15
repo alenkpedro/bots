@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.5.7",
+          "version": "0.5.8",
           "date": "2026-10-15",
-          "localizedDescription": "Criptografia de ponta a ponta (Ajustes › Privacidade no Mac; o iPhone recebe a chave por QR), avatares de grupo que seguem a forma de cada Bot e a tela de Novidades no tamanho certo.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.5.7/Bots.ipa",
-          "size": 7418593,
+          "localizedDescription": "No iPhone: anexar PDFs e arquivos do iCloud, e abrir os arquivos que os Bots entregam. Com a criptografia ligada, nem o nome dos arquivos fica no servidor.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.5.8/Bots.ipa",
+          "size": 7421814,
           "minOSVersion": "18.0"
         }
       ]
