@@ -13,11 +13,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.2.0",
+          "version": "0.3.0",
           "date": "2026-10-15",
-          "localizedDescription": "Importar Bots do marketplace, aviso de mensagens dentro do app e tela Sobre no iPhone.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.2.0/Bots.ipa",
-          "size": 7016177,
+          "localizedDescription": "Notificações em segundo plano, QR para instalar no iPhone, fonte no tamanho do sistema e login do Google mais bonito.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.3.0/Bots.ipa",
+          "size": 7004638,
           "minOSVersion": "18.0"
         }
       ]
