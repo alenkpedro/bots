@@ -1,11 +1,11 @@
 {
-  "version": "0.6.9",
-  "build": 26,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.6.9/Bots-mac.zip",
-  "signature": "RiJ+xvWZdDfVjcvBcLLONezudHF8uxQvzLPwAmvAesaL4pDKo6+R4jN/9ivL7aYTzxMW3zoQZ0IM0d9HaZrlDQ==",
-  "notes": "Mensagem para a equipe toda; iPhone sem Conectando ao voltar.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.6.9/Bots-mac-arm64.zip",
-  "signature_arm64": "NyzROuRpa4ghMqADkHbsKc2hNky0vO9fp3AAsw9pVJg+IeiYKIO8EhYMpYoORPKPsI63r55YyExgenvtAHQuCg==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.6.9/Bots-mac-x86_64.zip",
-  "signature_x86_64": "HjUaFgpIvCPp0tEV4tMVapnw6U/9rAIyKZEbgHaXWobpjIt8TbgPu/I5hJytXfovztetVtvaZzQpeJBZ+cGSCw=="
+  "version": "0.7.0",
+  "build": 27,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.7.0/Bots-mac.zip",
+  "signature": "sdimo1Z32X2x4cy9nts5WrncU3n4K/cd9av+RAYb/FF4L702bRyICbpoYXDMxK3X8/5btfX4aOIVb1wu2CfpBw==",
+  "notes": "Grupos em ordem, sempre permitir e liberar pastas, passo a passo, fila de mensagens, memória compartilhada, modelo reserva, ⌘F e versões salvas de cada Bot",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.7.0/Bots-mac-arm64.zip",
+  "signature_arm64": "DY7Vgl7M1f4qrECsVjgZO9PX1ikCVJCmWZ+zHh3pMKCqOe+jO93DIBRWl0Qi30A7MWRj8kodw2xA8ILqnrcCBA==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.7.0/Bots-mac-x86_64.zip",
+  "signature_x86_64": "Q9RYnzFZX/uL9+XGlvmKf0Pgk6ml07ZI2NaqVPUknUSLxZfw+hugUSzVNxPtDV8hFXCUp47tODHsTP4p/XReCQ=="
 }

@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.6.9",
+          "version": "0.7.0",
           "date": "2026-10-16",
-          "localizedDescription": "Mensagem para a equipe toda; iPhone sem Conectando ao voltar.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.6.9/Bots.ipa",
-          "size": 7770782,
+          "localizedDescription": "Grupos em ordem, sempre permitir e liberar pastas, passo a passo, fila de mensagens, memória compartilhada, modelo reserva, ⌘F e versões salvas de cada Bot",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.7.0/Bots.ipa",
+          "size": 7903993,
           "minOSVersion": "18.0"
         }
       ]
