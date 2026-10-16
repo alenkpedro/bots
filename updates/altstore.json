@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.6.3",
+          "version": "0.6.4",
           "date": "2026-10-16",
-          "localizedDescription": "Equipes com líder, quadro de tarefas e base de conhecimento; uma conta por Bot em qualquer cérebro; apps por Bot; Frame.io; atalhos no /; PDF no chat e versões de arquivos; @menção no iPhone.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.6.3/Bots.ipa",
-          "size": 7726409,
+          "localizedDescription": "Equipes na lista de conversas com os Bots à mostra; líder tira Bot da equipe; Bot principal demite (oculta).",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.6.4/Bots.ipa",
+          "size": 7752832,
           "minOSVersion": "18.0"
         }
       ]
