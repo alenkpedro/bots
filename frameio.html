@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Voltando para o Bots</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main style="max-width:520px;margin:15vh auto;padding:0 20px;text-align:center">
+  <h1>Voltando para o Bots…</h1>
+  <p id="msg">Se o Bots não abrir sozinho, toque no botão.</p>
+  <p><a id="open" href="#" style="display:inline-block;padding:10px 18px;border-radius:10px;background:#0a84ff;color:#fff;text-decoration:none">Abrir o Bots</a></p>
+</main>
+<script>
+  // Adobe sends the Frame.io sign-in back here (it only accepts https). This page only hands the
+  // code to the Bots app on this Mac; nothing is stored or sent anywhere else.
+  var target = "bots-app://frameio-callback" + location.search;
+  document.getElementById("open").href = target;
+  if (!location.search) document.getElementById("msg").textContent = "Nada para entregar ao Bots aqui.";
+  else location.href = target;
+</script>
+</body>
+</html>
