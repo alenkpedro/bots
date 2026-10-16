@@ -1,11 +1,11 @@
 {
-  "version": "0.6.5",
-  "build": 21,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.6.5/Bots-mac.zip",
-  "signature": "BoDWfULFJ4Iplob4m1fKDjZzcezG1Ed6pIqtGb9ZIwbcQs1l3oA6D8SGVEYJRxYAJsIM8/3k//3nWmvsJ17DAQ==",
-  "notes": "Conversas dos Bots dentro da equipe, sem repetir na lista; visual mais limpo.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.6.5/Bots-mac-arm64.zip",
-  "signature_arm64": "ND27FtDCOS30h+XRhuwi21g4rSaVTsdk83IODA8Y+3W13ZMlawQr3M5RDQAF03f/I7z7OsDsrM1WsOpMsNpXAA==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.6.5/Bots-mac-x86_64.zip",
-  "signature_x86_64": "Di69SMEMgjDewYb19WzxHm34U4isyazeBpbZS2NQP0EB7MeyCOscXZgm1c5BvYRGv+C26F2PNdk7g7AN7SVrCQ=="
+  "version": "0.6.6",
+  "build": 23,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.6.6/Bots-mac.zip",
+  "signature": "esE66TeXsTf89s84eim4bsGa5gN+wmFAcWErkhGZxVjd8h49Clukfn41xexrGfwFjJ61Rg2BnwQzrEt1tKoqAg==",
+  "notes": "Ajustar equipes conversando; líder dentro e fora da equipe; numa equipe, a mensagem vai para quem acabou de falar.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.6.6/Bots-mac-arm64.zip",
+  "signature_arm64": "KX5J+gIghMWssSto/sBR+6Cvz2kpxwVhp4LKsO7hlYcj9Kbn23TtnADUnYYhJqeooPG/4v/32lw3j1QyN4GcBQ==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.6.6/Bots-mac-x86_64.zip",
+  "signature_x86_64": "m24uMoIfdi/L7qzlMwc4aNMBjROHPHM+MNeEVfFGerSKgQTEJ1TdN+fPM14Wp7bmsIxZ9BILC/WOgql/lMwABw=="
 }

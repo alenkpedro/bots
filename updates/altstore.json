@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.6.5",
+          "version": "0.6.6",
           "date": "2026-10-16",
-          "localizedDescription": "Conversas dos Bots dentro da equipe, sem repetir na lista; visual mais limpo.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.6.5/Bots.ipa",
-          "size": 7762733,
+          "localizedDescription": "Ajustar equipes conversando; líder dentro e fora da equipe; numa equipe, a mensagem vai para quem acabou de falar.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.6.6/Bots.ipa",
+          "size": 7767017,
           "minOSVersion": "18.0"
         }
       ]
