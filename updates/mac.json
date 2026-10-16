@@ -1,11 +1,11 @@
 {
-  "version": "0.6.2",
-  "build": 18,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.6.2/Bots-mac.zip",
-  "signature": "nGg8bKD5YWG9zXhvZm8LGme6luU0QgRt4+5RW52gysq2R3bkUm/ADNoIUmGMlwectcouuBZEdADJlR94Ki8IAA==",
-  "notes": "Uma tela para cada Bot no computador dos Bots (com os logins compartilhados), assumir a tela de um Bot só, e arrastar imagens para o chat.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.6.2/Bots-mac-arm64.zip",
-  "signature_arm64": "vBhy8zAo4UYSsWz9fRNZm6B0u1Rj/Qx3We3n4KXVDzdYvzTVs0l2bAmXDn8JvQ1b1/+mt13gRtKMwbH7w5/ZAw==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.6.2/Bots-mac-x86_64.zip",
-  "signature_x86_64": "cRhNEg+gkYSEQWHPdodP88HTB7hRKedjc0IligtGKez3WNgUony2lQewF8gYJrUiTRXk4U5z++FrNEPE6HaFDA=="
+  "version": "0.6.3",
+  "build": 19,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.6.3/Bots-mac.zip",
+  "signature": "1ZtdBRA/aTht/uexnNsQUPmk+q9WwJDTrJe5J/l9Ofq9tivApto+gInBjd4XckZ+pcoAc5Zbwey1VhMsEYWFBA==",
+  "notes": "Equipes com líder, quadro de tarefas e base de conhecimento; uma conta por Bot em qualquer cérebro; apps por Bot; Frame.io; atalhos no /; PDF no chat e versões de arquivos; @menção no iPhone.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.6.3/Bots-mac-arm64.zip",
+  "signature_arm64": "eJqmt+nv7GsUOv0pjkF+A3AbnC42FuLq1dZP3D9KKF3gCAP+NlWgW9/4cxz6vnQwpntb7QVvBZvBYf9JDkTnDA==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.6.3/Bots-mac-x86_64.zip",
+  "signature_x86_64": "FZIxIgMhnyBZSN1Dg5kNfsSm+T5dBmS6z4GUuXaKYKrrdDaHvTm/x72ujb5VrWPqaFLY3rbMCAnKtMH6eca2DQ=="
 }
