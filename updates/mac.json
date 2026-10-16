@@ -1,11 +1,11 @@
 {
-  "version": "0.6.6",
-  "build": 23,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.6.6/Bots-mac.zip",
-  "signature": "esE66TeXsTf89s84eim4bsGa5gN+wmFAcWErkhGZxVjd8h49Clukfn41xexrGfwFjJ61Rg2BnwQzrEt1tKoqAg==",
-  "notes": "Ajustar equipes conversando; líder dentro e fora da equipe; numa equipe, a mensagem vai para quem acabou de falar.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.6.6/Bots-mac-arm64.zip",
-  "signature_arm64": "KX5J+gIghMWssSto/sBR+6Cvz2kpxwVhp4LKsO7hlYcj9Kbn23TtnADUnYYhJqeooPG/4v/32lw3j1QyN4GcBQ==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.6.6/Bots-mac-x86_64.zip",
-  "signature_x86_64": "m24uMoIfdi/L7qzlMwc4aNMBjROHPHM+MNeEVfFGerSKgQTEJ1TdN+fPM14Wp7bmsIxZ9BILC/WOgql/lMwABw=="
+  "version": "0.6.7",
+  "build": 24,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.6.7/Bots-mac.zip",
+  "signature": "m+cgnglTQbpBFStggOlQSSscEJX7bu46G2qY0xmHzox9VhF3Y7/ophCf1tbJfFhiMKak9RLGDDEAbwPmoDtTAw==",
+  "notes": "Rascunhos: copiar e abrir no Discord (ou Slack, WhatsApp).",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.6.7/Bots-mac-arm64.zip",
+  "signature_arm64": "2WOCySoWUJL5oc6Cp88r8WUjZwAc/6mQtjvyJM5ca2Sw0I/WrgO/JDu1hwczhNypgL2b7N3EBXBPESm6CVoLBA==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.6.7/Bots-mac-x86_64.zip",
+  "signature_x86_64": "ugeGDpS5UJ2SnWL1RnGentDPKyDEj4VJ33n5Fvuej7r0YkZntTMv9Nfs030+vIMZfAFZHMi8KUpzPlk6jkrFAA=="
 }
