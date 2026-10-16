@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.6.0",
+          "version": "0.6.1",
           "date": "2026-10-16",
-          "localizedDescription": "Cole imagens no chat, o Bot principal cria outros Bots, e o botão de notificações não trava mais.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.6.0/Bots.ipa",
-          "size": 7507762,
+          "localizedDescription": "Modelo por Bot, grupos sem limite de 6 com coordenador, quem está esperando você na lista, habilidades com / no meio da frase e reiniciar o computador dos Bots.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.6.1/Bots.ipa",
+          "size": 7529661,
           "minOSVersion": "18.0"
         }
       ]
