@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.6.8",
+          "version": "0.6.9",
           "date": "2026-10-16",
-          "localizedDescription": "Logins do seu navegador no computador dos Bots, só dos sites que você escolher.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.6.8/Bots.ipa",
-          "size": 7769913,
+          "localizedDescription": "Mensagem para a equipe toda; iPhone sem Conectando ao voltar.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.6.9/Bots.ipa",
+          "size": 7770782,
           "minOSVersion": "18.0"
         }
       ]
