@@ -1,11 +1,11 @@
 {
-  "version": "0.5.9",
-  "build": 15,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.5.9/Bots-mac.zip",
-  "signature": "Ffv5vm8ROs1t3BTpbE8zYG8YljZq/RtWUAI4hzxvmMGPN1C92Tfm+3zxbm7UFxdh5jwfhsxmYN4cFDWRGdj+BQ==",
-  "notes": "No iPhone dá para conectar apps: entre na conta do app ou cole o token, e o acesso vai direto para o seu Mac.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.5.9/Bots-mac-arm64.zip",
-  "signature_arm64": "2PAR2p00W1qgWeByAYh4i1/zAO0pOmx4nYixJQSZWZaiy6kOC2QiyOa3W2Pn4DuXFSYtdfLFykmDkxCnLKZRDg==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.5.9/Bots-mac-x86_64.zip",
-  "signature_x86_64": "3ukYlTnBc+ztIissuHo4JVrtWIMJpifsm8jpvJ2EC9i6/gIvLNMmdtw3o2hOFPAY6/p0Iz25Jrm4rcNNVqyoAA=="
+  "version": "0.6.0",
+  "build": 16,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.6.0/Bots-mac.zip",
+  "signature": "2ZhAKsdeUvMmGDylcIMHxdsMwsq3qNRHUH4dXhInJp9tuRPEB7XgUtDlP9UVK9gnkldVN1WfICYHik6tLF4yAg==",
+  "notes": "Cole imagens no chat, o Bot principal cria outros Bots, e o botão de notificações não trava mais.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.6.0/Bots-mac-arm64.zip",
+  "signature_arm64": "+7jVZzVENI5JKV+N4XxD8yPfFdDqNZ5wM9rx88QCEC+aRgDaBEP2lA2dcHvZvl9xBWctYIZZb7MHaC+oaNVqBg==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.6.0/Bots-mac-x86_64.zip",
+  "signature_x86_64": "BSu3ZzDHIZ0B4ZSIwYZ3xj2iNPbxjYiFZiXnD6XsYrQnSkR+OAbYWXR4gMJ4vq6rj1CDXnud+r58CQPfcC1OAw=="
 }

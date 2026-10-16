@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.5.9",
+          "version": "0.6.0",
           "date": "2026-10-16",
-          "localizedDescription": "No iPhone dá para conectar apps: entre na conta do app ou cole o token, e o acesso vai direto para o seu Mac.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.5.9/Bots.ipa",
-          "size": 7505640,
+          "localizedDescription": "Cole imagens no chat, o Bot principal cria outros Bots, e o botão de notificações não trava mais.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.6.0/Bots.ipa",
+          "size": 7507762,
           "minOSVersion": "18.0"
         }
       ]
