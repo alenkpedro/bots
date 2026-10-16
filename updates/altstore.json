@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.5.8",
-          "date": "2026-10-15",
-          "localizedDescription": "No iPhone: anexar PDFs e arquivos do iCloud, e abrir os arquivos que os Bots entregam. Com a criptografia ligada, nem o nome dos arquivos fica no servidor.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.5.8/Bots.ipa",
-          "size": 7421814,
+          "version": "0.5.9",
+          "date": "2026-10-16",
+          "localizedDescription": "No iPhone dá para conectar apps: entre na conta do app ou cole o token, e o acesso vai direto para o seu Mac.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.5.9/Bots.ipa",
+          "size": 7505640,
           "minOSVersion": "18.0"
         }
       ]
