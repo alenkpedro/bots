@@ -1,11 +1,11 @@
 {
-  "version": "0.6.1",
-  "build": 17,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.6.1/Bots-mac.zip",
-  "signature": "rUsC7MHUeJi/5rTTOtLrBf0qnXduEKx8eWFSx0sjpu0bMblzxgAOncrKzNf8gqajGMmHlo2q0chaH6gr1B4UBw==",
-  "notes": "Modelo por Bot, grupos sem limite de 6 com coordenador, quem está esperando você na lista, habilidades com / no meio da frase e reiniciar o computador dos Bots.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.6.1/Bots-mac-arm64.zip",
-  "signature_arm64": "NdbgisA4iiAghzCKz0HUU+hXCISk/in06aj5d80RUdnSPgOWXuBIDPZYRxsUJbjQEdWow+JqcsToR3a8IMqVAQ==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.6.1/Bots-mac-x86_64.zip",
-  "signature_x86_64": "LVL2CHFwAzVJnqw4U8PPNNMlQMyRetvs2oXig2D8G11sjcI023f7sDubQGr4y0GjwAPakshrTk0BNU6X4V/0BA=="
+  "version": "0.6.2",
+  "build": 18,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.6.2/Bots-mac.zip",
+  "signature": "nGg8bKD5YWG9zXhvZm8LGme6luU0QgRt4+5RW52gysq2R3bkUm/ADNoIUmGMlwectcouuBZEdADJlR94Ki8IAA==",
+  "notes": "Uma tela para cada Bot no computador dos Bots (com os logins compartilhados), assumir a tela de um Bot só, e arrastar imagens para o chat.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.6.2/Bots-mac-arm64.zip",
+  "signature_arm64": "vBhy8zAo4UYSsWz9fRNZm6B0u1Rj/Qx3We3n4KXVDzdYvzTVs0l2bAmXDn8JvQ1b1/+mt13gRtKMwbH7w5/ZAw==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.6.2/Bots-mac-x86_64.zip",
+  "signature_x86_64": "cRhNEg+gkYSEQWHPdodP88HTB7hRKedjc0IligtGKez3WNgUony2lQewF8gYJrUiTRXk4U5z++FrNEPE6HaFDA=="
 }

@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.6.1",
+          "version": "0.6.2",
           "date": "2026-10-16",
-          "localizedDescription": "Modelo por Bot, grupos sem limite de 6 com coordenador, quem está esperando você na lista, habilidades com / no meio da frase e reiniciar o computador dos Bots.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.6.1/Bots.ipa",
-          "size": 7529661,
+          "localizedDescription": "Uma tela para cada Bot no computador dos Bots (com os logins compartilhados), assumir a tela de um Bot só, e arrastar imagens para o chat.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.6.2/Bots.ipa",
+          "size": 7533280,
           "minOSVersion": "18.0"
         }
       ]
