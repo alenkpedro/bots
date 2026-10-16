@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.7.0",
+          "version": "0.7.1",
           "date": "2026-10-16",
-          "localizedDescription": "Grupos em ordem, sempre permitir e liberar pastas, passo a passo, fila de mensagens, memória compartilhada, modelo reserva, ⌘F e versões salvas de cada Bot",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.7.0/Bots.ipa",
-          "size": 7903993,
+          "localizedDescription": "Pastas, criar Bots à mão, Bots que não param no meio, lembretes, quadro que acorda a equipe, uma tela por Bot de verdade, avisos pelo Bark e muitas correções",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.7.1/Bots.ipa",
+          "size": 7947161,
           "minOSVersion": "18.0"
         }
       ]

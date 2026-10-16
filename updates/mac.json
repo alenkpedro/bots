@@ -1,11 +1,11 @@
 {
-  "version": "0.7.0",
-  "build": 27,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.7.0/Bots-mac.zip",
-  "signature": "sdimo1Z32X2x4cy9nts5WrncU3n4K/cd9av+RAYb/FF4L702bRyICbpoYXDMxK3X8/5btfX4aOIVb1wu2CfpBw==",
-  "notes": "Grupos em ordem, sempre permitir e liberar pastas, passo a passo, fila de mensagens, memória compartilhada, modelo reserva, ⌘F e versões salvas de cada Bot",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.7.0/Bots-mac-arm64.zip",
-  "signature_arm64": "DY7Vgl7M1f4qrECsVjgZO9PX1ikCVJCmWZ+zHh3pMKCqOe+jO93DIBRWl0Qi30A7MWRj8kodw2xA8ILqnrcCBA==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.7.0/Bots-mac-x86_64.zip",
-  "signature_x86_64": "Q9RYnzFZX/uL9+XGlvmKf0Pgk6ml07ZI2NaqVPUknUSLxZfw+hugUSzVNxPtDV8hFXCUp47tODHsTP4p/XReCQ=="
+  "version": "0.7.1",
+  "build": 28,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.7.1/Bots-mac.zip",
+  "signature": "fMbdUzoB9bFJiDM6zLyDXpmEhCVDZmJLmHslZ5ifxHzbMF9GP4znfHErKBUaab5ceZ+/bjKGcEMiAbPFSVrgCA==",
+  "notes": "Pastas, criar Bots à mão, Bots que não param no meio, lembretes, quadro que acorda a equipe, uma tela por Bot de verdade, avisos pelo Bark e muitas correções",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.7.1/Bots-mac-arm64.zip",
+  "signature_arm64": "5IBfmlbTsN90q/WPtHSJsM4jvdRPb68103hAvmS7Zdp+9m/1oRPfqRC/1ZOlQ34T6gjNzK7pfR91a/zL/XcMCw==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.7.1/Bots-mac-x86_64.zip",
+  "signature_x86_64": "zA7tEc+AMmC108+AeHUAh8FOjR7dpoQlZYYWUcJZeTnbwBCUluU1bHr/DTH7PgXy3ljp47WQFDwf9UuojY6aDQ=="
 }
