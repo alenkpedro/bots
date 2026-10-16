@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.6.4",
+          "version": "0.6.5",
           "date": "2026-10-16",
-          "localizedDescription": "Equipes na lista de conversas com os Bots à mostra; líder tira Bot da equipe; Bot principal demite (oculta).",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.6.4/Bots.ipa",
-          "size": 7752832,
+          "localizedDescription": "Conversas dos Bots dentro da equipe, sem repetir na lista; visual mais limpo.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.6.5/Bots.ipa",
+          "size": 7762733,
           "minOSVersion": "18.0"
         }
       ]

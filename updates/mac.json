@@ -1,11 +1,11 @@
 {
-  "version": "0.6.4",
-  "build": 20,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.6.4/Bots-mac.zip",
-  "signature": "wvKjxS/1J24g0H+wP+SNTx4pbcNvN5tVP8go2SjIWqvmUFuq4xe1EF4z5PWsW/lGqKPiKISCs9VuyDxA1u21Ag==",
-  "notes": "Equipes na lista de conversas com os Bots à mostra; líder tira Bot da equipe; Bot principal demite (oculta).",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.6.4/Bots-mac-arm64.zip",
-  "signature_arm64": "tpD9CHOC2n8kdAs8SKVuzT0xK46x1oNEYLMBs+khfjNoQZ/Cv3gN+VgdAoWja2C1bRhv4Gyl05u7/cpVGFBFBA==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.6.4/Bots-mac-x86_64.zip",
-  "signature_x86_64": "ArzCw4T1aRWDfN4NZBVO/PLdFsIDxJQCtJGUfcMO3WAP+CE1zkv2hm6L/wkk8UN10gxbPBCJv99rBLoMYx3mCg=="
+  "version": "0.6.5",
+  "build": 21,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.6.5/Bots-mac.zip",
+  "signature": "BoDWfULFJ4Iplob4m1fKDjZzcezG1Ed6pIqtGb9ZIwbcQs1l3oA6D8SGVEYJRxYAJsIM8/3k//3nWmvsJ17DAQ==",
+  "notes": "Conversas dos Bots dentro da equipe, sem repetir na lista; visual mais limpo.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.6.5/Bots-mac-arm64.zip",
+  "signature_arm64": "ND27FtDCOS30h+XRhuwi21g4rSaVTsdk83IODA8Y+3W13ZMlawQr3M5RDQAF03f/I7z7OsDsrM1WsOpMsNpXAA==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.6.5/Bots-mac-x86_64.zip",
+  "signature_x86_64": "Di69SMEMgjDewYb19WzxHm34U4isyazeBpbZS2NQP0EB7MeyCOscXZgm1c5BvYRGv+C26F2PNdk7g7AN7SVrCQ=="
 }
