@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.6.7",
+          "version": "0.6.8",
           "date": "2026-10-16",
-          "localizedDescription": "Rascunhos: copiar e abrir no Discord (ou Slack, WhatsApp).",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.6.7/Bots.ipa",
-          "size": 7769946,
+          "localizedDescription": "Logins do seu navegador no computador dos Bots, só dos sites que você escolher.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.6.8/Bots.ipa",
+          "size": 7769913,
           "minOSVersion": "18.0"
         }
       ]

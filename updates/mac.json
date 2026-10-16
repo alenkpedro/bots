@@ -1,11 +1,11 @@
 {
-  "version": "0.6.7",
-  "build": 24,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.6.7/Bots-mac.zip",
-  "signature": "m+cgnglTQbpBFStggOlQSSscEJX7bu46G2qY0xmHzox9VhF3Y7/ophCf1tbJfFhiMKak9RLGDDEAbwPmoDtTAw==",
-  "notes": "Rascunhos: copiar e abrir no Discord (ou Slack, WhatsApp).",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.6.7/Bots-mac-arm64.zip",
-  "signature_arm64": "2WOCySoWUJL5oc6Cp88r8WUjZwAc/6mQtjvyJM5ca2Sw0I/WrgO/JDu1hwczhNypgL2b7N3EBXBPESm6CVoLBA==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.6.7/Bots-mac-x86_64.zip",
-  "signature_x86_64": "ugeGDpS5UJ2SnWL1RnGentDPKyDEj4VJ33n5Fvuej7r0YkZntTMv9Nfs030+vIMZfAFZHMi8KUpzPlk6jkrFAA=="
+  "version": "0.6.8",
+  "build": 25,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.6.8/Bots-mac.zip",
+  "signature": "SI+pCv4NFnV+6LXleW99N5/ARjV50nsgcUtqHAkv4ukIE+YWBvQSCzqnUauCbCqrBHKJKerKiWmg4uXhn4Y7DA==",
+  "notes": "Logins do seu navegador no computador dos Bots, só dos sites que você escolher.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.6.8/Bots-mac-arm64.zip",
+  "signature_arm64": "fzzU27ZZ3calLsdSzQ0INbekNKkUgti26HCdNG4v5WPLfg1uOOzLh/U8s1Wi442yA6gY/zYxPGPyzrgfdUeDAg==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.6.8/Bots-mac-x86_64.zip",
+  "signature_x86_64": "M0P8CzycBHNv4kpOfnPDpwiXsS5P9Yhhq7FIObdyrdDTRI33LX7p5ATjsvUxTqYWrrjf98VvGQNaJVOOpMQWBQ=="
 }
