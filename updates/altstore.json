@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.8.2",
+          "version": "0.8.3",
           "date": "2026-10-17",
-          "localizedDescription": "Trabalhando ao vivo: a conversa mostra o que o Bot já fez e o que está fazendo agora; conversa no iPhone mais limpa, com as mensagens embaixo e ligar no topo",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.8.2/Bots.ipa",
-          "size": 8244589,
+          "localizedDescription": "Aprovação mais clara com a regra que pausou, regras pela conversa, mascote trabalhando e digitando como no Grok Bot, segurar mensagem para reagir e copiar, conectar apps novo, retorno tátil e vídeos na conversa",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.8.3/Bots.ipa",
+          "size": 8443529,
           "minOSVersion": "18.0"
         }
       ]

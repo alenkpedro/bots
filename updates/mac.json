@@ -1,11 +1,11 @@
 {
-  "version": "0.8.2",
-  "build": 31,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.8.2/Bots-mac.zip",
-  "signature": "/wJYJ6bpkHz3IjxwneEA6TCFU+G6zsWMQV9ssxNi+1VXDNdFmRj3wVQzGa/ny81WoZsTpfERc+1M/VnYeIiGDA==",
-  "notes": "Trabalhando ao vivo: a conversa mostra o que o Bot já fez e o que está fazendo agora; conversa no iPhone mais limpa, com as mensagens embaixo e ligar no topo",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.8.2/Bots-mac-arm64.zip",
-  "signature_arm64": "MtNdnfMxEysAnVn0zTVmqyNWthfUYCGeFkk6FYxZMlVtZmDJURhRVcCH1A2Gi4iLTs0HWEaAIEmAnAJ3UqZOAg==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.8.2/Bots-mac-x86_64.zip",
-  "signature_x86_64": "UjKDh3N/AdTtgVBTdMsCAsz+Jr6HyyoOrot4KiiEA/O8jjrNkIsRJ3rRp7bORzxTp3gPKXMXad+Xp0XVGtMCBQ=="
+  "version": "0.8.3",
+  "build": 32,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.8.3/Bots-mac.zip",
+  "signature": "Q+mU08rjZoofmtAIfhQ1drbFxzcdMPZgaN6461l/DWolTGG7QFbNgDyMhlVLbTCvEe0MkQgrN3xIJE8S6vUiDw==",
+  "notes": "Aprovação mais clara com a regra que pausou, regras pela conversa, mascote trabalhando e digitando como no Grok Bot, segurar mensagem para reagir e copiar, conectar apps novo, retorno tátil e vídeos na conversa",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.8.3/Bots-mac-arm64.zip",
+  "signature_arm64": "JvDOBnAcVplaOisJ3beNFSK3C3PJ3aaL4d7z6vBccID+PaWKyHAhqdmSstW4RSqEt3Ajc4T/+Ff+bzSR8hGEDg==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.8.3/Bots-mac-x86_64.zip",
+  "signature_x86_64": "ybO/+4jKft1+honUypn/EhQx90LoupAYNCuo0F9TyvwhJMWCrDVceW1OY7f54KxVkG+WHIwy4EVQYavAy0FSBA=="
 }
