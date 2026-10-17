@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.8.4",
+          "version": "0.8.5",
           "date": "2026-10-17",
-          "localizedDescription": "Conversa sem bastidores, mascote trabalhando e digitando como no Grok Bot (até o Bix) e segurar mensagem só com o painel do app",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.8.4/Bots.ipa",
-          "size": 8444311,
+          "localizedDescription": "Grupos como no WhatsApp, hora dentro do balão e fotos no tamanho certo",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.8.5/Bots.ipa",
+          "size": 8467314,
           "minOSVersion": "18.0"
         }
       ]

@@ -1,11 +1,11 @@
 {
-  "version": "0.8.4",
-  "build": 33,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.8.4/Bots-mac.zip",
-  "signature": "WDHzSGwRBylwSLrOTMkiI622T+b7E8L4ZvIsRn3/jI+gWXmAJeMByVnOjezeowidTRRm8nB+mteVyPCHd5iqDA==",
-  "notes": "Conversa sem bastidores, mascote trabalhando e digitando como no Grok Bot (até o Bix) e segurar mensagem só com o painel do app",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.8.4/Bots-mac-arm64.zip",
-  "signature_arm64": "x0XtSMOkvLVRWn0WAA6AG/dSPKLixi9A9GE3RgkUzccpdXVyvzz6wdDk/L4RIAPIvaJvz81peAygKZ0hd3UKDA==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.8.4/Bots-mac-x86_64.zip",
-  "signature_x86_64": "79DdqiP8MTxsoAOiEyLSkqgpKK7HXgj8Eus6niKS2ZA5bU5YVLsS8unwMJBxZ3N5Jsyq/chgFnA9INxrZ7WeBQ=="
+  "version": "0.8.5",
+  "build": 34,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.8.5/Bots-mac.zip",
+  "signature": "OSFr/x0v5ZLuKve6LPJgzgStWPvAnANlFfqqKyUZ6ZWeQ7CGRbAj0mgZf3fgAFd2JQrUtkUPSR/8w43UJy1DCg==",
+  "notes": "Grupos como no WhatsApp, hora dentro do balão e fotos no tamanho certo",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.8.5/Bots-mac-arm64.zip",
+  "signature_arm64": "E4YuWolbNVX6NzIVJrvtBJRgugQGs29IVUEmCDTUUI88HVG6vWLOIvcdbDEznrQGXpWCIMPFrkhFiwVvlVV1BQ==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.8.5/Bots-mac-x86_64.zip",
+  "signature_x86_64": "shruKhGTD70RAU8RV6R+M2n6y8Z54G6690/i3Qt6smQEMWLY3mXwsmcn176fUbMpDspBXPV0Pua1mIfdrn7dBQ=="
 }
