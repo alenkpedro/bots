@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.8.5",
+          "version": "0.8.6",
           "date": "2026-10-17",
-          "localizedDescription": "Grupos como no WhatsApp, hora dentro do balão e fotos no tamanho certo",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.8.5/Bots.ipa",
-          "size": 8467314,
+          "localizedDescription": "Grupos mais espertos (respondem só os Bots a quem a mensagem diz respeito, ao mesmo tempo), entrar em sites sem o Bot ver a senha, aprovação num toque, computador dos Bots em tela cheia no iPhone e botão ↓ certeiro.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.8.6/Bots.ipa",
+          "size": 8600704,
           "minOSVersion": "18.0"
         }
       ]
