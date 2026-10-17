@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.8.1",
+          "version": "0.8.2",
           "date": "2026-10-17",
-          "localizedDescription": "IA de vários Bots de uma vez, clique no logo para trocar a IA, importar escolhe a IA, horário das mensagens, links que abrem no iPhone e a escolha de IA que não volta sozinha",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.8.1/Bots.ipa",
-          "size": 8206891,
+          "localizedDescription": "Trabalhando ao vivo: a conversa mostra o que o Bot já fez e o que está fazendo agora; conversa no iPhone mais limpa, com as mensagens embaixo e ligar no topo",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.8.2/Bots.ipa",
+          "size": 8244589,
           "minOSVersion": "18.0"
         }
       ]

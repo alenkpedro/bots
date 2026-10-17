@@ -1,11 +1,11 @@
 {
-  "version": "0.8.1",
-  "build": 30,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.8.1/Bots-mac.zip",
-  "signature": "/uDZbjPpI5A4nNBgKtIcqyIakNSFVZRvRUACwaFircStShKsiDptocwz+F1cUCKzX3CB4v2Y9w0VtnjPwg8dAw==",
-  "notes": "IA de vários Bots de uma vez, clique no logo para trocar a IA, importar escolhe a IA, horário das mensagens, links que abrem no iPhone e a escolha de IA que não volta sozinha",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.8.1/Bots-mac-arm64.zip",
-  "signature_arm64": "7jaLQARzCFLCMieji9YPDPppyKW66ooGy5EWg/W39p+9i+58kzreMCVNQMiTY1OaeRfn1t4wkMNNia6f28C+AA==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.8.1/Bots-mac-x86_64.zip",
-  "signature_x86_64": "FIJEaxyUcmCm0iqS6ZjmHHgojBJMe8h9XHbuARbKC6Whyz/Rj45qqJiWp2dyhzy4Esz1ogKz6jsZlTl0vGUzBA=="
+  "version": "0.8.2",
+  "build": 31,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.8.2/Bots-mac.zip",
+  "signature": "/wJYJ6bpkHz3IjxwneEA6TCFU+G6zsWMQV9ssxNi+1VXDNdFmRj3wVQzGa/ny81WoZsTpfERc+1M/VnYeIiGDA==",
+  "notes": "Trabalhando ao vivo: a conversa mostra o que o Bot já fez e o que está fazendo agora; conversa no iPhone mais limpa, com as mensagens embaixo e ligar no topo",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.8.2/Bots-mac-arm64.zip",
+  "signature_arm64": "MtNdnfMxEysAnVn0zTVmqyNWthfUYCGeFkk6FYxZMlVtZmDJURhRVcCH1A2Gi4iLTs0HWEaAIEmAnAJ3UqZOAg==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.8.2/Bots-mac-x86_64.zip",
+  "signature_x86_64": "UjKDh3N/AdTtgVBTdMsCAsz+Jr6HyyoOrot4KiiEA/O8jjrNkIsRJ3rRp7bORzxTp3gPKXMXad+Xp0XVGtMCBQ=="
 }
