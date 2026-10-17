@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.8.6",
+          "version": "0.8.7",
           "date": "2026-10-17",
-          "localizedDescription": "Grupos mais espertos (respondem só os Bots a quem a mensagem diz respeito, ao mesmo tempo), entrar em sites sem o Bot ver a senha, aprovação num toque, computador dos Bots em tela cheia no iPhone e botão ↓ certeiro.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.8.6/Bots.ipa",
-          "size": 8600704,
+          "localizedDescription": "Enviar de verdade, com a sua aprovação: o Bot mostra o e-mail ou a mensagem num cartão, você edita se quiser e clica em Enviar; sai pelo seu Gmail ou pelo app conectado",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.8.7/Bots.ipa",
+          "size": 8638674,
           "minOSVersion": "18.0"
         }
       ]

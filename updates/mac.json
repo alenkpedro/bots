@@ -1,11 +1,11 @@
 {
-  "version": "0.8.6",
-  "build": 35,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.8.6/Bots-mac.zip",
-  "signature": "J8NA6zmoyumJErZHpTyfC9JlE58z6kJTFyndMh/xr/uyyDBvw7u7+9O6yPcSRzbsd4zMRBbDVYipH1xr0/sfDw==",
-  "notes": "Grupos mais espertos (respondem só os Bots a quem a mensagem diz respeito, ao mesmo tempo), entrar em sites sem o Bot ver a senha, aprovação num toque, computador dos Bots em tela cheia no iPhone e botão ↓ certeiro.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.8.6/Bots-mac-arm64.zip",
-  "signature_arm64": "fw/BUcaJiSGH7oVYqccLa8WhZ/+4P4kDsOoNHATbKgYE9UcJXEQdcV6qEwOG2eOq4w401cz0UalvwxOmwflsAw==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.8.6/Bots-mac-x86_64.zip",
-  "signature_x86_64": "PwhazTrBi0XIFIc3AxHX1vd2CDOtHOi1Reyr3UQIAn6ekC7ul8I52RECXC5bhqX2ld5SNmPvyD2+7taKsMFiAQ=="
+  "version": "0.8.7",
+  "build": 36,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.8.7/Bots-mac.zip",
+  "signature": "6VPG+7I6SRVBo8ddFFTO+wHI4Pb+W9klLiVNvXDSR16EDlyFUiXGXTxbVX8/OuT0Ck59CQvuPOBbuu5+pfOIDw==",
+  "notes": "Enviar de verdade, com a sua aprovação: o Bot mostra o e-mail ou a mensagem num cartão, você edita se quiser e clica em Enviar; sai pelo seu Gmail ou pelo app conectado",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.8.7/Bots-mac-arm64.zip",
+  "signature_arm64": "8DauVe8vGochm62a+2OGwgQyHYqxxj558lPtmA1E80TbgiMmTkP9/8Q51mU07DGlOPR28izYBdxJzvblcXhtBQ==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.8.7/Bots-mac-x86_64.zip",
+  "signature_x86_64": "h63KfbfPNlE0+zAw2W6Lq+0DRgYhZSFYSY0ji2F5mRawUGgBaM+iswyVX50+kvdGOLQi8hvj0niWnkoyiqwDDQ=="
 }
