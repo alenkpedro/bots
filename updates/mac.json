@@ -1,11 +1,11 @@
 {
-  "version": "0.8.10",
-  "build": 39,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.8.10/Bots-mac.zip",
-  "signature": "C9H+BoRZlhaOPrLzB83CXmNx1dLYpUNkYu7Gr1MuXe9DMNkLM7Yn4XGhuGHtR2VhmRJZTNLJOj3+kIQB+jVdBw==",
-  "notes": "Todos os cérebros pedem pelo cartão de aprovação para rodar comandos no Mac, o cartão de mensagem acha a conversa no Relay sozinho, e o nome do Bot no lugar ao criar.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.8.10/Bots-mac-arm64.zip",
-  "signature_arm64": "C5csqiUem5Vcn/KccjSvPbhT0blUZNQyc14MoVUPhZM5kZ2phYFVdP6uH/Hc/YaW2f5JrKue74G7V+d1DZXSAg==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.8.10/Bots-mac-x86_64.zip",
-  "signature_x86_64": "l3rsxLiMjj3Mz70r59sQnEUibU9/AnroCz3lG3NwNKLdCfOmSDH2W5r4wDM9aKiPgEDwEGEwOBtz3oSKSQQUCg=="
+  "version": "0.9.0",
+  "build": 40,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.9.0/Bots-mac.zip",
+  "signature": "ykmb8RY9MWn4FnKTIqURVGMjSj3KWfzKfUqUDazvnNiCmgCrBTE0yNW3sDa8VmdJjOKymxNgt7Do3ikuPc7CAA==",
+  "notes": "Widgets no iPhone: Bot principal, Esperando você, Seus Bots, Equipe com o quadro e Aprovação com Permitir e Negar, também na tela bloqueada. E o ponto de trabalhando no lugar na lista.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.9.0/Bots-mac-arm64.zip",
+  "signature_arm64": "xZT2XKGTr2CYNYy/Z3VtCmrYz7TnnOQ0wkaFoZzOZCoGYWcGJGFcb3oPNgehP21KwnRSrjJjBM3pRdQ1XZLfDw==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.9.0/Bots-mac-x86_64.zip",
+  "signature_x86_64": "bRQ1pjZvTvhSO9YSGOebVTIg9Db7SIQxDJRg5kiTc/E5WlEh+/AdpNtNHuT67VBNxEpvYNLFgCBmWQAAp39FBQ=="
 }

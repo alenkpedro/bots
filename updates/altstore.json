@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.8.10",
+          "version": "0.9.0",
           "date": "2026-10-17",
-          "localizedDescription": "Todos os cérebros pedem pelo cartão de aprovação para rodar comandos no Mac, o cartão de mensagem acha a conversa no Relay sozinho, e o nome do Bot no lugar ao criar.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.8.10/Bots.ipa",
-          "size": 8879809,
+          "localizedDescription": "Widgets no iPhone: Bot principal, Esperando você, Seus Bots, Equipe com o quadro e Aprovação com Permitir e Negar, também na tela bloqueada. E o ponto de trabalhando no lugar na lista.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.9.0/Bots.ipa",
+          "size": 11723705,
           "minOSVersion": "18.0"
         }
       ]
