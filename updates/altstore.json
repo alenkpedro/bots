@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.8.9",
+          "version": "0.8.10",
           "date": "2026-10-17",
-          "localizedDescription": "O que o Bot está fazendo em palavras, menções como no WhatsApp, todos os cérebros no computador dos Bots, chamada de voz mais natural, conversa entre os Bots em silêncio, e no Mac o painel de grupo novo, ⌘ Enter para mandar depois e o texto no lugar.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.8.9/Bots.ipa",
-          "size": 8879513,
+          "localizedDescription": "Todos os cérebros pedem pelo cartão de aprovação para rodar comandos no Mac, o cartão de mensagem acha a conversa no Relay sozinho, e o nome do Bot no lugar ao criar.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.8.10/Bots.ipa",
+          "size": 8879809,
           "minOSVersion": "18.0"
         }
       ]
