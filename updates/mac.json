@@ -1,11 +1,11 @@
 {
-  "version": "0.9.0",
-  "build": 40,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.9.0/Bots-mac.zip",
-  "signature": "ykmb8RY9MWn4FnKTIqURVGMjSj3KWfzKfUqUDazvnNiCmgCrBTE0yNW3sDa8VmdJjOKymxNgt7Do3ikuPc7CAA==",
-  "notes": "Widgets no iPhone: Bot principal, Esperando você, Seus Bots, Equipe com o quadro e Aprovação com Permitir e Negar, também na tela bloqueada. E o ponto de trabalhando no lugar na lista.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.9.0/Bots-mac-arm64.zip",
-  "signature_arm64": "xZT2XKGTr2CYNYy/Z3VtCmrYz7TnnOQ0wkaFoZzOZCoGYWcGJGFcb3oPNgehP21KwnRSrjJjBM3pRdQ1XZLfDw==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.9.0/Bots-mac-x86_64.zip",
-  "signature_x86_64": "bRQ1pjZvTvhSO9YSGOebVTIg9Db7SIQxDJRg5kiTc/E5WlEh+/AdpNtNHuT67VBNxEpvYNLFgCBmWQAAp39FBQ=="
+  "version": "0.9.3",
+  "build": 44,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.9.3/Bots-mac.zip",
+  "signature": "q93cVLZIhLtqvUgdqcGYCTVUNPJUMdwnxcsYju1p/hkOQabIgUo6Qw+KLT3ifO9J6zLaezKTXtyUFTG17HxWAA==",
+  "notes": "Entrar e Crie seu perfil novos, com o Bot espiando o cartão. Login seguro na tela do Bot, cartão de Computador com a tela ao vivo, seletores iguais em todo o app e cartão de mensagem com arquivos.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.9.3/Bots-mac-arm64.zip",
+  "signature_arm64": "X2L/uCsy4Qgkhk0p3jd3QI50P9p/OnOFN/2wvAgGqmg9OQzqFn3X4EMJ837VmoYp2898VUdKdzFpxBd90HSIBg==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.9.3/Bots-mac-x86_64.zip",
+  "signature_x86_64": "qT+wd4rRQiCAJOlFv6jeinn0XL9ua7Mvfi3+AbqUzZnhwSg8EUlobR56Jm7Nhqsbm6yiqaVY98sOQtBP7F91Dw=="
 }

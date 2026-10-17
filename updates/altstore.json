@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.9.2",
+          "version": "0.9.3",
           "date": "2026-10-17",
-          "localizedDescription": "Widgets e Compartilhar › Bots nas lojas que assinam com certificado próprio (como a FlareStore).",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.9.2/Bots.ipa",
-          "size": 11860824,
+          "localizedDescription": "Entrar e Crie seu perfil novos, com o Bot espiando o cartão. Login seguro na tela do Bot, cartão de Computador com a tela ao vivo, seletores iguais em todo o app e cartão de mensagem com arquivos.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.9.3/Bots.ipa",
+          "size": 11994334,
           "minOSVersion": "18.0"
         }
       ]
