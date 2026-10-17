@@ -1,11 +1,11 @@
 {
-  "version": "0.8.7",
-  "build": 36,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.8.7/Bots-mac.zip",
-  "signature": "6VPG+7I6SRVBo8ddFFTO+wHI4Pb+W9klLiVNvXDSR16EDlyFUiXGXTxbVX8/OuT0Ck59CQvuPOBbuu5+pfOIDw==",
-  "notes": "Enviar de verdade, com a sua aprovação: o Bot mostra o e-mail ou a mensagem num cartão, você edita se quiser e clica em Enviar; sai pelo seu Gmail ou pelo app conectado",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.8.7/Bots-mac-arm64.zip",
-  "signature_arm64": "8DauVe8vGochm62a+2OGwgQyHYqxxj558lPtmA1E80TbgiMmTkP9/8Q51mU07DGlOPR28izYBdxJzvblcXhtBQ==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.8.7/Bots-mac-x86_64.zip",
-  "signature_x86_64": "h63KfbfPNlE0+zAw2W6Lq+0DRgYhZSFYSY0ji2F5mRawUGgBaM+iswyVX50+kvdGOLQi8hvj0niWnkoyiqwDDQ=="
+  "version": "0.8.8",
+  "build": 37,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.8.8/Bots-mac.zip",
+  "signature": "f5A5f6nbu6Ox1y8VawwhFf6mleHr3NQZgumvPP6jALSNnVwHX9D7/HBlcghfFTw1WH7pHfxzewx/lLYotEFtCw==",
+  "notes": "WhatsApp, Telegram e Signal pelo Relay (e iMessage pelo Mensagens do Mac), ícone novo, mais espaço no Mac com o painel do Bot como no iPhone, e trocar de conversa sem travar.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.8.8/Bots-mac-arm64.zip",
+  "signature_arm64": "bBaabCDwBcbp3yrJPhq0679pgnPY0TNWMBmtVTpJP4shyIzFIpoXyctw5ckJjGkD/GHwDr3EFMTaMhtGsNK1BA==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.8.8/Bots-mac-x86_64.zip",
+  "signature_x86_64": "sVcQCavT3/Uy7/jG0f6Td6MklAFqKKhGe6kPeMpNK86PHRWVqPgVL4mpcvRSn/rfyzNCr+neLsa85uANKjIiBQ=="
 }

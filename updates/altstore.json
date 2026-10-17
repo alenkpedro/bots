@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.8.7",
+          "version": "0.8.8",
           "date": "2026-10-17",
-          "localizedDescription": "Enviar de verdade, com a sua aprovação: o Bot mostra o e-mail ou a mensagem num cartão, você edita se quiser e clica em Enviar; sai pelo seu Gmail ou pelo app conectado",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.8.7/Bots.ipa",
-          "size": 8638674,
+          "localizedDescription": "WhatsApp, Telegram e Signal pelo Relay (e iMessage pelo Mensagens do Mac), ícone novo, mais espaço no Mac com o painel do Bot como no iPhone, e trocar de conversa sem travar.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.8.8/Bots.ipa",
+          "size": 8809565,
           "minOSVersion": "18.0"
         }
       ]
