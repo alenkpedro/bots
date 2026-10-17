@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.8.3",
+          "version": "0.8.4",
           "date": "2026-10-17",
-          "localizedDescription": "Aprovação mais clara com a regra que pausou, regras pela conversa, mascote trabalhando e digitando como no Grok Bot, segurar mensagem para reagir e copiar, conectar apps novo, retorno tátil e vídeos na conversa",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.8.3/Bots.ipa",
-          "size": 8443529,
+          "localizedDescription": "Conversa sem bastidores, mascote trabalhando e digitando como no Grok Bot (até o Bix) e segurar mensagem só com o painel do app",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.8.4/Bots.ipa",
+          "size": 8444311,
           "minOSVersion": "18.0"
         }
       ]
