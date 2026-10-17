@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.9.3",
+          "version": "0.9.4",
           "date": "2026-10-17",
-          "localizedDescription": "Entrar e Crie seu perfil novos, com o Bot espiando o cartão. Login seguro na tela do Bot, cartão de Computador com a tela ao vivo, seletores iguais em todo o app e cartão de mensagem com arquivos.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.9.3/Bots.ipa",
-          "size": 11994334,
+          "localizedDescription": "Avisos empilhados, o Bot na Dynamic Island, deslize para permitir, segure para falar, o menu do +, Citar um trecho, grupos mais naturais e o quadro e as rotinas em blocos.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.9.4/Bots.ipa",
+          "size": 12444068,
           "minOSVersion": "18.0"
         }
       ]

@@ -1,11 +1,11 @@
 {
-  "version": "0.9.3",
-  "build": 44,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.9.3/Bots-mac.zip",
-  "signature": "q93cVLZIhLtqvUgdqcGYCTVUNPJUMdwnxcsYju1p/hkOQabIgUo6Qw+KLT3ifO9J6zLaezKTXtyUFTG17HxWAA==",
-  "notes": "Entrar e Crie seu perfil novos, com o Bot espiando o cartão. Login seguro na tela do Bot, cartão de Computador com a tela ao vivo, seletores iguais em todo o app e cartão de mensagem com arquivos.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.9.3/Bots-mac-arm64.zip",
-  "signature_arm64": "X2L/uCsy4Qgkhk0p3jd3QI50P9p/OnOFN/2wvAgGqmg9OQzqFn3X4EMJ837VmoYp2898VUdKdzFpxBd90HSIBg==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.9.3/Bots-mac-x86_64.zip",
-  "signature_x86_64": "qT+wd4rRQiCAJOlFv6jeinn0XL9ua7Mvfi3+AbqUzZnhwSg8EUlobR56Jm7Nhqsbm6yiqaVY98sOQtBP7F91Dw=="
+  "version": "0.9.4",
+  "build": 45,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.9.4/Bots-mac.zip",
+  "signature": "qY4sFeq2aiyZLhwafQid+fxwG9/CfYv1fkJtbGQ4H0WcLN/SfoxmocRMjfbTqzC5AA1RscDePwCIE5wEvTp2BA==",
+  "notes": "Avisos empilhados, o Bot na Dynamic Island, deslize para permitir, segure para falar, o menu do +, Citar um trecho, grupos mais naturais e o quadro e as rotinas em blocos.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.9.4/Bots-mac-arm64.zip",
+  "signature_arm64": "Kw8ga9GKgExJ3Vdl5NsyyUeV3pURc/Uhx42Jj+y9mUNzwBOk8mECNZwJk85fvumR/7pMU7NL/3GLZArcv6RLAg==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.9.4/Bots-mac-x86_64.zip",
+  "signature_x86_64": "v3xyWBQakCghC2MXGne9AaIXuz4Xz2w3oruNiA+OqEXuR+l7uCpp88xylZOP4hkTV5dTFpPpxGBFf0GhAfpoAA=="
 }
