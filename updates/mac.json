@@ -1,11 +1,11 @@
 {
-  "version": "0.8.8",
-  "build": 37,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.8.8/Bots-mac.zip",
-  "signature": "f5A5f6nbu6Ox1y8VawwhFf6mleHr3NQZgumvPP6jALSNnVwHX9D7/HBlcghfFTw1WH7pHfxzewx/lLYotEFtCw==",
-  "notes": "WhatsApp, Telegram e Signal pelo Relay (e iMessage pelo Mensagens do Mac), ícone novo, mais espaço no Mac com o painel do Bot como no iPhone, e trocar de conversa sem travar.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.8.8/Bots-mac-arm64.zip",
-  "signature_arm64": "bBaabCDwBcbp3yrJPhq0679pgnPY0TNWMBmtVTpJP4shyIzFIpoXyctw5ckJjGkD/GHwDr3EFMTaMhtGsNK1BA==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.8.8/Bots-mac-x86_64.zip",
-  "signature_x86_64": "sVcQCavT3/Uy7/jG0f6Td6MklAFqKKhGe6kPeMpNK86PHRWVqPgVL4mpcvRSn/rfyzNCr+neLsa85uANKjIiBQ=="
+  "version": "0.8.9",
+  "build": 38,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.8.9/Bots-mac.zip",
+  "signature": "NvLtaVmJxrlR7N3O9XV+ZTdbo5vvf6Cur7k3Z3r3Uo+RiMsnPXooqMnqEBSLs1AG20a1bxHQ3KobuhvlRM3kBw==",
+  "notes": "O que o Bot está fazendo em palavras, menções como no WhatsApp, todos os cérebros no computador dos Bots, chamada de voz mais natural, conversa entre os Bots em silêncio, e no Mac o painel de grupo novo, ⌘ Enter para mandar depois e o texto no lugar.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.8.9/Bots-mac-arm64.zip",
+  "signature_arm64": "O/V4YFKMDlyt3zsv2yUaPS3p+7afBVpQoJ+wGDD113CQGm71j1R/6e0bHqYGDTLR+4C/MR24Qz778/pr6RwWAA==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.8.9/Bots-mac-x86_64.zip",
+  "signature_x86_64": "4LAIusMeNM95lGT44DSybwj1Azkk4y1Xv0ahKzA/B8dT7psNMVQoTtlrHkPUBY/wSvI8fLN2y+Ja+68minpmAw=="
 }
