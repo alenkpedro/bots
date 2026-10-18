@@ -1,11 +1,11 @@
 {
-  "version": "0.9.4",
-  "build": 45,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.9.4/Bots-mac.zip",
-  "signature": "qY4sFeq2aiyZLhwafQid+fxwG9/CfYv1fkJtbGQ4H0WcLN/SfoxmocRMjfbTqzC5AA1RscDePwCIE5wEvTp2BA==",
-  "notes": "Avisos empilhados, o Bot na Dynamic Island, deslize para permitir, segure para falar, o menu do +, Citar um trecho, grupos mais naturais e o quadro e as rotinas em blocos.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.9.4/Bots-mac-arm64.zip",
-  "signature_arm64": "Kw8ga9GKgExJ3Vdl5NsyyUeV3pURc/Uhx42Jj+y9mUNzwBOk8mECNZwJk85fvumR/7pMU7NL/3GLZArcv6RLAg==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.9.4/Bots-mac-x86_64.zip",
-  "signature_x86_64": "v3xyWBQakCghC2MXGne9AaIXuz4Xz2w3oruNiA+OqEXuR+l7uCpp88xylZOP4hkTV5dTFpPpxGBFf0GhAfpoAA=="
+  "version": "0.9.5",
+  "build": 46,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.9.5/Bots-mac.zip",
+  "signature": "y0G7WMs3KRN9+jQkNBVJWCNRI2+8yDx0E6mLc1PVO6sX6zfzPZRC4+H2zpCB06w+7ZFDDhqQJxRdJikrXSONBw==",
+  "notes": "Bots que travavam no error_during_execution voltam a responder (recomeçam numa conversa nova, lembrando o chat); RevenueCat conecta com a chave da API v2; Permitir sempre nesta rotina; link para baixar o Relay.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.9.5/Bots-mac-arm64.zip",
+  "signature_arm64": "K/BcpY8Ir8UUELpJbkKM8uffOn0yN9+Q7ifM58zsB8VzehJu95D/1/345BfGLF5aHWzNYKLkweTRrPDKnfxdAg==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.9.5/Bots-mac-x86_64.zip",
+  "signature_x86_64": "CPSjoIqT6K6pNufYX1dV8pb2j6JCmZIGZz/w2PtSdWPODHhOXtLZbMPTRkh7Q4HzPu4BaEQz0mnEo4wbzKxVDg=="
 }

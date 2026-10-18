@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.9.4",
-          "date": "2026-10-17",
-          "localizedDescription": "Avisos empilhados, o Bot na Dynamic Island, deslize para permitir, segure para falar, o menu do +, Citar um trecho, grupos mais naturais e o quadro e as rotinas em blocos.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.9.4/Bots.ipa",
-          "size": 12444068,
+          "version": "0.9.5",
+          "date": "2026-10-18",
+          "localizedDescription": "Bots que travavam no error_during_execution voltam a responder (recomeçam numa conversa nova, lembrando o chat); RevenueCat conecta com a chave da API v2; Permitir sempre nesta rotina; link para baixar o Relay.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.9.5/Bots.ipa",
+          "size": 12447467,
           "minOSVersion": "18.0"
         }
       ]
