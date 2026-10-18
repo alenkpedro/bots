@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.9.6",
+          "version": "0.9.7",
           "date": "2026-10-18",
-          "localizedDescription": "Quanto cada Bot gasta (Uso), Bots na barra de menus do Mac, o mesmo Bot no grupo e no privado, rotinas mais leves e importadas em JSON, logins de muitos navegadores ou à mão, widget com qualquer loja e correções (Relay, Digitando… e trabalhando presos, Nova rotina, telas do computador).",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.9.6/Bots.ipa",
-          "size": 12590704,
+          "localizedDescription": "Permissões com uma frase do que você está permitindo e \"Sempre permitir este comando\", reações como no WhatsApp, lista do iPhone com o Bot principal no topo, rolagem mais lisa no iPhone, seta para cima repete a mensagem no Mac, o agente volta sozinho e logins do navegador num Mac novo.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.9.7/Bots.ipa",
+          "size": 12669095,
           "minOSVersion": "18.0"
         }
       ]
