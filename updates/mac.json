@@ -1,11 +1,11 @@
 {
-  "version": "0.9.5",
-  "build": 46,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.9.5/Bots-mac.zip",
-  "signature": "y0G7WMs3KRN9+jQkNBVJWCNRI2+8yDx0E6mLc1PVO6sX6zfzPZRC4+H2zpCB06w+7ZFDDhqQJxRdJikrXSONBw==",
-  "notes": "Bots que travavam no error_during_execution voltam a responder (recomeçam numa conversa nova, lembrando o chat); RevenueCat conecta com a chave da API v2; Permitir sempre nesta rotina; link para baixar o Relay.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.9.5/Bots-mac-arm64.zip",
-  "signature_arm64": "K/BcpY8Ir8UUELpJbkKM8uffOn0yN9+Q7ifM58zsB8VzehJu95D/1/345BfGLF5aHWzNYKLkweTRrPDKnfxdAg==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.9.5/Bots-mac-x86_64.zip",
-  "signature_x86_64": "CPSjoIqT6K6pNufYX1dV8pb2j6JCmZIGZz/w2PtSdWPODHhOXtLZbMPTRkh7Q4HzPu4BaEQz0mnEo4wbzKxVDg=="
+  "version": "0.9.6",
+  "build": 47,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.9.6/Bots-mac.zip",
+  "signature": "v+Bm9+ScPFIc0H/i/yf+YvxQNLA5EMKtMd5QzvhzAbCUS+WSDNXS1McpmXInWAHHfxs3T0nT/3IuuCTC4/nRDw==",
+  "notes": "Quanto cada Bot gasta (Uso), Bots na barra de menus do Mac, o mesmo Bot no grupo e no privado, rotinas mais leves e importadas em JSON, logins de muitos navegadores ou à mão, widget com qualquer loja e correções (Relay, Digitando… e trabalhando presos, Nova rotina, telas do computador).",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.9.6/Bots-mac-arm64.zip",
+  "signature_arm64": "MwXC+ZUq0efuV3zVRFhw9erOObUhRwX8udJZl7LN2HL1RQjZGmWBqICq0ki809+TBWSf4mOob7JzXiTWyKzSBA==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.9.6/Bots-mac-x86_64.zip",
+  "signature_x86_64": "LnGXwK3kDSTfmHsA/vk0bGW066zt+969gr/wQOpgfz2p54gYqMNb4dfBiLE4AarXUjldNXs6OtWJEmUenMcICg=="
 }
