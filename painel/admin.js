@@ -33,21 +33,23 @@
   const personName = p => p?.display_name || p?.name || p?.email || 'Sem nome';
 
   // ---------- sessão ----------
-  // Dois modos (Pedro, 19/10). Neste Mac (localhost) o painel fica aberto: a sessão vai para o localStorage e
-  // dura até você sair. Fora dele (github.io, no celular) a sessão aberta fica só no sessionStorage, e o que
-  // sobra entre uma vez e outra é o refresh token cifrado com um PIN de 6 dígitos (AES-GCM, chave PBKDF2).
-  // O PIN não é senha da conta: sem o aparelho na mão não há onde tentar PINs, e 5 erros apagam a sessão.
+  // Dois modos (Pedro, 19/10). Neste Mac (localhost) o painel fica aberto: entra uma vez com o código do e-mail,
+  // a sessão vai para o localStorage e dura até você sair. Fora dele (github.io, no celular) nunca pede e-mail:
+  // entra com o PIN de 6 dígitos, conferido no Supabase pela função admin-pin (migração 37: 5 erros no total
+  // travam até destravar no Mac), ou com o Face ID. A sessão aberta fica só no sessionStorage; o Face ID guarda
+  // o refresh token num cofre no aparelho, cifrado (AES-GCM) com uma chave interna que só sai com o rosto
+  // (passkey com PRF).
   const LOCAL = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
-  const LOCK_KEY = 'bots-admin-lock', TRIES = 5;
+  const LOCK_KEY = 'bots-admin-vault', DEK_KEY = 'bots-admin-dek';
   const store = (() => { try { return LOCAL ? localStorage : sessionStorage; } catch { return null; } })();
-  if (!LOCAL) try { localStorage.removeItem(KEY); } catch {}   // nada de sessão aberta guardada fora do Mac
+  if (!LOCAL) try { localStorage.removeItem(KEY); localStorage.removeItem('bots-admin-lock'); } catch {}   // nada de sessão aberta guardada fora do Mac (nem o cofre do PIN antigo)
   let session = null;
   try { session = JSON.parse(store?.getItem(KEY) || 'null'); } catch { session = null; }
-  let pinKey = null, pinSalt = null;   // a chave do PIN, só na memória enquanto o painel está aberto
+  let dek = null, dekKey = null;   // a chave interna do cofre, só na memória enquanto o painel está aberto
   const save = s => {
     session = s;
     try { s ? store?.setItem(KEY, JSON.stringify(s)) : store?.removeItem(KEY); } catch {}
-    if (s && pinKey) seal().catch(() => {});   // o Supabase troca o refresh token a cada renovação: guarda o novo
+    if (s && dekKey) seal().catch(() => {});   // o Supabase troca o refresh token a cada renovação: guarda o novo
   };
   async function auth(path, body) {
     const r = await fetch(`${cfg.url}/auth/v1/${path}`, { method: 'POST', headers: { apikey: cfg.key, 'content-type': 'application/json' }, body: JSON.stringify(body) });
@@ -57,38 +59,69 @@
   }
   const keep = out => save({ access: out.access_token, refresh: out.refresh_token, until: Date.now() + (out.expires_in - 60) * 1000, email: out.user?.email || session?.email });
 
-  // O cofre do PIN.
+  // O cofre do Face ID.
   const b64 = buf => btoa(String.fromCharCode(...new Uint8Array(buf)));
   const unb64 = str => Uint8Array.from(atob(str), c => c.charCodeAt(0));
-  const readLock = () => { try { return JSON.parse(localStorage.getItem(LOCK_KEY) || 'null'); } catch { return null; } };
+  const rand = n => crypto.getRandomValues(new Uint8Array(n));
+  const readLock = () => { try { const l = JSON.parse(localStorage.getItem(LOCK_KEY) || 'null'); return l?.v === 3 && l.face ? l : null; } catch { return null; } };
   const writeLock = l => { try { l ? localStorage.setItem(LOCK_KEY, JSON.stringify(l)) : localStorage.removeItem(LOCK_KEY); } catch {} };
-  async function pinToKey(pin, salt) {
-    const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pin), 'PBKDF2', false, ['deriveKey']);
-    return crypto.subtle.deriveKey({ name: 'PBKDF2', salt, iterations: 310000, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
-  }
+  const aes = raw => crypto.subtle.importKey('raw', raw, 'AES-GCM', false, ['encrypt', 'decrypt']);
+  async function encrypt(key, bytes) { const iv = rand(12); return { iv: b64(iv), ct: b64(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, bytes)) }; }
+  const decrypt = async (key, box) => new Uint8Array(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: unb64(box.iv) }, key, unb64(box.ct)));
+  // A chave interna também fica no sessionStorage (junto da sessão aberta, que vale tanto quanto ela): recarregar a
+  // página não pode perdê-la, senão as renovações deixariam de ir para o cofre e o rosto abriria um token vencido.
+  async function useDek(raw) { dek = raw; dekKey = await aes(raw); try { sessionStorage.setItem(DEK_KEY, b64(raw)); } catch {} }
+  const restoreDek = async () => { try { const v = sessionStorage.getItem(DEK_KEY); if (v && session && !LOCAL && readLock()) await useDek(unb64(v)); } catch {} };
+  const forgetDek = () => { dek = dekKey = null; try { sessionStorage.removeItem(DEK_KEY); } catch {} };
+  // Grava a sessão atual no cofre (a cada renovação, porque o Supabase troca o refresh token).
   async function seal() {
-    const iv = crypto.getRandomValues(new Uint8Array(12));
-    const data = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, pinKey, new TextEncoder().encode(JSON.stringify({ refresh: session.refresh, email: session.email })));
-    writeLock({ v: 1, salt: b64(pinSalt), iv: b64(iv), data: b64(data), tries: 0, email: session.email });
+    const lock = readLock(); if (!lock || !dekKey) return;
+    lock.data = await encrypt(dekKey, new TextEncoder().encode(JSON.stringify({ refresh: session.refresh, email: session.email })));
+    lock.email = session.email;
+    writeLock(lock);
   }
-  async function setPin(pin) { pinSalt = crypto.getRandomValues(new Uint8Array(16)); pinKey = await pinToKey(pin, pinSalt); await seal(); }
-  // Devolve true se abriu; false se o PIN não confere (e conta a tentativa).
-  async function unlock(pin) {
-    const lock = readLock(); if (!lock) return false;
-    const salt = unb64(lock.salt), key = await pinToKey(pin, salt);
-    try {
-      const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: unb64(lock.iv) }, key, unb64(lock.data));
-      const { refresh, email } = JSON.parse(new TextDecoder().decode(plain));
-      pinKey = key; pinSalt = salt;
-      session = { access: '', refresh, until: 0, email };   // token() renova na hora e grava o refresh novo
-      try { store?.setItem(KEY, JSON.stringify(session)); } catch {}
-      return true;
-    } catch {
-      lock.tries = (lock.tries || 0) + 1;
-      writeLock(lock.tries >= TRIES ? null : lock);
-      return false;
-    }
+
+  // Face ID: uma passkey deste endereço, com a extensão PRF. O segredo que ela devolve (só depois do rosto)
+  // vira a chave que tranca a chave interna. Sem PRF, não liga: um "ok" do Face ID sem segredo não protegeria nada.
+  const faceAvailable = async () => !LOCAL && !!window.PublicKeyCredential && await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable?.().catch(() => false);
+  async function prfKey(secret) {
+    const base = await crypto.subtle.importKey('raw', secret, 'HKDF', false, ['deriveKey']);
+    return crypto.subtle.deriveKey({ name: 'HKDF', hash: 'SHA-256', salt: new Uint8Array(0), info: new TextEncoder().encode('bots-painel-face') }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
   }
+  async function faceSecret(credId, salt) {
+    const got = await navigator.credentials.get({ publicKey: { challenge: rand(32), rpId: location.hostname, userVerification: 'required', timeout: 60000,
+      allowCredentials: [{ type: 'public-key', id: credId }], extensions: { prf: { eval: { first: salt } } } } });
+    return got.getClientExtensionResults().prf?.results?.first || null;
+  }
+  async function enableFace() {
+    const salt = rand(32);
+    const cred = await navigator.credentials.create({ publicKey: {
+      rp: { name: 'Painel dos Bots', id: location.hostname }, challenge: rand(32),
+      user: { id: rand(16), name: session.email || 'admin', displayName: 'Painel dos Bots' },
+      pubKeyCredParams: [{ type: 'public-key', alg: -7 }, { type: 'public-key', alg: -257 }],
+      authenticatorSelection: { authenticatorAttachment: 'platform', residentKey: 'preferred', userVerification: 'required' },
+      timeout: 60000, extensions: { prf: { eval: { first: salt } } } } });
+    const ext = cred.getClientExtensionResults().prf;
+    if (ext?.enabled === false) throw new Error('sem-prf');
+    // Alguns aparelhos só devolvem o segredo ao usar a passkey, não ao criar: aí pede o rosto mais uma vez.
+    const secret = ext?.results?.first || await faceSecret(cred.rawId, salt);
+    if (!secret) throw new Error('sem-prf');
+    const raw = rand(32);
+    writeLock({ v: 3, face: { cred: b64(cred.rawId), salt: b64(salt), ...(await encrypt(await prfKey(secret), raw)) } });
+    await useDek(raw); await seal();
+  }
+  async function unlockFace() {
+    const face = readLock()?.face; if (!face) return false;
+    const secret = await faceSecret(unb64(face.cred), unb64(face.salt));
+    if (!secret) throw new Error('sem-prf');
+    await useDek(await decrypt(await prfKey(secret), face));
+    const { refresh, email } = JSON.parse(new TextDecoder().decode(await decrypt(dekKey, readLock().data)));
+    session = { access: '', refresh, until: 0, email };   // token() renova na hora e grava o refresh novo no cofre
+    try { store?.setItem(KEY, JSON.stringify(session)); } catch {}
+    return true;
+  }
+  const disableFace = () => { writeLock(null); forgetDek(); };
+
   async function token() {
     if (!session) return null;
     if (Date.now() > session.until) {
@@ -99,7 +132,7 @@
         // Outra aba pode ter renovado antes (o Supabase só aceita cada refresh uma vez): usa a dela.
         let other = null; try { other = JSON.parse(store?.getItem(KEY) || 'null'); } catch {}
         if (other && other.refresh !== session.refresh && Date.now() < other.until) { session = other; return session.access; }
-        if (!LOCAL) { pinKey = null; writeLock(null); }   // sessão cancelada no Supabase: o PIN não abre mais nada
+        if (!LOCAL) disableFace();   // sessão cancelada no Supabase: o rosto não abre mais nada
         save(null); return null;
       }
     }
@@ -120,12 +153,12 @@
 
   // ---------- telas ----------
   function show(which, mode) {
-    if (which === 'login') loginMode(mode || (!LOCAL && readLock() ? 'pin' : 'email'));
+    if (which === 'login') loginMode(mode || (LOCAL ? 'email' : 'pin'));
     $('adm-login').hidden = which !== 'login';
     $('adm-denied').hidden = which !== 'denied';
     $('adm-shell').hidden = which !== 'shell';
     $('adm-who').textContent = session?.email || '';
-    $('adm-new-pin').hidden = LOCAL;
+    $('adm-new-pin').hidden = !LOCAL;
   }
   const status = (el, text, tone = '') => { el.textContent = text; el.dataset.tone = tone; };
   let toastTimer;
@@ -157,30 +190,32 @@
   }
   const codeBox = digits(document.querySelector('#adm-code .digits')), pinBox = digits(document.querySelector('#adm-pin .digits'));
 
-  // As telas de entrada: e-mail → código (e, fora do Mac, criar o PIN); ou só o PIN.
+  // As telas de entrada. No Mac: e-mail → código. No celular: o PIN (ou o rosto), e depois oferece o Face ID.
   const lastEmail = () => { try { return localStorage.getItem(EMAIL_KEY) || ''; } catch { return ''; } };
   const rememberEmail = e => { try { localStorage.setItem(EMAIL_KEY, e); } catch {} };
-  let loginStep = 'email', firstPin = '', email = '';
+  let loginStep = 'email', email = '', faceTried = false;
   const STEPS = {
-    email: ['Entrar no painel', () => LOCAL ? 'Só desta vez neste Mac: mandamos um código para o e-mail da sua conta dos Bots.' : 'Primeira vez neste aparelho: mandamos um código para o e-mail da sua conta dos Bots.'],
+    email: ['Entrar no painel', () => 'Só desta vez neste Mac: mandamos um código para o e-mail da sua conta dos Bots.'],
     code: ['Confira seu e-mail', () => `Mandamos um código para ${email}.`],
-    pin: ['Seu PIN', () => 'Pode digitar, ele não está olhando.'],
-    newpin: ['Crie um PIN', () => '6 dígitos. Da próxima vez, o painel neste aparelho pede só ele.'],
-    again: ['Repita o PIN', () => 'Para ter certeza de que é esse mesmo.'],
+    pin: ['Seu PIN', () => readLock() ? 'Olhe para o celular, ou digite o PIN. Ele não está olhando.' : 'Pode digitar, ele não está olhando.'],
+    face: ['Usar Face ID?', () => 'Para abrir o painel com o rosto. O PIN continua valendo se o Face ID não der.'],
   };
   function loginMode(step) {
     loginStep = step;
     $('auth-title').textContent = STEPS[step][0];
     $('auth-lead').textContent = STEPS[step][1]();
-    $('adm-email').hidden = step !== 'email'; $('adm-code').hidden = step !== 'code';
-    $('adm-pin').hidden = !['pin', 'newpin', 'again'].includes(step);
-    $('adm-forgot').hidden = step !== 'pin';
-    $('auth-bot').classList.toggle('is-shy', ['pin', 'newpin', 'again'].includes(step));   // tapa os olhos no PIN
+    $('adm-email').hidden = step !== 'email'; $('adm-code').hidden = step !== 'code'; $('adm-pin').hidden = step !== 'pin';
+    $('adm-face-offer').hidden = step !== 'face';
+    $('adm-face-open').hidden = !(step === 'pin' && readLock());
+    $('auth-bot').classList.toggle('is-shy', step === 'pin');   // tapa os olhos no PIN
     if (step === 'email') $('adm-email-input').value = email || lastEmail();
     if (step === 'code') { $('auth-who').textContent = email; codeBox.reset(); }
-    if ($('adm-pin').hidden === false) pinBox.reset();
+    if (step === 'pin') pinBox.reset();
     status($('adm-login-status'), '');
+    if (step === 'face') return;
     setTimeout(() => ({ email: $('adm-email-input'), code: $('adm-code-input') }[step] || $('adm-pin-input')).focus(), 0);
+    // Com Face ID ligado, já pede o rosto ao abrir (uma vez); se o navegador exigir um toque, fica o botão.
+    if (step === 'pin' && readLock() && !faceTried) { faceTried = true; setTimeout(faceOpen, 250); }
   }
   async function sendCode() {
     status($('adm-login-status'), 'Mandando…');
@@ -203,34 +238,89 @@
     try {
       keep(await auth('verify', { type: 'email', email, token }));
       rememberEmail(email);
-      if (LOCAL) start(); else loginMode('newpin');
+      start();
     } catch (err) { codeBox.shake(); status($('adm-login-status'), /expired|invalid/i.test(err.message) ? 'Esse código expirou ou não confere. Peça outro.' : err.message, 'erro'); }
     finally { codeBox.busy(false); }
   });
+  // O PIN vai para a função admin-pin, que confere no Supabase e devolve a sessão do admin.
   $('adm-pin').addEventListener('submit', async e => {
     e.preventDefault();
     const pin = $('adm-pin-input').value;
     if (pin.length < 6) return;
-    if (loginStep === 'newpin') { firstPin = pin; return loginMode('again'); }
-    if (loginStep === 'again') {
-      if (pin !== firstPin) { firstPin = ''; loginMode('newpin'); return status($('adm-login-status'), 'Os dois não batem. Crie de novo.', 'erro'); }
-      await setPin(pin); firstPin = '';
-      toast('PIN salvo. Da próxima vez, o painel pede só ele.');
-      return start();
-    }
-    pinBox.busy(true);
-    const ok = await unlock(pin);
-    pinBox.busy(false);
-    if (ok) return start();
-    const left = TRIES - (readLock()?.tries || TRIES);
-    if (!readLock()) { loginMode('email'); return status($('adm-login-status'), `${TRIES} tentativas erradas: o PIN foi apagado. Entre com o código do e-mail.`, 'erro'); }
-    pinBox.shake(); status($('adm-login-status'), `PIN errado. ${left === 1 ? 'Resta 1 tentativa' : `Restam ${left} tentativas`}.`, 'erro');
+    pinBox.busy(true); status($('adm-login-status'), '');
+    try {
+      const r = await fetch(`${cfg.url}/functions/v1/admin-pin`, { method: 'POST', headers: { apikey: cfg.key, 'content-type': 'application/json' }, body: JSON.stringify({ pin }) });
+      const out = await r.json().catch(() => ({}));
+      if (!r.ok) { pinBox.shake(); return status($('adm-login-status'), out.error || 'Não deu para entrar agora. Tente de novo.', 'erro'); }
+      keep(out);
+      if (!readLock() && await faceAvailable()) return loginMode('face');
+      start();
+    } catch { pinBox.shake(); status($('adm-login-status'), 'Sem conexão agora. Tente de novo.', 'erro'); }
+    finally { pinBox.busy(false); }
   });
-  $('adm-forgot').addEventListener('click', () => { writeLock(null); loginMode('email'); });
-  $('adm-new-pin').addEventListener('click', () => show('login', 'newpin'));
+
+  // Face ID: ligar (depois do PIN, ou no menu) e abrir.
+  const faceProblem = err => err?.name === 'NotAllowedError' ? '' : err?.message === 'sem-prf'
+    ? 'Este navegador não liberou o Face ID para o painel; continue com o PIN. (No iPhone, salvar a passkey no Chaveiro do iCloud costuma resolver.)'
+    : 'Não deu para usar o Face ID agora. Continue com o PIN.';
+  async function faceOpen() {
+    status($('adm-login-status'), '');
+    try { if (await unlockFace()) start(); }
+    catch (err) {
+      if (err?.name === 'OperationError') disableFace();   // o cofre não abriu com esse segredo: some, e fica o PIN
+      const m = faceProblem(err); if (m) status($('adm-login-status'), m, 'erro');
+      $('adm-face-open').hidden = !readLock(); $('adm-pin-input').focus();
+    }
+  }
+  $('adm-face-open').addEventListener('click', faceOpen);
+  $('adm-face-yes').addEventListener('click', async () => {
+    status($('adm-login-status'), '');
+    try { await enableFace(); toast('Face ID ligado. Da próxima vez, é só olhar.'); start(); }
+    catch (err) { status($('adm-login-status'), faceProblem(err) || 'Cancelado. Dá para ligar depois no menu.', 'erro'); $('adm-face-no').textContent = 'Continuar com o PIN'; }
+  });
+  $('adm-face-no').addEventListener('click', () => start());
+  $('adm-face-toggle').addEventListener('click', async () => {
+    if (readLock()) { disableFace(); toast('Face ID desligado. O painel pede o PIN.'); return faceMenu(); }
+    try { await enableFace(); toast('Face ID ligado.'); }
+    catch (err) { toast(faceProblem(err) || 'Cancelado.', 'erro'); }
+    faceMenu();
+  });
+  async function faceMenu() {
+    const b = $('adm-face-toggle');
+    b.hidden = LOCAL || !session || !(await faceAvailable());
+    b.textContent = readLock() ? 'Desligar o Face ID' : 'Usar Face ID';
+  }
+
+  // PIN do celular, no Mac: o estado (criado, tentativas, travado), criar ou trocar (digitando duas vezes) e destravar.
+  const pinDlg = $('adm-pin-dlg'), dlgBox = digits(document.querySelector('#pin-dlg-form .digits'));
+  let dlgFirst = '';
+  async function pinDlgState() {
+    const st = await api('rpc/admin_pin_status', { method: 'POST', body: {} });
+    $('pin-dlg-state').textContent = !st.set ? 'Ainda não tem PIN. Crie um para abrir o painel em alenkpedro.github.io/bots/painel/ sem e-mail nem código.'
+      : st.locked ? `Travado depois de 5 tentativas erradas (a última ${ago(st.last_failure_at)}). Destrave, ou crie um PIN novo.`
+      : `PIN criado ${ago(st.updated_at)}. ${st.failures ? `${st.failures} ${st.failures === 1 ? 'tentativa errada' : 'tentativas erradas'} desde o último acerto (trava em 5).` : 'Nenhuma tentativa errada.'} Para trocar, digite um novo.`;
+    $('pin-dlg-unlock').hidden = !st.locked;
+  }
+  const pinDlgStep = first => { dlgFirst = first; $('pin-dlg-step').textContent = first ? 'Repita o PIN' : 'Novo PIN'; dlgBox.reset(); setTimeout(() => $('pin-dlg-input').focus(), 0); };
+  $('adm-new-pin').addEventListener('click', () => { status($('pin-dlg-status'), ''); pinDlgStep(''); pinDlg.showModal(); pinDlgState().catch(fail); });
+  pinDlg.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => pinDlg.close()));
+  $('pin-dlg-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const pin = $('pin-dlg-input').value;
+    if (pin.length < 6) return;
+    if (!dlgFirst) { status($('pin-dlg-status'), ''); return pinDlgStep(pin); }
+    if (pin !== dlgFirst) { pinDlgStep(''); dlgBox.shake(); return status($('pin-dlg-status'), 'Os dois não batem. Digite de novo.', 'erro'); }
+    try { await api('rpc/admin_set_pin', { method: 'POST', body: { pin } }); status($('pin-dlg-status'), 'PIN salvo. No celular, o painel pede só ele (ou o Face ID).', 'ok'); pinDlgStep(''); await pinDlgState(); }
+    catch (err) { pinDlgStep(''); dlgBox.shake(); status($('pin-dlg-status'), /fraco/i.test(err.message) ? 'Esse PIN é fácil demais (repetido ou em sequência). Escolha outro.' : err.message, 'erro'); }
+  });
+  $('pin-dlg-unlock').addEventListener('click', async () => {
+    try { await api('rpc/admin_pin_unlock', { method: 'POST', body: {} }); status($('pin-dlg-status'), 'Destravado. O PIN volta a abrir o painel no celular.', 'ok'); await pinDlgState(); }
+    catch (err) { status($('pin-dlg-status'), err.message, 'erro'); }
+  });
+
   document.querySelectorAll('[data-out]').forEach(b => b.addEventListener('click', async () => {
     const t = session?.access;
-    pinKey = null; writeLock(null); save(null); show('login', 'email');
+    disableFace(); save(null); show('login');
     // scope=local: sai só deste painel. O padrão (global) derrubaria também o app no Mac e no iPhone.
     if (t) fetch(`${cfg.url}/auth/v1/logout?scope=local`, { method: 'POST', headers: { apikey: cfg.key, authorization: `Bearer ${t}` } }).catch(() => {});
   }));
@@ -682,13 +772,14 @@
 
   // ---------- começar ----------
   async function start() {
+    if (!dekKey) await restoreDek();
     if (!cfg) { show('login'); status($('adm-login-status'), 'Falta a configuração do Supabase (supabase.js).', 'erro'); return; }
-    if (!LOCAL && session && !readLock()) return show('login', 'newpin');   // entrou com o código e fechou antes de criar o PIN
     if (!(await token()) && !session) return show('login');
     try {
       const admin = await api('rpc/is_admin', { method: 'POST', body: {} });
       if (!admin) return show('denied');
       show('shell');
+      faceMenu();
       route();
     } catch (err) { if (session) { show('shell'); fail(err); } else { show('login'); status($('adm-login-status'), err.message, 'erro'); } }
   }

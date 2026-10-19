@@ -31,7 +31,7 @@
 -->
 
 <!-- Entrar, no estilo da tela de entrada do app. Neste Mac: o código do e-mail uma vez, e pronto. Fora dele
-     (celular): o código do e-mail na primeira vez, depois um PIN de 6 dígitos que tranca a sessão no aparelho. -->
+     (celular): nunca o e-mail; o PIN de 6 dígitos, conferido no Supabase (função admin-pin), ou o Face ID. -->
 <section class="adm-login" id="adm-login" hidden>
   <div class="auth">
     <header class="auth__head"><h1 id="auth-title">Entrar no painel</h1><p id="auth-lead"></p></header>
@@ -49,10 +49,14 @@
           <div class="auth__links"><button type="button" class="adm-link" id="adm-paste">Colar</button><button type="button" class="adm-link" id="adm-resend">Reenviar o e&#8209;mail</button></div>
         </form>
         <form id="adm-pin" hidden>
+          <button type="button" class="auth__face" id="adm-face-open" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2M9 9v1.5M15 9v1.5M12 9v4h-1M9.5 16q2.5 1.8 5 0"/></svg>Abrir com Face ID</button>
           <div class="digits digits--pin" data-len="6" data-group="3"><input id="adm-pin-input" inputmode="numeric" autocomplete="off" aria-label="PIN de 6 dígitos"></div>
           <button type="submit" class="auth__go">Entrar</button>
-          <div class="auth__links"><button type="button" class="adm-link" id="adm-forgot">Esqueci o PIN: entrar com o código do e&#8209;mail</button></div>
         </form>
+        <div class="auth__offer" id="adm-face-offer" hidden>
+          <button type="button" class="auth__go" id="adm-face-yes">Usar Face ID</button>
+          <div class="auth__links"><button type="button" class="adm-link" id="adm-face-no">Agora não</button></div>
+        </div>
         <p class="adm-status auth__status" id="adm-login-status" role="status"></p>
       </div>
     </div>
@@ -81,7 +85,8 @@
     <div class="adm-side__end">
       <a href="https://alenkpedro.github.io/bots/roadmap.html" target="_blank" rel="noopener">Ver o roadmap ↗</a>
       <span class="adm-who" id="adm-who"></span>
-      <button type="button" class="adm-link" id="adm-new-pin" hidden>Trocar o PIN</button>
+      <button type="button" class="adm-link" id="adm-new-pin" hidden>PIN do celular</button>
+      <button type="button" class="adm-link" id="adm-face-toggle" hidden>Usar Face ID</button>
       <button type="button" class="button button--quiet button--small" data-out>Sair</button>
     </div>
   </aside>
@@ -238,6 +243,21 @@
       <button type="submit" class="button">Salvar</button>
     </div>
   </form>
+</dialog>
+
+<!-- PIN do celular (só no Mac): criar, trocar e destravar o PIN que abre o painel publicado. -->
+<dialog class="rm-dialog adm-pin-dlg" id="adm-pin-dlg" aria-labelledby="adm-pin-title">
+  <div class="rm-dialog__body">
+    <div class="rm-dialog__top"><span class="rm-dialog__stage">Painel no celular</span><button type="button" class="rm-dialog__close" data-close aria-label="Fechar"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button></div>
+    <h2 id="adm-pin-title">PIN do celular</h2>
+    <p class="adm-help" id="pin-dlg-state">Conferindo…</p>
+    <form id="pin-dlg-form" class="pin-dlg__form">
+      <p class="pin-dlg__step" id="pin-dlg-step">Novo PIN</p>
+      <div class="digits digits--pin" data-len="6" data-group="3"><input id="pin-dlg-input" inputmode="numeric" autocomplete="off" aria-label="PIN de 6 dígitos"></div>
+    </form>
+    <p class="adm-status" id="pin-dlg-status" role="status"></p>
+    <div class="adm-edit__end"><button type="button" class="button button--quiet" id="pin-dlg-unlock" hidden>Destravar o PIN</button><span class="adm-edit__space"></span><button type="button" class="button button--quiet" data-close>Fechar</button></div>
+  </div>
 </dialog>
 
 <!-- Os registros que vieram com um feedback. -->

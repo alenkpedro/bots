@@ -710,6 +710,14 @@ p { text-wrap: pretty; }
 .auth__card .adm-link { font-size: 0.875rem; color: #7aa2ff; }
 .auth__status:empty { display: none; }
 .auth__status { margin: 0.75rem 0.4rem 0; font-size: 0.875rem; }
+.auth__face { display: flex; align-items: center; justify-content: center; gap: 0.55rem; height: 3.1rem; border-radius: 999px; background: #2a2a2d; color: var(--ink); font: inherit; font-weight: 600; font-size: 1rem; transition: background-color var(--t-hover) ease; }
+.auth__face:hover { background: #333337; }
+.auth__face svg { width: 1.35rem; height: 1.35rem; fill: none; stroke: #7aa2ff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.auth__offer { display: grid; gap: 0.75rem; }
+.auth__offer .auth__links { justify-content: center; }
+.pin-dlg__form { margin-top: 1.25rem; display: grid; gap: 0.5rem; }
+.pin-dlg__step { font-weight: 600; text-align: center; }
+.adm-pin-dlg .adm-status:not(:empty) { margin-top: 0.75rem; text-align: center; }
 /* As caixinhas: o campo de verdade fica invisível por cima delas, então toque, teclado e colar funcionam. */
 .digits { position: relative; padding: 0.35rem 0 0.25rem; }
 .digits input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; border: 0; padding: 0; caret-color: transparent; font-size: 16px; z-index: 1; }
