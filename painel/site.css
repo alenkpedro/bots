@@ -786,7 +786,8 @@ p { text-wrap: pretty; }
 .adm-head__tools { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .adm .button::before { content: none; }
 @media (max-width: 900px) {
-  .adm-shell { grid-template-columns: minmax(0, 1fr); }
+  /* Uma coluna: o topo fica do tamanho dele e a página leva o resto (senão, em página curta, a grade estica o topo). */
+  .adm-shell { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; }
   .adm-side, .adm-nav { min-width: 0; }
   .adm-side { position: static; height: auto; padding: 1rem var(--margin); gap: 0.75rem; }
   .adm-nav { display: flex; overflow-x: auto; gap: 0.25rem; scrollbar-width: none; }
