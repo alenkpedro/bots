@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.9.8",
+          "version": "0.9.9",
           "date": "2026-10-19",
-          "localizedDescription": "Pastas e fixados na lista, temas e fontes, rotinas por e-mail e sugeridas pelo uso, rotinas que gastam menos, computador dos Bots mais rápido, responder fotos e arquivos, ❤️ com dois toques, perguntas com várias respostas, aviso só no aparelho em uso, novos apps, e o agente passa a se atualizar sozinho.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.9.8/Bots.ipa",
-          "size": 13072157,
+          "localizedDescription": "Ligações sem espera (o Bot começa a falar em cerca de um segundo), voz mais natural com emoção leve nos Macs com chip Apple, números, valores e datas falados direito, e o ícone da barra de menus agora opcional.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.9.9/Bots.ipa",
+          "size": 13106707,
           "minOSVersion": "18.0"
         }
       ]

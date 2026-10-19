@@ -1,11 +1,11 @@
 {
-  "version": "0.9.8",
-  "build": 49,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.9.8/Bots-mac.zip",
-  "signature": "ChpK88Hasc/fB24lV8/YIXDEZ8drOhMEmoJTNy13Yi72c7EJWf7YdluCgCa96XEl6TAAvi9ViQF2vhNb/EUMBQ==",
-  "notes": "Pastas e fixados na lista, temas e fontes, rotinas por e-mail e sugeridas pelo uso, rotinas que gastam menos, computador dos Bots mais rápido, responder fotos e arquivos, ❤️ com dois toques, perguntas com várias respostas, aviso só no aparelho em uso, novos apps, e o agente passa a se atualizar sozinho.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.9.8/Bots-mac-arm64.zip",
-  "signature_arm64": "Pw+7fr97DK+pEdVGPr8znoQ8voMRyF347Ayinw5ObqrzV5bR9517DwwXkVQxM4hLTChv2TIqzzNqWh/wcYAVBA==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.9.8/Bots-mac-x86_64.zip",
-  "signature_x86_64": "4LYOxyNmGJ5wV4iGPUDLgpGkIEbYLiKFtS12E9b8lq3eD1A6gJ5jKSFAw7Z4vEo6Yhd64vT0zbrm0v31ND4PBg=="
+  "version": "0.9.9",
+  "build": 50,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.9.9/Bots-mac.zip",
+  "signature": "E0TW1B1qXztQ2izV1TjOgZwS5t+MNj+V6naQld6PkBjmgBkxjf8Yjj9/hv8jS+9nD2tICH/e0voRXqgGONWoAg==",
+  "notes": "Ligações sem espera (o Bot começa a falar em cerca de um segundo), voz mais natural com emoção leve nos Macs com chip Apple, números, valores e datas falados direito, e o ícone da barra de menus agora opcional.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.9.9/Bots-mac-arm64.zip",
+  "signature_arm64": "n96h/fQbmiaGYuIL+m64Nz/KT8L5h2Ucvdamb8dDdBzN9ER5UgvCimJP+CMjHt59FdCDOX5l6I+ndb8G4hciCQ==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.9.9/Bots-mac-x86_64.zip",
+  "signature_x86_64": "EfAvPybAS0/tkUhJ+ya4GG7Webbot1GCF0e2Ai81TfoDkDPqnjDFKHlWAA2WDx70j9pW0LP4gTkvIYjZV3MTCw=="
 }
