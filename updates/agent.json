@@ -1,0 +1,7 @@
+{
+  "built_at": 1792427670,
+  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1792427670/botd-1792427670.tar.gz",
+  "signature": "s6RhrR6gUfhVLjAESQtvjkUGXqys0yhxfLxcEzlFaXgpR29fI83YjEeDCGSBdpUVfeIbGJtaXXVUEvazEcMsAQ==",
+  "lock": "7b54654ad70ed12fa6f97a9a0edba32c0969161ec7d1096c4c1d5aa54482073f",
+  "notes": "Voz das ligações: começa a falar em meio segundo (em fluxo), tom de assistente segura e calma que muda conforme o contexto, pronúncia brasileira (achei, chave, sexta) e sem travar em frases longas."
+}
