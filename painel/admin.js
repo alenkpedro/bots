@@ -878,6 +878,16 @@
   addEventListener('hashchange', () => { if (!location.hash.startsWith('#notas')) flushNote(); });
   document.addEventListener('visibilitychange', () => { if (document.hidden) flushNote(); });
 
+  // Atualizar: grava o que estiver pendente e busca de novo a página aberta (no app instalado não tem puxar para baixo).
+  $('adm-refresh').addEventListener('click', async () => {
+    const b = $('adm-refresh'); if (b.classList.contains('is-busy')) return;
+    b.classList.add('is-busy');
+    const [name, arg] = location.hash.slice(1).split('/');
+    try { await flushNote(); await Promise.all([pages[pages[name] ? name : 'visao'](arg), loadPeople(), loadInbox()]); toast('Atualizado.'); }
+    catch (err) { fail(err); }
+    finally { b.classList.remove('is-busy'); }
+  });
+
   // ---------- começar ----------
   async function start() {
     if (!dekKey) await restoreDek();
