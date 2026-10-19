@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.9.9",
+          "version": "0.9.10",
           "date": "2026-10-19",
-          "localizedDescription": "Ligações sem espera (o Bot começa a falar em cerca de um segundo), voz mais natural com emoção leve nos Macs com chip Apple, números, valores e datas falados direito, e o ícone da barra de menus agora opcional.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.9.9/Bots.ipa",
-          "size": 13106707,
+          "localizedDescription": "Falar com o Bot pelo Botão de Ação, perfil do Bot novo, silenciar um Bot, pastas mais fáceis, ligação mais rápida em casa, letra nova e tela de carregamento com o Bot.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.9.10/Bots.ipa",
+          "size": 14800137,
           "minOSVersion": "18.0"
         }
       ]
