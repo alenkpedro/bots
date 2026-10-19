@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Painel">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin · Bots</title>
+<meta name="theme-color" content="#0a0a0b">
+<link rel="icon" href="admin-app/icone-192.png">
+<!-- Instalável como app (Chrome: Instalar página como app; iPhone: Adicionar à Tela de Início). -->
+<link rel="manifest" href="admin-app/app.webmanifest">
+<link rel="apple-touch-icon" href="admin-app/icone-180.png">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body class="adm">
+
+<!--
+  Painel de admin dos Bots: visão geral, pessoas, roadmap, ideias e feedback, versões e avisos.
+  Roda neste Mac (scripts/admin.sh) e, para abrir no celular, em alenkpedro.github.io/bots/painel/
+  (scripts/publish-admin.sh). Não guarda chave nenhuma: entra uma vez com o código do e-mail, como no app,
+  a sessão fica neste aparelho, e quem garante o acesso é o Supabase. Só a conta de admin
+  (is_admin, migração 26) lê e escreve aqui. O painel vê números, e-mails e versões, nunca o conteúdo
+  das conversas (migração 34).
+-->
+
+<!-- Entrar (uma vez em cada aparelho): o e-mail e o código que chega por e-mail. Depois a sessão fica guardada. -->
+<section class="adm-login" id="adm-login" hidden>
+  <div class="adm-login__card">
+    <a class="bar__name" href="#visao"><span data-mascot="round" data-hue="#38bdf8"></span>Bots <small>Admin</small></a>
+    <h1>Entrar no painel</h1>
+    <p>Só desta vez: mandamos um código para o e-mail da sua conta dos Bots. Depois o painel abre direto neste aparelho.</p>
+    <form id="adm-email">
+      <label for="adm-email-input">E-mail</label>
+      <input id="adm-email-input" type="email" autocomplete="email" required placeholder="voce@exemplo.com">
+      <button type="submit" class="button">Mandar código</button>
+    </form>
+    <form id="adm-code" hidden>
+      <label for="adm-code-input">Código</label>
+      <input id="adm-code-input" inputmode="numeric" autocomplete="one-time-code" required placeholder="123456">
+      <button type="submit" class="button">Entrar</button>
+      <button type="button" class="adm-link" id="adm-back">Usar outro e-mail</button>
+    </form>
+    <p class="adm-status" id="adm-login-status" role="status"></p>
+  </div>
+</section>
+
+<section class="adm-login" id="adm-denied" hidden>
+  <div class="adm-login__card">
+    <h1>Sem acesso</h1>
+    <p>Esta conta não é de admin. Entre com a conta que cuida dos Bots.</p>
+    <button type="button" class="button button--quiet" data-out>Sair</button>
+  </div>
+</section>
+
+<div class="adm-shell" id="adm-shell" hidden>
+  <aside class="adm-side">
+    <a class="bar__name" href="#visao"><span data-mascot="round" data-hue="#38bdf8"></span>Bots <small>Admin</small></a>
+    <nav class="adm-nav" aria-label="Painel">
+      <a href="#visao"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13h6V4H4zm10 7h6V11h-6zM4 20h6v-4H4zm10-11h6V4h-6z"/></svg><span class="adm-nav__long">Visão geral</span><span class="adm-nav__short" aria-hidden="true">Início</span></a>
+      <a href="#pessoas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm8 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM2 20c0-3.3 3.1-6 7-6s7 2.7 7 6zm15-6c2.8.3 5 2.5 5 5v1h-4"/></svg><span class="adm-nav__long">Pessoas</span><span class="adm-nav__short" aria-hidden="true">Pessoas</span><b data-badge="pessoas" hidden></b></a>
+      <a href="#roadmap"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h5v14H3zm6.5 0h5v9h-5zM16 5h5v6h-5z"/></svg><span class="adm-nav__long">Roadmap</span><span class="adm-nav__short" aria-hidden="true">Roadmap</span></a>
+      <a href="#ideias"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H8l-4 4zm4 5h8M8 12h5"/></svg><span class="adm-nav__long">Ideias e feedback</span><span class="adm-nav__short" aria-hidden="true">Ideias</span><b data-badge="ideias" hidden></b></a>
+      <a href="#travamentos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 16H3zm0 6v4m0 3v.5"/></svg><span class="adm-nav__long">Travamentos</span><span class="adm-nav__short" aria-hidden="true">Travam.</span><b data-badge="travamentos" hidden></b></a>
+      <a href="#versoes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v3h16v-3"/></svg><span class="adm-nav__long">Versões e avisos</span><span class="adm-nav__short" aria-hidden="true">Versões</span></a>
+    </nav>
+    <div class="adm-side__end">
+      <a href="https://alenkpedro.github.io/bots/roadmap.html" target="_blank" rel="noopener">Ver o roadmap ↗</a>
+      <span class="adm-who" id="adm-who"></span>
+      <button type="button" class="button button--quiet button--small" data-out>Sair</button>
+    </div>
+  </aside>
+
+  <main class="adm-main">
+    <p class="adm-status adm-toast" id="adm-status" role="status"></p>
+
+    <!-- Visão geral -->
+    <section class="adm-page" data-page="visao" aria-labelledby="t-visao">
+      <header class="adm-page__head"><div><h1 id="t-visao">Visão geral</h1><p>Como os Bots estão sendo usados. Só números: o painel nunca vê o conteúdo das conversas.</p></div></header>
+      <div class="kpis" id="kpis"></div>
+      <figure class="chart" id="chart">
+        <figcaption><b>Tarefas por dia</b><span>últimos 30 dias, de todas as pessoas</span></figcaption>
+        <div class="chart__plot" id="chart-plot"></div>
+        <div class="chart__tip" id="chart-tip" hidden></div>
+        <details class="chart__table"><summary>Ver como tabela</summary><table id="chart-table"><thead><tr><th>Dia</th><th>Tarefas</th></tr></thead><tbody></tbody></table></details>
+      </figure>
+      <section class="adm-todo" aria-labelledby="t-todo"><h2 id="t-todo">Precisa de você</h2><ul id="todo"></ul></section>
+    </section>
+
+    <!-- Pessoas -->
+    <section class="adm-page" data-page="pessoas" aria-labelledby="t-pessoas">
+      <header class="adm-page__head"><div><h1 id="t-pessoas">Pessoas</h1><p>Quem testa os Bots, as versões que usa e quanto usou nos últimos 7 dias. Clique numa pessoa para ver tudo.</p></div>
+        <input class="adm-search" id="people-search" type="search" placeholder="Buscar por nome ou e-mail" aria-label="Buscar pessoas"></header>
+      <div class="adm-chips" id="people-filter" role="tablist" aria-label="Situação">
+        <button type="button" data-f="all" aria-selected="true">Todas <b></b></button>
+        <button type="button" data-f="pending">Esperando <b></b></button>
+        <button type="button" data-f="approved">Aprovadas <b></b></button>
+        <button type="button" data-f="denied">Recusadas <b></b></button>
+      </div>
+      <div class="adm-table-wrap"><table class="adm-table" id="people">
+        <thead><tr><th>Pessoa</th><th>Situação</th><th>Último uso</th><th>Mac</th><th>iPhone</th><th class="num">Bots</th><th class="num">Tarefas 7d</th><th class="num" title="Quanto custaria pela API; nas assinaturas não é cobrado à parte">Equiv. API 7d</th><th></th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+    </section>
+
+    <!-- Uma pessoa: abre ao clicar na lista. Números e versões, nunca o conteúdo. -->
+    <section class="adm-page" data-page="pessoa" aria-labelledby="t-pessoa">
+      <a class="adm-back" href="#pessoas">← Pessoas</a>
+      <header class="person-head">
+        <span class="avatar avatar--big" id="person-avatar"></span>
+        <div><h1 id="t-pessoa">Pessoa</h1><p id="person-sub"></p></div>
+        <div class="adm-head__tools" id="person-act"></div>
+      </header>
+      <div class="kpis" id="person-kpis"></div>
+      <figure class="chart">
+        <figcaption><b>Tarefas por dia</b><span>últimos 30 dias</span></figcaption>
+        <div class="chart__plot" id="person-plot"></div>
+        <div class="chart__tip" id="person-tip" hidden></div>
+        <details class="chart__table"><summary>Ver como tabela</summary><table id="person-table"><thead><tr><th>Dia</th><th>Tarefas</th></tr></thead><tbody></tbody></table></details>
+      </figure>
+      <div class="adm-two person-grid">
+        <section class="adm-card-box" aria-labelledby="t-p-conta"><h2 id="t-p-conta">Conta</h2><dl class="facts" id="person-account"></dl></section>
+        <section class="adm-card-box" aria-labelledby="t-p-apar"><h2 id="t-p-apar">Computador e aparelhos</h2><dl class="facts" id="person-devices"></dl></section>
+      </div>
+      <section class="adm-card-box" aria-labelledby="t-p-mot"><h2 id="t-p-mot">Motores e modelos <small>últimos 30 dias</small></h2>
+        <div class="adm-table-wrap adm-table-wrap--flat"><table class="adm-table" id="person-engines">
+          <thead><tr><th>Motor</th><th>Modelo</th><th class="num">Tarefas</th><th class="num">Com erro</th><th class="num">Tokens</th><th class="num" title="Quanto custaria pela API; nas assinaturas não é cobrado à parte">Equiv. API</th></tr></thead><tbody></tbody>
+        </table></div></section>
+      <div class="adm-two person-grid">
+        <section class="adm-card-box" aria-labelledby="t-p-err"><h2 id="t-p-err">Últimos erros</h2><ul class="person-list" id="person-errors"></ul></section>
+        <section class="adm-card-box" aria-labelledby="t-p-trav"><h2 id="t-p-trav">Travamentos</h2><ul class="person-list" id="person-crashes"></ul></section>
+      </div>
+      <section class="adm-card-box" aria-labelledby="t-p-fb"><h2 id="t-p-fb">Feedback e ideias que mandou</h2><ul class="person-list" id="person-inbox"></ul></section>
+    </section>
+
+    <!-- Roadmap -->
+    <section class="adm-page" data-page="roadmap" aria-labelledby="t-roadmap">
+      <header class="adm-page__head"><div><h1 id="t-roadmap">Roadmap</h1><p id="board-hint">Arraste os cartões entre as colunas. O roadmap público muda na hora.</p></div>
+        <div class="adm-head__tools"><button type="button" class="button" data-new="next">Novo cartão</button></div></header>
+      <div class="adm-cols" id="adm-cols">
+        <section class="adm-col" data-col="next"><header><h2><span class="dot" data-s="next"></span>Na fila</h2><b data-count></b><button type="button" class="adm-plus" data-new="next" aria-label="Novo cartão em Na fila">+</button></header><div class="adm-list" data-list></div></section>
+        <section class="adm-col" data-col="dev"><header><h2><span class="dot" data-s="dev"></span>Em desenvolvimento</h2><b data-count></b><button type="button" class="adm-plus" data-new="dev" aria-label="Novo cartão em Em desenvolvimento">+</button></header><div class="adm-list" data-list></div></section>
+        <section class="adm-col" data-col="soon"><header><h2><span class="dot" data-s="soon"></span>Pronto, chega em breve</h2><b data-count></b><button type="button" class="adm-plus" data-new="soon" aria-label="Novo cartão em Pronto">+</button></header><div class="adm-list" data-list></div></section>
+        <section class="adm-col" data-col="live"><header><h2><span class="dot" data-s="live"></span>Já no app</h2><b data-count></b><button type="button" class="adm-plus" data-new="live" aria-label="Novo cartão em Já no app">+</button></header><div class="adm-list" data-list></div></section>
+      </div>
+    </section>
+
+    <!-- Ideias e feedback -->
+    <section class="adm-page" data-page="ideias" aria-labelledby="t-ideias">
+      <header class="adm-page__head"><div><h1 id="t-ideias">Ideias e feedback</h1><p>O que chega do app e do site. Feedback pode vir com os registros do agente, já sem senhas e tokens.</p></div>
+        <input class="adm-search" id="inbox-search" type="search" placeholder="Buscar no texto" aria-label="Buscar ideias e feedback"></header>
+      <div class="adm-chips" id="inbox-kind" role="tablist" aria-label="Tipo">
+        <button type="button" data-k="feedback" aria-selected="true">Feedback <b></b></button>
+        <button type="button" data-k="ideas">Ideias <b></b></button>
+      </div>
+      <div class="adm-chips adm-chips--quiet" id="inbox-status" role="tablist" aria-label="Situação">
+        <button type="button" data-st="new" aria-selected="true">Novos</button>
+        <button type="button" data-st="seen">Lidos e decididos</button>
+        <button type="button" data-st="all">Todos</button>
+      </div>
+      <ul class="inbox" id="inbox"></ul>
+    </section>
+
+    <!-- Travamentos -->
+    <section class="adm-page" data-page="travamentos" aria-labelledby="t-trav">
+      <header class="adm-page__head"><div><h1 id="t-trav">Travamentos</h1><p>O que o sistema (MetricKit) contou: o app fechando sozinho, travando ou passando do limite de CPU ou disco. Agrupado pelo lugar onde quebrou.</p></div></header>
+      <div class="adm-chips" id="crash-days" role="tablist" aria-label="Período">
+        <button type="button" data-d="7">7 dias</button>
+        <button type="button" data-d="30" aria-selected="true">30 dias</button>
+        <button type="button" data-d="90">90 dias</button>
+      </div>
+      <ul class="inbox" id="crashes"></ul>
+    </section>
+
+    <!-- Versões e avisos -->
+    <section class="adm-page" data-page="versoes" aria-labelledby="t-versoes">
+      <header class="adm-page__head"><div><h1 id="t-versoes">Versões e avisos</h1><p>Quem já atualizou e um aviso para todo mundo que testa.</p></div></header>
+      <div class="adm-two">
+        <section class="adm-card-box" aria-labelledby="t-ver"><h2 id="t-ver">Aparelhos por versão</h2><div id="versions"></div></section>
+        <section class="adm-card-box" aria-labelledby="t-aviso">
+          <h2 id="t-aviso">Novo aviso</h2>
+          <form class="adm-fields" id="notice-form">
+            <label>Título<input name="title" maxlength="80" required placeholder="Ex.: A versão 0.9.9 saiu"></label>
+            <label>Texto<textarea name="body" rows="3" maxlength="600" placeholder="O que mudou, em uma ou duas frases."></textarea></label>
+            <div class="adm-row">
+              <label>Link <small>opcional</small><input name="link" type="url" maxlength="300" placeholder="https://…"></label>
+              <label>Vale até <small>opcional</small><input name="ends_at" type="date"></label>
+            </div>
+            <p class="adm-help">Aparece uma vez no app de cada pessoa aprovada, enquanto estiver valendo.</p>
+            <div><button type="submit" class="button">Publicar aviso</button></div>
+          </form>
+        </section>
+      </div>
+      <section class="adm-card-box" aria-labelledby="t-avisos"><h2 id="t-avisos">Avisos</h2><ul class="notices" id="notices"></ul></section>
+    </section>
+  </main>
+</div>
+
+<!-- Editor de um cartão do roadmap. -->
+<dialog class="rm-dialog adm-edit" id="adm-edit" aria-labelledby="adm-edit-title">
+  <form class="rm-dialog__body" id="adm-form" method="dialog">
+    <div class="rm-dialog__top"><span class="rm-dialog__stage" id="adm-edit-kind">Cartão</span><button type="button" class="rm-dialog__close" data-close aria-label="Fechar"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button></div>
+    <h2 id="adm-edit-title">Editar cartão</h2>
+    <div class="adm-fields">
+      <label>Título<input name="title" maxlength="120" required></label>
+      <label>Resumo <small>o que aparece no cartão</small><textarea name="summary" rows="2" maxlength="400"></textarea></label>
+      <label>Texto <small>o que abre em Ver detalhes</small><textarea name="body" rows="4" maxlength="4000"></textarea></label>
+      <div class="adm-row">
+        <label>Etapa<select name="stage"><option value="next">Na fila</option><option value="dev">Em desenvolvimento</option><option value="soon">Pronto, chega em breve</option><option value="live">Já no app</option></select></label>
+        <label>Onde<select name="platforms"><option>Mac e iPhone</option><option>Só no Mac</option><option>Só no iPhone</option></select></label>
+      </div>
+      <div class="adm-row">
+        <label>Categoria<input name="category" maxlength="40" placeholder="Ex.: Rotinas"></label>
+        <label>Versão<input name="version" maxlength="20" placeholder="Ex.: 0.9.9"></label>
+      </div>
+      <label>O que está incluído <small>uma linha por item</small><textarea name="included" rows="3"></textarea></label>
+      <label class="adm-check"><input type="checkbox" name="published" checked> Publicado no roadmap</label>
+    </div>
+    <div class="adm-edit__end">
+      <button type="button" class="adm-danger" id="adm-delete">Apagar</button>
+      <span class="adm-edit__space"></span>
+      <button type="button" class="button button--quiet" data-close>Cancelar</button>
+      <button type="submit" class="button">Salvar</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Os registros que vieram com um feedback. -->
+<dialog class="rm-dialog adm-logs" id="adm-logs" aria-labelledby="adm-logs-title">
+  <div class="rm-dialog__body">
+    <div class="rm-dialog__top"><span class="rm-dialog__stage" id="adm-logs-meta"></span><button type="button" class="rm-dialog__close" data-close aria-label="Fechar"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button></div>
+    <h2 id="adm-logs-title">Registros</h2>
+    <pre class="adm-logs__text" id="adm-logs-text"></pre>
+    <div class="adm-edit__end"><span class="adm-edit__space"></span><button type="button" class="button button--quiet" id="adm-logs-copy">Copiar</button><button type="button" class="button" id="adm-logs-save">Baixar .txt</button></div>
+  </div>
+</dialog>
+
+<script src="supabase.js"></script>
+<script src="site.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
