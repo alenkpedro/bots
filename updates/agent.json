@@ -1,7 +1,7 @@
 {
-  "built_at": 1792432165,
-  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1792432165/botd-1792432165.tar.gz",
-  "signature": "b8Qomwxtmqjn+nbgiT+IsC8ezK3u/TbeJ9r0aIa2h4xG0BmLt90LUoCopXpOyFHPETsb8oPiE8f3JhJaB+pqBQ==",
+  "built_at": 1792435314,
+  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1792435314/botd-1792435314.tar.gz",
+  "signature": "umKRZXe/gxNEn9CgMEyRFIHttTB07DeUEGltY56BQfx1ZIorYacoEi6N3r6lhwCt7CmHSWvSt+yCL2EpA95gBg==",
   "lock": "7b54654ad70ed12fa6f97a9a0edba32c0969161ec7d1096c4c1d5aa54482073f",
-  "notes": "O agente se religa sozinho quando perde o login da sua conta, sem precisar abrir o app."
+  "notes": "Correção urgente da ligação: a voz voltou a sair (pedaços em MP3) e o agente não cai mais no meio da ligação. O tom some da legenda. Vídeos e arquivos de até 2 GB pelo WhatsApp. Menos prints na conversa."
 }
