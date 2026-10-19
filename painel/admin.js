@@ -34,14 +34,21 @@
 
   // ---------- sessão ----------
   // Dois modos (Pedro, 19/10). Neste Mac (localhost) o painel fica aberto: a sessão vai para o localStorage e
-  // dura até você sair. Publicado (github.io, para o celular) pede a senha: a sessão vai para o
-  // sessionStorage e some quando a aba ou o app fecha.
+  // dura até você sair. Fora dele (github.io, no celular) a sessão aberta fica só no sessionStorage, e o que
+  // sobra entre uma vez e outra é o refresh token cifrado com um PIN de 6 dígitos (AES-GCM, chave PBKDF2).
+  // O PIN não é senha da conta: sem o aparelho na mão não há onde tentar PINs, e 5 erros apagam a sessão.
   const LOCAL = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
+  const LOCK_KEY = 'bots-admin-lock', TRIES = 5;
   const store = (() => { try { return LOCAL ? localStorage : sessionStorage; } catch { return null; } })();
-  if (!LOCAL) try { localStorage.removeItem(KEY); } catch {}   // de antes dos dois modos: nada de sessão guardada aqui
+  if (!LOCAL) try { localStorage.removeItem(KEY); } catch {}   // nada de sessão aberta guardada fora do Mac
   let session = null;
   try { session = JSON.parse(store?.getItem(KEY) || 'null'); } catch { session = null; }
-  const save = s => { session = s; try { s ? store?.setItem(KEY, JSON.stringify(s)) : store?.removeItem(KEY); } catch {} };
+  let pinKey = null, pinSalt = null;   // a chave do PIN, só na memória enquanto o painel está aberto
+  const save = s => {
+    session = s;
+    try { s ? store?.setItem(KEY, JSON.stringify(s)) : store?.removeItem(KEY); } catch {}
+    if (s && pinKey) seal().catch(() => {});   // o Supabase troca o refresh token a cada renovação: guarda o novo
+  };
   async function auth(path, body) {
     const r = await fetch(`${cfg.url}/auth/v1/${path}`, { method: 'POST', headers: { apikey: cfg.key, 'content-type': 'application/json' }, body: JSON.stringify(body) });
     const out = await r.json().catch(() => ({}));
@@ -49,6 +56,39 @@
     return out;
   }
   const keep = out => save({ access: out.access_token, refresh: out.refresh_token, until: Date.now() + (out.expires_in - 60) * 1000, email: out.user?.email || session?.email });
+
+  // O cofre do PIN.
+  const b64 = buf => btoa(String.fromCharCode(...new Uint8Array(buf)));
+  const unb64 = str => Uint8Array.from(atob(str), c => c.charCodeAt(0));
+  const readLock = () => { try { return JSON.parse(localStorage.getItem(LOCK_KEY) || 'null'); } catch { return null; } };
+  const writeLock = l => { try { l ? localStorage.setItem(LOCK_KEY, JSON.stringify(l)) : localStorage.removeItem(LOCK_KEY); } catch {} };
+  async function pinToKey(pin, salt) {
+    const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pin), 'PBKDF2', false, ['deriveKey']);
+    return crypto.subtle.deriveKey({ name: 'PBKDF2', salt, iterations: 310000, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+  }
+  async function seal() {
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const data = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, pinKey, new TextEncoder().encode(JSON.stringify({ refresh: session.refresh, email: session.email })));
+    writeLock({ v: 1, salt: b64(pinSalt), iv: b64(iv), data: b64(data), tries: 0, email: session.email });
+  }
+  async function setPin(pin) { pinSalt = crypto.getRandomValues(new Uint8Array(16)); pinKey = await pinToKey(pin, pinSalt); await seal(); }
+  // Devolve true se abriu; false se o PIN não confere (e conta a tentativa).
+  async function unlock(pin) {
+    const lock = readLock(); if (!lock) return false;
+    const salt = unb64(lock.salt), key = await pinToKey(pin, salt);
+    try {
+      const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: unb64(lock.iv) }, key, unb64(lock.data));
+      const { refresh, email } = JSON.parse(new TextDecoder().decode(plain));
+      pinKey = key; pinSalt = salt;
+      session = { access: '', refresh, until: 0, email };   // token() renova na hora e grava o refresh novo
+      try { store?.setItem(KEY, JSON.stringify(session)); } catch {}
+      return true;
+    } catch {
+      lock.tries = (lock.tries || 0) + 1;
+      writeLock(lock.tries >= TRIES ? null : lock);
+      return false;
+    }
+  }
   async function token() {
     if (!session) return null;
     if (Date.now() > session.until) {
@@ -59,6 +99,7 @@
         // Outra aba pode ter renovado antes (o Supabase só aceita cada refresh uma vez): usa a dela.
         let other = null; try { other = JSON.parse(store?.getItem(KEY) || 'null'); } catch {}
         if (other && other.refresh !== session.refresh && Date.now() < other.until) { session = other; return session.access; }
+        if (!LOCAL) { pinKey = null; writeLock(null); }   // sessão cancelada no Supabase: o PIN não abre mais nada
         save(null); return null;
       }
     }
@@ -78,73 +119,118 @@
   }
 
   // ---------- telas ----------
-  function show(which) {
-    if (which === 'login' && $('adm-login').hidden) loginMode(LOCAL ? 'code' : 'pass');
+  function show(which, mode) {
+    if (which === 'login') loginMode(mode || (!LOCAL && readLock() ? 'pin' : 'email'));
     $('adm-login').hidden = which !== 'login';
     $('adm-denied').hidden = which !== 'denied';
     $('adm-shell').hidden = which !== 'shell';
     $('adm-who').textContent = session?.email || '';
+    $('adm-new-pin').hidden = LOCAL;
   }
   const status = (el, text, tone = '') => { el.textContent = text; el.dataset.tone = tone; };
   let toastTimer;
   const toast = (text, tone = 'ok') => { status($('adm-status'), text, tone); clearTimeout(toastTimer); toastTimer = setTimeout(() => status($('adm-status'), ''), 4000); };
   const fail = err => toast(err.message, 'erro');
 
-  // O e-mail fica lembrado neste aparelho para a próxima vez (o arquivo publicado não traz e-mail nenhum).
+  // As caixinhas de dígitos, como na entrada do app: um campo de verdade por cima (o teclado numérico, o
+  // código que o iPhone sugere acima do teclado, colar) e as caixas desenhadas a partir do que foi digitado.
+  function digits(box) {
+    const input = box.querySelector('input'), len = +box.dataset.len, group = +box.dataset.group, pin = box.classList.contains('digits--pin');
+    input.maxLength = len;
+    const row = document.createElement('span'); row.className = 'digits__row'; row.setAttribute('aria-hidden', 'true');
+    box.append(row);
+    const draw = () => {
+      const v = input.value, focused = document.activeElement === input;
+      row.innerHTML = Array.from({ length: len }, (_, i) => `${i && i % group === 0 ? '<i class="digits__gap"></i>' : ''}<span class="digits__slot${i === v.length && focused ? ' is-current' : ''}${v[i] ? ' is-filled' : ''}">${v[i] ? (pin ? '' : v[i]) : ''}</span>`).join('');
+    };
+    input.addEventListener('input', () => {
+      input.value = input.value.replace(/\D/g, '').slice(0, len);
+      box.classList.remove('is-wrong'); draw();
+      if (input.value.length === len) input.form.requestSubmit();
+    });
+    input.addEventListener('focus', draw); input.addEventListener('blur', draw);
+    box.reset = () => { input.value = ''; draw(); };
+    box.shake = () => { box.classList.remove('is-wrong'); void box.offsetWidth; box.classList.add('is-wrong'); input.value = ''; draw(); input.focus(); };
+    box.busy = on => box.classList.toggle('is-checking', on);
+    draw();
+    return box;
+  }
+  const codeBox = digits(document.querySelector('#adm-code .digits')), pinBox = digits(document.querySelector('#adm-pin .digits'));
+
+  // As telas de entrada: e-mail → código (e, fora do Mac, criar o PIN); ou só o PIN.
   const lastEmail = () => { try { return localStorage.getItem(EMAIL_KEY) || ''; } catch { return ''; } };
   const rememberEmail = e => { try { localStorage.setItem(EMAIL_KEY, e); } catch {} };
-  function loginMode(mode) {
-    const pass = mode === 'pass';
-    $('adm-pass').hidden = !pass; $('adm-email').hidden = pass; $('adm-code').hidden = true;
-    $('adm-use-pass').hidden = pass || LOCAL;
-    $('adm-pass-email').value = $('adm-email-input').value = lastEmail();
-    $('adm-login-lead').textContent = pass ? 'Entre com o e-mail e a senha do painel.'
-      : LOCAL ? 'Só desta vez: mandamos um código para o e-mail da sua conta dos Bots. Depois o painel abre direto neste Mac.'
-      : 'Mandamos um código para o e-mail da sua conta dos Bots.';
+  let loginStep = 'email', firstPin = '', email = '';
+  const STEPS = {
+    email: ['Entrar no painel', () => LOCAL ? 'Só desta vez neste Mac: mandamos um código para o e-mail da sua conta dos Bots.' : 'Primeira vez neste aparelho: mandamos um código para o e-mail da sua conta dos Bots.'],
+    code: ['Confira seu e-mail', () => `Mandamos um código para ${email}.`],
+    pin: ['Seu PIN', () => 'Pode digitar, ele não está olhando.'],
+    newpin: ['Crie um PIN', () => '6 dígitos. Da próxima vez, o painel neste aparelho pede só ele.'],
+    again: ['Repita o PIN', () => 'Para ter certeza de que é esse mesmo.'],
+  };
+  function loginMode(step) {
+    loginStep = step;
+    $('auth-title').textContent = STEPS[step][0];
+    $('auth-lead').textContent = STEPS[step][1]();
+    $('adm-email').hidden = step !== 'email'; $('adm-code').hidden = step !== 'code';
+    $('adm-pin').hidden = !['pin', 'newpin', 'again'].includes(step);
+    $('adm-forgot').hidden = step !== 'pin';
+    $('auth-bot').classList.toggle('is-shy', ['pin', 'newpin', 'again'].includes(step));   // tapa os olhos no PIN
+    if (step === 'email') $('adm-email-input').value = email || lastEmail();
+    if (step === 'code') { $('auth-who').textContent = email; codeBox.reset(); }
+    if ($('adm-pin').hidden === false) pinBox.reset();
     status($('adm-login-status'), '');
-    setTimeout(() => (pass ? ($('adm-pass-email').value ? $('adm-pass-input') : $('adm-pass-email')) : $('adm-email-input')).focus(), 0);
+    setTimeout(() => ({ email: $('adm-email-input'), code: $('adm-code-input') }[step] || $('adm-pin-input')).focus(), 0);
   }
-  $('adm-use-code').addEventListener('click', () => loginMode('code'));
-  $('adm-use-pass').addEventListener('click', () => loginMode('pass'));
-  $('adm-pass').addEventListener('submit', async e => {
-    e.preventDefault();
-    const em = $('adm-pass-email').value.trim();
-    status($('adm-login-status'), 'Conferindo…');
-    try {
-      keep(await auth('token?grant_type=password', { email: em, password: $('adm-pass-input').value }));
-      $('adm-pass-input').value = ''; rememberEmail(em); status($('adm-login-status'), '');
-      start();
-    } catch (err) {
-      status($('adm-login-status'), /invalid/i.test(err.message) ? 'E-mail ou senha não conferem. Se ainda não criou a senha, crie em "Senha do painel" no painel do Mac.' : err.message, 'erro');
-    }
-  });
-
-  // Entrar com código: o e-mail recebe um código (o mesmo do app); a conta já tem que existir.
-  let email = '';
-  $('adm-email').addEventListener('submit', async e => {
-    e.preventDefault();
-    email = $('adm-email-input').value.trim();
+  async function sendCode() {
     status($('adm-login-status'), 'Mandando…');
     try {
       await auth('otp', { email, create_user: false });
-      $('adm-email').hidden = true; $('adm-code').hidden = false; $('adm-code-input').focus();
-      status($('adm-login-status'), `Mandamos um código para ${email}.`, 'ok');
+      loginMode('code'); status($('adm-login-status'), '');
     } catch (err) { status($('adm-login-status'), err.message, 'erro'); }
+  }
+  $('adm-email').addEventListener('submit', e => { e.preventDefault(); email = $('adm-email-input').value.trim(); sendCode(); });
+  $('adm-resend').addEventListener('click', () => sendCode().then(() => status($('adm-login-status'), 'Mandamos outro código.', 'ok')));
+  $('adm-paste').addEventListener('click', async () => {
+    try { const t = (await navigator.clipboard.readText()).replace(/\D/g, ''); const i = $('adm-code-input'); i.value = t; i.dispatchEvent(new Event('input')); } catch {}
   });
+  $('adm-back').addEventListener('click', () => loginMode('email'));
   $('adm-code').addEventListener('submit', async e => {
     e.preventDefault();
-    status($('adm-login-status'), 'Conferindo…');
+    const token = $('adm-code-input').value;
+    if (token.length < 6) return;
+    codeBox.busy(true); status($('adm-login-status'), '');
     try {
-      keep(await auth('verify', { type: 'email', email, token: $('adm-code-input').value.replace(/\s/g, '') }));
+      keep(await auth('verify', { type: 'email', email, token }));
       rememberEmail(email);
-      status($('adm-login-status'), '');
-      start();
-    } catch (err) { status($('adm-login-status'), /expired|invalid/i.test(err.message) ? 'Esse código expirou ou não confere. Peça outro.' : err.message, 'erro'); }
+      if (LOCAL) start(); else loginMode('newpin');
+    } catch (err) { codeBox.shake(); status($('adm-login-status'), /expired|invalid/i.test(err.message) ? 'Esse código expirou ou não confere. Peça outro.' : err.message, 'erro'); }
+    finally { codeBox.busy(false); }
   });
-  $('adm-back').addEventListener('click', () => { $('adm-code').hidden = true; $('adm-email').hidden = false; status($('adm-login-status'), ''); });
+  $('adm-pin').addEventListener('submit', async e => {
+    e.preventDefault();
+    const pin = $('adm-pin-input').value;
+    if (pin.length < 6) return;
+    if (loginStep === 'newpin') { firstPin = pin; return loginMode('again'); }
+    if (loginStep === 'again') {
+      if (pin !== firstPin) { firstPin = ''; loginMode('newpin'); return status($('adm-login-status'), 'Os dois não batem. Crie de novo.', 'erro'); }
+      await setPin(pin); firstPin = '';
+      toast('PIN salvo. Da próxima vez, o painel pede só ele.');
+      return start();
+    }
+    pinBox.busy(true);
+    const ok = await unlock(pin);
+    pinBox.busy(false);
+    if (ok) return start();
+    const left = TRIES - (readLock()?.tries || TRIES);
+    if (!readLock()) { loginMode('email'); return status($('adm-login-status'), `${TRIES} tentativas erradas: o PIN foi apagado. Entre com o código do e-mail.`, 'erro'); }
+    pinBox.shake(); status($('adm-login-status'), `PIN errado. ${left === 1 ? 'Resta 1 tentativa' : `Restam ${left} tentativas`}.`, 'erro');
+  });
+  $('adm-forgot').addEventListener('click', () => { writeLock(null); loginMode('email'); });
+  $('adm-new-pin').addEventListener('click', () => show('login', 'newpin'));
   document.querySelectorAll('[data-out]').forEach(b => b.addEventListener('click', async () => {
     const t = session?.access;
-    save(null); show('login');
+    pinKey = null; writeLock(null); save(null); show('login', 'email');
     // scope=local: sai só deste painel. O padrão (global) derrubaria também o app no Mac e no iPhone.
     if (t) fetch(`${cfg.url}/auth/v1/logout?scope=local`, { method: 'POST', headers: { apikey: cfg.key, authorization: `Bearer ${t}` } }).catch(() => {});
   }));
@@ -595,27 +681,9 @@
   });
 
   // ---------- começar ----------
-  // Senha do painel: muda a senha da conta no Supabase (PUT /auth/v1/user) com a sessão aberta.
-  const passDlg = $('adm-pass-dlg'), passForm = $('adm-pass-form');
-  $('adm-set-pass').addEventListener('click', () => { passForm.reset(); status($('adm-pass-status'), ''); passDlg.showModal(); passForm.pass.focus(); });
-  passDlg.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => passDlg.close()));
-  passForm.addEventListener('submit', async e => {
-    e.preventDefault();
-    if (passForm.pass.value !== passForm.again.value) return status($('adm-pass-status'), 'As duas senhas não são iguais.', 'erro');
-    status($('adm-pass-status'), 'Salvando…');
-    try {
-      const t = await token(); if (!t) throw new Error('A sessão acabou. Entre de novo.');
-      const r = await fetch(`${cfg.url}/auth/v1/user`, { method: 'PUT', headers: { apikey: cfg.key, authorization: `Bearer ${t}`, 'content-type': 'application/json' }, body: JSON.stringify({ password: passForm.pass.value }) });
-      const out = await r.json().catch(() => ({}));
-      if (!r.ok) throw new Error(/reauth/i.test(`${out.msg} ${out.error_code}`) ? 'Por segurança, saia e entre de novo com o código do e-mail antes de trocar a senha.'
-        : /weak|short|characters/i.test(`${out.msg} ${out.error_code}`) ? 'Essa senha é fraca demais. Use 12 caracteres ou mais, misturando letras e números.' : out.msg || out.message || 'Não deu para salvar a senha.');
-      if (session?.email) rememberEmail(session.email);
-      passDlg.close(); toast('Senha salva. No celular, o painel pede esta senha.');
-    } catch (err) { status($('adm-pass-status'), err.message, 'erro'); }
-  });
-
   async function start() {
     if (!cfg) { show('login'); status($('adm-login-status'), 'Falta a configuração do Supabase (supabase.js).', 'erro'); return; }
+    if (!LOCAL && session && !readLock()) return show('login', 'newpin');   // entrou com o código e fechou antes de criar o PIN
     if (!(await token()) && !session) return show('login');
     try {
       const admin = await api('rpc/is_admin', { method: 'POST', body: {} });

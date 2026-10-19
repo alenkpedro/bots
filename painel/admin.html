@@ -23,39 +23,39 @@
   Painel de admin dos Bots: visão geral, pessoas, roadmap, ideias e feedback, versões e avisos.
   Dois modos. Neste Mac (localhost, scripts/admin.sh) abre direto: entra uma vez com o código do e-mail e
   a sessão fica guardada. Em alenkpedro.github.io/bots/painel/ (scripts/publish-admin.sh, para o celular)
-  pede a senha a cada vez que abre: a sessão só dura enquanto a aba ou o app estiver aberto. Não guarda
-  chave nenhuma; quem garante o acesso é o Supabase. Só a conta de admin
+  pede um PIN de 6 dígitos a cada vez que abre; o PIN tranca a sessão no próprio aparelho (não é senha da
+  conta, então não dá para tentar PINs pela internet). Não guarda chave nenhuma; quem garante o acesso é o
+  Supabase. Só a conta de admin
   (is_admin, migração 26) lê e escreve aqui. O painel vê números, e-mails e versões, nunca o conteúdo
   das conversas (migração 34).
 -->
 
-<!-- Entrar: com a senha (o padrão fora deste Mac) ou com o código que chega por e-mail (o padrão no localhost). -->
+<!-- Entrar, no estilo da tela de entrada do app. Neste Mac: o código do e-mail uma vez, e pronto. Fora dele
+     (celular): o código do e-mail na primeira vez, depois um PIN de 6 dígitos que tranca a sessão no aparelho. -->
 <section class="adm-login" id="adm-login" hidden>
-  <div class="adm-login__card">
-    <a class="bar__name" href="#visao"><span data-mascot="round" data-hue="#38bdf8"></span>Bots <small>Admin</small></a>
-    <h1>Entrar no painel</h1>
-    <p id="adm-login-lead"></p>
-    <form id="adm-pass" hidden>
-      <label for="adm-pass-email">E-mail</label>
-      <input id="adm-pass-email" type="email" autocomplete="username" required placeholder="voce@exemplo.com">
-      <label for="adm-pass-input">Senha</label>
-      <input id="adm-pass-input" type="password" autocomplete="current-password" required>
-      <button type="submit" class="button">Entrar</button>
-      <button type="button" class="adm-link" id="adm-use-code">Esqueci a senha: entrar com código do e-mail</button>
-    </form>
-    <form id="adm-email" hidden>
-      <label for="adm-email-input">E-mail</label>
-      <input id="adm-email-input" type="email" autocomplete="email" required placeholder="voce@exemplo.com">
-      <button type="submit" class="button">Mandar código</button>
-    </form>
-    <form id="adm-code" hidden>
-      <label for="adm-code-input">Código</label>
-      <input id="adm-code-input" inputmode="numeric" autocomplete="one-time-code" required placeholder="123456">
-      <button type="submit" class="button">Entrar</button>
-      <button type="button" class="adm-link" id="adm-back">Usar outro e-mail</button>
-    </form>
-    <button type="button" class="adm-link" id="adm-use-pass" hidden>Entrar com a senha</button>
-    <p class="adm-status" id="adm-login-status" role="status"></p>
+  <div class="auth">
+    <header class="auth__head"><h1 id="auth-title">Entrar no painel</h1><p id="auth-lead"></p></header>
+    <div class="auth__stage">
+      <span class="auth__bot" id="auth-bot" data-mascot="round" data-hue="#38bdf8"></span>
+      <div class="auth__card">
+        <form id="adm-email" hidden>
+          <input id="adm-email-input" type="email" autocomplete="email" required placeholder="seu@email.com" aria-label="E-mail">
+          <button type="submit" class="auth__go">Mandar código</button>
+        </form>
+        <form id="adm-code" hidden>
+          <div class="auth__who"><span id="auth-who"></span><button type="button" class="adm-link" id="adm-back">Trocar e&#8209;mail</button></div>
+          <div class="digits" data-len="8" data-group="4"><input id="adm-code-input" inputmode="numeric" autocomplete="one-time-code" aria-label="Código do e-mail"></div>
+          <button type="submit" class="auth__go">Entrar</button>
+          <div class="auth__links"><button type="button" class="adm-link" id="adm-paste">Colar</button><button type="button" class="adm-link" id="adm-resend">Reenviar o e&#8209;mail</button></div>
+        </form>
+        <form id="adm-pin" hidden>
+          <div class="digits digits--pin" data-len="6" data-group="3"><input id="adm-pin-input" inputmode="numeric" autocomplete="off" aria-label="PIN de 6 dígitos"></div>
+          <button type="submit" class="auth__go">Entrar</button>
+          <div class="auth__links"><button type="button" class="adm-link" id="adm-forgot">Esqueci o PIN: entrar com o código do e&#8209;mail</button></div>
+        </form>
+        <p class="adm-status auth__status" id="adm-login-status" role="status"></p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -81,7 +81,7 @@
     <div class="adm-side__end">
       <a href="https://alenkpedro.github.io/bots/roadmap.html" target="_blank" rel="noopener">Ver o roadmap ↗</a>
       <span class="adm-who" id="adm-who"></span>
-      <button type="button" class="adm-link" id="adm-set-pass">Senha do painel</button>
+      <button type="button" class="adm-link" id="adm-new-pin" hidden>Trocar o PIN</button>
       <button type="button" class="button button--quiet button--small" data-out>Sair</button>
     </div>
   </aside>
@@ -237,21 +237,6 @@
       <button type="button" class="button button--quiet" data-close>Cancelar</button>
       <button type="submit" class="button">Salvar</button>
     </div>
-  </form>
-</dialog>
-
-<!-- Criar ou trocar a senha do painel (a senha da sua conta dos Bots no Supabase), pedida fora deste Mac. -->
-<dialog class="rm-dialog adm-pass-dlg" id="adm-pass-dlg" aria-labelledby="adm-pass-title">
-  <form class="rm-dialog__body" id="adm-pass-form" method="dialog">
-    <div class="rm-dialog__top"><span class="rm-dialog__stage">Painel</span><button type="button" class="rm-dialog__close" data-close aria-label="Fechar"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button></div>
-    <h2 id="adm-pass-title">Senha do painel</h2>
-    <p class="adm-help">É a senha que o painel pede quando você abre pelo celular (alenkpedro.github.io/bots/painel/). Neste Mac ele continua abrindo direto. Se esquecer, o código por e-mail continua valendo.</p>
-    <div class="adm-fields">
-      <label>Nova senha <small>12 caracteres ou mais</small><input name="pass" type="password" autocomplete="new-password" minlength="12" required></label>
-      <label>Repita a senha<input name="again" type="password" autocomplete="new-password" minlength="12" required></label>
-    </div>
-    <p class="adm-status" id="adm-pass-status" role="status"></p>
-    <div class="adm-edit__end"><span class="adm-edit__space"></span><button type="button" class="button button--quiet" data-close>Cancelar</button><button type="submit" class="button">Salvar senha</button></div>
   </form>
 </dialog>
 
