@@ -4,26 +4,236 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bots</title>
-<meta name="description" content="Bots: assistentes que trabalham no seu Mac.">
-<link rel="stylesheet" href="style.css">
+<meta name="description" content="Bots: assistentes de IA para quem quer delegar de verdade. Cada Bot tem uma função e um computador próprio no seu Mac, usa seus apps e volta com o trabalho pronto.">
+<meta name="theme-color" content="#0a0a0b">
+<link rel="icon" href="img/icone.webp">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
-<body>
-<main>
-  <h1>Bots</h1>
-  <p class="lead">Assistentes que trabalham no seu Mac. Você pede pelo Mac ou pelo iPhone e um Bot faz.</p>
-  <p>Bots é um app pessoal, de uso privado, para Mac e iPhone. Cada Bot tem uma função (cuidar do e-mail, pesquisar, rodar rotinas) e trabalha num computador próprio dentro do seu Mac.</p>
-  <h2 id="instalar">Instalar</h2>
-  <p><strong>No Mac:</strong> <a href="https://github.com/alenkpedro/bots/releases/latest/download/Bots.dmg">baixe o Bots</a>, abra o arquivo e arraste o Bots para a pasta Aplicativos.</p>
-  <ol>
-    <li>Na primeira vez, o Mac avisa que não conhece o desenvolvedor. Abra Ajustes do Sistema → Privacidade e Segurança, role até o fim e clique em <em>Abrir Mesmo Assim</em>. Isso é só uma vez.</li>
-    <li>Entre com o seu e-mail. O Bots abre a lista <em>Preparar este Mac</em>: um botão para cada coisa (o agente, o cérebro, o computador dos Bots e a voz).</li>
-    <li>Depois disso, as atualizações chegam sozinhas: quando houver uma nova, aparece um aviso no canto da janela.</li>
-  </ol>
-  <p><strong>No iPhone:</strong> pelo app que você usa para instalar fora da App Store. <a href="https://altdirect.app/?url=https://alenkpedro.github.io/bots/updates/altstore.json">Toque aqui e escolha o seu</a> (AltStore, SideStore, Feather, LiveContainer, StikStore ou TrollApps) para adicionar a fonte do Bots. Na <strong>FlareStore</strong>, abra a aba de fontes (Sources/Repos), toque em + e cole: <code>https://alenkpedro.github.io/bots/updates/altstore.json</code>. As novas versões aparecem no próprio app, e o Bots também avisa.</p>
+<body id="topo">
 
-  <h2>Google</h2>
-  <p>Se você quiser, um Bot pode ler e pesquisar seus e-mails e salvar rascunhos no Gmail, ver e criar eventos na sua Agenda e ler arquivos do seu Drive. Você decide o que liga, e pode desligar a qualquer momento. Os detalhes estão na <a href="privacidade.html">política de privacidade</a>.</p>
-  <nav><a href="privacidade.html">Política de privacidade</a><a href="termos.html">Termos de uso</a></nav>
+<header class="bar">
+  <div class="bar__inner wrap">
+    <a class="bar__name" href="./"><span data-mascot="round" data-hue="#38bdf8"></span>Bots</a>
+    <nav class="bar__links" aria-label="Principal">
+      <a class="wide" href="#como">Como funciona</a>
+      <a class="wide" href="#faz">Recursos</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a class="wide" href="ajuda.html">Ajuda</a>
+      <a class="button button--small" href="https://github.com/alenkpedro/bots/releases/latest/download/Bots.dmg" data-dl data-done="Começou">Baixar</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap" aria-labelledby="titulo">
+    <h1 id="titulo" class="rv">Conheça os <span class="face" data-mascot="round" data-hue="#38bdf8" aria-hidden="true"></span> Bots</h1>
+    <p class="rv" style="--i:1">Assistentes de IA para quem quer delegar de verdade. Cada Bot tem uma função e um computador próprio no seu Mac, usa seus apps e volta com o trabalho pronto.</p>
+    <div class="hero__actions rv" style="--i:2">
+      <a class="button button--big" href="https://github.com/alenkpedro/bots/releases/latest/download/Bots.dmg" data-dl data-done="Download iniciado" data-peek data-magnet><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.7-1-2.7-4.1zM13.9 5c.7-.9 1.2-2 1-3.2-1 .1-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.1 1.2.1 2.3-.6 3.1-1.5z"/></svg>Baixar para macOS</a>
+      <a class="button button--big button--quiet" href="#instalar">Instalar no iPhone<span class="arrow arrow--down" aria-hidden="true">↓</span></a>
+    </div>
+    <p class="hero__note rv" style="--i:3">Grátis. Use com o Claude, o Codex ou outro cérebro que você já tem.</p>
+
+    <!-- O app montado na página: clique num Bot da lista ou escreva um pedido. -->
+    <div class="app rv" style="--i:3" data-ui>
+      <div class="app__side" role="tablist" aria-label="Bots">
+        <div class="app__top" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="app__search" aria-hidden="true">Buscar</div>
+        <button type="button" class="app__bot" role="tab" data-bot="caixa"><span data-mascot="ghost" data-hue="#f472b6"></span><span><b>Caixa de entrada</b><small>Caixa zerada, 4 rascunhos guardados</small></span></button>
+        <button type="button" class="app__bot" role="tab" data-bot="viagens"><span data-mascot="hex" data-hue="#22c55e"></span><span><b>Viagens</b><small data-tone="go">Comparando voos…</small></span></button>
+        <button type="button" class="app__bot" role="tab" data-bot="contas" aria-selected="true"><span data-mascot="bean" data-hue="#eab308"></span><span><b>Contas da casa</b><small data-tone="wait">Pede sua aprovação</small></span></button>
+        <button type="button" class="app__bot" role="tab" data-bot="loja"><span data-mascot="round" data-hue="#38bdf8"></span><span><b>Loja online</b><small>12 clientes respondidos</small></span></button>
+        <button type="button" class="app__bot" role="tab" data-bot="estudos" data-sleepy><span data-mascot="round" data-hue="#a78bfa"></span><span><b>Estudos</b><small>Resumo da aula pronto</small></span></button>
+        <button type="button" class="app__bot" role="tab" data-bot="saude" data-sleepy><span data-mascot="square" data-hue="#14b8a6"></span><span><b>Saúde</b><small>Consulta na terça, 15h</small></span></button>
+      </div>
+      <div class="app__main">
+        <div class="toasts" id="app-toasts"></div>
+        <div class="app__head" id="app-head"></div>
+        <div class="app__chat" id="app-chat" aria-live="polite"></div>
+        <form class="app__composer" id="app-ask">
+          <label class="sr-only" for="app-input">Escreva um pedido</label>
+          <input id="app-input" type="text" placeholder="Peça qualquer coisa…" autocomplete="off">
+          <button type="submit" aria-label="Mandar">↑</button>
+        </form>
+      </div>
+    </div>
+    <p class="app-caption">A interface do app, com uma conversa de exemplo. Clique num Bot ou escreva um pedido.</p>
+  </section>
+
+  <section class="section wrap" id="como" aria-labelledby="como-titulo">
+    <div class="team rv">
+      <div>
+        <h2 class="title" id="como-titulo">Peça como pediria à sua equipe</h2>
+        <p>Peça pelo Mac ou pelo iPhone, escrevendo, falando ou numa ligação. Cada Bot leva o trabalho do começo ao fim, lembra como você gosta das coisas e chama você só quando precisa da sua aprovação.</p>
+      </div>
+      <div class="cast" aria-hidden="true">
+        <span data-mascot="round" data-hue="#38bdf8"></span>
+        <span data-mascot="ghost" data-hue="#f472b6"></span>
+        <span data-mascot="hex" data-hue="#22c55e"></span>
+        <span data-mascot="square" data-hue="#ff8a3d"></span>
+        <span data-mascot="bean" data-hue="#eab308"></span>
+      </div>
+    </div>
+
+    <div class="features" id="faz">
+      <article class="feature rv">
+        <h3>Um computador só dele</h3>
+        <p>Cada Bot usa o navegador e o terminal de um computador próprio dentro do seu Mac. Você assiste ao vivo e assume quando quiser.</p>
+        <div class="feature__shot"><div class="phone" data-ui><div class="phone__screen"><div class="scr" role="img" aria-label="Perfil do Bot Viagens no app: planejador de viagens, trabalhando agora, com Conversar, Nova rotina e Ver a tela."><div class="scr__status"><span>9:41</span><span class="scr__icons" aria-hidden="true"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg viewBox="0 0 16 12"><path d="M8 2.2c2.4 0 4.6.9 6.3 2.5l1.2-1.3A10.8 10.8 0 0 0 8 .4 10.8 10.8 0 0 0 .5 3.4l1.2 1.3A9 9 0 0 1 8 2.2zm0 3.6c1.4 0 2.7.5 3.7 1.4l1.2-1.3A7.2 7.2 0 0 0 8 4a7.2 7.2 0 0 0-4.9 1.9l1.2 1.3c1-.9 2.3-1.4 3.7-1.4zm0 3.6c.5 0 1 .2 1.3.5L8 11.6 6.7 9.9c.3-.3.8-.5 1.3-.5z"/></svg><b class="scr__batt"><i></i></b></span></div><div class="scr__nav"><span class="scr__round">‹</span><b>Perfil</b><em>Editar</em></div><div class="scr__who"><span class="avatar"><span data-mascot="hex" data-hue="#22c55e"></span></span><b>Viagens</b><small>Planejador de viagens</small><small class="go">● Trabalhando agora · 1 tarefa</small></div><div class="scr__acts"><span>Conversar</span><span>Nova rotina</span><span>Ver a tela</span></div><div class="scr__seg"><span>Info</span><span>Documentos</span><span>Links</span><span>Mídia</span></div><p class="scr__label">Como trabalha</p><div class="scr__list"><div>Instruções<i>›</i></div><div>Habilidades<i>3 ›</i></div><div>Memória<i>›</i></div></div><p class="scr__label">O que pode acessar</p><div class="scr__list"><div>Computador<i>Navegador ›</i></div><div>Apps conectados<i>Gmail, Agenda ›</i></div></div></div></div></div></div>
+      </article>
+      <article class="feature rv" style="--i:1">
+        <h3>Entra nos sites sem ver a senha</h3>
+        <p>Quando um site pede login, aparece um cartão. Você digita no app, vai direto para a página, e nada fica guardado.</p>
+        <div class="feature__shot feature__shot--end"><div class="phone" data-ui><div class="phone__screen"><div class="scr" role="group" aria-label="Exemplo: o site da distribuidora pede login e um cartão deixa você entrar sem o Bot ver a senha. Nada do que você digitar aqui é enviado."><div class="scr__status"><span>9:41</span><span class="scr__icons" aria-hidden="true"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg viewBox="0 0 16 12"><path d="M8 2.2c2.4 0 4.6.9 6.3 2.5l1.2-1.3A10.8 10.8 0 0 0 8 .4 10.8 10.8 0 0 0 .5 3.4l1.2 1.3A9 9 0 0 1 8 2.2zm0 3.6c1.4 0 2.7.5 3.7 1.4l1.2-1.3A7.2 7.2 0 0 0 8 4a7.2 7.2 0 0 0-4.9 1.9l1.2 1.3c1-.9 2.3-1.4 3.7-1.4zm0 3.6c.5 0 1 .2 1.3.5L8 11.6 6.7 9.9c.3-.3.8-.5 1.3-.5z"/></svg><b class="scr__batt"><i></i></b></span></div><div class="scr__bar"><span class="scr__round">‹</span><span class="scr__pill"><span data-mascot="bean" data-hue="#eab308"></span><span><b>Contas da casa</b><small>Trabalhando · 1 min</small></span></span><span class="scr__round"><svg viewBox="0 0 24 24" width="12" height="12"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></span></div><div class="scr__body"><span class="b-day">Hoje</span><p class="b-me">Baixa a conta de luz deste mês</p><p class="b-bot">A distribuidora pediu login aqui. Tudo o que você digitar vai direto para a página, e eu não vejo nada.</p><form class="b-card b-login" autocomplete="off"><span class="b-login__bot" data-mascot="bean" data-hue="#eab308"></span><b>Entrar na distribuidora de energia</b><p>Só a página vê o que você digitar.</p><input class="b-login__field" type="text" name="exemplo-usuario" placeholder="CPF ou e-mail" aria-label="CPF ou e-mail (exemplo: nada é enviado)" autocomplete="off" spellcheck="false"><input class="b-login__field" type="password" name="exemplo-senha" placeholder="Senha" aria-label="Senha (exemplo: nada é enviado)" autocomplete="off"><button class="b-card__one" type="submit">Continuar</button></form></div><div class="scr__composer"><span class="scr__round">+</span><span>Mensagem para Contas da casa</span></div></div></div></div></div>
+      </article>
+      <article class="feature rv">
+        <h3>Pede antes do que importa</h3>
+        <p>Apagar, pagar, enviar: tudo o que não tem volta espera o seu Permitir. Você decide o que cada Bot pode fazer sozinho.</p>
+        <div class="feature__ui" data-ui>
+          <div class="ui-row"><span data-mascot="bean" data-hue="#eab308"></span><span><b>Contas da casa</b><small>Pagar a conta de luz</small></span><em>Pede você</em></div>
+          <div class="ui-row"><span data-mascot="ghost" data-hue="#f472b6"></span><span><b>Caixa de entrada</b><small>Enviar a resposta para o cliente</small></span><em>Pede você</em></div>
+          <div class="ui-row"><span data-mascot="hex" data-hue="#22c55e"></span><span><b>Viagens</b><small>Comparar 40 voos e hotéis</small></span><em data-tone="go">Sozinho</em></div>
+        </div>
+      </article>
+      <article class="feature rv" style="--i:1">
+        <h3>Rotinas que rodam sozinhas</h3>
+        <p>Num horário, quando chega um e-mail ou quando uma página muda. Pediu a mesma coisa três vezes? O Bot oferece fazer sozinho.</p>
+        <div class="feature__ui" data-ui>
+          <div class="ui-row"><span data-mascot="round" data-hue="#a3e635"></span><span><b>Resumo da semana</b><small>Redes sociais</small></span><em>Toda segunda, 9h</em></div>
+          <div class="ui-row"><span data-mascot="bean" data-hue="#eab308"></span><span><b>Guardar os recibos</b><small>Contas da casa</small></span><em>Quando chegar e-mail</em></div>
+          <div class="ui-row"><span data-mascot="hex" data-hue="#22c55e"></span><span><b>Avisar passagem barata</b><small>Viagens</small></span><em>Quando a página mudar</em></div>
+        </div>
+      </article>
+      <article class="feature rv">
+        <h3>Bots que trabalham juntos</h3>
+        <p>Monte equipes com um líder, cargos e um quadro de tarefas. Eles passam o trabalho entre si e só chamam você para o que é seu.</p>
+        <div class="feature__shot"><div class="phone" data-ui><div class="phone__screen"><div class="scr" role="img" aria-label="Equipe Loja online no app: três Bots, Atendimento é o líder, com o quadro de tarefas."><div class="scr__status"><span>9:41</span><span class="scr__icons" aria-hidden="true"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg viewBox="0 0 16 12"><path d="M8 2.2c2.4 0 4.6.9 6.3 2.5l1.2-1.3A10.8 10.8 0 0 0 8 .4 10.8 10.8 0 0 0 .5 3.4l1.2 1.3A9 9 0 0 1 8 2.2zm0 3.6c1.4 0 2.7.5 3.7 1.4l1.2-1.3A7.2 7.2 0 0 0 8 4a7.2 7.2 0 0 0-4.9 1.9l1.2 1.3c1-.9 2.3-1.4 3.7-1.4zm0 3.6c.5 0 1 .2 1.3.5L8 11.6 6.7 9.9c.3-.3.8-.5 1.3-.5z"/></svg><b class="scr__batt"><i></i></b></span></div><div class="scr__nav"><span class="scr__round">‹</span><b>Equipe</b><em>Editar</em></div><div class="scr__who"><span class="avatars"><span data-mascot="round" data-hue="#38bdf8"></span><span data-mascot="square" data-hue="#ff8a3d"></span><span data-mascot="ghost" data-hue="#f472b6"></span></span><b>Loja online</b><small>Equipe · 3 Bots · líder Atendimento</small><small class="go">● 2 trabalhando · 4 tarefas abertas</small></div><div class="scr__acts"><span>Conversar</span><span>Quadro</span><span>Editar</span></div><p class="scr__label">Membros</p><div class="scr__list"><div><span data-mascot="round" data-hue="#38bdf8"></span><span>Atendimento<span class="lead">Líder</span><small>Responde os clientes</small></span><i>›</i></div><div><span data-mascot="square" data-hue="#ff8a3d"></span><span>Estoque<small>Pedidos e fornecedores</small></span><i>›</i></div><div><span data-mascot="ghost" data-hue="#f472b6"></span><span>Anúncios<small>Campanhas e posts</small></span><i>›</i></div></div></div></div></div></div>
+      </article>
+      <article class="feature rv" style="--i:1">
+        <h3>Seus apps, com a sua licença</h3>
+        <p>Gmail, Agenda, Drive, Notion, GitHub, Slack, Linear e dezenas de outros. Cada Bot só usa o que você ligou.</p>
+        <div class="feature__shot feature__shot--globe"><div class="globe" role="img" aria-label="Alguns dos apps que os Bots usam: Gmail, Agenda, Drive, Notion, GitHub, Slack, Linear, Figma, Canva, Stripe e outros."><span style="--c:#ea4335">Gmail</span><span style="--c:#4285f4">Agenda</span><span style="--c:#34a853">Drive</span><span style="--c:#f5f5f5">Notion</span><span style="--c:#f0f6fc">GitHub</span><span style="--c:#e01e5a">Slack</span><span style="--c:#5e6ad2">Linear</span><span style="--c:#a259ff">Figma</span><span style="--c:#00c4cc">Canva</span><span style="--c:#635bff">Stripe</span><span style="--c:#fcb400">Airtable</span><span style="--c:#006bff">Calendly</span><span style="--c:#7b68ee">ClickUp</span><span style="--c:#e44332">Todoist</span><span style="--c:#ffd02f">Miro</span><span style="--c:#ff4f00">Zapier</span><span style="--c:#4353ff">Webflow</span><span style="--c:#1f8ded">Intercom</span><span style="--c:#a876b8">Sentry</span><span style="--c:#f5f5f5">Vercel</span><span style="--c:#f38020">Cloudflare</span><span style="--c:#3ecf8e">Supabase</span><span style="--c:#ffd21e">Hugging Face</span><span style="--c:#ff3d3d">YouTube</span><span style="--c:#5865f2">Discord</span></div></div>
+      </article>
+      <article class="feature feature--wide rv">
+        <div>
+          <h3>Ligue para um Bot</h3>
+          <p>Toque no ícone de onda e fale, como numa ligação. O Bot responde com voz, em português, e quando você desliga deixa um resumo no chat.</p>
+        </div>
+        <div class="call" data-ui role="img" aria-label="Ligação com o Bot Contas da casa: ele avisa da conta de luz, você diz para pagar e ele confirma.">
+          <div class="call__who"><span data-mascot="bean" data-hue="#eab308"></span><span><b>Contas da casa</b><small class="call__time">00:42</small></span></div>
+          <div class="wave" aria-hidden="true"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i><i style="--i:12"></i><i style="--i:13"></i><i style="--i:14"></i><i style="--i:15"></i><i style="--i:16"></i><i style="--i:17"></i><i style="--i:18"></i><i style="--i:19"></i><i style="--i:20"></i><i style="--i:21"></i><i style="--i:22"></i><i style="--i:23"></i><i style="--i:24"></i><i style="--i:25"></i><i style="--i:26"></i><i style="--i:27"></i></div>
+          <p class="call__line" aria-hidden="true"><b>Contas da casa</b>Achei a conta de luz: R$ 236,40, vence hoje. Pago agora?</p>
+          <div class="call__btns" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 15a3.5 3.5 0 0 0 3.5-3.5v-6a3.5 3.5 0 1 0-7 0v6A3.5 3.5 0 0 0 12 15zm6-3.5a6 6 0 0 1-12 0H4.5a7.5 7.5 0 0 0 6.75 7.46V22h1.5v-3.04a7.5 7.5 0 0 0 6.75-7.46z"/></svg></span><span class="end"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85a.98.98 0 0 1-1.39 0L.29 13.08A1 1 0 0 1 0 12.37c0-.28.11-.53.29-.71A16.9 16.9 0 0 1 12 7c4.57 0 8.7 1.81 11.71 4.66.18.18.29.43.29.71 0 .28-.11.53-.29.71l-2.48 2.48a.98.98 0 0 1-1.39 0 11.3 11.3 0 0 0-2.67-1.85.99.99 0 0 1-.56-.9v-3.1A15.3 15.3 0 0 0 12 9z"/></svg></span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="funcao">
+    <div class="jobs">
+      <div>
+        <h2 class="title rv" id="funcao">Dê uma função a cada Bot</h2>
+        <p class="sub rv" style="--i:1">Crie um Bot para cada parte do trabalho e adicione outro quando a demanda crescer. Eles trabalham ao mesmo tempo, cada um no seu canto.</p>
+        <div class="chips rv" style="--i:2" role="tablist" aria-label="Funções">
+          <button type="button" role="tab" data-job="0" aria-selected="true"><span data-mascot="ghost" data-hue="#f472b6"></span>Caixa de entrada</button>
+          <button type="button" role="tab" data-job="1"><span data-mascot="hex" data-hue="#22c55e"></span>Viagens</button>
+          <button type="button" role="tab" data-job="2"><span data-mascot="bean" data-hue="#eab308"></span>Contas da casa</button>
+          <button type="button" role="tab" data-job="3"><span data-mascot="round" data-hue="#38bdf8"></span>Loja online</button>
+          <button type="button" role="tab" data-job="4"><span data-mascot="round" data-hue="#a78bfa"></span>Estudos</button>
+          <button type="button" role="tab" data-job="5"><span data-mascot="square" data-hue="#14b8a6"></span>Saúde</button>
+          <button type="button" role="tab" data-job="6"><span data-mascot="square" data-hue="#ff8a3d"></span>Redes sociais</button>
+          <button type="button" role="tab" data-job="7"><span data-mascot="round" data-hue="#a3e635"></span>Código</button>
+        </div>
+      </div>
+      <div class="job rv" style="--i:2" id="job" aria-live="polite">
+        <h3>Caixa de entrada</h3>
+        <p>Lê, separa e responde seus e-mails, deixa rascunhos no seu tom e só envia com o seu clique.</p>
+        <ul><li>Caixa zerada<span>8h20</span></li><li>4 rascunhos guardados para você revisar<span>8h21</span></li><li>Reunião confirmada com o cliente<span>9h05</span></li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap center" aria-labelledby="iphone">
+    <h2 class="title rv" id="iphone">Seus Bots no bolso</h2>
+    <p class="sub rv" style="--i:1">No iPhone, você acompanha, responde e aprova de qualquer lugar. Com widgets, Dynamic Island e avisos só onde você está.</p>
+    <div class="phones rv" style="--i:2">
+      <div class="phone" data-ui><div class="phone__screen"><div class="scr" role="img" aria-label="Conversa com o Bot Estudos: ele leu o PDF da aula, mandou o resumo e está montando as perguntas para a prova."><div class="scr__status"><span>9:41</span><span class="scr__icons" aria-hidden="true"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg viewBox="0 0 16 12"><path d="M8 2.2c2.4 0 4.6.9 6.3 2.5l1.2-1.3A10.8 10.8 0 0 0 8 .4 10.8 10.8 0 0 0 .5 3.4l1.2 1.3A9 9 0 0 1 8 2.2zm0 3.6c1.4 0 2.7.5 3.7 1.4l1.2-1.3A7.2 7.2 0 0 0 8 4a7.2 7.2 0 0 0-4.9 1.9l1.2 1.3c1-.9 2.3-1.4 3.7-1.4zm0 3.6c.5 0 1 .2 1.3.5L8 11.6 6.7 9.9c.3-.3.8-.5 1.3-.5z"/></svg><b class="scr__batt"><i></i></b></span></div><div class="scr__bar"><span class="scr__round">‹</span><span class="scr__pill"><span data-mascot="round" data-hue="#a78bfa"></span><span><b>Estudos</b><small>Trabalhando · 2 min</small></span></span><span class="scr__round"><svg viewBox="0 0 24 24" width="12" height="12"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></span></div><div class="scr__body"><span class="b-day">Segunda</span><p class="b-me">Organiza minhas anotações de biologia</p><p class="b-bot">Juntei as 12 páginas num documento só, separado por assunto.</p><span class="b-day">Ontem</span><p class="b-me">Me lembra da prova de sexta</p><p class="b-bot">Anotado. Te aviso na quinta à noite, com o que falta revisar.</p><span class="b-day">Hoje</span><p class="b-me">Resume o capítulo 5 e monta 10 perguntas para a prova</p><p class="b-bot">Li o PDF da aula. O resumo cabe numa página:</p><div class="b-file"><span class="b-file__icon" aria-hidden="true">PDF</span><span><b>Resumo · Capítulo 5</b><small>1 página · agora</small></span></div><div class="b-work"><span data-mascot="round" data-hue="#a78bfa"></span><span>Montando as perguntas<small>6 de 10</small><i style="--p:60%"></i></span></div></div><div class="scr__composer"><span class="scr__round">+</span><span>Mensagem para Estudos</span></div><span class="scr__home"></span></div></div></div>
+      <div class="phone" data-ui><div class="phone__screen"><div class="scr scr--lock" role="img" aria-label="Tela bloqueada do iPhone: a Dynamic Island mostra o Bot Viagens trabalhando, os widgets contam quem trabalha e quem espera você, e um aviso de Contas da casa pede permissão para pagar a conta de luz."><div class="scr__status"><span>9:41</span><span class="scr__icons" aria-hidden="true"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg viewBox="0 0 16 12"><path d="M8 2.2c2.4 0 4.6.9 6.3 2.5l1.2-1.3A10.8 10.8 0 0 0 8 .4 10.8 10.8 0 0 0 .5 3.4l1.2 1.3A9 9 0 0 1 8 2.2zm0 3.6c1.4 0 2.7.5 3.7 1.4l1.2-1.3A7.2 7.2 0 0 0 8 4a7.2 7.2 0 0 0-4.9 1.9l1.2 1.3c1-.9 2.3-1.4 3.7-1.4zm0 3.6c.5 0 1 .2 1.3.5L8 11.6 6.7 9.9c.3-.3.8-.5 1.3-.5z"/></svg><b class="scr__batt"><i></i></b></span></div><span class="island" aria-hidden="true"><span data-mascot="hex" data-hue="#22c55e"></span><span class="island__text"><b>Viagens</b><small>Comparando voos · <span class="island__n">32</span> de 40</small></span><i></i></span><div class="lock__date">Terça, 21 de outubro</div><div class="lock__time">9:41</div><div class="lock__widgets"><span><span class="lock__faces"><span data-mascot="round" data-hue="#a78bfa"></span><span data-mascot="hex" data-hue="#22c55e"></span></span><b>2 trabalhando</b>Estudos e Viagens</span><span class="y"><b>1 esperando você</b>Contas da casa</span></div><div class="lock__stack"><div class="note note--live"><span data-mascot="hex" data-hue="#22c55e"></span><span><b>Viagens</b><small>Comparando voos para Lisboa · 32 de 40</small><i style="--p:80%"></i></span></div><div class="note"><span data-mascot="bean" data-hue="#eab308"></span><span><b>Contas da casa <em>agora</em></b><small>Pede permissão: pagar a conta de luz, R$ 236,40.</small><span class="note__btns"><span>Negar</span><span>Permitir</span></span></span></div><div class="note note--under"></div></div><div class="lock__foot" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 2h8v4l-2 3v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V9L8 6z"/></svg></span><span><svg viewBox="0 0 24 24"><path fill="currentColor" d="M9 4h6l1.5 2H20a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3.5zm3 4a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9z"/></svg></span></div><span class="scr__home"></span></div></div></div>
+      <div class="phone" data-ui><div class="phone__screen"><div class="scr" role="img" aria-label="Conversa com o Bot Saúde: ele procurou horários em três clínicas e pede a sua aprovação para confirmar a consulta."><div class="scr__status"><span>9:41</span><span class="scr__icons" aria-hidden="true"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg viewBox="0 0 16 12"><path d="M8 2.2c2.4 0 4.6.9 6.3 2.5l1.2-1.3A10.8 10.8 0 0 0 8 .4 10.8 10.8 0 0 0 .5 3.4l1.2 1.3A9 9 0 0 1 8 2.2zm0 3.6c1.4 0 2.7.5 3.7 1.4l1.2-1.3A7.2 7.2 0 0 0 8 4a7.2 7.2 0 0 0-4.9 1.9l1.2 1.3c1-.9 2.3-1.4 3.7-1.4zm0 3.6c.5 0 1 .2 1.3.5L8 11.6 6.7 9.9c.3-.3.8-.5 1.3-.5z"/></svg><b class="scr__batt"><i></i></b></span></div><div class="scr__bar"><span class="scr__round">‹</span><span class="scr__pill"><span data-mascot="square" data-hue="#14b8a6"></span><span><b>Saúde</b><small data-tone="wait">Esperando você</small></span></span><span class="scr__round"><svg viewBox="0 0 24 24" width="12" height="12"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></span></div><div class="scr__body"><span class="b-day">Domingo</span><p class="b-me">Me lembra do remédio todo dia às 21h</p><p class="b-bot">Combinado. Aviso no iPhone às 21h e, se você não marcar como tomado, de novo às 21h30.</p><span class="b-day">Hoje</span><p class="b-me">Marca a consulta com a dermatologista</p><p class="b-step">Olhou a agenda de 3 clínicas</p><p class="b-step">Conferiu o seu calendário</p><p class="b-bot">Achei horário na terça às 15h, perto do seu trabalho. Também tem quinta às 9h.</p><div class="b-card"><b>Saúde precisa da sua aprovação</b><p>Confirmar a consulta de terça, 15h, no site da clínica.</p><div class="b-card__btns"><span class="y">Permitir uma vez</span><span>Negar</span></div></div></div><div class="scr__composer"><span class="scr__round">+</span><span>Mensagem para Saúde</span></div><span class="scr__home"></span></div></div></div>
+    </div>
+  </section>
+
+  <section class="section wrap center" aria-labelledby="cerebros">
+    <h2 class="title rv" id="cerebros">Use o cérebro que você já tem</h2>
+    <p class="sub rv" style="--i:1">Os Bots pensam com o que já está no seu Mac, nos planos que você já paga, ou com um modelo local.</p>
+    <ul class="brains rv" style="--i:2"><li><img src="img/cerebros/claude.webp" width="64" height="64" alt="" loading="lazy">Claude Code</li><li><img src="img/cerebros/codex.webp" width="64" height="64" alt="" loading="lazy">Codex</li><li><img src="img/cerebros/opencode.webp" width="64" height="64" alt="" loading="lazy">OpenCode</li><li><img src="img/cerebros/grok.webp" width="64" height="64" alt="" loading="lazy">Grok</li><li><img src="img/cerebros/antigravity.webp" width="64" height="64" alt="" loading="lazy">Antigravity</li><li><img src="img/cerebros/lmstudio.webp" width="64" height="64" alt="" loading="lazy">LM Studio</li><li><img src="img/cerebros/ollama.webp" width="64" height="64" alt="" loading="lazy" class="on-white">Ollama</li></ul>
+  </section>
+
+  <section class="section wrap" id="instalar" aria-labelledby="instalar-titulo">
+    <div class="center">
+      <h2 class="title rv" id="instalar-titulo">Comece em poucos minutos</h2>
+      <p class="sub rv" style="--i:1">O Bots é um app pessoal, de uso privado. As versões novas aparecem num aviso no próprio app.</p>
+    </div>
+    <div class="install">
+      <article class="install__card rv">
+        <h3>No Mac</h3>
+        <ol>
+          <li>Baixe o Bots, abra o arquivo e arraste para Aplicativos.</li>
+          <li>Na primeira vez: Ajustes do Sistema › Privacidade e Segurança › Abrir Mesmo Assim.</li>
+          <li>Entre com o seu e-mail e siga Preparar este Mac. <a href="ajuda.html">Ajuda</a></li>
+        </ol>
+        <a class="button" href="https://github.com/alenkpedro/bots/releases/latest/download/Bots.dmg" data-dl data-done="Download iniciado">Baixar para macOS</a>
+      </article>
+      <article class="install__card rv" style="--i:1">
+        <h3>No iPhone</h3>
+        <ol>
+          <li>Adicione a fonte do Bots na loja que você usa: AltStore, SideStore, Feather, LiveContainer e outras.</li>
+          <li>As versões novas aparecem por lá, e o Bots também avisa.</li>
+        </ol>
+        <a class="button button--quiet" href="fonte.html">Adicionar a fonte</a>
+      </article>
+    </div>
+    <p class="google">Gmail, Agenda e Drive só se você ligar. Os detalhes estão na <a href="privacidade.html">política de privacidade</a>.</p>
+  </section>
+
+  <section class="section wrap" aria-labelledby="perguntas">
+    <div class="faq">
+      <h2 class="title center rv" id="perguntas">Perguntas</h2>
+      <div class="faq__list rv" style="--i:1">
+        <details><summary>Quanto custa?</summary><p>O Bots não cobra nada. Os Bots pensam com um cérebro que você já usa: Claude Code (o recomendado, com uma conta Claude Pro ou Max), Codex, OpenCode, Antigravity, Grok, ou um modelo local no LM Studio ou no Ollama.</p></details>
+        <details><summary>O Bot vê as minhas senhas?</summary><p>Não. Quando um site pede login, aparece um cartão no app: você digita ali, vai direto para a página e nada fica guardado. Segredos não passam pelo servidor em texto aberto.</p></details>
+        <details><summary>Ele faz coisas sem me perguntar?</summary><p>O que apaga, paga, envia ou não tem volta passa por um cartão com Permitir e Negar. No iPhone, os pedidos mais sérios pedem um deslize. Você ajusta as regras de cada Bot.</p></details>
+        <details><summary>O que um Bot faz com a minha conta Google?</summary><p>Se você quiser, um Bot pode ler e pesquisar seus e-mails e salvar rascunhos no Gmail, ver e criar eventos na sua Agenda e ler arquivos do seu Drive. Você decide o que liga e pode desligar a qualquer momento. Os detalhes estão na <a href="privacidade.html">política de privacidade</a>.</p></details>
+        <details><summary>Preciso deixar o Mac ligado?</summary><p>Sim: os Bots trabalham no seu Mac, no computador deles. Pelo iPhone você acompanha, responde e pede coisas de qualquer lugar.</p></details>
+        <details><summary>E no Windows?</summary><p>O app do Windows está em pausa desde 18 de outubro de 2026. Quando voltar, aparece no <a href="roadmap.html">roadmap</a>.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta wrap" aria-labelledby="cta-titulo">
+    <span class="face" data-mascot="round" data-hue="#38bdf8" aria-hidden="true"></span>
+    <h2 class="title rv" id="cta-titulo">Monte a sua equipe de Bots</h2>
+    <div class="hero__actions rv" style="--i:1">
+      <a class="button button--big" href="https://github.com/alenkpedro/bots/releases/latest/download/Bots.dmg" data-dl data-done="Download iniciado" data-peek data-magnet><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.7-1-2.7-4.1zM13.9 5c.7-.9 1.2-2 1-3.2-1 .1-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.1 1.2.1 2.3-.6 3.1-1.5z"/></svg>Baixar para macOS</a>
+      <a class="button button--big button--quiet" href="roadmap.html">Ver o roadmap<span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
 </main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand"><a class="bar__name" href="./"><span data-mascot="round" data-hue="#38bdf8"></span>Bots</a><p>Assistentes de IA que trabalham no seu Mac. Você pede pelo Mac ou pelo iPhone.</p></div>
+      <nav aria-label="Produto"><b>Produto</b><a href="#como">Como funciona</a><a href="#faz">Recursos</a><a href="roadmap.html">Roadmap</a></nav>
+      <nav aria-label="Instalar"><b>Instalar</b><a href="https://github.com/alenkpedro/bots/releases/latest/download/Bots.dmg">No Mac</a><a href="fonte.html">No iPhone</a></nav>
+      <nav aria-label="Ajuda"><b>Ajuda</b><a href="ajuda.html">Central de ajuda</a><a href="privacidade.html">Privacidade</a><a href="termos.html">Termos</a></nav>
+    </div>
+    <div class="foot__end"><span>Bots, 2026. Mac e iPhone, versão 0.9.8.</span><a href="mailto:pedroalencareditor@gmail.com">pedroalencareditor@gmail.com</a></div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
 </body>
 </html>

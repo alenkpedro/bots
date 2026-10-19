@@ -3,41 +3,94 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a0a0b">
 <title>Ajuda · Bots</title>
-<link rel="stylesheet" href="style.css">
+<link rel="icon" href="img/icone.webp">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
-<body>
-<main>
+<body id="topo">
+
+<header class="bar">
+  <div class="bar__inner wrap">
+    <a class="bar__name" href="./"><span data-mascot="round" data-hue="#38bdf8"></span>Bots</a>
+    <nav class="bar__links" aria-label="Principal">
+      <a class="wide" href="./#como">Como funciona</a>
+      <a class="wide" href="./#faz">Recursos</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a class="wide" href="ajuda.html">Ajuda</a>
+      <a class="button button--small" href="https://github.com/alenkpedro/bots/releases/latest/download/Bots.dmg" data-dl data-done="Começou">Baixar</a>
+    </nav>
+  </div>
+</header>
+
+<main class="doc">
   <h1>Central de ajuda</h1>
   <p class="lead">O básico para começar e tirar dúvidas.</p>
 
-  <h2>O que é um Bot</h2>
-  <p>Um assistente que trabalha no seu Mac. Você pede pelo Mac ou pelo iPhone, ele faz e conta quando terminar. Cada Bot tem uma função (e-mail, pesquisa, rotinas…) e eles conversam entre si quando um precisa do outro. O Bot com estrela é o principal: o primeiro a quem você recorre e quem os outros consultam.</p>
-
-  <h2>Primeiros passos no Mac</h2>
-  <ol>
-    <li>Abra o Bots e entre com o seu e-mail.</li>
-    <li>Na lista <em>Preparar este Mac</em>, toque em cada botão: o agente (faz os Bots trabalharem), o cérebro (Claude Code, ou outro que você já use), o computador dos Bots e a voz (opcionais).</li>
-    <li>Mande uma mensagem para um Bot. Pronto.</li>
-  </ol>
-  <p>Dá para voltar à lista em Configurações → Uso → Preparar este Mac.</p>
-
-  <h2>Cérebros</h2>
-  <p>Os Bots pensam com um destes, instalado no seu Mac: Claude Code (o recomendado; precisa de uma conta Claude Pro ou Max), Codex, OpenCode, Antigravity, Grok, ou um modelo local no LM Studio ou no Ollama. Troque o de cada Bot no perfil dele, clicando no nome no topo da conversa.</p>
-
-  <h2>Conectar aplicativos</h2>
-  <p>Em <em>Conectar aplicativos</em> você liga Gmail, Agenda, Drive, Notion, GitHub e outros. Cada Bot só usa o que você ligou, e o que pede sua permissão aparece no chat antes de acontecer.</p>
-
-  <h2>Ligações</h2>
-  <p>Toque no ícone de onda ao lado da mensagem para falar com um Bot. O que vocês falam fica na ligação; quando você desliga, ele deixa um resumo no chat. Precisa da voz local instalada.</p>
-
-  <h2>Atualizações</h2>
-  <p>Quando sai uma versão nova, aparece um botão azul ao lado de <em>Conectar aplicativos</em>. Clique e escolha <em>Atualizar</em>: o Bots reabre em segundos, com tudo onde estava. No iPhone, atualize pela loja onde você instalou.</p>
-
-  <h2>Algo deu errado?</h2>
-  <p>Na sua foto, no canto da barra lateral: <em>Suporte → Enviar feedback</em>. Conte o que aconteceu; as informações da versão já vão junto.</p>
-
-  <nav><a href="index.html">Bots</a><a href="privacidade.html">Privacidade</a><a href="termos.html">Termos</a></nav>
+  <div class="help">
+    <nav class="help__toc" aria-label="Tópicos">
+      <b>Tópicos</b>
+      <ul>
+        <li><a href="#bot">O que é um Bot</a></li>
+        <li><a href="#comecar">Primeiros passos no Mac</a></li>
+        <li><a href="#cerebros">Cérebros</a></li>
+        <li><a href="#apps">Conectar aplicativos</a></li>
+        <li><a href="#ligacoes">Ligações</a></li>
+        <li><a href="#atualizacoes">Atualizações</a></li>
+        <li><a href="#suporte">Algo deu errado?</a></li>
+      </ul>
+    </nav>
+    <div class="help__body">
+      <section id="bot">
+      <h2>O que é um Bot</h2>
+      <p>Um assistente que trabalha no seu Mac. Você pede pelo Mac ou pelo iPhone, ele faz e conta quando terminar. Cada Bot tem uma função (e-mail, pesquisa, rotinas…) e eles conversam entre si quando um precisa do outro. O Bot com estrela é o principal: o primeiro a quem você recorre e quem os outros consultam.</p>
+      </section>
+      <section id="comecar">
+      <h2>Primeiros passos no Mac</h2>
+      <ol>
+        <li>Abra o Bots e entre com o seu e-mail.</li>
+        <li>Na lista <em>Preparar este Mac</em>, toque em cada botão: o agente (faz os Bots trabalharem), o cérebro (Claude Code, ou outro que você já use), o computador dos Bots e a voz (opcionais).</li>
+        <li>Mande uma mensagem para um Bot. Pronto.</li>
+      </ol>
+      <p>Dá para voltar à lista em Configurações → Uso → Preparar este Mac.</p>
+      </section>
+      <section id="cerebros">
+      <h2>Cérebros</h2>
+      <p>Os Bots pensam com um destes, instalado no seu Mac: Claude Code (o recomendado; precisa de uma conta Claude Pro ou Max), Codex, OpenCode, Antigravity, Grok, ou um modelo local no LM Studio ou no Ollama. Troque o de cada Bot no perfil dele, clicando no nome no topo da conversa.</p>
+      </section>
+      <section id="apps">
+      <h2>Conectar aplicativos</h2>
+      <p>Em <em>Conectar aplicativos</em> você liga Gmail, Agenda, Drive, Notion, GitHub e outros. Cada Bot só usa o que você ligou, e o que pede sua permissão aparece no chat antes de acontecer.</p>
+      </section>
+      <section id="ligacoes">
+      <h2>Ligações</h2>
+      <p>Toque no ícone de onda ao lado da mensagem para falar com um Bot. O que vocês falam fica na ligação; quando você desliga, ele deixa um resumo no chat. Precisa da voz local instalada.</p>
+      </section>
+      <section id="atualizacoes">
+      <h2>Atualizações</h2>
+      <p>Quando sai uma versão nova, aparece um botão azul ao lado de <em>Conectar aplicativos</em>. Clique e escolha <em>Atualizar</em>: o Bots reabre em segundos, com tudo onde estava. No iPhone, atualize pela loja onde você instalou.</p>
+      </section>
+      <section id="suporte">
+      <h2>Algo deu errado?</h2>
+      <p>Na sua foto, no canto da barra lateral: <em>Suporte → Enviar feedback</em>. Conte o que aconteceu; as informações da versão já vão junto.</p>
+      </section>
+    </div>
+  </div>
 </main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand"><a class="bar__name" href="./"><span data-mascot="round" data-hue="#38bdf8"></span>Bots</a><p>Assistentes de IA que trabalham no seu Mac. Você pede pelo Mac ou pelo iPhone.</p></div>
+      <nav aria-label="Produto"><b>Produto</b><a href="./#como">Como funciona</a><a href="./#faz">Recursos</a><a href="roadmap.html">Roadmap</a></nav>
+      <nav aria-label="Instalar"><b>Instalar</b><a href="https://github.com/alenkpedro/bots/releases/latest/download/Bots.dmg">No Mac</a><a href="fonte.html">No iPhone</a></nav>
+      <nav aria-label="Ajuda"><b>Ajuda</b><a href="ajuda.html">Central de ajuda</a><a href="privacidade.html">Privacidade</a><a href="termos.html">Termos</a></nav>
+    </div>
+    <div class="foot__end"><span>Bots, 2026. Mac e iPhone, versão 0.9.8.</span><a href="mailto:pedroalencareditor@gmail.com">pedroalencareditor@gmail.com</a></div>
+  </div>
+</footer>
+<script src="site.js"></script>
 </body>
 </html>

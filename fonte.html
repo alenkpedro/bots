@@ -3,47 +3,66 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a0a0b">
 <title>Bots no iPhone</title>
 <meta name="description" content="Adicione a fonte do Bots na sua loja do iPhone.">
-<link rel="stylesheet" href="style.css">
-<style>
-  .card { margin: 24px 0; padding: 20px; border: 1px solid var(--line); border-radius: 18px; }
-  .src { display:block; font: 15px/1.4 ui-monospace, Menlo, monospace; word-break: break-all; color: var(--text); margin: 0 0 16px; }
-  .btn { display:block; width:100%; box-sizing:border-box; padding: 14px 16px; border-radius: 14px; border: 0;
-         font: 600 17px/1.2 -apple-system, system-ui, sans-serif; text-align:center; text-decoration:none; cursor:pointer; }
-  .primary { background: var(--accent); color: #fff; }
-  .secondary { background: transparent; color: var(--accent); border: 1px solid var(--line); margin-top: 10px; }
-  .stores { display:grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-  .stores .btn { margin: 0; }
-  ol li { margin-bottom: 6px; }
-</style>
+<link rel="icon" href="img/icone.webp">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
-<body>
-<main>
+<body id="topo">
+
+<header class="bar">
+  <div class="bar__inner wrap">
+    <a class="bar__name" href="./"><span data-mascot="round" data-hue="#38bdf8"></span>Bots</a>
+    <nav class="bar__links" aria-label="Principal">
+      <a class="wide" href="./#como">Como funciona</a>
+      <a class="wide" href="./#faz">Recursos</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a class="wide" href="ajuda.html">Ajuda</a>
+      <a class="button button--small" href="https://github.com/alenkpedro/bots/releases/latest/download/Bots.dmg" data-dl data-done="Começou">Baixar</a>
+    </nav>
+  </div>
+</header>
+
+<main class="doc">
   <h1>Bots no iPhone</h1>
   <p class="lead">Copie a fonte e adicione na loja que você usa para instalar apps fora da App Store.</p>
 
   <div class="card">
     <code class="src" id="src">https://alenkpedro.github.io/bots/updates/altstore.json</code>
-    <button class="btn primary" id="copy" type="button">Copiar link da fonte</button>
+    <button class="button button--big" id="copy" type="button">Copiar link da fonte</button>
     <div class="stores">
-      <a class="btn secondary" href="altstore://source?url=https://alenkpedro.github.io/bots/updates/altstore.json">Abrir na AltStore</a>
-      <a class="btn secondary" href="sidestore://source?url=https://alenkpedro.github.io/bots/updates/altstore.json">Abrir na SideStore</a>
-      <a class="btn secondary" href="feather://source/https://alenkpedro.github.io/bots/updates/altstore.json">Abrir na Feather</a>
-      <a class="btn secondary" href="livecontainer://source?url=https://alenkpedro.github.io/bots/updates/altstore.json">Abrir no LiveContainer</a>
+      <a class="button button--quiet" href="altstore://source?url=https://alenkpedro.github.io/bots/updates/altstore.json">Abrir na AltStore</a>
+      <a class="button button--quiet" href="sidestore://source?url=https://alenkpedro.github.io/bots/updates/altstore.json">Abrir na SideStore</a>
+      <a class="button button--quiet" href="feather://source/https://alenkpedro.github.io/bots/updates/altstore.json">Abrir na Feather</a>
+      <a class="button button--quiet" href="livecontainer://source?url=https://alenkpedro.github.io/bots/updates/altstore.json">Abrir no LiveContainer</a>
     </div>
   </div>
 
-  <h2>Na FlareStore</h2>
+  <h2>Em outra loja</h2>
   <ol>
     <li>Toque em <em>Copiar link da fonte</em>, aqui em cima.</li>
-    <li>Abra a FlareStore e vá na aba de fontes (Sources ou Repos).</li>
+    <li>Abra a sua loja e vá na aba de fontes (Sources ou Repos).</li>
     <li>Toque em <strong>+</strong>, cole o link e confirme.</li>
     <li>Procure o Bots na fonte e toque em instalar. As novas versões aparecem por lá.</li>
   </ol>
 
   <p class="small">Ainda não tem uma loja? Veja <a href="index.html#instalar">como instalar o Bots</a>.</p>
 </main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand"><a class="bar__name" href="./"><span data-mascot="round" data-hue="#38bdf8"></span>Bots</a><p>Assistentes de IA que trabalham no seu Mac. Você pede pelo Mac ou pelo iPhone.</p></div>
+      <nav aria-label="Produto"><b>Produto</b><a href="./#como">Como funciona</a><a href="./#faz">Recursos</a><a href="roadmap.html">Roadmap</a></nav>
+      <nav aria-label="Instalar"><b>Instalar</b><a href="https://github.com/alenkpedro/bots/releases/latest/download/Bots.dmg">No Mac</a><a href="fonte.html">No iPhone</a></nav>
+      <nav aria-label="Ajuda"><b>Ajuda</b><a href="ajuda.html">Central de ajuda</a><a href="privacidade.html">Privacidade</a><a href="termos.html">Termos</a></nav>
+    </div>
+    <div class="foot__end"><span>Bots, 2026. Mac e iPhone, versão 0.9.8.</span><a href="mailto:pedroalencareditor@gmail.com">pedroalencareditor@gmail.com</a></div>
+  </div>
+</footer>
 <script>
   const button = document.getElementById('copy');
   const text = document.getElementById('src').textContent.trim();
@@ -53,9 +72,16 @@
       const r = document.createRange(); r.selectNodeContents(document.getElementById('src'));
       const s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand('copy'); s.removeAllRanges();
     }
-    button.textContent = 'Copiado';
-    setTimeout(() => { button.textContent = 'Copiar link da fonte'; }, 1800);
+    // O botão confirma: fica verde com um ✓ e o link pisca, para não restar dúvida de que copiou.
+    clearTimeout(button.timer);
+    button.classList.remove('is-copied'); void button.offsetWidth;
+    button.classList.add('is-copied');
+    button.innerHTML = '<span class="copy-check" aria-hidden="true">✓</span>Copiado';
+    document.getElementById('src').classList.remove('is-flash'); void button.offsetWidth;
+    document.getElementById('src').classList.add('is-flash');
+    button.timer = setTimeout(() => { button.classList.remove('is-copied'); button.textContent = 'Copiar link da fonte'; }, 2200);
   });
 </script>
+<script src="site.js"></script>
 </body>
 </html>

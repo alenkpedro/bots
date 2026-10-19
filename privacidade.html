@@ -3,11 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a0a0b">
 <title>Privacidade · Bots</title>
-<link rel="stylesheet" href="style.css">
+<link rel="icon" href="img/icone.webp">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
-<body>
-<main>
+<body id="topo">
+
+<header class="bar">
+  <div class="bar__inner wrap">
+    <a class="bar__name" href="./"><span data-mascot="round" data-hue="#38bdf8"></span>Bots</a>
+    <nav class="bar__links" aria-label="Principal">
+      <a class="wide" href="./#como">Como funciona</a>
+      <a class="wide" href="./#faz">Recursos</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a class="wide" href="ajuda.html">Ajuda</a>
+      <a class="button button--small" href="https://github.com/alenkpedro/bots/releases/latest/download/Bots.dmg" data-dl data-done="Começou">Baixar</a>
+    </nav>
+  </div>
+</header>
+
+<main class="doc">
   <h1>Política de privacidade</h1>
   <p class="small">Atualizada em 15 de outubro de 2026</p>
   <p>Bots é um app pessoal para Mac e iPhone, usado por quem o instala no próprio Mac. Esta página explica o que ele acessa, onde isso fica e o que ele nunca faz.</p>
@@ -33,7 +51,19 @@
 
   <h2>Contato</h2>
   <p>Dúvidas: <a href="mailto:pedroalencareditor@gmail.com">pedroalencareditor@gmail.com</a></p>
-  <nav><a href="index.html">Bots</a><a href="termos.html">Termos de uso</a></nav>
 </main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand"><a class="bar__name" href="./"><span data-mascot="round" data-hue="#38bdf8"></span>Bots</a><p>Assistentes de IA que trabalham no seu Mac. Você pede pelo Mac ou pelo iPhone.</p></div>
+      <nav aria-label="Produto"><b>Produto</b><a href="./#como">Como funciona</a><a href="./#faz">Recursos</a><a href="roadmap.html">Roadmap</a></nav>
+      <nav aria-label="Instalar"><b>Instalar</b><a href="https://github.com/alenkpedro/bots/releases/latest/download/Bots.dmg">No Mac</a><a href="fonte.html">No iPhone</a></nav>
+      <nav aria-label="Ajuda"><b>Ajuda</b><a href="ajuda.html">Central de ajuda</a><a href="privacidade.html">Privacidade</a><a href="termos.html">Termos</a></nav>
+    </div>
+    <div class="foot__end"><span>Bots, 2026. Mac e iPhone, versão 0.9.8.</span><a href="mailto:pedroalencareditor@gmail.com">pedroalencareditor@gmail.com</a></div>
+  </div>
+</footer>
+<script src="site.js"></script>
 </body>
 </html>

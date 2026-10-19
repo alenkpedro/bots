@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roadmap dos Bots</title>
+<meta name="description" content="O que os Bots estão aprendendo agora, o que chega na próxima versão e tudo o que já está no app.">
+<meta name="theme-color" content="#0a0a0b">
+<link rel="icon" href="img/icone.webp">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body id="topo">
+
+<header class="bar">
+  <div class="bar__inner wrap">
+    <a class="bar__name" href="./"><span data-mascot="round" data-hue="#38bdf8"></span>Bots</a>
+    <nav class="bar__links" aria-label="Principal">
+      <a class="wide" href="./#como">Como funciona</a>
+      <a class="wide" href="./#faz">Recursos</a>
+      <a href="roadmap.html" aria-current="page">Roadmap</a>
+      <a class="wide" href="ajuda.html">Ajuda</a>
+      <a class="button button--small" href="https://github.com/alenkpedro/bots/releases/latest/download/Bots.dmg" data-dl data-done="Começou">Baixar</a>
+    </nav>
+  </div>
+</header>
+
+<!--
+  Como atualizar: cada item é um <article class="rm-card" data-s="..."> na grade, na ordem em que aparece.
+  Etapas: dev (em desenvolvimento), soon (pronto, chega em breve), next (na fila), live (já no app, só os destaques).
+  Mudou de etapa? Troque o data-s e o texto da etapa no cartão e no <template> (o que abre em "Ver detalhes").
+  Os números das abas são contados dos cartões; uma etapa sem cartões fica em 0, com a aba desativada.
+  "Já no app" segue as Novidades do app (BotMac/Sources/WhatsNew.swift), da versão mais nova à mais antiga.
+-->
+<main class="wrap">
+  <section class="rm-top" aria-labelledby="titulo">
+    <h1 id="titulo" class="rv">Roadmap dos <span class="face" data-mascot="round" data-hue="#38bdf8" aria-hidden="true"></span> Bots</h1>
+    <p class="rm-top__note rv" style="--i:1">O que estamos construindo agora, o que vem a seguir e o que já chegou ao app.</p>
+    <div class="rm-top__actions rv" style="--i:2">
+      <button type="button" class="button" data-open-idea>Sugerir uma ideia</button>
+      <p class="rm-top__count"><span id="rm-total">31</span> itens publicados</p>
+    </div>
+  </section>
+
+  <div class="rm-tabs" role="tablist" aria-label="Etapas">
+    <button type="button" role="tab" data-s="all" aria-selected="true" data-about="Tudo o que está no roadmap, do que está sendo feito agora ao que já chegou ao app.">Tudo <b></b></button>
+    <button type="button" role="tab" data-s="dev" aria-selected="false" data-about="O que estamos construindo agora.">Em desenvolvimento <b></b></button>
+    <button type="button" role="tab" data-s="soon" aria-selected="false" data-about="Feito e testado. Entra na próxima versão do app.">Pronto, chega em breve <b></b></button>
+    <button type="button" role="tab" data-s="next" aria-selected="false" data-about="Planejado. Começa depois do que está em desenvolvimento.">Na fila <b></b></button>
+    <button type="button" role="tab" data-s="live" aria-selected="false" data-about="As mudanças mais importantes que já chegaram ao app, da mais nova à mais antiga.">Já no app <b></b></button>
+  </div>
+  <p class="rm-about" id="rm-about" aria-live="polite">Tudo o que está no roadmap, do que está sendo feito agora ao que já chegou ao app.</p>
+
+  <div class="rm-grid">
+      <article class="rm-card" data-s="dev">
+        <h3>Tarefas no computador 2 a 3 vezes mais rápidas</h3>
+        <p>Já medimos onde vai o tempo de cada tarefa: acordar o computador dos Bots, abrir a tela e o navegador, cada ferramenta.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Em desenvolvimento<span class="rm-card__cat"> · Computador</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Em desenvolvimento</dd><dt>Categoria</dt><dd>Computador</dd><dt>Onde</dt><dd>Só no Mac</dd></dl><div class="rm-dialog__text"><p>Já medimos onde vai o tempo de cada tarefa: acordar o computador dos Bots, abrir a tela e o navegador, cada ferramenta. Agora vem cortar essas esperas.</p></div><h3>O que está incluído</h3><ul><li>Medição de onde vai o tempo de cada tarefa</li><li>Cortar as esperas do computador, da tela e do navegador</li></ul></template>
+      </article>
+      <article class="rm-card" data-s="soon">
+        <h3>Ligações sem aquela espera</h3>
+        <p>Numa ligação, o Bot já fica pronto para a sua próxima frase e começa a falar em cerca de um segundo, não mais em três a cinco.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Pronto, chega em breve<span class="rm-card__cat"> · Ligações</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Pronto, chega em breve</dd><dt>Categoria</dt><dd>Ligações</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.9.9</dd></dl><div class="rm-dialog__text"><p>Numa ligação, o Bot já fica pronto para a sua próxima frase e começa a falar em cerca de um segundo, não mais em três a cinco.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="soon">
+        <h3>Uma voz mais natural</h3>
+        <p>Nos Macs com chip Apple, a voz das ligações ficou mais humana e com emoção leve: sorri numa boa notícia e fica mais calma numa ruim.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Pronto, chega em breve<span class="rm-card__cat"> · Ligações</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Pronto, chega em breve</dd><dt>Categoria</dt><dd>Ligações</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.9.9</dd></dl><div class="rm-dialog__text"><p>Nos Macs com chip Apple, a voz das ligações ficou mais humana e com emoção leve: sorri numa boa notícia e fica mais calma numa ruim. Ela se atualiza sozinha.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="soon">
+        <h3>Números, valores e datas falados direito</h3>
+        <p>R$ 1.250,90, 19/10 e 9h30 saem por extenso, como uma pessoa falaria, e &quot;sexta&quot; não sai mais &quot;secsta&quot;.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Pronto, chega em breve<span class="rm-card__cat"> · Ligações</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Pronto, chega em breve</dd><dt>Categoria</dt><dd>Ligações</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.9.9</dd></dl><div class="rm-dialog__text"><p>R$ 1.250,90, 19/10 e 9h30 saem por extenso, como uma pessoa falaria, e &quot;sexta&quot; não sai mais &quot;secsta&quot;.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="soon">
+        <h3>Barra de menus opcional</h3>
+        <p>O ícone ao lado do relógio vem desligado.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Pronto, chega em breve<span class="rm-card__cat"> · Visual</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Pronto, chega em breve</dd><dt>Categoria</dt><dd>Visual</dd><dt>Onde</dt><dd>Só no Mac</dd><dt>Versão</dt><dd>0.9.9</dd></dl><div class="rm-dialog__text"><p>O ícone ao lado do relógio vem desligado. Para usar, ligue em Ajustes › Avisos.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="soon">
+        <h3>Ajustes do iPhone por assunto</h3>
+        <p>Os Ajustes do iPhone viram páginas por assunto, com cores e acessibilidade revistas.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Pronto, chega em breve<span class="rm-card__cat"> · Visual</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Pronto, chega em breve</dd><dt>Categoria</dt><dd>Visual</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.9.9</dd></dl><div class="rm-dialog__text"><p>Os Ajustes do iPhone viram páginas por assunto, com cores e acessibilidade revistas. Liberar tudo no Mac pede uma confirmação, e Negar fica no lugar de Não permitir.</p></div><h3>O que está incluído</h3><ul><li>Ajustes do iPhone em páginas por assunto</li><li>Cores e acessibilidade revistas</li><li>Confirmação ao liberar tudo no Mac</li><li>Negar no lugar de Não permitir</li></ul></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>Pastas e fixados na lista</h3>
+        <p>Cada pasta vira uma seção da lista, os Bots fixados ficam grandes no topo, e uma pílula leva às conversas não lidas.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Conversa</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Conversa</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.9.8</dd></dl><div class="rm-dialog__text"><p>Cada pasta vira uma seção da lista, os Bots fixados ficam grandes no topo, e uma pílula leva às conversas não lidas. No Mac, a lista ficou como a do iPhone.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>Temas e fontes</h3>
+        <p>Meia-noite, Papel e Floresta, e letras arredondadas ou com serifa, em Ajustes › Aparência.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Visual</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Visual</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.9.8</dd></dl><div class="rm-dialog__text"><p>Meia-noite, Papel e Floresta, e letras arredondadas ou com serifa, em Ajustes › Aparência.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>Rotinas que começam com um e-mail</h3>
+        <p>Peça &quot;quando chegar e-mail de tal pessoa, faça isso&quot;: o Bot olha o Gmail a cada 2 minutos e age quando chega.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Rotinas</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Rotinas</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.9.8</dd></dl><div class="rm-dialog__text"><p>Peça &quot;quando chegar e-mail de tal pessoa, faça isso&quot;: o Bot olha o Gmail a cada 2 minutos e age quando chega.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>Rotinas sugeridas pelo uso</h3>
+        <p>Pediu a mesma coisa três vezes perto do mesmo horário?</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Rotinas</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Rotinas</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.9.8</dd></dl><div class="rm-dialog__text"><p>Pediu a mesma coisa três vezes perto do mesmo horário? O Bot oferece fazer sozinho, uma vez, com Sim, Outro horário e Não.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>O agente se atualiza sozinho</h3>
+        <p>Correções do agente chegam sozinhas, quando nenhum Bot está trabalhando, sem atualizar o app.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Apps</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Apps</dd><dt>Onde</dt><dd>Só no Mac</dd><dt>Versão</dt><dd>0.9.8</dd></dl><div class="rm-dialog__text"><p>Correções do agente chegam sozinhas, quando nenhum Bot está trabalhando, sem atualizar o app.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>Permissões que dá para entender</h3>
+        <p>O cartão diz em uma frase o que você está permitindo (&quot;Isso vai publicar o post…&quot;), e comandos compostos ganham &quot;Sempre permitir este comando&quot;.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Segurança</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Segurança</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.9.7</dd></dl><div class="rm-dialog__text"><p>O cartão diz em uma frase o que você está permitindo (&quot;Isso vai publicar o post…&quot;), e comandos compostos ganham &quot;Sempre permitir este comando&quot;.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>Quanto cada Bot gasta</h3>
+        <p>Tokens e custo estimado de hoje e dos últimos 7 dias, no perfil de cada Bot e em Ajustes › Uso, do que mais gasta para o que menos.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · App</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>App</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.9.6</dd></dl><div class="rm-dialog__text"><p>Tokens e custo estimado de hoje e dos últimos 7 dias, no perfil de cada Bot e em Ajustes › Uso, do que mais gasta para o que menos.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>Bots na barra de menus</h3>
+        <p>Um ícone ao lado do relógio para permitir, responder perguntas e responder aos Bots sem abrir o app.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Segurança</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Segurança</dd><dt>Onde</dt><dd>Só no Mac</dd><dt>Versão</dt><dd>0.9.6</dd></dl><div class="rm-dialog__text"><p>Um ícone ao lado do relógio para permitir, responder perguntas e responder aos Bots sem abrir o app. Desliga em Ajustes › Avisos.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>Avisos empilhados</h3>
+        <p>Vários Bots falando ao mesmo tempo viram uma pilha, com o mais novo em cima.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · App</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>App</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.9.4</dd></dl><div class="rm-dialog__text"><p>Vários Bots falando ao mesmo tempo viram uma pilha, com o mais novo em cima. Puxe para baixo (ou aponte no Mac) para abrir, e suba um aviso para dispensar.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>O Bot na Dynamic Island</h3>
+        <p>Enquanto um Bot trabalha, ele aparece na ilha e na tela bloqueada, dizendo o que está fazendo.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Widgets</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Widgets</dd><dt>Onde</dt><dd>Só no iPhone</dd><dt>Versão</dt><dd>0.9.4</dd></dl><div class="rm-dialog__text"><p>Enquanto um Bot trabalha, ele aparece na ilha e na tela bloqueada, dizendo o que está fazendo.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>Deslize para permitir</h3>
+        <p>Pedidos que apagam, pagam ou não têm volta pedem um deslize, para um toque sem querer não aprovar.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Segurança</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Segurança</dd><dt>Onde</dt><dd>Só no iPhone</dd><dt>Versão</dt><dd>0.9.4</dd></dl><div class="rm-dialog__text"><p>Pedidos que apagam, pagam ou não têm volta pedem um deslize, para um toque sem querer não aprovar.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>Login seguro na tela do Bot</h3>
+        <p>Quando a página aberta pelo Bot pede senha, aparece o cartão de login: você entra, inclusive com código de verificação, e o Bot nunca vê a senha.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Segurança</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Segurança</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.9.3</dd></dl><div class="rm-dialog__text"><p>Quando a página aberta pelo Bot pede senha, aparece o cartão de login: você entra, inclusive com código de verificação, e o Bot nunca vê a senha. Os sites não saem mais da conta ao trocar de tela.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>Cartão de Computador</h3>
+        <p>Mostra a tela ao vivo e quem está com ela, com Assumir, Terminei e Pular, de qualquer aparelho.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Computador</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Computador</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.9.3</dd></dl><div class="rm-dialog__text"><p>Mostra a tela ao vivo e quem está com ela, com Assumir, Terminei e Pular, de qualquer aparelho. Os botões dos cartões ficaram retos e dividem a largura.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>Widgets</h3>
+        <p>Seus Bots na tela de início: o Bot principal, o que espera por você, todos os Bots, a sua equipe com o quadro e um pedido de aprovação com Permitir e Negar que responde sem abrir o app.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Widgets</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Widgets</dd><dt>Onde</dt><dd>Só no iPhone</dd><dt>Versão</dt><dd>0.9.0</dd></dl><div class="rm-dialog__text"><p>Seus Bots na tela de início: o Bot principal, o que espera por você, todos os Bots, a sua equipe com o quadro e um pedido de aprovação com Permitir e Negar que responde sem abrir o app. Toque e mantenha pressionado na tela de início › Editar › Adicionar widget › Bots.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>O que o Bot está fazendo</h3>
+        <p>Em vez de só “trabalhando”, você vê “Pesquisa lendo o arquivo”, “executando alguns comandos”, “clicando por aí”… na conversa e na lista.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Conversa</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Conversa</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.8.9</dd></dl><div class="rm-dialog__text"><p>Em vez de só “trabalhando”, você vê “Pesquisa lendo o arquivo”, “executando alguns comandos”, “clicando por aí”… na conversa e na lista.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>Todos os cérebros no computador dos Bots</h3>
+        <p>Codex, OpenCode, Grok e Antigravity também usam o navegador e o terminal do computador dos Bots.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Segurança</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Segurança</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.8.9</dd></dl><div class="rm-dialog__text"><p>Codex, OpenCode, Grok e Antigravity também usam o navegador e o terminal do computador dos Bots. LM Studio, Ollama e as APIs ganham Gmail, Agenda, Drive e os apps conectados, pedindo aprovação para o que muda algo.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>WhatsApp, Telegram e Signal pelo Relay</h3>
+        <p>Os Bots acham e leem suas conversas pelo Relay deste Mac, e o cartão da mensagem envia por ele quando você clica em Enviar.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Apps</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Apps</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.8.8</dd></dl><div class="rm-dialog__text"><p>Os Bots acham e leem suas conversas pelo Relay deste Mac, e o cartão da mensagem envia por ele quando você clica em Enviar. O iMessage vai pelo Mensagens do Mac. Ligue em Ajustes › Apps.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>Enviar de verdade, com a sua aprovação</h3>
+        <p>Peça a um Bot para mandar um e-mail ou uma mensagem: ele mostra o cartão com o texto, você edita se quiser e clica em Enviar.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Segurança</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Segurança</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.8.7</dd></dl><div class="rm-dialog__text"><p>Peça a um Bot para mandar um e-mail ou uma mensagem: ele mostra o cartão com o texto, você edita se quiser e clica em Enviar. Sai pelo seu Gmail ou pelo app conectado (Slack…). Sem o seu clique, nada sai.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>Grupos mais espertos</h3>
+        <p>Sem @, respondem só os Bots a quem a mensagem diz respeito, e ao mesmo tempo.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Equipes</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Equipes</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.8.6</dd></dl><div class="rm-dialog__text"><p>Sem @, respondem só os Bots a quem a mensagem diz respeito, e ao mesmo tempo. Embaixo aparece quem está trabalhando, com os mascotes juntos.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>Mandar quando terminar</h3>
+        <p>Com o Bot trabalhando, Enter interrompe e envia, ou a mensagem entra numa fila que você vê e pode cancelar.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Conversa</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Conversa</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.7.0</dd></dl><div class="rm-dialog__text"><p>Com o Bot trabalhando, Enter interrompe e envia, ou a mensagem entra numa fila que você vê e pode cancelar.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>O que os Bots sabem de você</h3>
+        <p>As memórias de todos os Bots num lugar, em Ajustes.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · App</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>App</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.7.0</dd></dl><div class="rm-dialog__text"><p>As memórias de todos os Bots num lugar, em Ajustes. O que o Bot principal sabe de você passa a valer para todos.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>Equipes com líder</h3>
+        <p>Num grupo, ligue “Equipe com líder”: você fala com o líder, ele divide o trabalho e chama os outros pelo cargo.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Equipes</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Equipes</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.6.3</dd></dl><div class="rm-dialog__text"><p>Num grupo, ligue “Equipe com líder”: você fala com o líder, ele divide o trabalho e chama os outros pelo cargo. Cada equipe tem quadro de tarefas e base de conhecimento.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>Uma tela para cada Bot</h3>
+        <p>No computador dos Bots, cada Bot que está trabalhando usa a própria tela: dois Bots não disputam mais o mesmo navegador.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Segurança</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Segurança</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.6.2</dd></dl><div class="rm-dialog__text"><p>No computador dos Bots, cada Bot que está trabalhando usa a própria tela: dois Bots não disputam mais o mesmo navegador. Os logins valem para todos.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>Criptografia de ponta a ponta</h3>
+        <p>Em Ajustes › Privacidade no Mac.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Conversa</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Conversa</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.5.7</dd></dl><div class="rm-dialog__text"><p>Em Ajustes › Privacidade no Mac. Suas conversas, arquivos e memórias saem dos seus aparelhos já cifrados: nem o servidor nem quem cuida dele consegue ler.</p></div></template>
+      </article>
+      <article class="rm-card" data-s="live">
+        <h3>Na ligação, ele te escuta</h3>
+        <p>Se o Bot estiver esperando você assumir o computador e você falar, ele para de esperar e responde.</p>
+        <span class="rm-card__foot"><span class="rm-card__stage"><span class="dot"></span>Já no app<span class="rm-card__cat"> · Ligações</span></span><button type="button" class="rm-card__more">Ver detalhes</button></span>
+        <template><dl><dt>Etapa</dt><dd>Já no app</dd><dt>Categoria</dt><dd>Ligações</dd><dt>Onde</dt><dd>Mac e iPhone</dd><dt>Versão</dt><dd>0.5.5</dd></dl><div class="rm-dialog__text"><p>Se o Bot estiver esperando você assumir o computador e você falar, ele para de esperar e responde. E diz onde tocar para assumir.</p></div></template>
+      </article>
+  </div>
+  <div class="rm-more" id="rm-more">
+    <button type="button" class="button button--quiet">Carregar mais</button>
+    <p id="rm-shown"></p>
+  </div>
+
+  <dialog class="rm-dialog" id="rm-dialog" aria-labelledby="rm-dialog-title">
+    <div class="rm-dialog__body">
+      <div class="rm-dialog__top"><span class="rm-card__stage rm-dialog__stage"></span><button type="button" class="rm-dialog__close" aria-label="Fechar"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button></div>
+      <h2 id="rm-dialog-title"></h2>
+      <div class="rm-dialog__fill"></div>
+    </div>
+  </dialog>
+
+  <dialog class="rm-dialog" id="rm-idea" aria-labelledby="rm-idea-title">
+    <div class="rm-dialog__body">
+      <div class="rm-dialog__top"><span class="rm-dialog__stage">Sugerir uma ideia</span><button type="button" class="rm-dialog__close" aria-label="Fechar"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button></div>
+      <h2 id="rm-idea-title">O que os Bots deviam fazer?</h2>
+      <p class="rm-idea__note">Conte a ideia do seu jeito. Ela vai para a lista que a gente lê antes de decidir o que entra no roadmap. Quem usa o app também pode mandar por Ajustes › Sugerir uma ideia.</p>
+      <form class="rm-idea">
+        <label for="idea-body">Sua ideia</label>
+        <textarea id="idea-body" name="body" rows="5" minlength="10" maxlength="2000" required placeholder="Ex.: um Bot que acompanha o preço de uma passagem e me avisa quando baixar"></textarea>
+        <label for="idea-contact">Seu e-mail <span>(opcional, para a gente responder)</span></label>
+        <input id="idea-contact" name="contact" type="email" maxlength="200" autocomplete="email" placeholder="voce@exemplo.com">
+        <div class="rm-idea__trap" aria-hidden="true"><label for="idea-website">Não preencha</label><input id="idea-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+        <div class="rm-idea__end"><button type="submit" class="button">Enviar ideia</button><p class="rm-idea__status" role="status"></p></div>
+      </form>
+    </div>
+  </dialog>
+
+  <section class="rm-legend" aria-labelledby="ler">
+    <h2 id="ler">Como ler o roadmap</h2>
+    <dl>
+      <dt data-s="dev"><i class="dot"></i>Em desenvolvimento</dt><dd>Estamos construindo agora.</dd>
+      <dt data-s="soon"><i class="dot"></i>Pronto, chega em breve</dt><dd>Finalizado e testado. Entra numa próxima atualização do app.</dd>
+      <dt data-s="next"><i class="dot"></i>Na fila</dt><dd>Planejado. Começa depois do que está em desenvolvimento.</dd>
+      <dt data-s="live"><i class="dot"></i>Já no app</dt><dd>As mudanças mais importantes que já estão no app.</dd>
+    </dl>
+    <p>Datas e versões são previsões e podem mudar. Algumas novidades só existem no Mac ou só no iPhone; cada item diz onde.</p>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand"><a class="bar__name" href="./"><span data-mascot="round" data-hue="#38bdf8"></span>Bots</a><p>Assistentes de IA que trabalham no seu Mac. Você pede pelo Mac ou pelo iPhone.</p></div>
+      <nav aria-label="Produto"><b>Produto</b><a href="./#como">Como funciona</a><a href="./#faz">Recursos</a><a href="roadmap.html">Roadmap</a></nav>
+      <nav aria-label="Instalar"><b>Instalar</b><a href="https://github.com/alenkpedro/bots/releases/latest/download/Bots.dmg">No Mac</a><a href="fonte.html">No iPhone</a></nav>
+      <nav aria-label="Ajuda"><b>Ajuda</b><a href="ajuda.html">Central de ajuda</a><a href="privacidade.html">Privacidade</a><a href="termos.html">Termos</a></nav>
+    </div>
+    <div class="foot__end"><span>Bots, 2026. Mac e iPhone, versão 0.9.8.</span><a href="mailto:pedroalencareditor@gmail.com">pedroalencareditor@gmail.com</a></div>
+  </div>
+</footer>
+
+<script src="supabase.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

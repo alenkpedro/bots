@@ -3,16 +3,46 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a0a0b">
 <meta name="robots" content="noindex">
 <title>Voltando para o Bots</title>
-<link rel="stylesheet" href="style.css">
+<link rel="icon" href="img/icone.webp">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
-<body>
-<main style="max-width:520px;margin:15vh auto;padding:0 20px;text-align:center">
+<body id="topo">
+
+<header class="bar">
+  <div class="bar__inner wrap">
+    <a class="bar__name" href="./"><span data-mascot="round" data-hue="#38bdf8"></span>Bots</a>
+    <nav class="bar__links" aria-label="Principal">
+      <a class="wide" href="./#como">Como funciona</a>
+      <a class="wide" href="./#faz">Recursos</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a class="wide" href="ajuda.html">Ajuda</a>
+      <a href="https://github.com/alenkpedro/bots/releases/latest/download/Bots.dmg">Baixar</a>
+    </nav>
+  </div>
+</header>
+
+<main class="doc doc--handoff">
   <h1>Voltando para o Bots…</h1>
   <p id="msg">Se o Bots não abrir sozinho, toque no botão.</p>
-  <p><a id="open" href="#" style="display:inline-block;padding:10px 18px;border-radius:10px;background:#0a84ff;color:#fff;text-decoration:none">Abrir o Bots</a></p>
+  <p><a id="open" class="button button--big" href="#">Abrir o Bots</a></p>
 </main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand"><a class="bar__name" href="./"><span data-mascot="round" data-hue="#38bdf8"></span>Bots</a><p>Assistentes de IA que trabalham no seu Mac. Você pede pelo Mac ou pelo iPhone.</p></div>
+      <nav aria-label="Produto"><b>Produto</b><a href="./#como">Como funciona</a><a href="./#faz">Recursos</a><a href="roadmap.html">Roadmap</a></nav>
+      <nav aria-label="Instalar"><b>Instalar</b><a href="https://github.com/alenkpedro/bots/releases/latest/download/Bots.dmg">No Mac</a><a href="fonte.html">No iPhone</a></nav>
+      <nav aria-label="Ajuda"><b>Ajuda</b><a href="ajuda.html">Central de ajuda</a><a href="privacidade.html">Privacidade</a><a href="termos.html">Termos</a></nav>
+    </div>
+    <div class="foot__end"><span>Bots, 2026. Mac e iPhone, versão 0.9.8.</span><a href="mailto:pedroalencareditor@gmail.com">pedroalencareditor@gmail.com</a></div>
+  </div>
+</footer>
 <script>
   // Adobe sends the Frame.io sign-in back here (it only accepts https). This page only hands the
   // code to the Bots app on this Mac; nothing is stored or sent anywhere else.
@@ -21,5 +51,6 @@
   if (!location.search) document.getElementById("msg").textContent = "Nada para entregar ao Bots aqui.";
   else location.href = target;
 </script>
+<script src="site.js"></script>
 </body>
 </html>
