@@ -345,7 +345,7 @@
   }
 
   // ---------- páginas ----------
-  const pages = { visao: renderOverview, pessoas: renderPeople, pessoa: renderPerson, roadmap: renderBoardPage, ideias: renderInbox, travamentos: renderCrashes, versoes: renderVersions };
+  const pages = { visao: renderOverview, pessoas: renderPeople, pessoa: renderPerson, roadmap: renderBoardPage, ideias: renderInbox, travamentos: renderCrashes, versoes: renderVersions, notas: renderNotes };
   // #pessoa/<id> abre a página de uma pessoa; o menu continua marcando Pessoas.
   function route() {
     const [name, arg] = location.hash.slice(1).split('/');
@@ -769,6 +769,114 @@
       await renderVersions();
     } catch (err) { fail(err); }
   });
+
+  // Notas: as anotações do admin (migração 38), com tipo, checklist e "resolvida". Salva sozinho, uma pausa
+  // depois de você parar de digitar; trocar de nota ou sair grava o que faltava.
+  const TAGS = { bug: 'Bug', tarefa: 'Tarefa', ideia: 'Ideia', nota: 'Nota' };
+  let notes = [], noteTag = 'all', noteDone = 'open', noteId = null, noteTimer = null, noteDirty = false;
+  const note = () => notes.find(n => n.id === noteId);
+  const progress = n => n.items?.length ? `${n.items.filter(i => i.done).length} de ${n.items.length}` : '';
+  async function renderNotes() {
+    await flushNote();
+    notes = await api('admin_notes?select=*&order=updated_at.desc') || [];
+    if (noteId && !note()) noteId = null;
+    drawNotes(); if (noteId) fillNote();
+  }
+  function noteBadge() { setBadge('notas', notes.filter(n => !n.done && n.tag === 'bug').length); }
+  function drawNotes() {
+    const q = $('notes-search').value.trim().toLowerCase();
+    const byDone = notes.filter(n => noteDone === 'all' || (noteDone === 'done') === n.done);
+    const counts = { all: byDone.length }; byDone.forEach(n => counts[n.tag] = (counts[n.tag] || 0) + 1);
+    document.querySelectorAll('#notes-tag button').forEach(b => { b.querySelector('b').textContent = counts[b.dataset.t] || 0; b.setAttribute('aria-selected', b.dataset.t === noteTag); });
+    document.querySelectorAll('#notes-done button').forEach(b => b.setAttribute('aria-selected', b.dataset.d === noteDone));
+    const rows = byDone.filter(n => (noteTag === 'all' || n.tag === noteTag) && (!q || `${n.title} ${n.body} ${(n.items || []).map(i => i.text).join(' ')}`.toLowerCase().includes(q)));
+    $('notes-list').innerHTML = rows.map(n => `<li><button type="button" class="notes__item${n.id === noteId ? ' is-open' : ''}${n.done ? ' is-done' : ''}" data-note="${n.id}">
+      <span class="notes__line"><span class="pill" data-tag="${n.tag}">${TAGS[n.tag]}</span>${progress(n) ? `<small>${progress(n)}</small>` : ''}<small class="notes__when">${ago(n.updated_at)}</small></span>
+      <b>${esc(n.title || 'Sem título')}</b>${n.body ? `<span class="notes__peek">${esc(n.body.slice(0, 120))}</span>` : ''}</button></li>`).join('')
+      || `<li class="adm-empty">${notes.length ? 'Nada com esse filtro.' : 'Nenhuma nota ainda. Crie a primeira em "Nova nota".'}</li>`;
+    noteBadge();
+  }
+  function fillNote() {
+    const n = note(); if (!n) return closeNote();
+    $('note').hidden = false; $('note-none').hidden = true; document.querySelector('.notes').classList.add('is-editing');
+    $('note-title').value = n.title; $('note-body').value = n.body; $('note-done').checked = n.done;
+    document.querySelectorAll('#note-tags button').forEach(b => b.setAttribute('aria-checked', b.dataset.tag === n.tag));
+    drawItems(); fitTitle(); $('note-saved').textContent = '';
+  }
+  function drawItems(focus) {
+    const n = note();
+    $('note-items').innerHTML = (n.items || []).map((it, k) => `<li class="checklist__item${it.done ? ' is-done' : ''}" data-k="${k}">
+      <input type="checkbox" ${it.done ? 'checked' : ''} aria-label="Feito">
+      <input type="text" value="${esc(it.text)}" maxlength="500" placeholder="Item" aria-label="Item ${k + 1}">
+      <button type="button" class="checklist__x" aria-label="Tirar o item">×</button></li>`).join('');
+    if (focus !== undefined) { const el = $('note-items').querySelectorAll('input[type="text"]')[focus]; el?.focus(); el?.setSelectionRange(el.value.length, el.value.length); }
+  }
+  function closeNote() { noteId = null; $('note').hidden = true; $('note-none').hidden = false; document.querySelector('.notes').classList.remove('is-editing'); drawNotes(); }
+  async function openNote(id) { await flushNote(); noteId = id; drawNotes(); fillNote(); }
+  // Salvar: o que mudou vai de uma vez, uma pausa depois da última mudança.
+  function changed() { noteDirty = true; $('note-saved').textContent = 'Salvando…'; clearTimeout(noteTimer); noteTimer = setTimeout(flushNote, 700); }
+  async function flushNote() {
+    clearTimeout(noteTimer);
+    const n = note(); if (!n || !noteDirty) return;
+    noteDirty = false;
+    try {
+      const [row] = await api(`admin_notes?id=eq.${n.id}`, { method: 'PATCH', body: { title: n.title, body: n.body, tag: n.tag, items: n.items, done: n.done }, prefer: 'return=representation' });
+      if (row) n.updated_at = row.updated_at;
+      if (noteId === n.id) $('note-saved').textContent = 'Salvo';
+      drawNotes();
+    } catch (err) { noteDirty = true; $('note-saved').textContent = 'Não salvou'; fail(err); }
+  }
+  $('note-new').addEventListener('click', async () => {
+    try {
+      await flushNote();
+      const [n] = await api('admin_notes', { method: 'POST', body: { tag: noteTag === 'all' ? 'bug' : noteTag }, prefer: 'return=representation' });
+      notes.unshift(n); if (noteDone === 'done') noteDone = 'open';
+      noteId = n.id; drawNotes(); fillNote(); $('note-title').focus();
+    } catch (err) { fail(err); }
+  });
+  $('notes-list').addEventListener('click', e => { const b = e.target.closest('[data-note]'); if (b) openNote(b.dataset.note); });
+  $('notes-tag').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { noteTag = b.dataset.t; drawNotes(); } });
+  $('notes-done').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { noteDone = b.dataset.d; drawNotes(); } });
+  $('notes-search').addEventListener('input', drawNotes);
+  $('note-back').addEventListener('click', async () => { await flushNote(); closeNote(); });
+  // O título quebra linha (no celular um título longo não cabe numa só) e cresce com o texto; Enter vai para a checklist.
+  const fitTitle = () => { const t = $('note-title'); t.style.height = 'auto'; t.style.height = `${t.scrollHeight}px`; };
+  $('note-title').addEventListener('input', e => { e.target.value = e.target.value.replace(/\n/g, ' '); note().title = e.target.value; fitTitle(); changed(); });
+  $('note-title').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); const first = $('note-items').querySelector('input[type="text"]'); first ? first.focus() : $('note-add-item').click(); } });
+  $('note-body').addEventListener('input', e => { note().body = e.target.value; changed(); });
+  $('note-done').addEventListener('change', e => { note().done = e.target.checked; changed(); flushNote(); });
+  $('note-tags').addEventListener('click', e => {
+    const b = e.target.closest('[data-tag]'); if (!b) return;
+    note().tag = b.dataset.tag; document.querySelectorAll('#note-tags button').forEach(x => x.setAttribute('aria-checked', x === b)); changed();
+  });
+  // A checklist: Enter cria o próximo item, apagar um item vazio volta para o anterior.
+  const newItem = (text = '') => ({ id: Math.random().toString(36).slice(2, 10), text, done: false });
+  $('note-add-item').addEventListener('click', () => { const n = note(); n.items = [...(n.items || []), newItem()]; drawItems(n.items.length - 1); changed(); });
+  $('note-items').addEventListener('input', e => {
+    const li = e.target.closest('[data-k]'); if (!li || e.target.type !== 'text') return;
+    note().items[+li.dataset.k].text = e.target.value; changed();
+  });
+  $('note-items').addEventListener('change', e => {
+    const li = e.target.closest('[data-k]'); if (!li || e.target.type !== 'checkbox') return;
+    note().items[+li.dataset.k].done = e.target.checked; li.classList.toggle('is-done', e.target.checked); changed(); drawNotes();
+  });
+  $('note-items').addEventListener('click', e => {
+    const x = e.target.closest('.checklist__x'); if (!x) return;
+    const k = +x.closest('[data-k]').dataset.k; note().items.splice(k, 1); drawItems(Math.max(0, k - 1)); changed();
+  });
+  $('note-items').addEventListener('keydown', e => {
+    const li = e.target.closest('[data-k]'); if (!li || e.target.type !== 'text') return;
+    const n = note(), k = +li.dataset.k;
+    if (e.key === 'Enter') { e.preventDefault(); n.items.splice(k + 1, 0, newItem()); drawItems(k + 1); changed(); }
+    if (e.key === 'Backspace' && !e.target.value) { e.preventDefault(); n.items.splice(k, 1); drawItems(Math.max(0, k - 1)); changed(); }
+  });
+  $('note-delete').addEventListener('click', async () => {
+    const n = note(); if (!n || !confirm(`Apagar "${n.title || 'Sem título'}"? Não tem como desfazer.`)) return;
+    try { noteDirty = false; await api(`admin_notes?id=eq.${n.id}`, { method: 'DELETE' }); notes = notes.filter(x => x.id !== n.id); closeNote(); toast('Nota apagada.'); }
+    catch (err) { fail(err); }
+  });
+  addEventListener('hashchange', () => { if (!location.hash.startsWith('#notas')) flushNote(); });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) flushNote(); });
 
   // ---------- começar ----------
   async function start() {

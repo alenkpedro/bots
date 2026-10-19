@@ -81,6 +81,7 @@
       <a href="#ideias"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H8l-4 4zm4 5h8M8 12h5"/></svg><span class="adm-nav__long">Ideias e feedback</span><span class="adm-nav__short" aria-hidden="true">Ideias</span><b data-badge="ideias" hidden></b></a>
       <a href="#travamentos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 16H3zm0 6v4m0 3v.5"/></svg><span class="adm-nav__long">Travamentos</span><span class="adm-nav__short" aria-hidden="true">Travam.</span><b data-badge="travamentos" hidden></b></a>
       <a href="#versoes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v3h16v-3"/></svg><span class="adm-nav__long">Versões e avisos</span><span class="adm-nav__short" aria-hidden="true">Versões</span></a>
+      <a href="#notas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4 5.5l1 1 2-2M4 11.5l1 1 2-2M4 17.5l1 1 2-2"/></svg><span class="adm-nav__long">Notas</span><span class="adm-nav__short" aria-hidden="true">Notas</span><b data-badge="notas" hidden></b></a>
     </nav>
     <div class="adm-side__end">
       <a href="https://alenkpedro.github.io/bots/roadmap.html" target="_blank" rel="noopener">Ver o roadmap ↗</a>
@@ -190,6 +191,46 @@
         <button type="button" data-d="90">90 dias</button>
       </div>
       <ul class="inbox" id="crashes"></ul>
+    </section>
+
+    <!-- Notas: as anotações do admin (bugs, tarefas, ideias) com checklist. Migração 38: só o admin vê. -->
+    <section class="adm-page" data-page="notas" aria-labelledby="t-notas">
+      <header class="adm-page__head"><div><h1 id="t-notas">Notas</h1><p>Suas anotações: bugs, tarefas e ideias, com checklist. Só você vê, no Mac e no celular.</p></div>
+        <div class="adm-head__tools"><input class="adm-search" id="notes-search" type="search" placeholder="Buscar nas notas" aria-label="Buscar nas notas"><button type="button" class="button" id="note-new">Nova nota</button></div></header>
+      <div class="adm-chips" id="notes-tag" role="tablist" aria-label="Tipo">
+        <button type="button" data-t="all" aria-selected="true">Todas <b></b></button>
+        <button type="button" data-t="bug">Bugs <b></b></button>
+        <button type="button" data-t="tarefa">Tarefas <b></b></button>
+        <button type="button" data-t="ideia">Ideias <b></b></button>
+        <button type="button" data-t="nota">Notas <b></b></button>
+      </div>
+      <div class="adm-chips adm-chips--quiet" id="notes-done" role="tablist" aria-label="Situação">
+        <button type="button" data-d="open" aria-selected="true">Abertas</button>
+        <button type="button" data-d="done">Resolvidas</button>
+        <button type="button" data-d="all">Todas</button>
+      </div>
+      <div class="notes">
+        <ul class="notes__list" id="notes-list"></ul>
+        <section class="note" id="note" hidden aria-label="Nota">
+          <div class="note__top">
+            <button type="button" class="adm-link note__back" id="note-back">← Notas</button>
+            <div class="note__tags" id="note-tags" role="radiogroup" aria-label="Tipo da nota">
+              <button type="button" data-tag="bug" role="radio">Bug</button><button type="button" data-tag="tarefa" role="radio">Tarefa</button><button type="button" data-tag="ideia" role="radio">Ideia</button><button type="button" data-tag="nota" role="radio">Nota</button>
+            </div>
+            <span class="note__saved" id="note-saved" role="status"></span>
+          </div>
+          <textarea class="note__title" id="note-title" rows="1" maxlength="200" placeholder="Título" aria-label="Título"></textarea>
+          <ul class="checklist" id="note-items" aria-label="Checklist"></ul>
+          <button type="button" class="adm-link" id="note-add-item">+ Item</button>
+          <textarea class="note__body" id="note-body" rows="5" maxlength="20000" placeholder="Detalhes, passos para reproduzir, links…" aria-label="Detalhes"></textarea>
+          <div class="note__end">
+            <label class="adm-check"><input type="checkbox" id="note-done"> Resolvida</label>
+            <span class="adm-edit__space"></span>
+            <button type="button" class="adm-danger" id="note-delete">Apagar</button>
+          </div>
+        </section>
+        <p class="notes__empty" id="note-none">Escolha uma nota ou crie uma nova.</p>
+      </div>
     </section>
 
     <!-- Versões e avisos -->
