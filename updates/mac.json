@@ -1,11 +1,11 @@
 {
-  "version": "0.9.7",
-  "build": 48,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.9.7/Bots-mac.zip",
-  "signature": "Ff1LA5oqhi1Bry4r2sph7x7FvRFisA8JUeq3dqPTQ4It/RQ2w3Q6n5+aWVT/c22r9UC3wbuXJO/pUh+i5nTcAw==",
-  "notes": "Permissões com uma frase do que você está permitindo e \"Sempre permitir este comando\", reações como no WhatsApp, lista do iPhone com o Bot principal no topo, rolagem mais lisa no iPhone, seta para cima repete a mensagem no Mac, o agente volta sozinho e logins do navegador num Mac novo.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.9.7/Bots-mac-arm64.zip",
-  "signature_arm64": "o0MyVSiWXMpp1Jm/wsQdN8kCn5sxdGi00U9NVmbrzbwuw0fI11nDX0aiRxcbpFAUbP20YguWkQpxQkYPJv7HDQ==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.9.7/Bots-mac-x86_64.zip",
-  "signature_x86_64": "kTdlXWy1wZ6xoSAaWAqXObg+WvLGE29q77fOnOQIph2vN+2oXRFX27PoPQJhZHPLqUmcxvFeGrnuGKAlYpemDw=="
+  "version": "0.9.8",
+  "build": 49,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v0.9.8/Bots-mac.zip",
+  "signature": "ChpK88Hasc/fB24lV8/YIXDEZ8drOhMEmoJTNy13Yi72c7EJWf7YdluCgCa96XEl6TAAvi9ViQF2vhNb/EUMBQ==",
+  "notes": "Pastas e fixados na lista, temas e fontes, rotinas por e-mail e sugeridas pelo uso, rotinas que gastam menos, computador dos Bots mais rápido, responder fotos e arquivos, ❤️ com dois toques, perguntas com várias respostas, aviso só no aparelho em uso, novos apps, e o agente passa a se atualizar sozinho.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.9.8/Bots-mac-arm64.zip",
+  "signature_arm64": "Pw+7fr97DK+pEdVGPr8znoQ8voMRyF347Ayinw5ObqrzV5bR9517DwwXkVQxM4hLTChv2TIqzzNqWh/wcYAVBA==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.9.8/Bots-mac-x86_64.zip",
+  "signature_x86_64": "4LYOxyNmGJ5wV4iGPUDLgpGkIEbYLiKFtS12E9b8lq3eD1A6gJ5jKSFAw7Z4vEo6Yhd64vT0zbrm0v31ND4PBg=="
 }

@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.9.7",
-          "date": "2026-10-18",
-          "localizedDescription": "Permissões com uma frase do que você está permitindo e \"Sempre permitir este comando\", reações como no WhatsApp, lista do iPhone com o Bot principal no topo, rolagem mais lisa no iPhone, seta para cima repete a mensagem no Mac, o agente volta sozinho e logins do navegador num Mac novo.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.9.7/Bots.ipa",
-          "size": 12669095,
+          "version": "0.9.8",
+          "date": "2026-10-19",
+          "localizedDescription": "Pastas e fixados na lista, temas e fontes, rotinas por e-mail e sugeridas pelo uso, rotinas que gastam menos, computador dos Bots mais rápido, responder fotos e arquivos, ❤️ com dois toques, perguntas com várias respostas, aviso só no aparelho em uso, novos apps, e o agente passa a se atualizar sozinho.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.9.8/Bots.ipa",
+          "size": 13072157,
           "minOSVersion": "18.0"
         }
       ]
