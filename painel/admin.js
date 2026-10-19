@@ -878,6 +878,173 @@
   addEventListener('hashchange', () => { if (!location.hash.startsWith('#notas')) flushNote(); });
   document.addEventListener('visibilitychange', () => { if (document.hidden) flushNote(); });
 
+  // Menu de contexto: botão direito no computador, tocar e segurar no celular (lá ele sobe como uma folha de
+  // baixo, como no iPhone). Cada tipo de item tem as ações dele; fora de um item, sobra "Atualizar".
+  const copy = async (text, ok) => { try { await navigator.clipboard.writeText(text); toast(ok); } catch { toast('Não deu para copiar.', 'erro'); } };
+  async function decide(id, st) {
+    if (st === 'denied' && who(id)?.status === 'approved' && !confirm('Tirar o acesso desta pessoa? Ela para de usar os Bots até você aprovar de novo.')) return;
+    try { await api(`access?user_id=eq.${id}`, { method: 'PATCH', body: { status: st, decided_at: new Date().toISOString() } }); toast(st === 'approved' ? 'Acesso aprovado.' : 'Acesso tirado.'); await refreshPage(); }
+    catch (err) { fail(err); }
+  }
+  async function refreshPage() { const [name, arg] = location.hash.slice(1).split('/'); await pages[pages[name] ? name : 'visao'](arg); }
+  async function patchNote(n, fields) {
+    Object.assign(n, fields);
+    try { await api(`admin_notes?id=eq.${n.id}`, { method: 'PATCH', body: fields }); if (n.id === noteId) fillNote(); drawNotes(); }
+    catch (err) { fail(err); }
+  }
+  const noteText = n => [n.title || 'Sem título', ...(n.items || []).map(i => `${i.done ? '[x]' : '[ ]'} ${i.text}`), n.body].filter(Boolean).join('\n');
+  // Cada provedor: o seletor do item e, para um elemento, o título do menu e as ações.
+  const MENUS = [
+    ['tr[data-user]', el => {
+      const p = who(el.dataset.user); if (!p) return null;
+      return { title: personName(p), items: [
+        { label: 'Abrir', run: () => { location.hash = `pessoa/${p.user_id}`; } },
+        p.status !== 'approved' && { label: 'Aprovar', run: () => decide(p.user_id, 'approved') },
+        p.status !== 'denied' && { label: p.status === 'approved' ? 'Tirar o acesso' : 'Recusar', danger: p.status === 'approved', run: () => decide(p.user_id, 'denied') },
+        p.email && { label: 'Copiar e-mail', run: () => copy(p.email, 'E-mail copiado.') },
+      ] };
+    }],
+    ['[data-item]', el => {
+      const it = items.find(i => i.id === el.dataset.item); if (!it) return null;
+      return { title: it.title, items: [
+        { label: 'Editar', run: () => openEditor(it) },
+        ...Object.entries(STAGES).filter(([k]) => k !== it.stage).map(([k, l]) => ({ label: `Mover para ${l}`, run: async () => {
+          const top = Math.min(0, ...items.filter(i => i.stage === k).map(i => i.position)) - 1;
+          try { await api(`roadmap_items?id=eq.${it.id}`, { method: 'PATCH', body: { stage: k, position: top } }); Object.assign(it, { stage: k, position: top }); drawBoard(); toast(`Movido para ${l}.`); } catch (err) { fail(err); }
+        } })),
+        { label: it.published ? 'Esconder do roadmap público' : 'Publicar no roadmap', run: async () => {
+          try { await api(`roadmap_items?id=eq.${it.id}`, { method: 'PATCH', body: { published: !it.published } }); it.published = !it.published; drawBoard(); toast(it.published ? 'Publicado.' : 'Escondido do roadmap público.'); } catch (err) { fail(err); }
+        } },
+        { label: 'Apagar', danger: true, run: async () => {
+          if (!confirm(`Apagar "${it.title}"? Não tem como desfazer.`)) return;
+          try { await api(`roadmap_items?id=eq.${it.id}`, { method: 'DELETE' }); items = items.filter(i => i.id !== it.id); drawBoard(); toast('Cartão apagado.'); } catch (err) { fail(err); }
+        } },
+      ] };
+    }],
+    ['[data-idea]', el => {
+      const x = ideas.find(i => i.id === el.dataset.idea); if (!x) return null;
+      const set = st => async () => { try { await api(`roadmap_ideas?id=eq.${x.id}`, { method: 'PATCH', body: { status: st } }); toast(st === 'new' ? 'Voltou para Novos.' : 'Ideia recusada.'); await renderInbox(); } catch (err) { fail(err); } };
+      return { title: 'Ideia', items: [
+        x.status === 'new' && { label: 'Virar cartão', run: () => el.querySelector('[data-accept]')?.click() },
+        x.status === 'new' && { label: 'Recusar', run: set('declined') },
+        x.status !== 'new' && { label: 'Voltar para Novos', run: set('new') },
+        x.user_id && who(x.user_id) && { label: 'Abrir quem mandou', run: () => { location.hash = `pessoa/${x.user_id}`; } },
+        { label: 'Copiar o texto', run: () => copy(x.body, 'Texto copiado.') },
+        { label: 'Apagar', danger: true, run: async () => {
+          if (!confirm('Apagar esta ideia?')) return;
+          try { await api(`roadmap_ideas?id=eq.${x.id}`, { method: 'DELETE' }); toast('Ideia apagada.'); await renderInbox(); } catch (err) { fail(err); }
+        } },
+      ] };
+    }],
+    ['[data-fb]', el => {
+      const f = feedback.find(i => i.id === el.dataset.fb); if (!f) return null;
+      const LABEL = { new: 'Marcar como novo', read: 'Marcar como lido', done: 'Marcar como resolvido' };
+      return { title: 'Feedback', items: [
+        ...Object.entries(LABEL).filter(([k]) => k !== f.status).map(([k, l]) => ({ label: l, run: async () => {
+          try { await api(`feedback?id=eq.${f.id}`, { method: 'PATCH', body: { status: k } }); toast('Situação atualizada.'); await loadInbox(); drawInbox(); } catch (err) { fail(err); }
+        } })),
+        f.logs && { label: 'Ver registros', run: () => openLogs(f) },
+        f.user_id && who(f.user_id) && { label: 'Abrir quem mandou', run: () => { location.hash = `pessoa/${f.user_id}`; } },
+        { label: 'Copiar o texto', run: () => copy(f.body, 'Texto copiado.') },
+        { label: 'Apagar', danger: true, run: async () => {
+          if (!confirm('Apagar este feedback (e os registros que vieram com ele)?')) return;
+          try { await api(`feedback?id=eq.${f.id}`, { method: 'DELETE' }); toast('Feedback apagado.'); await loadInbox(); drawInbox(); } catch (err) { fail(err); }
+        } },
+      ] };
+    }],
+    ['[data-crash]', el => {
+      const g = crashes[+el.dataset.crash]; if (!g) return null;
+      return { title: g.reason, items: [
+        { label: 'Ver o relatório', run: () => el.querySelector('[data-open]')?.click() },
+        { label: 'Copiar a assinatura', run: () => copy(g.signature, 'Assinatura copiada.') },
+        { label: 'Anotar como bug', run: async () => {
+          try {
+            const [n] = await api('admin_notes', { method: 'POST', body: { tag: 'bug', title: g.reason.slice(0, 200), body: `${g.signature}\n${g.reports} ${g.reports === 1 ? 'vez' : 'vezes'}, versões ${g.versions.join(', ')}`, items: [] }, prefer: 'return=representation' });
+            notes.unshift(n); noteId = n.id; location.hash = 'notas'; toast('Virou uma nota de bug.');
+          } catch (err) { fail(err); }
+        } },
+      ] };
+    }],
+    ['[data-note]', el => {
+      const n = notes.find(i => i.id === el.dataset.note); if (!n) return null;
+      return { title: n.title || 'Sem título', items: [
+        { label: 'Abrir', run: () => openNote(n.id) },
+        { label: n.done ? 'Reabrir' : 'Marcar como resolvida', run: () => patchNote(n, { done: !n.done }) },
+        ...Object.entries(TAGS).filter(([k]) => k !== n.tag).map(([k, l]) => ({ label: `Mudar para ${l}`, run: () => patchNote(n, { tag: k }) })),
+        { label: 'Copiar como texto', run: () => copy(noteText(n), 'Nota copiada.') },
+        { label: 'Apagar', danger: true, run: async () => {
+          if (!confirm(`Apagar "${n.title || 'Sem título'}"? Não tem como desfazer.`)) return;
+          try { if (n.id === noteId) { noteDirty = false; closeNote(); } await api(`admin_notes?id=eq.${n.id}`, { method: 'DELETE' }); notes = notes.filter(x => x.id !== n.id); drawNotes(); toast('Nota apagada.'); } catch (err) { fail(err); }
+        } },
+      ] };
+    }],
+    ['[data-notice]', el => {
+      const n = notices.find(i => i.id === el.dataset.notice); if (!n) return null;
+      return { title: n.title, items: [
+        el.querySelector('[data-end]') && { label: 'Encerrar agora', run: () => el.querySelector('[data-end]').click() },
+        { label: 'Apagar', danger: true, run: () => el.querySelector('[data-del]').click() },
+      ] };
+    }],
+  ];
+  const menuFor = target => {
+    for (const [sel, build] of MENUS) { const el = target.closest(sel); if (el) { const m = build(el); if (m) return { ...m, el }; } }
+    return null;
+  };
+  const general = () => ({ title: 'Painel', items: [{ label: 'Atualizar', run: () => $('adm-refresh').click() }, { label: 'Nova nota', run: () => { location.hash = 'notas'; setTimeout(() => $('note-new').click(), 300); } }] });
+
+  const ctx = document.createElement('div');
+  ctx.className = 'ctx'; ctx.hidden = true;
+  ctx.innerHTML = '<div class="ctx__shade" data-ctx-close></div><div class="ctx__menu" role="menu"><p class="ctx__title"></p><div class="ctx__items"></div><button type="button" class="ctx__cancel" data-ctx-close>Cancelar</button></div>';
+  document.body.append(ctx);
+  let ctxFrom = null, ctxMarked = null;
+  function openMenu(menu, x, y, sheet) {
+    const box = ctx.querySelector('.ctx__menu'), list = ctx.querySelector('.ctx__items');
+    const acts = menu.items.filter(Boolean);
+    ctx.querySelector('.ctx__title').textContent = menu.title;
+    list.innerHTML = acts.map((a, i) => `<button type="button" role="menuitem" data-i="${i}"${a.danger ? ' class="is-danger"' : ''}>${esc(a.label)}</button>`).join('');
+    list.onclick = e => { const b = e.target.closest('[data-i]'); if (!b) return; closeMenu(); acts[+b.dataset.i].run(); };
+    ctx.classList.toggle('is-sheet', sheet);
+    ctxFrom = document.activeElement; ctxMarked = menu.el || null; ctxMarked?.classList.add('is-ctx');
+    ctx.hidden = false;
+    if (!sheet) {
+      box.style.left = '0px'; box.style.top = '0px';
+      const r = box.getBoundingClientRect();
+      box.style.left = `${Math.max(8, Math.min(x, innerWidth - r.width - 8))}px`;
+      box.style.top = `${Math.max(8, Math.min(y, innerHeight - r.height - 8))}px`;
+    } else { box.style.left = box.style.top = ''; }
+    list.querySelector('button')?.focus({ preventScroll: true });
+  }
+  function closeMenu() { if (ctx.hidden) return; ctx.hidden = true; ctxMarked?.classList.remove('is-ctx'); ctxMarked = null; ctxFrom?.focus?.({ preventScroll: true }); }
+  ctx.addEventListener('click', e => { if (e.target.closest('[data-ctx-close]')) closeMenu(); });
+  ctx.addEventListener('contextmenu', e => { e.preventDefault(); closeMenu(); });
+  ctx.addEventListener('keydown', e => {
+    const bs = [...ctx.querySelectorAll('.ctx__items button')], i = bs.indexOf(document.activeElement);
+    if (e.key === 'Escape') { e.preventDefault(); closeMenu(); }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); bs[(i + (e.key === 'ArrowDown' ? 1 : -1) + bs.length) % bs.length]?.focus(); }
+  });
+  addEventListener('scroll', closeMenu, { passive: true }); addEventListener('resize', closeMenu); addEventListener('hashchange', closeMenu);
+  // Campos de texto continuam com o menu do sistema (copiar, colar).
+  const typing = t => t.closest('input, textarea, select, [contenteditable]');
+  const shell = $('adm-shell');
+  shell.addEventListener('contextmenu', e => {
+    if (typing(e.target) || !ctx.hidden) return;
+    const m = menuFor(e.target) || general();
+    e.preventDefault();
+    const r = e.target.getBoundingClientRect();   // pela tecla de menu, sem mouse: abre junto do item
+    openMenu(m, e.clientX || r.left + 12, e.clientY || r.bottom, false);
+  });
+  // Tocar e segurar: meio segundo parado em cima de um item abre a folha; o toque que soltar não vira clique.
+  let press = null, swallow = false;
+  shell.addEventListener('pointerdown', e => {
+    if (e.pointerType !== 'touch' || typing(e.target)) return;
+    const m = menuFor(e.target); if (!m) return;
+    press = { x: e.clientX, y: e.clientY, timer: setTimeout(() => { press = null; swallow = true; navigator.vibrate?.(10); openMenu(m, 0, 0, true); }, 500) };
+  });
+  const cancelPress = () => { if (press) { clearTimeout(press.timer); press = null; } };
+  shell.addEventListener('pointermove', e => { if (press && Math.hypot(e.clientX - press.x, e.clientY - press.y) > 10) cancelPress(); });
+  ['pointerup', 'pointercancel'].forEach(t => shell.addEventListener(t, cancelPress));
+  shell.addEventListener('click', e => { if (swallow) { swallow = false; e.preventDefault(); e.stopPropagation(); } }, true);
+
   // Atualizar: grava o que estiver pendente e busca de novo a página aberta (no app instalado não tem puxar para baixo).
   $('adm-refresh').addEventListener('click', async () => {
     const b = $('adm-refresh'); if (b.classList.contains('is-busy')) return;
