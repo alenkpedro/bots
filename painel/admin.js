@@ -32,10 +32,16 @@
   }
   const personName = p => p?.display_name || p?.name || p?.email || 'Sem nome';
 
-  // ---------- sessão (guardada só neste navegador) ----------
+  // ---------- sessão ----------
+  // Dois modos (Pedro, 19/10). Neste Mac (localhost) o painel fica aberto: a sessão vai para o localStorage e
+  // dura até você sair. Publicado (github.io, para o celular) pede a senha: a sessão vai para o
+  // sessionStorage e some quando a aba ou o app fecha.
+  const LOCAL = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
+  const store = (() => { try { return LOCAL ? localStorage : sessionStorage; } catch { return null; } })();
+  if (!LOCAL) try { localStorage.removeItem(KEY); } catch {}   // de antes dos dois modos: nada de sessão guardada aqui
   let session = null;
-  try { session = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch { session = null; }
-  const save = s => { session = s; try { s ? localStorage.setItem(KEY, JSON.stringify(s)) : localStorage.removeItem(KEY); } catch {} };
+  try { session = JSON.parse(store?.getItem(KEY) || 'null'); } catch { session = null; }
+  const save = s => { session = s; try { s ? store?.setItem(KEY, JSON.stringify(s)) : store?.removeItem(KEY); } catch {} };
   async function auth(path, body) {
     const r = await fetch(`${cfg.url}/auth/v1/${path}`, { method: 'POST', headers: { apikey: cfg.key, 'content-type': 'application/json' }, body: JSON.stringify(body) });
     const out = await r.json().catch(() => ({}));
@@ -51,7 +57,7 @@
         // Sem internet (fetch falhou): mantém a sessão guardada e tenta de novo depois.
         if (err instanceof TypeError) return null;
         // Outra aba pode ter renovado antes (o Supabase só aceita cada refresh uma vez): usa a dela.
-        let other = null; try { other = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch {}
+        let other = null; try { other = JSON.parse(store?.getItem(KEY) || 'null'); } catch {}
         if (other && other.refresh !== session.refresh && Date.now() < other.until) { session = other; return session.access; }
         save(null); return null;
       }
@@ -73,6 +79,7 @@
 
   // ---------- telas ----------
   function show(which) {
+    if (which === 'login' && $('adm-login').hidden) loginMode(LOCAL ? 'code' : 'pass');
     $('adm-login').hidden = which !== 'login';
     $('adm-denied').hidden = which !== 'denied';
     $('adm-shell').hidden = which !== 'shell';
@@ -83,9 +90,36 @@
   const toast = (text, tone = 'ok') => { status($('adm-status'), text, tone); clearTimeout(toastTimer); toastTimer = setTimeout(() => status($('adm-status'), ''), 4000); };
   const fail = err => toast(err.message, 'erro');
 
-  // Entrar: o e-mail recebe um código (o mesmo do app); a conta já tem que existir. O e-mail fica lembrado
-  // neste aparelho para a próxima vez (o arquivo publicado não traz e-mail nenhum).
-  try { $('adm-email-input').value = localStorage.getItem(EMAIL_KEY) || ''; } catch {}
+  // O e-mail fica lembrado neste aparelho para a próxima vez (o arquivo publicado não traz e-mail nenhum).
+  const lastEmail = () => { try { return localStorage.getItem(EMAIL_KEY) || ''; } catch { return ''; } };
+  const rememberEmail = e => { try { localStorage.setItem(EMAIL_KEY, e); } catch {} };
+  function loginMode(mode) {
+    const pass = mode === 'pass';
+    $('adm-pass').hidden = !pass; $('adm-email').hidden = pass; $('adm-code').hidden = true;
+    $('adm-use-pass').hidden = pass || LOCAL;
+    $('adm-pass-email').value = $('adm-email-input').value = lastEmail();
+    $('adm-login-lead').textContent = pass ? 'Entre com o e-mail e a senha do painel.'
+      : LOCAL ? 'Só desta vez: mandamos um código para o e-mail da sua conta dos Bots. Depois o painel abre direto neste Mac.'
+      : 'Mandamos um código para o e-mail da sua conta dos Bots.';
+    status($('adm-login-status'), '');
+    setTimeout(() => (pass ? ($('adm-pass-email').value ? $('adm-pass-input') : $('adm-pass-email')) : $('adm-email-input')).focus(), 0);
+  }
+  $('adm-use-code').addEventListener('click', () => loginMode('code'));
+  $('adm-use-pass').addEventListener('click', () => loginMode('pass'));
+  $('adm-pass').addEventListener('submit', async e => {
+    e.preventDefault();
+    const em = $('adm-pass-email').value.trim();
+    status($('adm-login-status'), 'Conferindo…');
+    try {
+      keep(await auth('token?grant_type=password', { email: em, password: $('adm-pass-input').value }));
+      $('adm-pass-input').value = ''; rememberEmail(em); status($('adm-login-status'), '');
+      start();
+    } catch (err) {
+      status($('adm-login-status'), /invalid/i.test(err.message) ? 'E-mail ou senha não conferem. Se ainda não criou a senha, crie em "Senha do painel" no painel do Mac.' : err.message, 'erro');
+    }
+  });
+
+  // Entrar com código: o e-mail recebe um código (o mesmo do app); a conta já tem que existir.
   let email = '';
   $('adm-email').addEventListener('submit', async e => {
     e.preventDefault();
@@ -102,7 +136,7 @@
     status($('adm-login-status'), 'Conferindo…');
     try {
       keep(await auth('verify', { type: 'email', email, token: $('adm-code-input').value.replace(/\s/g, '') }));
-      try { localStorage.setItem(EMAIL_KEY, email); } catch {}
+      rememberEmail(email);
       status($('adm-login-status'), '');
       start();
     } catch (err) { status($('adm-login-status'), /expired|invalid/i.test(err.message) ? 'Esse código expirou ou não confere. Peça outro.' : err.message, 'erro'); }
@@ -561,6 +595,25 @@
   });
 
   // ---------- começar ----------
+  // Senha do painel: muda a senha da conta no Supabase (PUT /auth/v1/user) com a sessão aberta.
+  const passDlg = $('adm-pass-dlg'), passForm = $('adm-pass-form');
+  $('adm-set-pass').addEventListener('click', () => { passForm.reset(); status($('adm-pass-status'), ''); passDlg.showModal(); passForm.pass.focus(); });
+  passDlg.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => passDlg.close()));
+  passForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (passForm.pass.value !== passForm.again.value) return status($('adm-pass-status'), 'As duas senhas não são iguais.', 'erro');
+    status($('adm-pass-status'), 'Salvando…');
+    try {
+      const t = await token(); if (!t) throw new Error('A sessão acabou. Entre de novo.');
+      const r = await fetch(`${cfg.url}/auth/v1/user`, { method: 'PUT', headers: { apikey: cfg.key, authorization: `Bearer ${t}`, 'content-type': 'application/json' }, body: JSON.stringify({ password: passForm.pass.value }) });
+      const out = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(/reauth/i.test(`${out.msg} ${out.error_code}`) ? 'Por segurança, saia e entre de novo com o código do e-mail antes de trocar a senha.'
+        : /weak|short|characters/i.test(`${out.msg} ${out.error_code}`) ? 'Essa senha é fraca demais. Use 12 caracteres ou mais, misturando letras e números.' : out.msg || out.message || 'Não deu para salvar a senha.');
+      if (session?.email) rememberEmail(session.email);
+      passDlg.close(); toast('Senha salva. No celular, o painel pede esta senha.');
+    } catch (err) { status($('adm-pass-status'), err.message, 'erro'); }
+  });
+
   async function start() {
     if (!cfg) { show('login'); status($('adm-login-status'), 'Falta a configuração do Supabase (supabase.js).', 'erro'); return; }
     if (!(await token()) && !session) return show('login');
@@ -572,7 +625,8 @@
     } catch (err) { if (session) { show('shell'); fail(err); } else { show('login'); status($('adm-login-status'), err.message, 'erro'); } }
   }
   start();
-  // O painel fica aberto neste aparelho: renova a sessão antes de vencer, mesmo com a aba parada, para nunca pedir o código de novo.
+  // Renova a sessão antes de vencer, mesmo com a aba parada: neste Mac o painel nunca pede o código de novo,
+  // e no celular não pede a senha no meio do uso.
   setInterval(() => { if (session) token().catch(() => {}); }, 10 * 60 * 1000);
   document.addEventListener('visibilitychange', () => { if (!document.hidden && session) token().catch(() => {}); });
 })();
