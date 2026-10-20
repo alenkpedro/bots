@@ -469,8 +469,14 @@
     $('person-avatar').outerHTML = avatar(p, true).replace('class="avatar', 'id="person-avatar" class="avatar');
     $('t-pessoa').textContent = personName(p);
     $('person-sub').innerHTML = `${personName(p) !== a.email ? `${esc(a.email)} · ` : ''}<span class="pill" data-st="${a.status}">${label[a.status] || a.status}</span>`;
+    // Recursos ligados só para esta pessoa (migração 40): plugins primeiro.
+    let features = [];
+    try { features = (await api(`access?user_id=eq.${id}&select=features`))?.[0]?.features || []; } catch { features = null; }
+    if (personId !== id) return;
+    const plugins = features?.includes('plugins');
     $('person-act').innerHTML = (a.status === 'approved' ? '' : `<button type="button" class="button button--small" data-decide="approved">Aprovar</button>`)
-      + (a.status === 'denied' ? '' : `<button type="button" class="button button--small button--quiet" data-decide="denied">${a.status === 'approved' ? 'Tirar o acesso' : 'Recusar'}</button>`);
+      + (a.status === 'denied' ? '' : `<button type="button" class="button button--small button--quiet" data-decide="denied">${a.status === 'approved' ? 'Tirar o acesso' : 'Recusar'}</button>`)
+      + (features === null ? '' : `<button type="button" class="button button--small ${plugins ? 'button--quiet' : ''}" data-feature="plugins" data-on="${plugins ? '0' : '1'}">${plugins ? 'Desligar plugins' : 'Liberar plugins'}</button>`);
 
     const tile = (label, value, note = '') => `<div class="kpi"><span>${label}</span><b>${value}</b>${note ? `<small>${note}</small>` : ''}</div>`;
     $('person-kpis').innerHTML = [
@@ -527,6 +533,17 @@
       <small>${f.k} · ${ago(f.created_at)}${f.app_version ? ` · ${esc(f.app_version)}` : ''}${f.logs ? ` · <button type="button" class="adm-link" data-logs="${f.id}">Ver registros</button>` : ''}</small></li>`).join('') || empty('Ainda não mandou nada.');
   }
   $('person-act').addEventListener('click', async e => {
+    const f = e.target.closest('[data-feature]');
+    if (f && personId) {
+      try {
+        const now = (await api(`access?user_id=eq.${personId}&select=features`))?.[0]?.features || [];
+        const next = f.dataset.on === '1' ? [...new Set([...now, f.dataset.feature])] : now.filter(x => x !== f.dataset.feature);
+        await api(`access?user_id=eq.${personId}`, { method: 'PATCH', body: { features: next } });
+        toast(f.dataset.on === '1' ? 'Plugins liberados. Aparecem no Mac dessa pessoa na próxima vez que o app abrir.' : 'Plugins desligados.');
+        await renderPerson(personId);
+      } catch (err) { fail(err); }
+      return;
+    }
     const b = e.target.closest('[data-decide]'); if (!b || !personId) return;
     const st = b.dataset.decide;
     if (st === 'denied' && !confirm('Tirar o acesso desta pessoa? Ela para de usar os Bots até você aprovar de novo.')) return;
@@ -635,6 +652,14 @@
   // Ideias e feedback: uma caixa de entrada com filtro por tipo e situação.
   let inboxKind = 'feedback', inboxStatus = 'new';
   async function renderInbox() { await Promise.all([loadInbox(), people.length ? null : loadPeople()]); drawInbox(); }
+  /** An idea's text as the public roadmap may show it: no "[Vera · …]" tag, no owner/effort notes. */
+  function publicText(body) {
+    return body
+      .replace(/^\s*\[[^\]]*\]\s*/, '')
+      .replace(/\s*(Ideia nova\.|Donos? (prov[aá]vel|provável)?:[^.]*\.|Donos?:[^.]*\.|Esfor[cç]o:[^.]*\.?|Precisa de [^.]*\(pedido d[ao] [^)]*\)\.?)/gi, '')
+      .replace(/\s{2,}/g, ' ').trim();
+  }
+
   function drawInbox() {
     const q = $('inbox-search').value.trim().toLowerCase();
     document.querySelectorAll('#inbox-kind button').forEach(b => {
@@ -657,12 +682,36 @@
       : `<li class="inbox__item" data-fb="${x.id}">
           <p>${esc(x.body)}</p>
           <small>${from(x)}${device(x) ? ` · ${device(x)}` : ''}${x.app_version ? ` · ${esc(x.app_version)}` : ''}${x.os_version ? ` · ${esc(x.os_version)}` : ''} · ${ago(x.created_at)}</small>
+          ${x.screenshot_path ? `<a class="inbox__shot" data-shot="${esc(x.screenshot_path)}" target="_blank" rel="noopener" aria-label="Abrir a captura da tela"><img alt="Captura da tela de quando o problema foi relatado"></a>` : ''}
           <div class="inbox__acts">
             ${x.logs ? '<button type="button" class="button button--small button--quiet" data-logs>Ver registros</button>' : ''}
             <label class="sr-only" for="st-${x.id}">Situação</label>
             <select id="st-${x.id}" data-status><option value="new"${x.status === 'new' ? ' selected' : ''}>Novo</option><option value="read"${x.status === 'read' ? ' selected' : ''}>Lido</option><option value="done"${x.status === 'done' ? ' selected' : ''}>Resolvido</option></select>
           </div>
         </li>`).join('') || `<li class="adm-empty">${inboxStatus === 'new' ? 'Nada novo por aqui.' : 'Nada por aqui.'}</li>`;
+    loadShots();
+  }
+  // As capturas do "Relatar um problema" (iPhone) ficam no bucket privado "uploads": a imagem vem com a
+  // sessão do admin (migração 43 deixa o admin ler só as pastas feedback/) e fica guardada como blob.
+  const shots = new Map();
+  async function shotURL(path) {
+    if (!shots.has(path)) shots.set(path, (async () => {
+      const t = await token();
+      const r = await fetch(`${cfg.url}/storage/v1/object/authenticated/uploads/${path.split('/').map(encodeURIComponent).join('/')}`, { headers: { apikey: cfg.key, authorization: `Bearer ${t}` } });
+      if (!r.ok) throw new Error('sem captura');
+      return URL.createObjectURL(await r.blob());
+    })().catch(err => { shots.delete(path); throw err; }));
+    return shots.get(path);
+  }
+  function loadShots() {
+    document.querySelectorAll('#inbox [data-shot]').forEach(async a => {
+      try { const u = await shotURL(a.dataset.shot); a.href = u; a.querySelector('img').src = u; }
+      catch { a.replaceWith(Object.assign(document.createElement('small'), { className: 'inbox__noshot', textContent: 'A captura não abriu.' })); }
+    });
+  }
+  async function removeShot(path) {
+    if (!path) return;
+    try { const t = await token(); await fetch(`${cfg.url}/storage/v1/object/uploads/${path.split('/').map(encodeURIComponent).join('/')}`, { method: 'DELETE', headers: { apikey: cfg.key, authorization: `Bearer ${t}` } }); } catch {}
   }
   $('inbox-kind').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { inboxKind = b.dataset.k; drawInbox(); } });
   $('inbox-status').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { inboxStatus = b.dataset.st; drawInbox(); } });
@@ -672,8 +721,12 @@
     if (ideaEl) {
       const idea = ideas.find(i => i.id === ideaEl.dataset.idea);
       if (e.target.closest('[data-accept]')) {
-        const first = idea.body.split(/[.!?\n]/)[0].trim();
-        openEditor({ stage: 'next', title: first.slice(0, 120), summary: idea.body.slice(0, 400), body: idea.body, platforms: 'Mac e iPhone', published: true }, idea);
+        // The roadmap is public: the card starts from the idea without Vera's tag ("[Vera · equipe ·
+        // Rui · 20/10]") and without the team's notes (owner, effort, "Ideia nova."), which only make
+        // sense in here. Pedro, 20/10: cards should read like the others; rewrite the title anyway.
+        const text = publicText(idea.body);
+        const first = text.replace(/^(bug|ideia|sugestão|pedido):\s*/i, '').split(/(?<=[.!?])\s|\n|: /)[0].replace(/[.:]$/, '').trim();
+        openEditor({ stage: 'next', title: first.slice(0, 120), summary: text.slice(0, 400), body: text, platforms: 'Mac e iPhone', published: true }, idea);
       }
       if (e.target.closest('[data-decline]')) {
         try { await api(`roadmap_ideas?id=eq.${idea.id}`, { method: 'PATCH', body: { status: 'declined' } }); toast('Ideia recusada.'); await renderInbox(); } catch (err) { fail(err); }
@@ -947,8 +1000,8 @@
         f.user_id && who(f.user_id) && { label: 'Abrir quem mandou', run: () => { location.hash = `pessoa/${f.user_id}`; } },
         { label: 'Copiar o texto', run: () => copy(f.body, 'Texto copiado.') },
         { label: 'Apagar', danger: true, run: async () => {
-          if (!confirm('Apagar este feedback (e os registros que vieram com ele)?')) return;
-          try { await api(`feedback?id=eq.${f.id}`, { method: 'DELETE' }); toast('Feedback apagado.'); await loadInbox(); drawInbox(); } catch (err) { fail(err); }
+          if (!confirm(f.screenshot_path ? 'Apagar este feedback (e os registros e a captura que vieram com ele)?' : 'Apagar este feedback (e os registros que vieram com ele)?')) return;
+          try { await api(`feedback?id=eq.${f.id}`, { method: 'DELETE' }); await removeShot(f.screenshot_path); toast('Feedback apagado.'); await loadInbox(); drawInbox(); } catch (err) { fail(err); }
         } },
       ] };
     }],
