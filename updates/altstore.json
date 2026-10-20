@@ -17,15 +17,25 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "0.9.10",
-          "date": "2026-10-19",
-          "localizedDescription": "Falar com o Bot pelo Botão de Ação, perfil do Bot novo, silenciar um Bot, pastas mais fáceis, ligação mais rápida em casa, letra nova e tela de carregamento com o Bot.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v0.9.10/Bots.ipa",
-          "size": 14800137,
+          "version": "1.0.0",
+          "date": "2026-10-20",
+          "localizedDescription": "🎉 Bots 1.0! Grupos e equipes viram Equipes e responde quem faz sentido, o Bot avisa quando termina, a conversa ganhou fixar, buscar, editar e PDF, atalhos novos no Botão de Ação, várias contas do Google e muito mais.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.0.0/Bots.ipa",
+          "size": 15189931,
           "minOSVersion": "18.0"
         }
       ]
     }
   ],
-  "news": []
+  "news": [
+    {
+      "title": "Bots 1.0 chegou 🎉",
+      "identifier": "bots-1.0.0",
+      "caption": "🎉 Bots 1.0! Grupos e equipes viram Equipes e responde quem faz sentido, o Bot avisa quando termina, a conversa ganhou fixar, buscar, editar e PDF, atalhos novos no Botão de Ação, várias contas do Google e muito mais.",
+      "date": "2026-10-20",
+      "tintColor": "2F6FE4",
+      "appID": "com.pedroalencar.botclone.ios",
+      "notify": true
+    }
+  ]
 }

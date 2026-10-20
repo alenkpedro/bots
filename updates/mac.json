@@ -1,11 +1,11 @@
 {
-  "version": "0.9.10",
-  "build": 54,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v0.9.10/Bots-mac.zip",
-  "signature": "MM7ubGVH5nWkihydA1JvBadIvPdxtTESlEiOOcpBPVgP8MiT6O1Sjx7whtUjzxjDM56jvbNT8GOgVRoNVRuKAQ==",
-  "notes": "Falar com o Bot pelo Botão de Ação, perfil do Bot novo, silenciar um Bot, pastas mais fáceis, ligação mais rápida em casa, letra nova e tela de carregamento com o Bot.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v0.9.10/Bots-mac-arm64.zip",
-  "signature_arm64": "U/VEOsxMLPDDZRPMDYBLBKor1pGlCVuk8OJYLO1w4uIOQV+z6QgPVXzcFmvLj+Q3mrQEVQcXEyoVZpNUlAuPCw==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v0.9.10/Bots-mac-x86_64.zip",
-  "signature_x86_64": "Nh7sWSuxhX7fzLFM0IjLn0fKEf+pspIomjJ0xsCz4LwdK1u0tsSf4yfRTOXjWrUJPdromE3a8MQPF9USnzWIDA=="
+  "version": "1.0.0",
+  "build": 55,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v1.0.0/Bots-mac.zip",
+  "signature": "H8yjOvuFSIJ2z+t8VJuWnzBxR32CfJe79UOLhlNij4mmV6Q22pxlaILGhy4QR49sOQGygEszVa3tZbav3Hw9Bw==",
+  "notes": "🎉 Bots 1.0! Grupos e equipes viram Equipes e responde quem faz sentido, o Bot avisa quando termina, a conversa ganhou fixar, buscar, editar e PDF, atalhos novos no Botão de Ação, várias contas do Google e muito mais.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.0.0/Bots-mac-arm64.zip",
+  "signature_arm64": "XS2haRBdVICWHIl3TZMX5P8wk+vJCRYqB+PN+ZI1m0lCHAjf6+bnfrU+/LRe+l95gJd16NePFNqz0IJONXAICQ==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.0.0/Bots-mac-x86_64.zip",
+  "signature_x86_64": "hXJT8y5l52/T2YNUBzl2AxmDOFnXoX2z4v/HyZanRkM+4/S3xUEnNX1AvWjF4Q3dbh/3NGFy18q6GrKolt/bCQ=="
 }
