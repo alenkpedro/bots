@@ -1,7 +1,7 @@
 {
-  "built_at": 1792511702,
-  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1792511702/botd-1792511702.tar.gz",
-  "signature": "4VsbUcPJlWwYg18fd+kvVIQFjDbQVlYihmPPENmPCVKqlqbzqzNSIMC1ni39eEo0RIqVfLjiP5BsdkpVTJZPDg==",
+  "built_at": 1792521377,
+  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1792521377/botd-1792521377.tar.gz",
+  "signature": "tpOcEWgKVRA2BWp+DdY/Th0XO+jIjw8l3BFR0jp1i6nT9394dEnRxSiiWIN/69mVKcc9IakClydT+pjGWqxsBg==",
   "lock": "7b54654ad70ed12fa6f97a9a0edba32c0969161ec7d1096c4c1d5aa54482073f",
-  "notes": "Voz: os áudios dos Bots passam a sair no Voxtral (Mistral), o português mais natural; nas ligações, Lia e Caio usam o Voxtral sozinhos em Macs rápidos o bastante"
+  "notes": "Bots gastam menos em tarefas longas: a conversa é resumida ao passar de 200 mil tokens, também no meio da tarefa."
 }
