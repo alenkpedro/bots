@@ -1,11 +1,11 @@
 {
-  "version": "1.0.1",
-  "build": 56,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v1.0.1/Bots-mac.zip",
-  "signature": "ZIFiwoj6XutfJjXoEe9fCjjbpyfr7aKWq4WKONkZxoRr8URFH1efq5/kLCnWUX1gBdvK+0G5yolf9J2NaiHsBg==",
-  "notes": "Os Bots usam os apps do seu Mac, cada Bot com o próprio navegador, notificações com botões, apps que não conectavam (Mercado Livre, Stripe, Zapier…) voltaram, conversas antigas de volta e menos gasto: sessões longas recomeçam resumidas e as mensagens não duplicam mais.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.0.1/Bots-mac-arm64.zip",
-  "signature_arm64": "yZ66nOL5eDnU0ldmWC8GopAG9U0cuwjclyVo5vDFIYHoz1rcrWWBi1diLhVfKgo2jYVF5+VEb//3MtHRFx//Bw==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.0.1/Bots-mac-x86_64.zip",
-  "signature_x86_64": "qrBzZGiPT+Sj14lDE4xh31lRJfTECyCuVQHzYZIq3x3LI6c0l/Iza8jKwkZzZ4kRNjHW7Gy5fIM8PN3UBdagCA=="
+  "version": "1.0.2",
+  "build": 57,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v1.0.2/Bots-mac.zip",
+  "signature": "gzbYIoo7jpHKRkLfDOuWJX5MLZK5IuwUEuXsdEiPfVec1S/bdjK6fjX/kBczC0y5SnjHflwR+5jXg8NE87OpBw==",
+  "notes": "Bots mais rápidos no computador, computador dos Bots que dorme quando ninguém usa, tela do Bot mais simples, voz Voxtral nos áudios e sem limite de Bots.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.0.2/Bots-mac-arm64.zip",
+  "signature_arm64": "pcBM7BlvyRsjvoFOLsSlNup19/4SNMmuEVhNIQRoSr2IxtNN+86jjWL8Oj/oar/3ElcaWUCz7R1c78dNcb8UBw==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.0.2/Bots-mac-x86_64.zip",
+  "signature_x86_64": "25qs4JgeheHRaQturvyAS5dd5CNbPa4qXqspxmJhwMoLXV0ppVgnCu1C45V8rF5oAI2OQsJOVoBXCX2T8mYWCw=="
 }
