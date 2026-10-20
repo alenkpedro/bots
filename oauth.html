@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Voltando ao Bots</title>
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<!-- Where an app's login comes back when it only takes https (botd: McpOAuth.returnPage). It passes the
+     answer on, untouched: to the Bots on this Mac (state "p<port>.…": its 127.0.0.1) or to the iPhone app. -->
+<main class="doc" style="min-height:80vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center">
+  <h1>Voltando ao Bots…</h1>
+  <p><a id="back" href="#">Toque aqui se não voltar sozinho</a></p>
+</main>
+<script>
+  const q = location.search;
+  const state = new URLSearchParams(q).get('state') || '';
+  const port = /^p(\d{2,5})\./.exec(state);
+  const to = port ? `http://127.0.0.1:${port[1]}/callback${q}` : `bots-app://mcp-callback${q}`;
+  document.getElementById('back').href = to;
+  location.replace(to);
+</script>
+</body>
+</html>

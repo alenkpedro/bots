@@ -17,25 +17,15 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "1.0.0",
+          "version": "1.0.1",
           "date": "2026-10-20",
-          "localizedDescription": "🎉 Bots 1.0! Grupos e equipes viram Equipes e responde quem faz sentido, o Bot avisa quando termina, a conversa ganhou fixar, buscar, editar e PDF, atalhos novos no Botão de Ação, várias contas do Google e muito mais.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.0.0/Bots.ipa",
-          "size": 15189931,
+          "localizedDescription": "Os Bots usam os apps do seu Mac, cada Bot com o próprio navegador, notificações com botões, apps que não conectavam (Mercado Livre, Stripe, Zapier…) voltaram, conversas antigas de volta e menos gasto: sessões longas recomeçam resumidas e as mensagens não duplicam mais.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.0.1/Bots.ipa",
+          "size": 15275799,
           "minOSVersion": "18.0"
         }
       ]
     }
   ],
-  "news": [
-    {
-      "title": "Bots 1.0 chegou 🎉",
-      "identifier": "bots-1.0.0",
-      "caption": "🎉 Bots 1.0! Grupos e equipes viram Equipes e responde quem faz sentido, o Bot avisa quando termina, a conversa ganhou fixar, buscar, editar e PDF, atalhos novos no Botão de Ação, várias contas do Google e muito mais.",
-      "date": "2026-10-20",
-      "tintColor": "2F6FE4",
-      "appID": "com.pedroalencar.botclone.ios",
-      "notify": true
-    }
-  ]
+  "news": []
 }
