@@ -447,8 +447,7 @@ p { text-wrap: pretty; }
 @keyframes pop { from { transform: scale(0); } }
 @keyframes flash { from { background: rgb(74 222 128 / 0.22); color: #fff; } }
 @media (max-width: 700px) { .doc .card { grid-template-columns: 1fr; } .doc .card .button--big { width: 100%; } }
-.stores { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
-@media (max-width: 900px) { .stores { grid-template-columns: 1fr 1fr; } }
+.stores { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 .stores .button { width: 100%; white-space: normal; text-align: center; }
 @media (max-width: 420px) { .stores { grid-template-columns: 1fr; } }
 /* Central de ajuda: os tópicos ficam fixos ao lado do texto. */
