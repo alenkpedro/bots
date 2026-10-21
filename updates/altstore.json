@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "1.0.4",
+          "version": "1.0.5",
           "date": "2026-10-21",
-          "localizedDescription": "Corrige o app do iPhone que fechava ao abrir na 1.0.3; pedidos de aprovação com os detalhes inteiros e sem parar comandos que só leem como se fossem pagamento.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.0.4/Bots.ipa",
-          "size": 16118720,
+          "localizedDescription": "Bots prontos, sete vozes novas nas ligações, pausar um Bot e ver a fila, os Bots no recorte da tela, entrar no iPhone pelo QR do Mac, rotinas acordadas pelo Stripe e outros serviços, avisos de atualização dos motores, Ajustes mais simples e contas novas já cifradas.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.0.5/Bots.ipa",
+          "size": 16229580,
           "minOSVersion": "18.0"
         }
       ]

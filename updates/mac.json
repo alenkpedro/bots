@@ -1,11 +1,11 @@
 {
-  "version": "1.0.4",
-  "build": 63,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v1.0.4/Bots-mac.zip",
-  "signature": "jboSgAjbua+wPLLXMBVOekYCjawwHQERT1JaSJMYwsiULBy3GSnVWq3AEvKaOmrjQSXXOyHYFg1kykHsPbKgDw==",
-  "notes": "Corrige o app do iPhone que fechava ao abrir na 1.0.3; pedidos de aprovação com os detalhes inteiros e sem parar comandos que só leem como se fossem pagamento.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.0.4/Bots-mac-arm64.zip",
-  "signature_arm64": "/w3AQgPqBAgW4lzwQVIzmwio8mNSaI5Wn0PX4dT3W5cNxIK9HfAxK+kO4TFHg+64J6fyqcd4SscnrAErk6hMAQ==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.0.4/Bots-mac-x86_64.zip",
-  "signature_x86_64": "FkUzPLYnE1SzldK8mQfwqk8K9jSU/N4bP6W+HPdkoa0yBetHvbPL9J2V3EHZ0MQ8NHfXW0GW6hKZkjs3MCg+Cg=="
+  "version": "1.0.5",
+  "build": 64,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v1.0.5/Bots-mac.zip",
+  "signature": "5I/8pCZti1X+d6YAQiZQd0zdTTtlRLyeoomDxMBS24ygjh4CKteFmoijf7oOpmiZKsxgWhA6vEk6c/nUrZ6JDQ==",
+  "notes": "Bots prontos, sete vozes novas nas ligações, pausar um Bot e ver a fila, os Bots no recorte da tela, entrar no iPhone pelo QR do Mac, rotinas acordadas pelo Stripe e outros serviços, avisos de atualização dos motores, Ajustes mais simples e contas novas já cifradas.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.0.5/Bots-mac-arm64.zip",
+  "signature_arm64": "ET053IsDjnhOYH10tr43iO+OXS5L/dUhc7P17kbvPZjJ8k1u/eG+hy8p05xrnlhv9cEXZ9CME5QNwpzISMHmBQ==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.0.5/Bots-mac-x86_64.zip",
+  "signature_x86_64": "/fWRT8AOEJIyp8sanmdEd1C3lFDbgAw8ju0cV/sAOnWqU2t/YuVeeQ3P5B9GefwLdNVD7P5J5RyuRDTvKNwEDw=="
 }
