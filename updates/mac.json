@@ -1,11 +1,11 @@
 {
-  "version": "1.0.3",
-  "build": 62,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v1.0.3/Bots-mac.zip",
-  "signature": "8uD1maOWDMM2G1LVg4xolXzLd1eLBIez6H2dC/TKi67FQii6u683i54EWQ9EtLr9luQ1DpirUzVXgqyJTWu6BQ==",
-  "notes": "Bots na nuvem (experimental), app abrindo bem mais rápido, painel do Bot e Ajustes mais limpos, histórico de versões com os bugs corrigidos, cada Bot com a sua tela, aprovar respostas num cartão e mais.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.0.3/Bots-mac-arm64.zip",
-  "signature_arm64": "ThCmJxXgB5t3le9Tr9TflXtGpvTPOLv4/pVmJ0TzY3UfggdyD2+LXDsVYgB8K1EjXxKlX0+7cmqzjKYPgwpaAg==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.0.3/Bots-mac-x86_64.zip",
-  "signature_x86_64": "KionHprpBR8Y9OkILMkTFcugc/j2/14hrmd5GHkPLSVsaOqcYySBLZaL9wQODLznzuTL3BLkLBZKLuOFlioDCA=="
+  "version": "1.0.4",
+  "build": 63,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v1.0.4/Bots-mac.zip",
+  "signature": "jboSgAjbua+wPLLXMBVOekYCjawwHQERT1JaSJMYwsiULBy3GSnVWq3AEvKaOmrjQSXXOyHYFg1kykHsPbKgDw==",
+  "notes": "Corrige o app do iPhone que fechava ao abrir na 1.0.3; pedidos de aprovação com os detalhes inteiros e sem parar comandos que só leem como se fossem pagamento.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.0.4/Bots-mac-arm64.zip",
+  "signature_arm64": "/w3AQgPqBAgW4lzwQVIzmwio8mNSaI5Wn0PX4dT3W5cNxIK9HfAxK+kO4TFHg+64J6fyqcd4SscnrAErk6hMAQ==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.0.4/Bots-mac-x86_64.zip",
+  "signature_x86_64": "FkUzPLYnE1SzldK8mQfwqk8K9jSU/N4bP6W+HPdkoa0yBetHvbPL9J2V3EHZ0MQ8NHfXW0GW6hKZkjs3MCg+Cg=="
 }

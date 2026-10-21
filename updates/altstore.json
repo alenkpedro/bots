@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "1.0.3",
+          "version": "1.0.4",
           "date": "2026-10-21",
-          "localizedDescription": "Bots na nuvem (experimental), app abrindo bem mais rápido, painel do Bot e Ajustes mais limpos, histórico de versões com os bugs corrigidos, cada Bot com a sua tela, aprovar respostas num cartão e mais.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.0.3/Bots.ipa",
-          "size": 16100875,
+          "localizedDescription": "Corrige o app do iPhone que fechava ao abrir na 1.0.3; pedidos de aprovação com os detalhes inteiros e sem parar comandos que só leem como se fossem pagamento.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.0.4/Bots.ipa",
+          "size": 16118720,
           "minOSVersion": "18.0"
         }
       ]
