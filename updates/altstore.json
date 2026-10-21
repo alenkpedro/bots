@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "1.0.2",
-          "date": "2026-10-20",
-          "localizedDescription": "Bots mais rápidos no computador, computador dos Bots que dorme quando ninguém usa, tela do Bot mais simples, voz Voxtral nos áudios e sem limite de Bots.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.0.2/Bots.ipa",
-          "size": 15276283,
+          "version": "1.0.3",
+          "date": "2026-10-21",
+          "localizedDescription": "Bots na nuvem (experimental), app abrindo bem mais rápido, painel do Bot e Ajustes mais limpos, histórico de versões com os bugs corrigidos, cada Bot com a sua tela, aprovar respostas num cartão e mais.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.0.3/Bots.ipa",
+          "size": 16100875,
           "minOSVersion": "18.0"
         }
       ]

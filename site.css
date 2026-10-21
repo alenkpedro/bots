@@ -1044,6 +1044,9 @@ p { text-wrap: pretty; }
 .inbox__item p { white-space: pre-wrap; }
 .inbox__item small { grid-column: 1; color: var(--soft); font-size: 0.8125rem; }
 .inbox__item small a { color: var(--link); }
+.inbox__shot { grid-column: 1; justify-self: start; display: block; margin-top: 0.4rem; }
+.inbox__shot img { display: block; height: 180px; min-width: 83px; border-radius: 12px; border: 1px solid rgba(127, 127, 127, 0.25); background: var(--bg); }
+.inbox__noshot { grid-column: 1; color: var(--soft); font-size: 0.8125rem; }
 .inbox__acts { grid-column: 2; grid-row: 1 / span 2; display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; justify-content: flex-end; }
 .inbox select { width: auto; padding: 0.45rem 0.7rem; }
 @media (max-width: 700px) { .inbox__item { grid-template-columns: 1fr; } .inbox__acts { grid-column: 1; grid-row: auto; justify-content: flex-start; } }
