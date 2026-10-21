@@ -469,14 +469,17 @@
     $('person-avatar').outerHTML = avatar(p, true).replace('class="avatar', 'id="person-avatar" class="avatar');
     $('t-pessoa').textContent = personName(p);
     $('person-sub').innerHTML = `${personName(p) !== a.email ? `${esc(a.email)} · ` : ''}<span class="pill" data-st="${a.status}">${label[a.status] || a.status}</span>`;
-    // Recursos ligados só para esta pessoa (migração 40): plugins primeiro.
+    // Recursos ligados só para esta pessoa (migração 40): plugins e Bots na nuvem.
     let features = [];
     try { features = (await api(`access?user_id=eq.${id}&select=features`))?.[0]?.features || []; } catch { features = null; }
     if (personId !== id) return;
-    const plugins = features?.includes('plugins');
+    const feature = (key, name) => {
+      const on = features.includes(key);
+      return `<button type="button" class="button button--small ${on ? 'button--quiet' : ''}" data-feature="${key}" data-on="${on ? '0' : '1'}">${on ? 'Desligar' : 'Liberar'} ${name}</button>`;
+    };
     $('person-act').innerHTML = (a.status === 'approved' ? '' : `<button type="button" class="button button--small" data-decide="approved">Aprovar</button>`)
       + (a.status === 'denied' ? '' : `<button type="button" class="button button--small button--quiet" data-decide="denied">${a.status === 'approved' ? 'Tirar o acesso' : 'Recusar'}</button>`)
-      + (features === null ? '' : `<button type="button" class="button button--small ${plugins ? 'button--quiet' : ''}" data-feature="plugins" data-on="${plugins ? '0' : '1'}">${plugins ? 'Desligar plugins' : 'Liberar plugins'}</button>`);
+      + (features === null ? '' : feature('plugins', 'plugins') + feature('nuvem', 'nuvem'));
 
     const tile = (label, value, note = '') => `<div class="kpi"><span>${label}</span><b>${value}</b>${note ? `<small>${note}</small>` : ''}</div>`;
     $('person-kpis').innerHTML = [
@@ -539,7 +542,8 @@
         const now = (await api(`access?user_id=eq.${personId}&select=features`))?.[0]?.features || [];
         const next = f.dataset.on === '1' ? [...new Set([...now, f.dataset.feature])] : now.filter(x => x !== f.dataset.feature);
         await api(`access?user_id=eq.${personId}`, { method: 'PATCH', body: { features: next } });
-        toast(f.dataset.on === '1' ? 'Plugins liberados. Aparecem no Mac dessa pessoa na próxima vez que o app abrir.' : 'Plugins desligados.');
+        const [on, off] = { plugins: ['Plugins liberados', 'Plugins desligados'], nuvem: ['Bots na nuvem liberado', 'Bots na nuvem desligado'] }[f.dataset.feature] || ['Liberado', 'Desligado'];
+        toast(f.dataset.on === '1' ? `${on}. Aparece no Mac dessa pessoa na próxima vez que o app abrir.` : `${off}.`);
         await renderPerson(personId);
       } catch (err) { fail(err); }
       return;

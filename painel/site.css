@@ -434,6 +434,22 @@ p { text-wrap: pretty; }
 /* Na largura toda, o link e o botão de copiar ficam lado a lado, com as lojas embaixo. */
 .doc .card { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
 .doc .card .stores { grid-column: 1 / -1; }
+/* Comparar: a tabela rola de lado no celular (a primeira coluna fica parada) e a coluna do Bots
+   se destaca de leve, sem esconder as outras. */
+.vs { margin-top: 2.5rem; overflow-x: auto; border-radius: var(--radius); background: var(--surface); }
+.vs:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.vs table { width: 100%; min-width: 760px; border-collapse: collapse; font-size: 0.9375rem; line-height: 1.45; }
+.vs th, .vs td { padding: 0.95rem 1.1rem; text-align: left; vertical-align: top; color: #d4d4d8; }
+.vs thead th { color: var(--ink); font-size: 1rem; font-weight: 600; padding-top: 1.3rem; }
+.vs tbody th { color: var(--ink); font-weight: 600; width: 15%; position: sticky; left: 0; background: var(--surface); }
+.vs tbody tr + tr > * { border-top: 1px solid var(--surface-3); }
+.vs td { width: 28%; }
+.vs .vs__us { background: var(--surface-2); color: var(--ink); }
+.vs__hint { display: none; }
+@media (max-width: 800px) { .doc .vs__hint { display: block; margin-top: 2rem; } .vs__hint + .vs { margin-top: 0.75rem; } }
+.vs thead .vs__us { color: var(--blue); }
+.doc .card h3 { font-size: 1.25rem; letter-spacing: -0.02em; }
+.doc .card p { margin-top: 0.35rem; color: var(--muted); }
 /* Copiar link da fonte: o botão vira verde com um ✓ que salta, e o link pisca. */
 #copy { transition: background-color var(--t-ui) ease, color var(--t-ui) ease, transform var(--t-press) var(--ease-out); }
 #copy.is-copied { background: var(--go); color: #062a12; }
