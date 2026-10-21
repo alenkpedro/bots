@@ -1,7 +1,7 @@
 {
-  "built_at": 1792593548,
-  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1792593548/botd-1792593548.tar.gz",
-  "signature": "cgQU21aWAEowVQ9/Q9MRP5GGTgBpjDztE4wDRZ3+mqd+ZfZ7Lg2+Gx7WU23NTTxYYGblGD/ipB5hUVw9isNWBw==",
+  "built_at": 1792595270,
+  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1792595270/botd-1792595270.tar.gz",
+  "signature": "wjE9Zl2LeF6k3ywWa74NQQUE+IU8S7HWHSVDIeqshkowCTqEXnQrs2ia7gVfWfa77LhEPvGNgOilNDnArqQnAQ==",
   "lock": "7b54654ad70ed12fa6f97a9a0edba32c0969161ec7d1096c4c1d5aa54482073f",
-  "notes": "Bots escrevem tudo em português, até as notas entre passos, e não mandam print do que o cartão de aprovação já mostra."
+  "notes": "Os Bots tentam de novo duas vezes quando o servidor do cérebro cai ou demora (Antigravity, Claude, Codex), antes de mostrar o erro."
 }
