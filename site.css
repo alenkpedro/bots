@@ -140,9 +140,11 @@ p { text-wrap: pretty; }
 .bar__inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4.25rem; }
 .bar__name { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; font-size: 1.125rem; letter-spacing: -0.02em; text-decoration: none; }
 .bar__name svg { width: 1.75rem; height: 1.75rem; }
-.bar__links { display: flex; align-items: center; gap: clamp(0.75rem, 2vw, 1.75rem); font-size: 0.9375rem; }
-.bar__links a:not(.button) { text-decoration: none; color: var(--muted); transition: color var(--t-hover) ease; }
-.bar__links a:not(.button):hover, .bar__links a[aria-current] { color: var(--ink); }
+/* The links in one pill (easyui's pill navigation): each one a pill of its own on hover, the page you're on lit. */
+.bar__links { display: flex; align-items: center; gap: 0.125rem; font-size: 0.9375rem; padding: 0.3rem; border-radius: 999px; background: rgb(28 28 31 / 0.72); border: 1px solid var(--surface-3); -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4); }
+.bar__links a:not(.button) { text-decoration: none; color: var(--muted); padding: 0.45rem 0.85rem; border-radius: 999px; transition: color var(--t-hover) ease, background-color var(--t-hover) ease; }
+.bar__links a:not(.button):hover, .bar__links a[aria-current] { color: var(--ink); background: var(--surface-3); }
+.bar__links .button { margin-left: 0.25rem; }
 @media (max-width: 760px) { .bar__links .wide { display: none; } }
 
 /* ---------- mascotes (desenhados aqui, como no app) ---------- */
@@ -264,6 +266,30 @@ p { text-wrap: pretty; }
 /* Cartão grande: falar com Bots como se fala com a equipe, e os mascotes à direita. */
 .team { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 2rem; border-radius: var(--radius); background: var(--surface); padding: clamp(2rem, 5vw, 4rem); overflow: hidden; min-height: 26rem; }
 .team p { margin-top: 1rem; color: var(--muted); font-size: 1.125rem; max-width: 30rem; }
+/* Three Bots' cards in a stack that fans out when you point at the section (easyui's stacked cards). */
+.deck { position: relative; min-height: 22rem; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; }
+.deck__card { grid-area: 1 / 1; width: min(22rem, 100%); box-sizing: border-box; display: flex; align-items: center; gap: 0.9rem; padding: 1.1rem 1.25rem; border-radius: 1.5rem; background: var(--surface-2); border: 1px solid var(--surface-3); box-shadow: 0 18px 40px rgb(0 0 0 / 0.35); transition: transform var(--t-reveal) var(--ease-out), background-color var(--t-ui) ease; }
+.deck__card > span { width: 3rem; flex: none; }
+.deck__card svg { width: 100%; height: auto; }
+.deck__card b { display: block; font-weight: 600; letter-spacing: -0.01em; }
+.deck__card > div { min-width: 0; }
+.deck__card small { display: block; color: var(--muted); font-size: 0.9375rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.deck__card small[data-tone="go"] { color: var(--go); }
+.deck__card small[data-tone="wait"] { color: var(--wait); }
+/* At rest a stack, each card behind showing its Bot's name; pointed at, they line up like the app's list. */
+.deck__card:nth-child(1) { transform: translateY(-2.9rem) scale(0.9); background: var(--surface); }
+.deck__card:nth-child(2) { transform: translateY(-1.45rem) scale(0.95); }
+.deck__card:nth-child(3) { transform: translateY(0); z-index: 2; background: var(--surface-3); }
+.team:hover .deck__card:nth-child(1), .team:focus-within .deck__card:nth-child(1) { transform: translateY(-5.6rem); }
+.team:hover .deck__card:nth-child(2), .team:focus-within .deck__card:nth-child(2) { transform: translateY(0); }
+.team:hover .deck__card:nth-child(3), .team:focus-within .deck__card:nth-child(3) { transform: translateY(5.6rem); }
+@media (prefers-reduced-motion: reduce) { .deck__card { transition: none; } }
+/* No pointer to hover with (a phone): the list, open. */
+@media (hover: none) {
+  .deck .deck__card:nth-child(1) { transform: translateY(-5.6rem); }
+  .deck .deck__card:nth-child(2) { transform: translateY(0); }
+  .deck .deck__card:nth-child(3) { transform: translateY(5.6rem); }
+}
 .cast { position: relative; height: 100%; min-height: 18rem; }
 .cast span { position: absolute; }
 .cast svg { width: 100%; height: auto; }
@@ -475,6 +501,21 @@ p { text-wrap: pretty; }
 .doc .help__toc a { display: block; padding: 0.35rem 0; color: var(--muted); text-decoration: none; transition: color var(--t-hover) ease; }
 .doc .help__toc a:hover { color: var(--ink); }
 .help__body > section:first-child h2 { margin-top: 0; }
+/* Each topic opens and closes (easyui's smooth accordion); the list on the left opens the one you pick. */
+.help__body details { border-bottom: 1px solid var(--surface-3); }
+.help__body summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.15rem 0; border-radius: 0.5rem; }
+.help__body summary::-webkit-details-marker { display: none; }
+.help__body summary h2 { margin: 0; }
+.help__body summary::after { content: "+"; flex: none; font-size: 1.5rem; line-height: 1; color: var(--muted); transition: transform var(--t-ui) var(--ease-out), color var(--t-hover) ease; }
+.help__body summary:hover::after { color: var(--ink); }
+.help__body details[open] > summary::after { transform: rotate(45deg); }
+.help__body details > :last-child { margin-bottom: 1.5rem; }
+@supports (interpolate-size: allow-keywords) {
+  .help__body { interpolate-size: allow-keywords; }
+  .help__body details::details-content { height: 0; overflow: clip; transition: height var(--t-ui) var(--ease-out), content-visibility var(--t-ui) allow-discrete; }
+  .help__body details[open]::details-content { height: auto; }
+  @media (prefers-reduced-motion: reduce) { .help__body details::details-content { transition: none; } }
+}
 @media (max-width: 760px) { .help { grid-template-columns: 1fr; } .help__toc { position: static; } }
 /* Volta do login do Frame.io: só a mensagem e o botão que abre o app. */
 .doc--handoff { min-height: calc(100svh - 4.25rem); display: grid; align-content: center; justify-items: center; text-align: center; }

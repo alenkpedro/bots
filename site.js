@@ -541,4 +541,20 @@
       });
     }
   }
+
+  // ---------- a pílula de cima acende a página em que você está ----------
+  const here = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.bar__links a:not(.button)').forEach(a => {
+    const to = (a.getAttribute('href') || '').split('#')[0];
+    if (to && to === here && !a.hasAttribute('aria-current')) a.setAttribute('aria-current', 'page');
+  });
+
+  // ---------- ajuda: cada tópico abre e fecha; o da lista (ou o do link) abre ----------
+  const topics = document.querySelectorAll('.help__body details');
+  if (topics.length) {
+    const open = id => { const d = id && document.getElementById(id); if (d && d.tagName === 'DETAILS') d.open = true; };
+    open(location.hash.slice(1));
+    addEventListener('hashchange', () => open(location.hash.slice(1)));
+    document.querySelectorAll('.help__toc a[href^="#"]').forEach(a => a.addEventListener('click', () => open(a.getAttribute('href').slice(1))));
+  }
 })();
