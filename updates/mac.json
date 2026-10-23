@@ -1,11 +1,11 @@
 {
-  "version": "1.0.9",
-  "build": 85,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v1.0.9/Bots-mac.zip",
-  "signature": "cTEHUQ9PnDMhxiVTz0K9ABZPocDttVjhQePK3eMLKIvIRW+15A7weD34Pf5Q9rKTPU3pD+o/dIUIlh+iAZo0CA==",
-  "notes": "Pessoas e Bots juntos em Membros, @ para chamar pessoas, liberar só o quadro da equipe, e o + do Mac com Novo Bot e Nova equipe.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.0.9/Bots-mac-arm64.zip",
-  "signature_arm64": "GJT0P9C5Xa3eBJYs1c87YpDp83/voZ0ZhEO8eWOzVIZU1bpVQul2xrjdZAIsOh7+8tdIDhAZytelmrb/y9b2Dw==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.0.9/Bots-mac-x86_64.zip",
-  "signature_x86_64": "gwKkVyvUvuSxdsIdKuyVVPFnBqFkEUwgrFweV2B0HOg2EMo/MJK/zh4oiAy/z4g+n0IP4zextOkGdRUFQCjnDg=="
+  "version": "1.1",
+  "build": 92,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v1.1/Bots-mac.zip",
+  "signature": "NwCtOj98QKSMXRanQvNJrnwng1tCWkGZfR/2V++ciAudSKRWsbeD08GY1vQfVn6SPjn5wIp4J80N41A9xGo1AQ==",
+  "notes": "Seus Bots no grupo dos outros, avisos de quem entra e sai, Bots que voltam sozinhos quando um build termina, Novo Bot e Nova equipe redesenhados, listas ao escrever e login mais simples.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.1/Bots-mac-arm64.zip",
+  "signature_arm64": "vfXlxE0BJ4Oc8m3oICHvCXk6xe9gRXmKCK0fJWvYBpmRN5AyG/rFrP6yJ91APEyqR/dbkOZ2Lr5O+MhVLA1XAg==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.1/Bots-mac-x86_64.zip",
+  "signature_x86_64": "yCrFdjs2uuSdaKLCOLiCLsjjnIxB2cteA7Ny3eWIi6HTXskZXaX8ry03fLZ/5CfwEquHK3v3IYfWmo8xEDR/BA=="
 }
