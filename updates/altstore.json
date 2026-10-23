@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "1.0.6",
+          "version": "1.0.7",
           "date": "2026-10-23",
-          "localizedDescription": "Grupos com colegas, páginas vivas, selecionar vários com Desfazer, chaves num campo seguro, pagamentos com limite, organizar o Gmail, 1Password, cérebro leve e forte, mensagens sem interromper, ilha no notch e o app bem mais leve.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.0.6/Bots.ipa",
-          "size": 18449141,
+          "localizedDescription": "Sair da conta de um cérebro e Bots na nuvem que voltam sozinhos quando param de responder.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.0.7/Bots.ipa",
+          "size": 18449502,
           "minOSVersion": "18.0"
         }
       ]

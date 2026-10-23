@@ -1,11 +1,11 @@
 {
-  "version": "1.0.6",
-  "build": 67,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v1.0.6/Bots-mac.zip",
-  "signature": "ZLXwZv7t/sCykUbiPk0Q0YPzbifIfg7oNY7Z5bZgy36uuvcMnWWFosHxc3575onOt1ikvKFDtUreP4aIPE+7CA==",
-  "notes": "Grupos com colegas, páginas vivas, selecionar vários com Desfazer, chaves num campo seguro, pagamentos com limite, organizar o Gmail, 1Password, cérebro leve e forte, mensagens sem interromper, ilha no notch e o app bem mais leve.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.0.6/Bots-mac-arm64.zip",
-  "signature_arm64": "oOS9k5fQ2CZYaeRZVwCzwbJaTfw53SfDT6JIbY6q5OyP/aMxnJAv4oS6MW9An2kQkjjcx2kMTfPQi8ybJJiwDQ==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.0.6/Bots-mac-x86_64.zip",
-  "signature_x86_64": "D5EPLKzR8K20CwZmWntglyxYXgDXbqvf23UuMj3NPlGW4L1BRFwaO+ZXFwjgHVvVLPseIoP4iXMw6rF+eWUyBg=="
+  "version": "1.0.7",
+  "build": 68,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v1.0.7/Bots-mac.zip",
+  "signature": "xvIUZz9F92xIXLiGVAMmTNgNg0wsGT7BxW7rTAqTXF47hLrMUFw44o1iGdUmI9OtvmgoZJQqFe/JVSsJQovKDQ==",
+  "notes": "Sair da conta de um cérebro e Bots na nuvem que voltam sozinhos quando param de responder.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.0.7/Bots-mac-arm64.zip",
+  "signature_arm64": "Bmc4QZtioL+bN3qr7PANxSMOTSt2Wn1OYo6lL0fRAB/HtfzwWuOGXyS9lvlSjUKvt9vduUCjpLrzclqshw3gAA==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.0.7/Bots-mac-x86_64.zip",
+  "signature_x86_64": "hN22156cXBAm7G56Jo324a6iwjBheF+fMXHkYXtWyFLb+qBwvlRKnM77bDY2zqPefRY8cMsZpC4y/YfRVE8fAg=="
 }
