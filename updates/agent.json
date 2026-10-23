@@ -1,7 +1,7 @@
 {
-  "built_at": 1792597933,
-  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1792597933/botd-1792597933.tar.gz",
-  "signature": "xv9Fy8SJDKZEWM4yRXrEm/DEmVMFJAXcIp6GU3ZaBYbIkgtz1D6WkP2Q9xGfYl4lmxHi/FElv0NFvbYilWxWAA==",
+  "built_at": 1792716963,
+  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1792716963/botd-1792716963.tar.gz",
+  "signature": "jb/IUDOQZfTDF2jGWipf/6OUspC2Oh5SPnKPRQ/+zgWKmK2ORVzNJ10FBujF3kw67trTOk473UEO6Gn0DIiEAw==",
   "lock": "7b54654ad70ed12fa6f97a9a0edba32c0969161ec7d1096c4c1d5aa54482073f",
-  "notes": "Permitir tudo não para mais por nomes de arquivos, sequências e cortes (\"Split payment\", PIX) nem por chave de API num cabeçalho; e, no Permitir tudo, os Bots publicam sozinhos o que você pediu no seu canal ou grupo (dinheiro, senhas e códigos continuam com você)."
+  "notes": "Bots na nuvem que param de responder voltam sozinhos, e o agente que perde o login entra de novo em vez de ficar parado."
 }
