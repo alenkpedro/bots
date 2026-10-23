@@ -1,7 +1,7 @@
 {
-  "built_at": 1792716963,
-  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1792716963/botd-1792716963.tar.gz",
-  "signature": "jb/IUDOQZfTDF2jGWipf/6OUspC2Oh5SPnKPRQ/+zgWKmK2ORVzNJ10FBujF3kw67trTOk473UEO6Gn0DIiEAw==",
+  "built_at": 1792773443,
+  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1792773443/botd-1792773443.tar.gz",
+  "signature": "Hoflv5T+Ls99IRHWZhoJJqkpfhGVWH/Ca+svl7qcUnBDNPLOZMX1EvMpCHmnZZCJASLD2c7zX00bjydTHGLwAA==",
   "lock": "7b54654ad70ed12fa6f97a9a0edba32c0969161ec7d1096c4c1d5aa54482073f",
-  "notes": "Bots na nuvem que param de responder voltam sozinhos, e o agente que perde o login entra de novo em vez de ficar parado."
+  "notes": "Grupos: quadro, cargos e notas liberáveis, sem NO_REPLY no fim e message_bot sem envio vazio"
 }
