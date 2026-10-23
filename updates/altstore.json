@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "1.0.8",
+          "version": "1.0.9",
           "date": "2026-10-23",
-          "localizedDescription": "Fotos e vídeos como no WhatsApp, arquivos dentro do app no Mac, lista de etapas nos trabalhos longos e grupos compartilhados funcionando de novo.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.0.8/Bots.ipa",
-          "size": 18715710,
+          "localizedDescription": "Pessoas e Bots juntos em Membros, @ para chamar pessoas, liberar só o quadro da equipe, e o + do Mac com Novo Bot e Nova equipe.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.0.9/Bots.ipa",
+          "size": 18746914,
           "minOSVersion": "18.0"
         }
       ]

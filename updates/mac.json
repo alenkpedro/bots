@@ -1,11 +1,11 @@
 {
-  "version": "1.0.8",
-  "build": 83,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v1.0.8/Bots-mac.zip",
-  "signature": "xQJZL/lkp21gOVXqZ2NbusufeeQBVjEXTmwxgGSnuWySrY6egiPDQfcHCYPvKBJfTyRZoZJLYRz7kzWoiwe0Cw==",
-  "notes": "Fotos e vídeos como no WhatsApp, arquivos dentro do app no Mac, lista de etapas nos trabalhos longos e grupos compartilhados funcionando de novo.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.0.8/Bots-mac-arm64.zip",
-  "signature_arm64": "ROmJY79eFvB4IyyJOMI7/+3axFODTioW3gqrJd/PfVpCRs+lV1cZXBiVUzwmiBpGK7EKI0w6BtPC0a2ryH9fCQ==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.0.8/Bots-mac-x86_64.zip",
-  "signature_x86_64": "rpYfC+7baz8M6SjXDNkz+sVsL38QJtdTwpN5yYqti82HL00Q+WavGchwk13UDh/aUoJDIDHkYsgFjEQc4zGGBA=="
+  "version": "1.0.9",
+  "build": 85,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v1.0.9/Bots-mac.zip",
+  "signature": "cTEHUQ9PnDMhxiVTz0K9ABZPocDttVjhQePK3eMLKIvIRW+15A7weD34Pf5Q9rKTPU3pD+o/dIUIlh+iAZo0CA==",
+  "notes": "Pessoas e Bots juntos em Membros, @ para chamar pessoas, liberar só o quadro da equipe, e o + do Mac com Novo Bot e Nova equipe.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.0.9/Bots-mac-arm64.zip",
+  "signature_arm64": "GJT0P9C5Xa3eBJYs1c87YpDp83/voZ0ZhEO8eWOzVIZU1bpVQul2xrjdZAIsOh7+8tdIDhAZytelmrb/y9b2Dw==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.0.9/Bots-mac-x86_64.zip",
+  "signature_x86_64": "gwKkVyvUvuSxdsIdKuyVVPFnBqFkEUwgrFweV2B0HOg2EMo/MJK/zh4oiAy/z4g+n0IP4zextOkGdRUFQCjnDg=="
 }
