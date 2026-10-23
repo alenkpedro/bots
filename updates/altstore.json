@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "1.1",
+          "version": "1.1.1",
           "date": "2026-10-23",
-          "localizedDescription": "Seus Bots no grupo dos outros, avisos de quem entra e sai, Bots que voltam sozinhos quando um build termina, Novo Bot e Nova equipe redesenhados, listas ao escrever e login mais simples.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.1/Bots.ipa",
-          "size": 18805980,
+          "localizedDescription": "Caixas do código de login consertadas no Mac, código digitado com atraso ainda vale, site no endereço novo e instalador redesenhado.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.1.1/Bots.ipa",
+          "size": 18806426,
           "minOSVersion": "18.0"
         }
       ]
