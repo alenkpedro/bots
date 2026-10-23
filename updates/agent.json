@@ -1,7 +1,7 @@
 {
-  "built_at": 1792781128,
-  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1792781128/botd-1792781128.tar.gz",
-  "signature": "Qys5FcVKYmntGhuaheL/3txP0fVVqaUtqD8dM7tK/0W4UID5irva/AVlK3emnHwb1oGQBmfA/ZkuSCWHqmicCw==",
+  "built_at": 1792786705,
+  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1792786705/botd-1792786705.tar.gz",
+  "signature": "Gns+YDhBOUAQm8HvhdbjYKhHxqGUA9LirC0amIChE2ly/qibYnh+aKc5Bf/3ICpZ2Lf46btauMLLcnhbyQ8BAQ==",
   "lock": "7b54654ad70ed12fa6f97a9a0edba32c0969161ec7d1096c4c1d5aa54482073f",
-  "notes": "Bots que deixam algo rodando voltam sozinhos quando termina (wake_when_done)"
+  "notes": "Código de login digitado depois do tempo ainda vale"
 }
