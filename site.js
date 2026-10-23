@@ -543,9 +543,11 @@
   }
 
   // ---------- a pílula de cima acende a página em que você está ----------
-  const here = location.pathname.split('/').pop() || 'index.html';
+  // Sem o .html: o Cloudflare Pages serve /ajuda no lugar de /ajuda.html.
+  const page = p => p.replace(/\.html$/, '');
+  const here = page(location.pathname.split('/').pop() || 'index.html');
   document.querySelectorAll('.bar__links a:not(.button)').forEach(a => {
-    const to = (a.getAttribute('href') || '').split('#')[0];
+    const to = page((a.getAttribute('href') || '').split('#')[0]);
     if (to && to === here && !a.hasAttribute('aria-current')) a.setAttribute('aria-current', 'page');
   });
 
