@@ -345,7 +345,7 @@
   }
 
   // ---------- páginas ----------
-  const pages = { visao: renderOverview, pessoas: renderPeople, pessoa: renderPerson, roadmap: renderBoardPage, ideias: renderInbox, travamentos: renderCrashes, versoes: renderVersions, notas: renderNotes };
+  const pages = { visao: renderOverview, pessoas: renderPeople, pessoa: renderPerson, roadmap: renderBoardPage, ideias: renderInbox, travamentos: renderCrashes, nuvem: renderCloud, versoes: renderVersions, notas: renderNotes };
   // #pessoa/<id> abre a página de uma pessoa; o menu continua marcando Pessoas.
   function route() {
     const [name, arg] = location.hash.slice(1).split('/');
@@ -751,7 +751,7 @@
     shownLogs = f;
     $('adm-logs-title').textContent = title;
     const p = who(f.user_id);
-    $('adm-logs-meta').textContent = [p?.email, f.device === 'macos' ? 'Mac' : 'iPhone', f.app_version, new Date(f.created_at).toLocaleString('pt-BR')].filter(Boolean).join(' · ');
+    $('adm-logs-meta').textContent = [p?.email, f.device === 'macos' ? 'Mac' : f.device === 'cloud' ? 'Nuvem' : 'iPhone', f.app_version, new Date(f.created_at).toLocaleString('pt-BR')].filter(Boolean).join(' · ');
     $('adm-logs-text').textContent = f.logs;
     logs.showModal();
   }
@@ -762,6 +762,33 @@
     a.href = URL.createObjectURL(new Blob([shownLogs.logs], { type: 'text/plain' }));
     a.download = `bots-registros-${shownLogs.created_at.slice(0, 10)}-${shownLogs.id.slice(0, 8)}.txt`;
     a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+
+  // Nuvem: o que o supervisor mandou de cada botd da nuvem (cloud_health). Um que reinicia em laço ou
+  // que não manda nada há mais de 3 minutos aparece em vermelho; a linha abre o log inteiro.
+  let cloud = [];
+  const CLOUD_STATE = { running: ['on', 'Ligado'], restarting: ['denied', 'Reiniciando'], exited: ['denied', 'Parado'], missing: ['denied', 'Não existe'], off: ['fim', 'Desligado'] };
+  async function renderCloud() {
+    [cloud] = await Promise.all([api('cloud_health?select=*&order=key.asc'), people.length ? null : loadPeople()]);
+    cloud = (cloud || []).sort((a, b) => (a.key === 'supervisor') - (b.key === 'supervisor'));
+    const stale = r => Date.now() - new Date(r.updated_at) > 3 * 60_000;
+    const bad = r => stale(r) || ['restarting', 'exited', 'missing'].includes(r.state);
+    setBadge('nuvem', cloud.filter(bad).length);
+    $('cloud').innerHTML = cloud.map((r, i) => {
+      const [k, label] = stale(r) ? ['denied', 'Sem notícias'] : CLOUD_STATE[r.state] || ['pending', r.state];
+      const name = r.key === 'supervisor' ? 'Supervisor' : esc(personName(who(r.user_id)));
+      const last = (r.log || '').trim().split('\n').filter(Boolean).slice(-2).map(l => esc(l.replace(/^\S+Z\s/, ''))).join('<br>');
+      return `<li class="inbox__item" data-cloud="${i}">
+        <p><span class="pill" data-st="${k}">${label}</span> <b>${name}</b></p>
+        <small>${r.restarts ? `${r.restarts} ${r.restarts === 1 ? 'reinício' : 'reinícios'} · ` : ''}${r.started_at ? `ligado ${ago(r.started_at)} · ` : ''}notícia ${ago(r.updated_at)}${last ? `<br>${last}` : ''}</small>
+        <div class="inbox__acts"><button type="button" class="button button--small button--quiet" data-open>Ver o log</button></div>
+      </li>`;
+    }).join('') || '<li class="adm-empty">Ninguém com Bots na nuvem agora (ou o supervisor ainda não mandou nada).</li>';
+  }
+  $('cloud').addEventListener('click', e => {
+    const li = e.target.closest('[data-cloud]'); if (!li || !e.target.closest('[data-open]')) return;
+    const r = cloud[+li.dataset.cloud];
+    openLogs({ id: r.key.replace(/^botd:/, ''), user_id: r.user_id, device: 'cloud', created_at: r.updated_at, logs: r.log || '(vazio)' }, r.key === 'supervisor' ? 'Log do supervisor' : 'Log do botd na nuvem');
   });
 
   // Travamentos: agrupados pelo lugar onde quebrou; o relatório mais recente de cada grupo abre inteiro.
