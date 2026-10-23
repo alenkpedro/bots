@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a0a0b">
+<title>Convite para uma equipe · Bots</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="img/icone.webp">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<!-- An invite to a group with colleagues (GroupPeople.swift, GroupLink): a normal link that WhatsApp and
+     Mail make clickable, which hands the code to the app (bots-app://grupo/<code>). The code rides after
+     the "#", so it never reaches the server. -->
+<main class="doc" style="min-height:80vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center">
+  <img src="img/icone.webp" alt="" width="72" height="72" style="border-radius:18px">
+  <h1>Convite para uma equipe</h1>
+  <p id="msg">Abrindo o Bots…</p>
+  <p><a id="open" class="button button--big" href="#">Abrir no Bots</a></p>
+  <p class="muted">Ainda não tem o Bots? <a href="./">Baixe aqui</a> e depois toque no convite de novo.</p>
+</main>
+<script>
+  const code = location.hash.slice(1).toLowerCase();
+  const open = document.getElementById('open');
+  if (/^[0-9a-f]{16}$/.test(code)) {
+    open.href = 'bots-app://grupo/' + code;
+    location.href = open.href;
+  } else {
+    document.getElementById('msg').textContent = 'Este convite está incompleto. Peça um link novo a quem te convidou.';
+    open.remove();
+  }
+</script>
+</body>
+</html>
