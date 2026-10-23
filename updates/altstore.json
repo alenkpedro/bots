@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "1.0.7",
+          "version": "1.0.8",
           "date": "2026-10-23",
-          "localizedDescription": "Sair da conta de um cérebro e Bots na nuvem que voltam sozinhos quando param de responder.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.0.7/Bots.ipa",
-          "size": 18449502,
+          "localizedDescription": "Fotos e vídeos como no WhatsApp, arquivos dentro do app no Mac, lista de etapas nos trabalhos longos e grupos compartilhados funcionando de novo.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.0.8/Bots.ipa",
+          "size": 18715710,
           "minOSVersion": "18.0"
         }
       ]

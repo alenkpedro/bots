@@ -1,11 +1,11 @@
 {
-  "version": "1.0.7",
-  "build": 68,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v1.0.7/Bots-mac.zip",
-  "signature": "xvIUZz9F92xIXLiGVAMmTNgNg0wsGT7BxW7rTAqTXF47hLrMUFw44o1iGdUmI9OtvmgoZJQqFe/JVSsJQovKDQ==",
-  "notes": "Sair da conta de um cérebro e Bots na nuvem que voltam sozinhos quando param de responder.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.0.7/Bots-mac-arm64.zip",
-  "signature_arm64": "Bmc4QZtioL+bN3qr7PANxSMOTSt2Wn1OYo6lL0fRAB/HtfzwWuOGXyS9lvlSjUKvt9vduUCjpLrzclqshw3gAA==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.0.7/Bots-mac-x86_64.zip",
-  "signature_x86_64": "hN22156cXBAm7G56Jo324a6iwjBheF+fMXHkYXtWyFLb+qBwvlRKnM77bDY2zqPefRY8cMsZpC4y/YfRVE8fAg=="
+  "version": "1.0.8",
+  "build": 83,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v1.0.8/Bots-mac.zip",
+  "signature": "xQJZL/lkp21gOVXqZ2NbusufeeQBVjEXTmwxgGSnuWySrY6egiPDQfcHCYPvKBJfTyRZoZJLYRz7kzWoiwe0Cw==",
+  "notes": "Fotos e vídeos como no WhatsApp, arquivos dentro do app no Mac, lista de etapas nos trabalhos longos e grupos compartilhados funcionando de novo.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.0.8/Bots-mac-arm64.zip",
+  "signature_arm64": "ROmJY79eFvB4IyyJOMI7/+3axFODTioW3gqrJd/PfVpCRs+lV1cZXBiVUzwmiBpGK7EKI0w6BtPC0a2ryH9fCQ==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.0.8/Bots-mac-x86_64.zip",
+  "signature_x86_64": "rpYfC+7baz8M6SjXDNkz+sVsL38QJtdTwpN5yYqti82HL00Q+WavGchwk13UDh/aUoJDIDHkYsgFjEQc4zGGBA=="
 }
