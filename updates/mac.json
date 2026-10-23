@@ -1,11 +1,11 @@
 {
-  "version": "1.0.5",
-  "build": 64,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v1.0.5/Bots-mac.zip",
-  "signature": "5I/8pCZti1X+d6YAQiZQd0zdTTtlRLyeoomDxMBS24ygjh4CKteFmoijf7oOpmiZKsxgWhA6vEk6c/nUrZ6JDQ==",
-  "notes": "Bots prontos, sete vozes novas nas ligações, pausar um Bot e ver a fila, os Bots no recorte da tela, entrar no iPhone pelo QR do Mac, rotinas acordadas pelo Stripe e outros serviços, avisos de atualização dos motores, Ajustes mais simples e contas novas já cifradas.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.0.5/Bots-mac-arm64.zip",
-  "signature_arm64": "ET053IsDjnhOYH10tr43iO+OXS5L/dUhc7P17kbvPZjJ8k1u/eG+hy8p05xrnlhv9cEXZ9CME5QNwpzISMHmBQ==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.0.5/Bots-mac-x86_64.zip",
-  "signature_x86_64": "/fWRT8AOEJIyp8sanmdEd1C3lFDbgAw8ju0cV/sAOnWqU2t/YuVeeQ3P5B9GefwLdNVD7P5J5RyuRDTvKNwEDw=="
+  "version": "1.0.6",
+  "build": 67,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v1.0.6/Bots-mac.zip",
+  "signature": "ZLXwZv7t/sCykUbiPk0Q0YPzbifIfg7oNY7Z5bZgy36uuvcMnWWFosHxc3575onOt1ikvKFDtUreP4aIPE+7CA==",
+  "notes": "Grupos com colegas, páginas vivas, selecionar vários com Desfazer, chaves num campo seguro, pagamentos com limite, organizar o Gmail, 1Password, cérebro leve e forte, mensagens sem interromper, ilha no notch e o app bem mais leve.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.0.6/Bots-mac-arm64.zip",
+  "signature_arm64": "oOS9k5fQ2CZYaeRZVwCzwbJaTfw53SfDT6JIbY6q5OyP/aMxnJAv4oS6MW9An2kQkjjcx2kMTfPQi8ybJJiwDQ==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.0.6/Bots-mac-x86_64.zip",
+  "signature_x86_64": "D5EPLKzR8K20CwZmWntglyxYXgDXbqvf23UuMj3NPlGW4L1BRFwaO+ZXFwjgHVvVLPseIoP4iXMw6rF+eWUyBg=="
 }

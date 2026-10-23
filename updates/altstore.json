@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "1.0.5",
-          "date": "2026-10-21",
-          "localizedDescription": "Bots prontos, sete vozes novas nas ligações, pausar um Bot e ver a fila, os Bots no recorte da tela, entrar no iPhone pelo QR do Mac, rotinas acordadas pelo Stripe e outros serviços, avisos de atualização dos motores, Ajustes mais simples e contas novas já cifradas.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.0.5/Bots.ipa",
-          "size": 16229580,
+          "version": "1.0.6",
+          "date": "2026-10-23",
+          "localizedDescription": "Grupos com colegas, páginas vivas, selecionar vários com Desfazer, chaves num campo seguro, pagamentos com limite, organizar o Gmail, 1Password, cérebro leve e forte, mensagens sem interromper, ilha no notch e o app bem mais leve.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.0.6/Bots.ipa",
+          "size": 18449141,
           "minOSVersion": "18.0"
         }
       ]
