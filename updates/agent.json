@@ -1,7 +1,7 @@
 {
-  "built_at": 1792773443,
-  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1792773443/botd-1792773443.tar.gz",
-  "signature": "Hoflv5T+Ls99IRHWZhoJJqkpfhGVWH/Ca+svl7qcUnBDNPLOZMX1EvMpCHmnZZCJASLD2c7zX00bjydTHGLwAA==",
+  "built_at": 1792776552,
+  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1792776552/botd-1792776552.tar.gz",
+  "signature": "gO9YzsSnd7g1+cdD7bi+c/zvQgnps4N3n8/MN2fNJwwRB/eOT6nZDRbJU9ClVGht3SKwlR6Jx4oyMnA+uDdyDA==",
   "lock": "7b54654ad70ed12fa6f97a9a0edba32c0969161ec7d1096c4c1d5aa54482073f",
-  "notes": "Grupos: quadro, cargos e notas liberáveis, sem NO_REPLY no fim e message_bot sem envio vazio"
+  "notes": "Grupos: a chave do grupo chega a quem entrou antes de publicar a chave pública"
 }
