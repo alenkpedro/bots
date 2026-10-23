@@ -195,7 +195,7 @@
   const rememberEmail = e => { try { localStorage.setItem(EMAIL_KEY, e); } catch {} };
   let loginStep = 'email', email = '', faceTried = false;
   const STEPS = {
-    email: ['Entrar no painel', () => 'Só desta vez neste Mac: mandamos um código para o e-mail da sua conta dos Bots.'],
+    email: ['Entrar no painel', () => LOCAL ? 'Só desta vez neste Mac: mandamos um código para o e-mail da sua conta dos Bots.' : 'Moderador: mandamos um código para o e-mail da sua conta dos Bots.'],
     code: ['Confira seu e-mail', () => `Mandamos um código para ${email}.`],
     pin: ['Seu PIN', () => readLock() ? 'Olhe para o celular, ou digite o PIN. Ele não está olhando.' : 'Pode digitar, ele não está olhando.'],
     face: ['Usar Face ID?', () => 'Para abrir o painel com o rosto. O PIN continua valendo se o Face ID não der.'],
@@ -207,6 +207,7 @@
     $('adm-email').hidden = step !== 'email'; $('adm-code').hidden = step !== 'code'; $('adm-pin').hidden = step !== 'pin';
     $('adm-face-offer').hidden = step !== 'face';
     $('adm-face-open').hidden = !(step === 'pin' && readLock());
+    $('adm-to-pin').hidden = LOCAL || step !== 'email';
     $('auth-bot').classList.toggle('is-shy', step === 'pin');   // tapa os olhos no PIN
     if (step === 'email') $('adm-email-input').value = email || lastEmail();
     if (step === 'code') { $('auth-who').textContent = email; codeBox.reset(); }
@@ -230,6 +231,8 @@
     try { const t = (await navigator.clipboard.readText()).replace(/\D/g, ''); const i = $('adm-code-input'); i.value = t; i.dispatchEvent(new Event('input')); } catch {}
   });
   $('adm-back').addEventListener('click', () => loginMode('email'));
+  $('adm-mod-email').addEventListener('click', () => loginMode('email'));
+  $('adm-to-pin').addEventListener('click', () => loginMode('pin'));
   $('adm-code').addEventListener('submit', async e => {
     e.preventDefault();
     const token = $('adm-code-input').value;
@@ -238,6 +241,7 @@
     try {
       keep(await auth('verify', { type: 'email', email, token }));
       rememberEmail(email);
+      if (!LOCAL && !readLock() && await faceAvailable()) return loginMode('face');   // moderador no celular: oferece o rosto
       start();
     } catch (err) { codeBox.shake(); status($('adm-login-status'), /expired|invalid/i.test(err.message) ? 'Esse código expirou ou não confere. Peça outro.' : err.message, 'erro'); }
     finally { codeBox.busy(false); }
@@ -296,7 +300,7 @@
   let dlgFirst = '';
   async function pinDlgState() {
     const st = await api('rpc/admin_pin_status', { method: 'POST', body: {} });
-    $('pin-dlg-state').textContent = !st.set ? 'Ainda não tem PIN. Crie um para abrir o painel em alenkpedro.github.io/bots/painel/ sem e-mail nem código.'
+    $('pin-dlg-state').textContent = !st.set ? 'Ainda não tem PIN. Crie um para abrir o painel em appbots.pages.dev/painel/ sem e-mail nem código.'
       : st.locked ? `Travado depois de 5 tentativas erradas (a última ${ago(st.last_failure_at)}). Destrave, ou crie um PIN novo.`
       : `PIN criado ${ago(st.updated_at)}. ${st.failures ? `${st.failures} ${st.failures === 1 ? 'tentativa errada' : 'tentativas erradas'} desde o último acerto (trava em 5).` : 'Nenhuma tentativa errada.'} Para trocar, digite um novo.`;
     $('pin-dlg-unlock').hidden = !st.locked;
@@ -328,7 +332,16 @@
   // ---------- dados ----------
   let people = [], items = [], ideas = [], feedback = [], notices = [];
   const who = id => people.find(p => p.user_id === id);
-  async function loadPeople() { people = await api('rpc/admin_people', { method: 'POST', body: {} }) || []; badges(); }
+  async function loadPeople() {
+    const [list, m] = await Promise.all([api('rpc/admin_people', { method: 'POST', body: {} }), isAdmin() ? api('rpc/admin_moderators', { method: 'POST', body: {} }).catch(() => []) : null]);
+    people = list || []; if (m) mods = new Set(m);
+    badges();
+  }
+  // Aprovar ou recusar: o admin escreve em access; o moderador passa por moderator_decide, que só decide quem espera.
+  async function decideAccess(id, st) {
+    if (isAdmin()) await api(`access?user_id=eq.${id}`, { method: 'PATCH', body: { status: st, decided_at: new Date().toISOString() } });
+    else await api('rpc/moderator_decide', { method: 'POST', body: { person: id, approve: st === 'approved' } });
+  }
   async function loadInbox() {
     [ideas, feedback] = await Promise.all([
       api('roadmap_ideas?select=*&order=created_at.desc&limit=500'),
@@ -345,11 +358,16 @@
   }
 
   // ---------- páginas ----------
+  // Papéis (migração 54): o admin vê tudo; o moderador, só o roadmap, os pedidos de acesso e os números.
+  let ROLE = null, mods = new Set();
+  const isAdmin = () => ROLE === 'admin';
+  const MOD_PAGES = ['visao', 'pessoas', 'roadmap', 'travamentos', 'versoes'];
   const pages = { visao: renderOverview, pessoas: renderPeople, pessoa: renderPerson, roadmap: renderBoardPage, ideias: renderInbox, travamentos: renderCrashes, nuvem: renderCloud, versoes: renderVersions, notas: renderNotes };
   // #pessoa/<id> abre a página de uma pessoa; o menu continua marcando Pessoas.
   function route() {
     const [name, arg] = location.hash.slice(1).split('/');
-    const page = pages[name] ? name : 'visao';
+    let page = pages[name] ? name : 'visao';
+    if (!isAdmin() && !MOD_PAGES.includes(page)) { page = 'visao'; history.replaceState(null, '', '#visao'); }
     const nav = page === 'pessoa' ? 'pessoas' : page;
     document.querySelectorAll('.adm-page').forEach(p => p.hidden = p.dataset.page !== page);
     document.querySelectorAll('.adm-nav a').forEach(a => a.toggleAttribute('aria-current', a.getAttribute('href') === `#${nav}`));
@@ -376,9 +394,9 @@
     drawChart(o.runs_by_day || []);
     const todo = [];
     if (o.pending) todo.push(`<li><a href="#pessoas" data-filter="pending"><b>${o.pending}</b> ${o.pending === 1 ? 'pedido de acesso' : 'pedidos de acesso'}</a></li>`);
-    if (o.feedback_new) todo.push(`<li><a href="#ideias" data-kind="feedback"><b>${o.feedback_new}</b> ${o.feedback_new === 1 ? 'feedback sem ler' : 'feedbacks sem ler'}</a></li>`);
+    if (o.feedback_new && isAdmin()) todo.push(`<li><a href="#ideias" data-kind="feedback"><b>${o.feedback_new}</b> ${o.feedback_new === 1 ? 'feedback sem ler' : 'feedbacks sem ler'}</a></li>`);
     if (c?.reports_7d) todo.push(`<li><a href="#travamentos"><b>${c.reports_7d}</b> ${c.reports_7d === 1 ? 'travamento' : 'travamentos'} nos últimos 7 dias</a></li>`);
-    if (o.ideas_new) todo.push(`<li><a href="#ideias" data-kind="ideas"><b>${o.ideas_new}</b> ${o.ideas_new === 1 ? 'ideia nova' : 'ideias novas'}</a></li>`);
+    if (o.ideas_new && isAdmin()) todo.push(`<li><a href="#ideias" data-kind="ideas"><b>${o.ideas_new}</b> ${o.ideas_new === 1 ? 'ideia nova' : 'ideias novas'}</a></li>`);
     $('todo').innerHTML = todo.join('') || '<li class="adm-empty">Nada esperando por você.</li>';
   }
   $('todo').addEventListener('click', e => {
@@ -422,14 +440,15 @@
     document.querySelectorAll('#people-filter button').forEach(b => { b.querySelector('b').textContent = counts[b.dataset.f] || 0; b.setAttribute('aria-selected', b.dataset.f === peopleFilter); });
     const label = { approved: 'Aprovada', pending: 'Esperando', denied: 'Recusada' };
     const rows = people.filter(p => (peopleFilter === 'all' || p.status === peopleFilter) && (!q || `${p.name || ''} ${p.email || ''}`.toLowerCase().includes(q)));
-    $('people').querySelector('tbody').innerHTML = rows.map(p => `<tr data-user="${p.user_id}" tabindex="0" aria-label="Abrir ${esc(personName(p))}">
+    const canDecide = p => isAdmin() ? p.status !== 'approved' : p.status === 'pending';
+    $('people').querySelector('tbody').innerHTML = rows.map(p => `<tr data-user="${p.user_id}"${isAdmin() ? ` tabindex="0" aria-label="Abrir ${esc(personName(p))}"` : ''}>
       <td><div class="who-cell">${avatar(p)}<div><b>${esc(personName(p))}</b><small>${personName(p) !== p.email ? esc(p.email) + ' · ' : ''}entrou em ${day(p.requested_at)}</small></div></div></td>
-      <td><span class="pill" data-st="${p.status}">${label[p.status] || p.status}</span></td>
+      <td><span class="pill" data-st="${p.status}">${label[p.status] || p.status}</span>${mods.has(p.user_id) ? ' <span class="pill" data-st="mod">Moderador</span>' : ''}</td>
       <td>${ago(p.last_seen)}</td>
       <td>${p.mac_version ? esc(p.mac_version) : p.agent_version ? `<small>agente ${esc(p.agent_version)}</small>` : '—'}</td>
       <td>${p.ios_version ? esc(p.ios_version) : p.has_ios ? '<small>tem o app</small>' : '—'}</td>
       <td class="num">${nf.format(p.bots)}</td><td class="num">${nf.format(p.runs_7d)}</td><td class="num">${money(p.cost_7d)}</td>
-      <td class="act">${p.status === 'approved' ? '' : `<button type="button" class="button button--small" data-decide="approved">Aprovar</button>`}${p.status === 'pending' ? `<button type="button" class="button button--small button--quiet" data-decide="denied">Recusar</button>` : ''}</td>
+      <td class="act">${!canDecide(p) ? '' : `<button type="button" class="button button--small" data-decide="approved">Aprovar</button>`}${p.status === 'pending' ? `<button type="button" class="button button--small button--quiet" data-decide="denied">Recusar</button>` : ''}</td>
     </tr>`).join('') || `<tr><td colspan="9" class="adm-empty">Ninguém por aqui.</td></tr>`;
   }
   $('people-filter').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { peopleFilter = b.dataset.f; drawPeople(); } });
@@ -437,9 +456,9 @@
   $('people').addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.matches('tr[data-user]')) e.target.click(); });
   $('people').addEventListener('click', async e => {
     const b = e.target.closest('[data-decide]');
-    if (!b) { const tr = e.target.closest('tr[data-user]'); if (tr) location.hash = `pessoa/${tr.dataset.user}`; return; }
+    if (!b) { const tr = e.target.closest('tr[data-user]'); if (tr && isAdmin()) location.hash = `pessoa/${tr.dataset.user}`; return; }
     const id = b.closest('tr').dataset.user, st = b.dataset.decide;
-    try { await api(`access?user_id=eq.${id}`, { method: 'PATCH', body: { status: st, decided_at: new Date().toISOString() } }); toast(st === 'approved' ? 'Acesso aprovado.' : 'Acesso recusado.'); await renderPeople(); }
+    try { await decideAccess(id, st); toast(st === 'approved' ? 'Acesso aprovado.' : 'Acesso recusado.'); await renderPeople(); }
     catch (err) { fail(err); }
   });
 
@@ -801,7 +820,7 @@
     $('crashes').innerHTML = crashes.map((g, i) => `<li class="inbox__item" data-crash="${i}">
       <p><span class="pill" data-st="${g.kind === 'crash' ? 'denied' : 'pending'}">${KIND[g.kind] || g.kind}</span> <b>${esc(g.reason)}</b></p>
       <small>${esc(g.signature)}<br>${g.reports} ${g.reports === 1 ? 'vez' : 'vezes'} · ${g.people} ${g.people === 1 ? 'pessoa' : 'pessoas'} · ${g.devices.map(d => d === 'macos' ? 'Mac' : 'iPhone').join(' e ')} · versões ${g.versions.map(esc).join(', ')} · última ${ago(g.last_seen)}</small>
-      <div class="inbox__acts"><button type="button" class="button button--small button--quiet" data-open>Ver o relatório</button></div>
+      ${isAdmin() ? '<div class="inbox__acts"><button type="button" class="button button--small button--quiet" data-open>Ver o relatório</button></div>' : ''}
     </li>`).join('') || `<li class="adm-empty">Nenhum travamento nos últimos ${crashDays} dias.</li>`;
   }
   $('crash-days').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { crashDays = +b.dataset.d; renderCrashes().catch(fail); } });
@@ -967,7 +986,7 @@
   const copy = async (text, ok) => { try { await navigator.clipboard.writeText(text); toast(ok); } catch { toast('Não deu para copiar.', 'erro'); } };
   async function decide(id, st) {
     if (st === 'denied' && who(id)?.status === 'approved' && !confirm('Tirar o acesso desta pessoa? Ela para de usar os Bots até você aprovar de novo.')) return;
-    try { await api(`access?user_id=eq.${id}`, { method: 'PATCH', body: { status: st, decided_at: new Date().toISOString() } }); toast(st === 'approved' ? 'Acesso aprovado.' : 'Acesso tirado.'); await refreshPage(); }
+    try { await decideAccess(id, st); toast(st === 'approved' ? 'Acesso aprovado.' : 'Acesso tirado.'); await refreshPage(); }
     catch (err) { fail(err); }
   }
   async function refreshPage() { const [name, arg] = location.hash.slice(1).split('/'); await pages[pages[name] ? name : 'visao'](arg); }
@@ -981,10 +1000,22 @@
   const MENUS = [
     ['tr[data-user]', el => {
       const p = who(el.dataset.user); if (!p) return null;
+      const me = p.email && session?.email && p.email.toLowerCase() === session.email.toLowerCase();
+      const setMod = on => async () => {
+        if (!on && !confirm(`Tirar ${personName(p)} de moderador? A pessoa para de ver o painel.`)) return;
+        try { await api('rpc/admin_set_moderator', { method: 'POST', body: { person: p.user_id, moderator: on } }); toast(on ? 'Agora é moderador. Entra no painel com o código do e-mail.' : 'Não é mais moderador.'); await refreshPage(); }
+        catch (err) { fail(err); }
+      };
+      if (!isAdmin()) return { title: personName(p), items: [
+        p.status === 'pending' && { label: 'Aprovar', run: () => decide(p.user_id, 'approved') },
+        p.status === 'pending' && { label: 'Recusar', run: () => decide(p.user_id, 'denied') },
+        p.email && { label: 'Copiar e-mail', run: () => copy(p.email, 'E-mail copiado.') },
+      ] };
       return { title: personName(p), items: [
         { label: 'Abrir', run: () => { location.hash = `pessoa/${p.user_id}`; } },
         p.status !== 'approved' && { label: 'Aprovar', run: () => decide(p.user_id, 'approved') },
         p.status !== 'denied' && { label: p.status === 'approved' ? 'Tirar o acesso' : 'Recusar', danger: p.status === 'approved', run: () => decide(p.user_id, 'denied') },
+        p.status === 'approved' && !me && (mods.has(p.user_id) ? { label: 'Tirar de moderador', run: setMod(false) } : { label: 'Tornar moderador', run: setMod(true) }),
         p.email && { label: 'Copiar e-mail', run: () => copy(p.email, 'E-mail copiado.') },
       ] };
     }],
@@ -1038,6 +1069,7 @@
     }],
     ['[data-crash]', el => {
       const g = crashes[+el.dataset.crash]; if (!g) return null;
+      if (!isAdmin()) return { title: g.reason, items: [{ label: 'Copiar a assinatura', run: () => copy(g.signature, 'Assinatura copiada.') }] };
       return { title: g.reason, items: [
         { label: 'Ver o relatório', run: () => el.querySelector('[data-open]')?.click() },
         { label: 'Copiar a assinatura', run: () => copy(g.signature, 'Assinatura copiada.') },
@@ -1074,7 +1106,7 @@
     for (const [sel, build] of MENUS) { const el = target.closest(sel); if (el) { const m = build(el); if (m) return { ...m, el }; } }
     return null;
   };
-  const general = () => ({ title: 'Painel', items: [{ label: 'Atualizar', run: () => $('adm-refresh').click() }, { label: 'Nova nota', run: () => { location.hash = 'notas'; setTimeout(() => $('note-new').click(), 300); } }] });
+  const general = () => ({ title: 'Painel', items: [{ label: 'Atualizar', run: () => $('adm-refresh').click() }, isAdmin() && { label: 'Nova nota', run: () => { location.hash = 'notas'; setTimeout(() => $('note-new').click(), 300); } }] });
 
   const ctx = document.createElement('div');
   ctx.className = 'ctx'; ctx.hidden = true;
@@ -1145,8 +1177,9 @@
     if (!cfg) { show('login'); status($('adm-login-status'), 'Falta a configuração do Supabase (supabase.js).', 'erro'); return; }
     if (!(await token()) && !session) return show('login');
     try {
-      const admin = await api('rpc/is_admin', { method: 'POST', body: {} });
-      if (!admin) return show('denied');
+      ROLE = await api('rpc/panel_role', { method: 'POST', body: {} });
+      if (!ROLE) return show('denied');
+      document.body.dataset.role = ROLE;   // o CSS esconde do moderador o que é só do admin ([data-admin-only])
       show('shell');
       faceMenu();
       route();

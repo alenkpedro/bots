@@ -870,7 +870,7 @@ p { text-wrap: pretty; }
   .adm-side__end .adm-link { font-size: 0.8125rem; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
   .adm-side__buttons { flex: none; }
   .adm-refresh span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-  .adm-nav { position: fixed; z-index: 25; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0; overflow: visible;
+  .adm-nav { position: fixed; z-index: 25; left: 0; right: 0; bottom: 0; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 0; overflow: visible;
     padding: 0.35rem 0.25rem calc(0.35rem + env(safe-area-inset-bottom)); background: color-mix(in srgb, #0e0e10 92%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-top: 1px solid #1f1f23; }
   .adm-nav a { position: relative; flex-direction: column; gap: 0.2rem; padding: 0.4rem 0.1rem; border-radius: 10px; font-size: 0.6875rem; white-space: nowrap; min-height: 3rem; justify-content: center; }
   .adm-nav a[aria-current] { background: none; color: var(--blue); }
@@ -1046,6 +1046,11 @@ p { text-wrap: pretty; }
   .adm-page[data-page="notas"] .adm-head__tools { width: 100%; }
   .adm-page[data-page="notas"] .adm-search { flex: 1; width: auto; }
 }
+
+/* O moderador não vê o que é só do admin (abas, avisos, PIN). As regras do banco é que garantem; isto só limpa a tela. */
+[data-role="moderator"] [data-admin-only] { display: none !important; }
+.pill[data-st="mod"] { background: #172a4a; color: #a5c4ff; }
+#people tbody tr[data-user]:not([tabindex]) { cursor: default; }
 
 /* Menu de contexto: no computador, um menu no ponto do clique; no toque, uma folha que sobe de baixo. */
 .ctx { position: fixed; inset: 0; z-index: 60; }
