@@ -1,11 +1,11 @@
 {
-  "version": "1.1.1",
-  "build": 93,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v1.1.1/Bots-mac.zip",
-  "signature": "dA5o7WDDGk8qT+RQSl9gVgIq8evLMq/aFRslgYZZDxxzbQZBZz4yRH6VjbSkhLquIOjMgDYRdk53ebaQNvPGDA==",
-  "notes": "Caixas do código de login consertadas no Mac, código digitado com atraso ainda vale, site no endereço novo e instalador redesenhado.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.1.1/Bots-mac-arm64.zip",
-  "signature_arm64": "Rk80xUrg5eH11iMjHBJkkgDvlXMJd3s8GeUobzaUwippSmdE75CgVnm7D1Vo9lO+V1i3Sc5kznA6rPYrYiWEBw==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.1.1/Bots-mac-x86_64.zip",
-  "signature_x86_64": "YZEb4mPxWOh4ZBYAYBtbmWHkO5LX8FI+LggnBMcHmelnVGSScHqzdBgR+S9GoHUDLezGdqnwhcFiLyCwdjfRAg=="
+  "version": "1.2",
+  "build": 94,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v1.2/Bots-mac.zip",
+  "signature": "zARHGPJvMeaKP+NYCUYyN8ZRlxsNES1EWjQW1jKhobhjOAXzdkGNlhy3aw4PTk5MIWZbXMxky9/0oADQxKDsDA==",
+  "notes": "Ajustes de cara nova; o que você manda sai na hora, com Desfazer; recusou, o Bot para; logins e dados salvos no Mac; WhatsApp na hora; Hoje e Ajuste em vídeo.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.2/Bots-mac-arm64.zip",
+  "signature_arm64": "TXJxJh3UVPcZVahFs8sQ2dfoa+Jk3vcY4kCyNPJg9O9bXGKdrn66XMXWg4yJMSKVlU5UvScPg7xgXC0Wm00IBQ==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.2/Bots-mac-x86_64.zip",
+  "signature_x86_64": "FPSbq8d2e7PSSSfVs7wqUywc1ltGlwG1D0mQj6HXC0pHAKscgOfi4FwVfqFX605O0E6Kfl+ahIpw96QbF2cyCg=="
 }

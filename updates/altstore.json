@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "1.1.1",
-          "date": "2026-10-23",
-          "localizedDescription": "Caixas do código de login consertadas no Mac, código digitado com atraso ainda vale, site no endereço novo e instalador redesenhado.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.1.1/Bots.ipa",
-          "size": 18806426,
+          "version": "1.2",
+          "date": "2026-10-25",
+          "localizedDescription": "Ajustes de cara nova; o que você manda sai na hora, com Desfazer; recusou, o Bot para; logins e dados salvos no Mac; WhatsApp na hora; Hoje e Ajuste em vídeo.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.2/Bots.ipa",
+          "size": 19573376,
           "minOSVersion": "18.0"
         }
       ]
