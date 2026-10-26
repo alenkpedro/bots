@@ -1112,6 +1112,8 @@ p { text-wrap: pretty; }
 .live__list li small { grid-column: 2; color: var(--soft); font-size: 0.75rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .live__list li .live__flag { grid-row: span 2; }
 .live__via { grid-column: 3; grid-row: 1; color: var(--soft); font-size: 0.75rem; text-align: right; }
+.live__dev { grid-column: 3; grid-row: 1; justify-self: end; color: var(--soft); display: inline-grid; }
+.live__dev svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .live__ago { grid-column: 3; color: var(--soft); font-size: 0.75rem; text-align: right; font-variant-numeric: tabular-nums; }
 .live__events li { grid-template-columns: auto minmax(0, 1fr) auto auto; }
 .live__events li small { grid-column: 2; }

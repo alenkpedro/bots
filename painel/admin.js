@@ -1018,6 +1018,13 @@
     feedback_sent: ['Feedback', 'new'], app_crashed: ['Travamento', 'bad'], app_opened: ['App aberto', 'go'],
   };
   const DEVICE = { macos: 'Mac', ios: 'iPhone' };
+  const VIA = { agente: 'Agente no Mac', 'app do Mac': 'App do Mac', iPhone: 'iPhone', tarefa: 'Tarefa rodando' };
+  const ICON = {
+    mac: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>',
+    phone: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>',
+  };
+  // Tempo curto, como no OpenBot: agora, 3m, 2h, 1d.
+  const short = t => { const m = (Date.now() - new Date(t)) / 60000; return m < 1 ? 'agora' : m < 60 ? `${Math.round(m)}m` : m < 1440 ? `${Math.round(m / 60)}h` : `${Math.round(m / 1440)}d`; };
   const ROUTINE = { done: 'concluída', error: 'com erro', running: 'rodando', queued: 'na fila' };
   const detail = e => !e.detail ? '' : e.kind === 'routine_ran' ? ROUTINE[e.detail] || e.detail : e.kind.startsWith('run_') ? engineName(e.detail) : e.kind === 'app_opened' ? e.detail.replace(/^(macos|ios)/, d => DEVICE[d]) : e.kind === 'feedback_sent' ? DEVICE[e.detail] || '' : e.detail;
 
@@ -1040,8 +1047,9 @@
     setBadge('aovivo', online.length);
     drawLiveMap(people, first);
     // Online agora.
-    $('live-online').innerHTML = online.map(p => `<li><span class="live__flag">${flag(p.where?.cc)}</span><b>${esc(p.name || 'Sem nome')}</b>
-      <small>${p.where ? esc(p.where.city) : 'fuso desconhecido'}</small><span class="live__via">${p.via}</span><span class="live__ago">${ago(new Date(p.last).toISOString())}</span></li>`).join('')
+    // Sem nomes (Pedro, 26/10: dá para mostrar a tela): a cidade, o aparelho e há quanto tempo, como no OpenBot.
+    $('live-online').innerHTML = online.map(p => `<li><span class="live__flag">${flag(p.where?.cc)}</span><b>${p.where ? esc(p.where.city) : 'Lugar desconhecido'}</b>
+      <small>${VIA[p.via] || p.via}</small><span class="live__dev" title="${VIA[p.via] || ''}">${p.via === 'iPhone' ? ICON.phone : ICON.mac}</span><span class="live__ago">${short(p.last)}</span></li>`).join('')
       || '<li class="live__empty">Ninguém agora.</li>';
     // Tarefas por minuto, com a dica de cada barra.
     const max = Math.max(1, ...live.per_minute.map(m => m.runs));
@@ -1056,8 +1064,9 @@
       const k = `${e.at}|${e.kind}|${e.user_id}`, fresh = !first && !seenEvents.has(k);
       const [label, tone] = EVENT[e.kind] || [e.kind, 'go'];
       const w = e.country ? { cc: e.country, city: e.city || '' } : place(e.tz);
+      const where = w?.city ? esc(w.city) : 'Lugar desconhecido';
       return `<li class="live__event${fresh ? ' is-fresh' : ''}" data-tone="${tone}"><i class="live__evdot"></i><b>${label}</b>
-        <small>${esc(e.name || '')}${detail(e) ? ` · ${esc(detail(e))}` : ''}</small><span class="live__flag" title="${w ? esc(w.city) : ''}">${flag(w?.cc)}</span><span class="live__ago">${ago(e.at)}</span></li>`;
+        <small>${where}${detail(e) ? ` · ${esc(detail(e))}` : ''}</small><span class="live__flag">${flag(w?.cc)}</span><span class="live__ago">${short(e.at)}</span></li>`;
     }).join('') || '<li class="live__empty">Nada nas últimas 24 horas.</li>';
     seenEvents = new Set(live.events.map(e => `${e.at}|${e.kind}|${e.user_id}`));
     // Pessoas por país (todas as aprovadas; as online primeiro na conta).
