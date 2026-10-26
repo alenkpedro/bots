@@ -1,11 +1,11 @@
 {
-  "version": "1.2",
-  "build": 94,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v1.2/Bots-mac.zip",
-  "signature": "zARHGPJvMeaKP+NYCUYyN8ZRlxsNES1EWjQW1jKhobhjOAXzdkGNlhy3aw4PTk5MIWZbXMxky9/0oADQxKDsDA==",
-  "notes": "Ajustes de cara nova; o que você manda sai na hora, com Desfazer; recusou, o Bot para; logins e dados salvos no Mac; WhatsApp na hora; Hoje e Ajuste em vídeo.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.2/Bots-mac-arm64.zip",
-  "signature_arm64": "TXJxJh3UVPcZVahFs8sQ2dfoa+Jk3vcY4kCyNPJg9O9bXGKdrn66XMXWg4yJMSKVlU5UvScPg7xgXC0Wm00IBQ==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.2/Bots-mac-x86_64.zip",
-  "signature_x86_64": "FPSbq8d2e7PSSSfVs7wqUywc1ltGlwG1D0mQj6HXC0pHAKscgOfi4FwVfqFX605O0E6Kfl+ahIpw96QbF2cyCg=="
+  "version": "1.2.1",
+  "build": 95,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v1.2.1/Bots-mac.zip",
+  "signature": "E72Zvn56GzANDM9LmCpBh8XlHN5s1RlGPjwQEpj/aQxavvWFPxhkjM1utqga5vP/oH7vB7pMlCvxJYMs+JB9DQ==",
+  "notes": "O cartão de conectar o WhatsApp aparece de novo, com o código pelo número no iPhone, e o Bot continua conversando enquanto você conecta.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.2.1/Bots-mac-arm64.zip",
+  "signature_arm64": "R0KvTStvb9NYyVdRBMzJPmFv3RWTrvlV81U3aq49euunavj+m3O01fptvKtqbhfVMkqmeVqJEG10quZpkqwrBA==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.2.1/Bots-mac-x86_64.zip",
+  "signature_x86_64": "Xu3jntfraHIxSSwvCaApr7LYiiRjMYzBH9MVs6u/Z5zG52YT9agmQAE7sUbX/yRRn2tJRnQNreE5VPSPtMBHBQ=="
 }
