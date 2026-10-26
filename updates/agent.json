@@ -1,7 +1,7 @@
 {
-  "built_at": 1793037072,
-  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1793037072/botd-1793037072.tar.gz",
-  "signature": "xg3Ad1Kp33xBLa1R/YqtwtsM5DrX4tszK5oPOK+nwOKqzHAKYFCk6Bdi68gAc8jq5TePsR6yVJ4ngnWmlicMCQ==",
+  "built_at": 1793042615,
+  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1793042615/botd-1793042615.tar.gz",
+  "signature": "nqZlpSE2EpyZk22MGDMEOTh0Z0VfaRIDkkvBkDhFO8W302Y1Tqk8tpgTedJmnqvhfxpnaBJjr6Z/HgMJbXa7Cg==",
   "lock": "539dc3c8fc1f5c46fd41c72e0bd5d5fe47366c51e8b418c5e548d6826c070d52",
-  "notes": "Bots que perguntam algo esperam sua resposta (sem perguntar duas vezes na equipe), e no Windows o navegador do computador dos Bots volta a responder."
+  "notes": "Webhooks com o endereço do site, links quebrados saem, HTML com imagens, resposta no idioma de quem fala"
 }
