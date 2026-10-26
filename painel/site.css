@@ -857,6 +857,33 @@ p { text-wrap: pretty; }
   .adm-side__end { display: flex; align-items: center; flex-wrap: wrap; margin-top: 0; }
 }
 
+/* A barra lateral recolhida: só os ícones, e os números das abas viram um pontinho no canto do ícone. */
+.adm-side__top { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding-right: 0.15rem; }
+.adm-side__top .bar__name { padding: 0 0.5rem; min-width: 0; }
+.adm-collapse { flex: none; width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: 9px; color: var(--soft); transition: background-color var(--t-hover) ease, color var(--t-hover) ease; }
+.adm-collapse:hover { background: var(--surface); color: var(--ink); }
+.adm-collapse svg { width: 1.15rem; height: 1.15rem; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; transition: transform 200ms ease; }
+.adm-shell { transition: grid-template-columns 200ms ease; }
+@media (min-width: 901px) {
+  .adm-shell.is-collapsed { grid-template-columns: 4.25rem minmax(0, 1fr); }
+  .is-collapsed .adm-side { padding-left: 0.55rem; padding-right: 0.55rem; align-items: center; }
+  .is-collapsed .adm-side__top { flex-direction: column; gap: 0.75rem; padding: 0; }
+  .is-collapsed .adm-side__top .bar__name { padding: 0; }
+  .is-collapsed .adm-side__brand { display: none; }
+  .is-collapsed .adm-collapse svg { transform: scaleX(-1); }
+  .is-collapsed .adm-nav { width: 100%; }
+  .is-collapsed .adm-nav a { position: relative; justify-content: center; padding: 0.65rem 0; }
+  .is-collapsed .adm-nav__long { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .is-collapsed .adm-nav b { position: absolute; top: 0.2rem; right: 0.35rem; margin: 0; min-width: 1rem; height: 1rem; padding: 0 0.25rem; font-size: 0.625rem; }
+  .is-collapsed .adm-side__end { padding: 0; align-items: center; }
+  .is-collapsed .adm-side__end > a, .is-collapsed .adm-who, .is-collapsed .adm-side__end > .adm-link { display: none; }
+  .is-collapsed .adm-side__buttons { flex-direction: column; }
+  .is-collapsed .adm-refresh { width: 2.1rem; padding: 0; justify-content: center; }
+  .is-collapsed .adm-refresh span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .is-collapsed [data-out] { padding-left: 0.6rem; padding-right: 0.6rem; font-size: 0.8125rem; }
+}
+@media (max-width: 900px) { .adm-collapse { display: none; } }
+@media (prefers-reduced-motion: reduce) { .adm-shell, .adm-collapse svg { transition: none; } }
 .adm-nav__short { display: none; }
 /* No celular (e instalado na tela de início) o painel vira app: abas fixas embaixo, topo curto, números dois a dois. */
 @media (max-width: 700px) {
@@ -865,7 +892,7 @@ p { text-wrap: pretty; }
   .adm-side__end a, .adm-who { display: none; }
   .adm-refresh { width: 2.1rem; padding: 0; justify-content: center; }
   /* Topo do celular numa linha só: a marca sem o "Admin", e os links do PIN e do Face ID menores. */
-  .adm-side > .bar__name small { display: none; }
+  .adm-side .bar__name small { display: none; }
   .adm-side__end { flex-wrap: nowrap; min-width: 0; }
   .adm-side__end .adm-link { font-size: 0.8125rem; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
   .adm-side__buttons { flex: none; }

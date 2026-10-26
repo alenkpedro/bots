@@ -1008,7 +1008,8 @@
     feedback_sent: ['Feedback', 'new'], app_crashed: ['Travamento', 'bad'], app_opened: ['App aberto', 'go'],
   };
   const DEVICE = { macos: 'Mac', ios: 'iPhone' };
-  const detail = e => !e.detail ? '' : e.kind.startsWith('run_') ? engineName(e.detail) : e.kind === 'app_opened' ? e.detail.replace(/^(macos|ios)/, d => DEVICE[d]) : e.kind === 'feedback_sent' ? DEVICE[e.detail] || '' : e.detail;
+  const ROUTINE = { done: 'concluída', error: 'com erro', running: 'rodando', queued: 'na fila' };
+  const detail = e => !e.detail ? '' : e.kind === 'routine_ran' ? ROUTINE[e.detail] || e.detail : e.kind.startsWith('run_') ? engineName(e.detail) : e.kind === 'app_opened' ? e.detail.replace(/^(macos|ios)/, d => DEVICE[d]) : e.kind === 'feedback_sent' ? DEVICE[e.detail] || '' : e.detail;
 
   let live = null, liveTimer = null, seenEvents = new Set(), view = null, liveFitted = false;
   async function renderLive() {
@@ -1035,7 +1036,9 @@
     $('live-bars').setAttribute('aria-label', `${total} tarefas nos últimos 30 minutos`);
     $('live-bars').innerHTML = live.per_minute.map(m => `<span title="${new Date(m.t).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}: ${m.runs} ${m.runs === 1 ? 'tarefa' : 'tarefas'}"><i style="height:${m.runs ? Math.max(8, (m.runs / max) * 100) : 3}%"${m.runs ? '' : ' class="is-zero"'}></i></span>`).join('');
     // Eventos: os novos desde a última vez entram com destaque.
-    $('live-events').innerHTML = live.events.map(e => {
+    // Rotina pulada (fora do horário, Mac dormindo) não é acontecimento: só enchia a lista.
+    const events = live.events.filter(e => !(e.kind === 'routine_ran' && e.detail === 'skipped'));
+    $('live-events').innerHTML = events.map(e => {
       const k = `${e.at}|${e.kind}|${e.user_id}`, fresh = !first && !seenEvents.has(k);
       const [label, tone] = EVENT[e.kind] || [e.kind, 'go'];
       const w = place(e.tz);
@@ -1307,6 +1310,26 @@
     try { await flushNote(); await Promise.all([pages[pages[name] ? name : 'visao'](arg), loadPeople(), loadInbox()]); toast('Atualizado.'); }
     catch (err) { fail(err); }
     finally { b.classList.remove('is-busy'); }
+  });
+
+  // Barra lateral que recolhe (no computador): vira uma faixa só com os ícones; o nome aparece ao passar o mouse.
+  // Lembra a escolha neste navegador. Atalho: ⌘\ (Ctrl+\ fora do Mac).
+  const SIDE_KEY = 'bots-admin-side';
+  document.querySelectorAll('.adm-nav a').forEach(a => { a.title = a.querySelector('.adm-nav__long')?.textContent || ''; });
+  function setCollapsed(on, remember = true) {
+    $('adm-shell').classList.toggle('is-collapsed', on);
+    const b = $('adm-collapse');
+    b.setAttribute('aria-expanded', String(!on));
+    b.setAttribute('aria-label', on ? 'Abrir a barra lateral' : 'Recolher a barra lateral');
+    b.title = `${on ? 'Abrir' : 'Recolher'} a barra lateral (⌘\\)`;
+    if (remember) try { localStorage.setItem(SIDE_KEY, on ? '1' : '0'); } catch {}
+    // O mapa do Ao vivo e o gráfico se ajustam à largura nova.
+    setTimeout(() => dispatchEvent(new Event('resize')), 220);
+  }
+  try { if (localStorage.getItem(SIDE_KEY) === '1') setCollapsed(true, false); } catch {}
+  $('adm-collapse').addEventListener('click', () => setCollapsed(!$('adm-shell').classList.contains('is-collapsed')));
+  addEventListener('keydown', e => {
+    if (e.key === '\\' && (e.metaKey || e.ctrlKey) && innerWidth > 900) { e.preventDefault(); $('adm-collapse').click(); }
   });
 
   // ---------- começar ----------
