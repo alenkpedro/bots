@@ -465,7 +465,7 @@
   // Uma pessoa: conta, computador e aparelhos, uso em 30 dias, motores, erros, travamentos e o que ela mandou.
   // admin_person (migração 36) só devolve números, versões e o texto dos erros do agente, nunca conversas.
   // Os ids que o agente grava (botd/src/engines.ts): "cli:claude", "local:lmstudio/<modelo>", "api".
-  const ENGINE = { 'cli:claude': 'Claude Code', 'cli:codex': 'Codex', 'cli:opencode': 'OpenCode', 'cli:antigravity': 'Antigravity', 'cli:grok': 'Grok', 'local:lmstudio': 'LM Studio', 'local:ollama': 'Ollama', api: 'API', 'cli:opencode-vm': 'OpenCode (computador dos Bots)' };
+  const ENGINE = { 'cli:claude': 'Claude Code', 'cli:codex': 'Codex', 'cli:opencode': 'OpenCode', 'cli:antigravity': 'Antigravity', 'cli:grok': 'Grok', 'local:lmstudio': 'LM Studio', 'local:ollama': 'Ollama', api: 'API', auto: 'Automático', 'cli:opencode-vm': 'OpenCode (computador dos Bots)' };
   const engineName = e => { const id = String(e || '').split(/[#/|]/)[0]; return ENGINE[id] || e || '—'; };
   // runs.model leva o motor e o modelo juntos ("cli:claude#opus", "local:ollama/qwen3"): aqui só o modelo.
   const modelName = m => { const t = String(m || ''); return t.includes('#') ? t.split('#')[1].split('|')[0] : t.startsWith('local:') ? t.split('/').slice(1).join('/') : /^(cli:|api$|auto$)/.test(t) || !t ? 'padrão' : t; };
@@ -1062,7 +1062,7 @@
     people.forEach(p => { if (!p.where) return; const g = groups[p.where.key] ||= { ...p.where, people: [], on: 0 }; g.people.push(p); if (p.online) g.on++; });
     const list = Object.values(groups).sort((a, b) => a.on - b.on);   // os online por cima
     host.querySelector('.live__dots').innerHTML = list.map(g => {
-      const [x, y] = xy(g), r = 4 + Math.sqrt(g.people.length) * 2.4;   // em unidades da tela inteira; o CSS desfaz o zoom
+      const [x, y] = xy(g), r = 4 + Math.min(Math.sqrt(g.people.length), 3.5) * 2.4;   // em unidades da tela inteira; o CSS desfaz o zoom
       return `<g class="live__pt${g.on ? ' is-on' : ''}" data-key="${esc(g.key)}" transform="translate(${x} ${y})">${g.on ? `<circle class="live__pulse" r="${r}"/>` : ''}<circle class="live__core" r="${r}"/></g>`;
     }).join('');
     host.querySelectorAll('.live__pt').forEach(el => {

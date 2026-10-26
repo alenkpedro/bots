@@ -14,7 +14,10 @@
 <link rel="manifest" href="admin-app/app.webmanifest">
 <link rel="apple-touch-icon" href="admin-app/icone-180.png">
 <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="site.css">
+<!-- Sempre a versão atual: sem isto o navegador (e o app instalado) segue com o admin.js e o site.css antigos do
+     cache, e uma aba nova, como Ao vivo, não abre. O painel é pequeno; baixar de novo a cada abertura não pesa. -->
+<script>window.BOTS_V = Date.now(); document.write(`<link rel="stylesheet" href="site.css?v=${BOTS_V}">`)</script>
+<noscript><link rel="stylesheet" href="site.css"></noscript>
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body class="adm">
@@ -354,9 +357,6 @@
   </div>
 </dialog>
 
-<script src="supabase.js"></script>
-<script src="site.js"></script>
-<script src="admin-app/world.js"></script>
-<script src="admin.js"></script>
+<script>for (const f of ['supabase.js', 'site.js', 'admin-app/world.js', 'admin.js']) document.write(`<script src="${f}?v=${BOTS_V}"><\/script>`)</script>
 </body>
 </html>
