@@ -362,7 +362,7 @@
   let ROLE = null, mods = new Set();
   const isAdmin = () => ROLE === 'admin';
   const MOD_PAGES = ['visao', 'pessoas', 'roadmap', 'travamentos', 'versoes'];
-  const pages = { visao: renderOverview, pessoas: renderPeople, pessoa: renderPerson, roadmap: renderBoardPage, ideias: renderInbox, travamentos: renderCrashes, nuvem: renderCloud, versoes: renderVersions, notas: renderNotes };
+  const pages = { visao: renderOverview, aovivo: renderLive, pessoas: renderPeople, pessoa: renderPerson, roadmap: renderBoardPage, ideias: renderInbox, travamentos: renderCrashes, nuvem: renderCloud, versoes: renderVersions, notas: renderNotes };
   // #pessoa/<id> abre a página de uma pessoa; o menu continua marcando Pessoas.
   function route() {
     const [name, arg] = location.hash.slice(1).split('/');
@@ -980,6 +980,144 @@
   });
   addEventListener('hashchange', () => { if (!location.hash.startsWith('#notas')) flushNote(); });
   document.addEventListener('visibilitychange', () => { if (document.hidden) flushNote(); });
+
+  // Ao vivo (migração 59): o mapa pelo fuso de cada pessoa, quem está online, os eventos e as tarefas por minuto.
+  // Atualiza a cada 15 segundos só enquanto a página está aberta e visível.
+  const WORLD = window.BOTS_WORLD;
+  const country = (() => { try { const d = new Intl.DisplayNames(['pt-BR'], { type: 'region' }); return cc => { try { return d.of(cc); } catch { return cc; } }; } catch { return cc => cc; } })();
+  const flag = cc => cc && /^[A-Z]{2}$/.test(cc) ? String.fromCodePoint(...[...cc].map(c => 0x1f1a5 + c.charCodeAt(0))) : '';
+  // O fuso vira um lugar: a cidade do fuso (America/Sao_Paulo → São Paulo), o país e as coordenadas.
+  const CITY_FIX = { Sao_Paulo: 'São Paulo', Bogota: 'Bogotá', Asuncion: 'Asunción', Mexico_City: 'Cidade do México', New_York: 'Nova York', Lisbon: 'Lisboa', London: 'Londres', Madrid: 'Madri', Belem: 'Belém', Maceio: 'Maceió', Cuiaba: 'Cuiabá', Araguaina: 'Araguaína', Santarem: 'Santarém' };
+  function place(tz) {
+    const t = WORLD?.tz?.[tz]; if (!t) return null;
+    const last = tz.split('/').pop();
+    return { lat: t[0], lng: t[1], cc: t[2], city: CITY_FIX[last] || last.replace(/_/g, ' '), key: tz };
+  }
+  const xy = p => [(p.lng + 180) * 2, (90 - p.lat) * 2];
+  const MIN = 60000;
+  // Online: o agente deu sinal nos últimos 2,5 min (ele avisa a cada minuto), ou o app, o iPhone ou uma tarefa nos últimos 5.
+  function presence(p, now) {
+    const age = t => t ? now - new Date(t) : Infinity;
+    const via = age(p.agent_seen) < 2.5 * MIN ? 'agente' : age(p.mac_seen) < 5 * MIN ? 'app do Mac' : age(p.phone_seen) < 5 * MIN ? 'iPhone' : age(p.run_at) < 5 * MIN ? 'tarefa' : null;
+    const last = Math.max(...[p.agent_seen, p.mac_seen, p.phone_seen, p.run_at].filter(Boolean).map(t => +new Date(t)), 0);
+    return { online: !!via, via, last };
+  }
+  const EVENT = {
+    run_started: ['Tarefa começou', 'go'], run_done: ['Tarefa terminou', 'go'], run_failed: ['Tarefa com erro', 'bad'],
+    bot_created: ['Bot criado', 'new'], routine_ran: ['Rotina rodou', 'go'], access_requested: ['Pedido de acesso', 'new'],
+    feedback_sent: ['Feedback', 'new'], app_crashed: ['Travamento', 'bad'], app_opened: ['App aberto', 'go'],
+  };
+  const DEVICE = { macos: 'Mac', ios: 'iPhone' };
+  const detail = e => !e.detail ? '' : e.kind.startsWith('run_') ? engineName(e.detail) : e.kind === 'app_opened' ? e.detail.replace(/^(macos|ios)/, d => DEVICE[d]) : e.kind === 'feedback_sent' ? DEVICE[e.detail] || '' : e.detail;
+
+  let live = null, liveTimer = null, seenEvents = new Set(), view = null, liveFitted = false;
+  async function renderLive() {
+    clearInterval(liveTimer);
+    await pollLive(true);
+    liveTimer = setInterval(() => { if (location.hash.startsWith('#aovivo') && !document.hidden) pollLive().catch(() => {}); else if (!location.hash.startsWith('#aovivo')) clearInterval(liveTimer); }, 15000);
+  }
+  async function pollLive(first = false) {
+    live = await api('rpc/admin_live', { method: 'POST', body: {} });
+    const now = +new Date(live.now);
+    const people = live.people.map(p => ({ ...p, where: place(p.tz), ...presence(p, now) }));
+    const online = people.filter(p => p.online).sort((a, b) => b.last - a.last);
+    $('live-count').textContent = nf.format(online.length);
+    setBadge('aovivo', online.length);
+    drawLiveMap(people, first);
+    // Online agora.
+    $('live-online').innerHTML = online.map(p => `<li><span class="live__flag">${flag(p.where?.cc)}</span><b>${esc(p.name || 'Sem nome')}</b>
+      <small>${p.where ? esc(p.where.city) : 'fuso desconhecido'}</small><span class="live__via">${p.via}</span><span class="live__ago">${ago(new Date(p.last).toISOString())}</span></li>`).join('')
+      || '<li class="live__empty">Ninguém agora.</li>';
+    // Tarefas por minuto, com a dica de cada barra.
+    const max = Math.max(1, ...live.per_minute.map(m => m.runs));
+    const total = live.per_minute.reduce((s, m) => s + m.runs, 0);
+    $('live-runs').innerHTML = `<b>${nf.format(total)}</b> ${total === 1 ? 'tarefa' : 'tarefas'}`;
+    $('live-bars').setAttribute('aria-label', `${total} tarefas nos últimos 30 minutos`);
+    $('live-bars').innerHTML = live.per_minute.map(m => `<span title="${new Date(m.t).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}: ${m.runs} ${m.runs === 1 ? 'tarefa' : 'tarefas'}"><i style="height:${m.runs ? Math.max(8, (m.runs / max) * 100) : 3}%"${m.runs ? '' : ' class="is-zero"'}></i></span>`).join('');
+    // Eventos: os novos desde a última vez entram com destaque.
+    $('live-events').innerHTML = live.events.map(e => {
+      const k = `${e.at}|${e.kind}|${e.user_id}`, fresh = !first && !seenEvents.has(k);
+      const [label, tone] = EVENT[e.kind] || [e.kind, 'go'];
+      const w = place(e.tz);
+      return `<li class="live__event${fresh ? ' is-fresh' : ''}" data-tone="${tone}"><i class="live__evdot"></i><b>${label}</b>
+        <small>${esc(e.name || '')}${detail(e) ? ` · ${esc(detail(e))}` : ''}</small><span class="live__flag" title="${w ? esc(w.city) : ''}">${flag(w?.cc)}</span><span class="live__ago">${ago(e.at)}</span></li>`;
+    }).join('') || '<li class="live__empty">Nada nas últimas 24 horas.</li>';
+    seenEvents = new Set(live.events.map(e => `${e.at}|${e.kind}|${e.user_id}`));
+    // Pessoas por país (todas as aprovadas; as online primeiro na conta).
+    const byCc = {};
+    people.forEach(p => { const cc = p.where?.cc; if (!cc) return; (byCc[cc] ||= { n: 0, on: 0 }).n++; if (p.online) byCc[cc].on++; });
+    const ccs = Object.entries(byCc).sort((a, b) => b[1].on - a[1].on || b[1].n - a[1].n).slice(0, 6);
+    $('live-countries').innerHTML = ccs.length ? `<span class="live__label">Países</span>${ccs.map(([cc, v]) => `<span class="live__country"><span class="live__flag">${flag(cc)}</span>${esc(country(cc))} <b>${nf.format(v.n)}</b>${v.on ? `<small>${v.on} online</small>` : ''}</span>`).join('')}` : '';
+  }
+
+  // O mapa: continentes em SVG (Natural Earth, desenhado aqui mesmo), um ponto por cidade de fuso, maior quanto
+  // mais gente; verde e pulsando quando tem alguém online. Arrastar move, a roda e os botões aproximam.
+  function drawLiveMap(people, first) {
+    const host = $('live-map');
+    if (!host.querySelector('svg')) {
+      host.innerHTML = `<svg viewBox="0 0 ${WORLD.width} ${WORLD.height}" preserveAspectRatio="xMidYMid meet"><path class="live__land" d="${WORLD.land}"/><g class="live__dots"></g></svg>`;
+      wireMap(host);
+    }
+    const groups = {};
+    people.forEach(p => { if (!p.where) return; const g = groups[p.where.key] ||= { ...p.where, people: [], on: 0 }; g.people.push(p); if (p.online) g.on++; });
+    const list = Object.values(groups).sort((a, b) => a.on - b.on);   // os online por cima
+    host.querySelector('.live__dots').innerHTML = list.map(g => {
+      const [x, y] = xy(g), r = 4 + Math.sqrt(g.people.length) * 2.4;   // em unidades da tela inteira; o CSS desfaz o zoom
+      return `<g class="live__pt${g.on ? ' is-on' : ''}" data-key="${esc(g.key)}" transform="translate(${x} ${y})">${g.on ? `<circle class="live__pulse" r="${r}"/>` : ''}<circle class="live__core" r="${r}"/></g>`;
+    }).join('');
+    host.querySelectorAll('.live__pt').forEach(el => {
+      const g = groups[el.dataset.key];
+      el.addEventListener('pointerenter', () => { const t = $('live-tip'); t.hidden = false; t.innerHTML = `<b>${flag(g.cc)} ${esc(g.city)}</b><span>${g.people.length} ${g.people.length === 1 ? 'pessoa' : 'pessoas'}${g.on ? ` · ${g.on} online` : ''}</span>`; });
+      el.addEventListener('pointermove', e => { const box = $('live-map').getBoundingClientRect(); const t = $('live-tip'); t.style.left = `${e.clientX - box.left}px`; t.style.top = `${e.clientY - box.top}px`; });
+      el.addEventListener('pointerleave', () => { $('live-tip').hidden = true; });
+    });
+    if (first && !liveFitted) { fitMap(list); liveFitted = true; }
+  }
+  // Enquadra onde tem gente, no espaço livre entre as colunas de cima do mapa (no computador), ou o mundo todo.
+  function fitMap(list = []) {
+    const box = $('live-map').getBoundingClientRect();
+    const pts = list.map(xy);
+    if (!pts.length || !box.width) return setView({ x: 0, y: 0, w: WORLD.width, h: WORLD.height });
+    const wide = innerWidth > 900, side = sel => wide ? (document.querySelector(sel)?.getBoundingClientRect().width || 0) + 40 : 16;
+    const padL = side('.live__left'), padR = side('.live__right'), padT = 24, padB = wide ? 110 : 24;
+    const availW = Math.max(120, box.width - padL - padR), availH = Math.max(120, box.height - padT - padB);
+    const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
+    const bw = Math.max(50, Math.max(...xs) - Math.min(...xs)), bh = Math.max(30, Math.max(...ys) - Math.min(...ys));
+    const room = wide ? 1.35 : 1.12;   // no celular o mapa é pequeno: aperta mais
+    const k = Math.min(availW / (bw * room), availH / (bh * room), box.width / 40);   // px por unidade do mapa
+    const cx = (Math.max(...xs) + Math.min(...xs)) / 2, cy = (Math.max(...ys) + Math.min(...ys)) / 2;
+    setView({ x: cx - (padL + availW / 2) / k, y: cy - (padT + availH / 2) / k, w: box.width / k, h: box.height / k });
+  }
+  function setView(v) {
+    if (v.w > WORLD.width * 1.6) { const f = WORLD.width * 1.6 / v.w; v.x += v.w * (1 - f) / 2; v.y += v.h * (1 - f) / 2; v.w *= f; v.h *= f; }
+    if (v.w < 20) { const f = 20 / v.w; v.x -= v.w * (f - 1) / 2; v.y -= v.h * (f - 1) / 2; v.w *= f; v.h *= f; }
+    view = v; $('live-map').querySelector('svg')?.setAttribute('viewBox', `${v.x} ${v.y} ${v.w} ${v.h}`);
+    // Os pontos ficam do mesmo tamanho na tela ao aproximar.
+    $('live-map').style.setProperty('--k', String(v.w / WORLD.width));
+  }
+  function zoom(f, cx, cy) {
+    if (!view) return;
+    const nx = cx ?? view.x + view.w / 2, ny = cy ?? view.y + view.h / 2;
+    setView({ x: nx - (nx - view.x) * f, y: ny - (ny - view.y) * f, w: view.w * f, h: view.h * f });
+  }
+  function wireMap(host) {
+    const svg = host.querySelector('svg');
+    const toMap = e => { const r = svg.getBoundingClientRect(), s = Math.max(view.w / r.width, view.h / r.height); return [view.x + (e.clientX - r.left - (r.width - view.w / s) / 2) * s, view.y + (e.clientY - r.top - (r.height - view.h / s) / 2) * s]; };
+    host.addEventListener('wheel', e => { if (!view) return; e.preventDefault(); const [x, y] = toMap(e); zoom(e.deltaY > 0 ? 1.15 : 1 / 1.15, x, y); }, { passive: false });
+    let drag = null;
+    host.addEventListener('pointerdown', e => { if (!view || e.button) return; drag = { x: e.clientX, y: e.clientY, v: { ...view } }; host.setPointerCapture(e.pointerId); });
+    host.addEventListener('pointermove', e => {
+      if (!drag) return; const r = svg.getBoundingClientRect(), s = Math.max(view.w / r.width, view.h / r.height);
+      setView({ ...drag.v, x: drag.v.x - (e.clientX - drag.x) * s, y: drag.v.y - (e.clientY - drag.y) * s });
+    });
+    ['pointerup', 'pointercancel'].forEach(t => host.addEventListener(t, () => { drag = null; }));
+  }
+  document.querySelector('.live__zoom').addEventListener('click', e => {
+    const b = e.target.closest('[data-zoom]'); if (!b) return;
+    if (b.dataset.zoom === 'in') zoom(1 / 1.5); else if (b.dataset.zoom === 'out') zoom(1.5);
+    else { const host = $('live-map'); const keys = [...host.querySelectorAll('.live__pt')].map(el => place(el.dataset.key)).filter(Boolean); fitMap(keys); }
+  });
+  addEventListener('resize', () => { if (view && location.hash.startsWith('#aovivo')) setView(view); });
 
   // Menu de contexto: botão direito no computador, tocar e segurar no celular (lá ele sobe como uma folha de
   // baixo, como no iPhone). Cada tipo de item tem as ações dele; fora de um item, sobra "Atualizar".
