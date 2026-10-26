@@ -1,7 +1,7 @@
 {
-  "built_at": 1792978679,
-  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1792978679/botd-1792978679.tar.gz",
-  "signature": "lYHeH/5GB1rGfr872Sk78LiWHS9YqgNrA14blIWe7s5XSo3B3weWoraCDTD2CCnkmxb732VQn58EpbGDLqYbAg==",
+  "built_at": 1792980380,
+  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1792980380/botd-1792980380.tar.gz",
+  "signature": "qUIEnA9VWXrThTIhNlItYB3ufXOm39ruEmjyiuovsr/otxGNZamPrcjaHUObN7DS4tBEm4m6wiSR/LMREvdhCQ==",
   "lock": "539dc3c8fc1f5c46fd41c72e0bd5d5fe47366c51e8b418c5e548d6826c070d52",
-  "notes": "Conectar o WhatsApp não trava mais o Bot: o cartão espera sozinho e o Bot é avisado quando conectar."
+  "notes": "O cartão de conectar o WhatsApp aparece de novo."
 }
