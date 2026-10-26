@@ -857,6 +857,33 @@ p { text-wrap: pretty; }
   .adm-side__end { display: flex; align-items: center; flex-wrap: wrap; margin-top: 0; }
 }
 
+/* A barra lateral recolhida: só os ícones, e os números das abas viram um pontinho no canto do ícone. */
+.adm-side__top { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding-right: 0.15rem; }
+.adm-side__top .bar__name { padding: 0 0.5rem; min-width: 0; }
+.adm-collapse { flex: none; width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: 9px; color: var(--soft); transition: background-color var(--t-hover) ease, color var(--t-hover) ease; }
+.adm-collapse:hover { background: var(--surface); color: var(--ink); }
+.adm-collapse svg { width: 1.15rem; height: 1.15rem; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; transition: transform 200ms ease; }
+.adm-shell { transition: grid-template-columns 200ms ease; }
+@media (min-width: 901px) {
+  .adm-shell.is-collapsed { grid-template-columns: 4.25rem minmax(0, 1fr); }
+  .is-collapsed .adm-side { padding-left: 0.55rem; padding-right: 0.55rem; align-items: center; }
+  .is-collapsed .adm-side__top { flex-direction: column; gap: 0.75rem; padding: 0; }
+  .is-collapsed .adm-side__top .bar__name { padding: 0; }
+  .is-collapsed .adm-side__brand { display: none; }
+  .is-collapsed .adm-collapse svg { transform: scaleX(-1); }
+  .is-collapsed .adm-nav { width: 100%; }
+  .is-collapsed .adm-nav a { position: relative; justify-content: center; padding: 0.65rem 0; }
+  .is-collapsed .adm-nav__long { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .is-collapsed .adm-nav b { position: absolute; top: 0.2rem; right: 0.35rem; margin: 0; min-width: 1rem; height: 1rem; padding: 0 0.25rem; font-size: 0.625rem; }
+  .is-collapsed .adm-side__end { padding: 0; align-items: center; }
+  .is-collapsed .adm-side__end > a, .is-collapsed .adm-who, .is-collapsed .adm-side__end > .adm-link { display: none; }
+  .is-collapsed .adm-side__buttons { flex-direction: column; }
+  .is-collapsed .adm-refresh { width: 2.1rem; padding: 0; justify-content: center; }
+  .is-collapsed .adm-refresh span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .is-collapsed [data-out] { padding-left: 0.6rem; padding-right: 0.6rem; font-size: 0.8125rem; }
+}
+@media (max-width: 900px) { .adm-collapse { display: none; } }
+@media (prefers-reduced-motion: reduce) { .adm-shell, .adm-collapse svg { transition: none; } }
 .adm-nav__short { display: none; }
 /* No celular (e instalado na tela de início) o painel vira app: abas fixas embaixo, topo curto, números dois a dois. */
 @media (max-width: 700px) {
@@ -865,12 +892,12 @@ p { text-wrap: pretty; }
   .adm-side__end a, .adm-who { display: none; }
   .adm-refresh { width: 2.1rem; padding: 0; justify-content: center; }
   /* Topo do celular numa linha só: a marca sem o "Admin", e os links do PIN e do Face ID menores. */
-  .adm-side > .bar__name small { display: none; }
+  .adm-side .bar__name small { display: none; }
   .adm-side__end { flex-wrap: nowrap; min-width: 0; }
   .adm-side__end .adm-link { font-size: 0.8125rem; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
   .adm-side__buttons { flex: none; }
   .adm-refresh span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-  .adm-nav { position: fixed; z-index: 25; left: 0; right: 0; bottom: 0; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 0; overflow: visible;
+  .adm-nav { position: fixed; z-index: 25; left: 0; right: 0; bottom: 0; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(3.7rem, 1fr); gap: 0; overflow-x: auto; overflow-y: visible; scrollbar-width: none; overscroll-behavior-x: contain;
     padding: 0.35rem 0.25rem calc(0.35rem + env(safe-area-inset-bottom)); background: color-mix(in srgb, #0e0e10 92%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-top: 1px solid #1f1f23; }
   .adm-nav a { position: relative; flex-direction: column; gap: 0.2rem; padding: 0.4rem 0.1rem; border-radius: 10px; font-size: 0.6875rem; white-space: nowrap; min-height: 3rem; justify-content: center; }
   .adm-nav a[aria-current] { background: none; color: var(--blue); }
@@ -1051,6 +1078,88 @@ p { text-wrap: pretty; }
 [data-role="moderator"] [data-admin-only] { display: none !important; }
 .pill[data-st="mod"] { background: #172a4a; color: #a5c4ff; }
 #people tbody tr[data-user]:not([tabindex]) { cursor: default; }
+
+/* Ao vivo: o mapa ocupa a página; os números e as listas ficam por cima, nas bordas. */
+.adm-page[data-page="aovivo"] { margin: -2rem calc(-1 * clamp(1rem, 3vw, 2.5rem)) -4rem; }
+.live { position: relative; height: 100svh; min-height: 36rem; overflow: hidden; background: #0c0d0f; }
+.live__map { position: absolute; inset: 0; cursor: grab; touch-action: none; --k: 1; }
+.live__map:active { cursor: grabbing; }
+.live__map svg { width: 100%; height: 100%; display: block; }
+.live__land { fill: #232429; stroke: #303137; stroke-width: calc(0.6px * var(--k)); vector-effect: non-scaling-stroke; }
+.live__pt { cursor: pointer; }
+.live__core { fill: #3f3f46; transform: scale(var(--k)); }
+.live__pt.is-on .live__core { fill: #38bdf8; }
+.live__pulse { fill: #38bdf8; opacity: 0.35; transform: scale(var(--k)); }
+@media (prefers-reduced-motion: no-preference) {
+  .live__pulse { animation: live-pulse 2.4s ease-out infinite; }
+  .live__event.is-fresh { animation: live-in 600ms ease-out; }
+}
+@keyframes live-pulse { from { transform: scale(var(--k)); opacity: 0.45; } to { transform: scale(calc(var(--k) * 3)); opacity: 0; } }
+@keyframes live-in { from { background: rgb(56 189 248 / 0.16); transform: translateY(-6px); } }
+.live__tip { position: absolute; z-index: 3; pointer-events: none; transform: translate(-50%, calc(-100% - 14px)); padding: 0.45rem 0.7rem; border-radius: 10px; background: #26272c; font-size: 0.875rem; white-space: nowrap; display: grid; box-shadow: 0 8px 24px rgb(0 0 0 / 0.4); }
+.live__tip span { color: var(--muted); font-size: 0.8125rem; }
+.live__left, .live__right { position: absolute; z-index: 2; top: 1.5rem; bottom: 10rem; display: flex; flex-direction: column; gap: 0.6rem; width: min(22rem, 30%); pointer-events: none; }
+.live__left { left: 1.5rem; } .live__right { right: 1.5rem; }
+.live__left > *, .live__right > * { pointer-events: auto; }
+.live__now { display: grid; gap: 0.2rem; margin-bottom: 0.6rem; }
+.live__now b { font-size: clamp(3.5rem, 2rem + 4vw, 6rem); line-height: 0.95; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+.live__now span { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--muted); font-size: 0.8125rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.live__dot { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: #38bdf8; box-shadow: 0 0 0 4px rgb(56 189 248 / 0.2); }
+.live__label { color: var(--soft); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+.live__list { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.3rem; overflow-y: auto; min-height: 0; scrollbar-width: none; }
+.live__list li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; column-gap: 0.55rem; padding: 0.5rem 0.7rem; border-radius: 10px; background: rgb(20 20 22 / 0.88); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); font-size: 0.875rem; box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.05); }
+.live__list li b { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.live__list li small { grid-column: 2; color: var(--soft); font-size: 0.75rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.live__list li .live__flag { grid-row: span 2; }
+.live__via { grid-column: 3; grid-row: 1; color: var(--soft); font-size: 0.75rem; text-align: right; }
+.live__ago { grid-column: 3; color: var(--soft); font-size: 0.75rem; text-align: right; font-variant-numeric: tabular-nums; }
+.live__events li { grid-template-columns: auto minmax(0, 1fr) auto auto; }
+.live__events li small { grid-column: 2; }
+.live__events .live__flag { grid-row: span 2; grid-column: 3; }
+.live__events .live__ago { grid-column: 4; grid-row: 1 / span 2; }
+.live__evdot { grid-row: span 2; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: #38bdf8; }
+.live__event[data-tone="bad"] .live__evdot { background: #f87171; }
+.live__event[data-tone="new"] .live__evdot { background: #a5c4ff; }
+.live__flag { font-size: 1.05rem; line-height: 1; }
+.live__empty { display: block !important; color: var(--soft); background: none !important; box-shadow: none !important; padding: 0.3rem 0 !important; }
+.live__card { padding: 0.85rem 0.95rem; border-radius: 14px; background: rgb(20 20 22 / 0.88); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.05); margin-bottom: 0.4rem; }
+.live__cardhead { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-size: 0.8125rem; color: var(--muted); }
+.live__cardhead b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.live__bars { margin-top: 0.7rem; height: 3.5rem; display: grid; grid-template-columns: repeat(30, minmax(0, 1fr)); gap: 2px; align-items: end; }
+.live__bars span { height: 100%; display: flex; align-items: flex-end; }
+.live__bars i { width: 100%; border-radius: 3px 3px 0 0; background: #0284c7; }
+.live__bars i.is-zero { background: #26272c; }
+.live__bars span:hover i { background: var(--blue); }
+.live__bottom { position: absolute; z-index: 2; left: 1.5rem; right: 5rem; bottom: 1.5rem; display: flex; align-items: center; gap: 1.1rem; padding: 0.75rem 1.1rem; border-radius: 14px; background: rgb(20 20 22 / 0.88); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.05); font-size: 0.875rem; }
+.live__bottom { flex-direction: column; align-items: stretch; gap: 0.45rem; }
+#live-countries { display: grid; gap: 0.45rem; }
+#live-countries:empty { display: none; }
+.live__row { display: flex; align-items: center; gap: 1.1rem; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
+.live__row .live__label { min-width: 4.5rem; }
+.live__site { color: var(--muted); font-size: 0.8125rem; margin-top: 0.2rem; }
+.live__site strong { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.live__country { display: inline-flex; align-items: center; gap: 0.4rem; }
+.live__country b { font-weight: 500; color: var(--muted); font-variant-numeric: tabular-nums; }
+.live__country small { color: #38bdf8; font-size: 0.75rem; }
+.live__zoom { position: absolute; z-index: 2; right: 1.5rem; bottom: 1.5rem; display: grid; border-radius: 12px; overflow: hidden; background: rgb(20 20 22 / 0.88); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06); }
+.live__zoom button { width: 2.4rem; height: 2.4rem; display: grid; place-items: center; color: var(--muted); font-size: 1.15rem; }
+.live__zoom button:hover { background: var(--surface-2); color: var(--ink); }
+.live__zoom svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.live__note { color: var(--soft); font-size: 0.75rem; }
+/* No celular: o número, o mapa, as barras, quem está online e os eventos, um embaixo do outro. */
+@media (max-width: 900px) {
+  .adm-page[data-page="aovivo"] { margin: 0; }
+  .live { height: auto; min-height: 0; overflow: visible; background: none; display: flex; flex-direction: column; gap: 0.9rem; }
+  .live__map { position: relative; inset: auto; order: 2; aspect-ratio: 4 / 3; border-radius: 18px; overflow: hidden; background: #0c0d0f; touch-action: pan-y; }   /* o dedo rola a página */
+  .live__left, .live__right { position: static; width: auto; pointer-events: auto; display: contents; }
+  .live__now { order: 1; margin: 0; }
+  .live__card { order: 3; margin: 0; }
+  .live__left .live__label { order: 4; } #live-online { order: 5; }
+  .live__right > .live__label { order: 6; } #live-events { order: 7; }
+  .live__list { overflow: visible; }
+  .live__bottom { position: static; order: 8; transform: none; max-width: none; justify-content: flex-start; }
+  .live__zoom { display: none; }   /* no toque: pinça não, mas arrastar e o enquadramento automático bastam */
+}
 
 /* Menu de contexto: no computador, um menu no ponto do clique; no toque, uma folha que sobe de baixo. */
 .ctx { position: fixed; inset: 0; z-index: 60; }

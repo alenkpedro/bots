@@ -559,4 +559,10 @@
     addEventListener('hashchange', () => open(location.hash.slice(1)));
     document.querySelectorAll('.help__toc a[href^="#"]').forEach(a => a.addEventListener('click', () => open(a.getAttribute('href').slice(1))));
   }
+
+  // Conta a visita para o Ao vivo do painel (functions/conta.js): só a página e o site de onde a pessoa veio; o país
+  // o Cloudflare põe. Sem cookie e sem nada que identifique quem visitou. O painel e uma cópia local não contam.
+  if (!document.body.classList.contains('adm') && /\.(pages\.dev|github\.io)$/.test(location.hostname)) {
+    try { navigator.sendBeacon?.('https://appbots.pages.dev/conta', JSON.stringify({ p: location.pathname, r: document.referrer })); } catch {}
+  }
 })();
