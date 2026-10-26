@@ -993,7 +993,17 @@
     const last = tz.split('/').pop();
     return { lat: t[0], lng: t[1], cc: t[2], city: CITY_FIX[last] || last.replace(/_/g, ' '), key: tz };
   }
+  // A cidade que o agente informou (fase 2: Cloudflare, uns 10 km) vale mais que a do fuso.
+  const placeOf = p => p.lat != null && p.lng != null
+    ? { lat: +p.lat, lng: +p.lng, cc: p.country, city: p.city || p.region || place(p.tz)?.city || '?', key: `${p.city || ''}|${p.country || ''}|${p.lat}|${p.lng}`, real: true }
+    : place(p.tz);
   const xy = p => [(p.lng + 180) * 2, (90 - p.lat) * 2];
+  // Os sites de onde vêm as visitas, com o nome que todo mundo conhece.
+  const REF = [[/(^|\.)(x\.com|t\.co|twitter\.com)$/, 'X'], [/(^|\.)google\./, 'Google'], [/(^|\.)bing\.com$/, 'Bing'], [/(^|\.)duckduckgo\.com$/, 'DuckDuckGo'],
+    [/(^|\.)(instagram\.com|l\.instagram\.com)$/, 'Instagram'], [/(^|\.)(facebook\.com|fb\.com|l\.facebook\.com)$/, 'Facebook'], [/(^|\.)linkedin\.com$|lnkd\.in$/, 'LinkedIn'],
+    [/(^|\.)(youtube\.com|youtu\.be)$/, 'YouTube'], [/(^|\.)github\.com$/, 'GitHub'], [/(^|\.)reddit\.com$/, 'Reddit'], [/(^|\.)(whatsapp\.com|wa\.me)$/, 'WhatsApp'],
+    [/(^|\.)chatgpt\.com$/, 'ChatGPT'], [/(^|\.)perplexity\.ai$/, 'Perplexity']];
+  const refName = h => !h ? 'Direto' : (REF.find(([re]) => re.test(h))?.[1] || h);
   const MIN = 60000;
   // Online: o agente deu sinal nos últimos 2,5 min (ele avisa a cada minuto), ou o app, o iPhone ou uma tarefa nos últimos 5.
   function presence(p, now) {
@@ -1018,11 +1028,15 @@
     liveTimer = setInterval(() => { if (location.hash.startsWith('#aovivo') && !document.hidden) pollLive().catch(() => {}); else if (!location.hash.startsWith('#aovivo')) clearInterval(liveTimer); }, 15000);
   }
   async function pollLive(first = false) {
-    live = await api('rpc/admin_live', { method: 'POST', body: {} });
+    let site;
+    [live, site] = await Promise.all([api('rpc/admin_live', { method: 'POST', body: {} }),
+      api('rpc/admin_site_stats', { method: 'POST', body: {} }).catch(() => null)]);   // sem a migração 60, sem visitas
     const now = +new Date(live.now);
-    const people = live.people.map(p => ({ ...p, where: place(p.tz), ...presence(p, now) }));
+    const people = live.people.map(p => ({ ...p, where: placeOf(p), ...presence(p, now) }));
     const online = people.filter(p => p.online).sort((a, b) => b.last - a.last);
     $('live-count').textContent = nf.format(online.length);
+    $('live-site').hidden = !site;
+    if (site) $('live-site').innerHTML = `<strong>${nf.format(site.now)}</strong> ${site.now === 1 ? 'visitante' : 'visitantes'} no site agora · ${nf.format(site.day)} em 24 h`;
     setBadge('aovivo', online.length);
     drawLiveMap(people, first);
     // Online agora.
@@ -1041,7 +1055,7 @@
     $('live-events').innerHTML = events.map(e => {
       const k = `${e.at}|${e.kind}|${e.user_id}`, fresh = !first && !seenEvents.has(k);
       const [label, tone] = EVENT[e.kind] || [e.kind, 'go'];
-      const w = place(e.tz);
+      const w = e.country ? { cc: e.country, city: e.city || '' } : place(e.tz);
       return `<li class="live__event${fresh ? ' is-fresh' : ''}" data-tone="${tone}"><i class="live__evdot"></i><b>${label}</b>
         <small>${esc(e.name || '')}${detail(e) ? ` · ${esc(detail(e))}` : ''}</small><span class="live__flag" title="${w ? esc(w.city) : ''}">${flag(w?.cc)}</span><span class="live__ago">${ago(e.at)}</span></li>`;
     }).join('') || '<li class="live__empty">Nada nas últimas 24 horas.</li>';
@@ -1050,7 +1064,11 @@
     const byCc = {};
     people.forEach(p => { const cc = p.where?.cc; if (!cc) return; (byCc[cc] ||= { n: 0, on: 0 }).n++; if (p.online) byCc[cc].on++; });
     const ccs = Object.entries(byCc).sort((a, b) => b[1].on - a[1].on || b[1].n - a[1].n).slice(0, 6);
-    $('live-countries').innerHTML = ccs.length ? `<span class="live__label">Países</span>${ccs.map(([cc, v]) => `<span class="live__country"><span class="live__flag">${flag(cc)}</span>${esc(country(cc))} <b>${nf.format(v.n)}</b>${v.on ? `<small>${v.on} online</small>` : ''}</span>`).join('')}` : '';
+    const row = (label, items) => items.length ? `<div class="live__row"><span class="live__label">${label}</span>${items.join('')}</div>` : '';
+    $('live-countries').innerHTML =
+      row('Pessoas', ccs.map(([cc, v]) => `<span class="live__country"><span class="live__flag">${flag(cc)}</span>${esc(country(cc))} <b>${nf.format(v.n)}</b>${v.on ? `<small>${v.on} online</small>` : ''}</span>`))
+      + (site ? row('Origens', (site.referrers || []).map(r => `<span class="live__country">${esc(refName(r.referrer))} <b>${nf.format(r.visits)}</b></span>`))
+        + row('Visitas', (site.countries || []).map(c => `<span class="live__country"><span class="live__flag">${flag(c.country)}</span>${esc(country(c.country))} <b>${nf.format(c.visits)}</b></span>`)) : '');
   }
 
   // O mapa: continentes em SVG (Natural Earth, desenhado aqui mesmo), um ponto por cidade de fuso, maior quanto

@@ -129,7 +129,7 @@
         <div class="live__map" id="live-map" aria-label="Mapa de quem usa os Bots, pelo fuso horário"></div>
         <div class="live__tip" id="live-tip" hidden></div>
         <div class="live__left">
-          <div class="live__now"><b id="live-count">0</b><span><i class="live__dot"></i>online agora</span></div>
+          <div class="live__now"><b id="live-count">0</b><span><i class="live__dot"></i>online agora</span><small class="live__site" id="live-site" hidden></small></div>
           <h2 class="live__label">Online agora</h2>
           <ul class="live__list" id="live-online"></ul>
         </div>
@@ -141,13 +141,12 @@
           <h2 class="live__label">Eventos</h2>
           <ul class="live__list live__events" id="live-events"></ul>
         </div>
-        <div class="live__bottom" id="live-countries"></div>
+        <div class="live__bottom"><div id="live-countries"></div><p class="live__note">Lugar aproximado: a cidade que o agente informou (uns 10 km) ou, sem ela, a do fuso horário.</p></div>
         <div class="live__zoom">
           <button type="button" data-zoom="in" aria-label="Aproximar">+</button>
           <button type="button" data-zoom="out" aria-label="Afastar">−</button>
           <button type="button" data-zoom="fit" aria-label="Mostrar todos"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></button>
         </div>
-        <p class="live__note">Lugar aproximado: a cidade do fuso horário de cada pessoa.</p>
       </div>
     </section>
 
