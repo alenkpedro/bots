@@ -1019,6 +1019,14 @@
   };
   const DEVICE = { macos: 'Mac', ios: 'iPhone' };
   const VIA = { agente: 'Agente no Mac', 'app do Mac': 'App do Mac', iPhone: 'iPhone', tarefa: 'Tarefa rodando' };
+  const VIA_SHORT = { agente: 'no agente', 'app do Mac': 'no app do Mac', iPhone: 'no iPhone', tarefa: 'com tarefa' };
+  const svgI = d => `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${d}"/></svg>`;
+  const EVENT_ICON = {
+    run_started: svgI('M8 5.5v13l10-6.5z'), run_done: svgI('M5 12.5l4.5 4.5L19 7.5'), run_failed: svgI('M7 7l10 10M17 7L7 17'),
+    bot_created: svgI('M12 5v14M5 12h14'), routine_ran: svgI('M12 7v5l3 2M12 3.5a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17z'),
+    access_requested: svgI('M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4.5 20a7.5 7.5 0 0 1 15 0'), feedback_sent: svgI('M4 5h16v11H9l-5 4z'),
+    app_crashed: svgI('M12 4l9 16H3zM12 10v4M12 17v.5'), app_opened: svgI('M5 12h12M13 7l5 5-5 5'),
+  };
   const ICON = {
     mac: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>',
     phone: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>',
@@ -1040,44 +1048,78 @@
       api('rpc/admin_site_stats', { method: 'POST', body: {} }).catch(() => null)]);   // sem a migração 60, sem visitas
     const now = +new Date(live.now);
     const people = live.people.map(p => ({ ...p, where: placeOf(p), ...presence(p, now) }));
-    const online = people.filter(p => p.online).sort((a, b) => b.last - a.last);
+    const online = people.filter(p => p.online);
     $('live-count').textContent = nf.format(online.length);
     $('live-site').hidden = !site;
-    if (site) $('live-site').innerHTML = `<strong>${nf.format(site.now)}</strong> ${site.now === 1 ? 'visitante' : 'visitantes'} no site agora · ${nf.format(site.day)} em 24 h`;
+    if (site) $('live-site').innerHTML = `<strong>${nf.format(site.now)}</strong> ${site.now === 1 ? 'visitante' : 'visitantes'} no site agora · ${nf.format(site.day)} hoje`;
     setBadge('aovivo', online.length);
     drawLiveMap(people, first);
-    // Online agora.
-    // Sem nomes (Pedro, 26/10: dá para mostrar a tela): a cidade, o aparelho e há quanto tempo, como no OpenBot.
-    $('live-online').innerHTML = online.map(p => `<li><span class="live__flag">${flag(p.where?.cc)}</span><b>${p.where ? esc(p.where.city) : 'Lugar desconhecido'}</b>
-      <small>${VIA[p.via] || p.via}</small><span class="live__dev" title="${VIA[p.via] || ''}">${p.via === 'iPhone' ? ICON.phone : ICON.mac}</span><span class="live__ago">${short(p.last)}</span></li>`).join('')
-      || '<li class="live__empty">Ninguém agora.</li>';
-    // Tarefas por minuto, com a dica de cada barra.
-    const max = Math.max(1, ...live.per_minute.map(m => m.runs));
-    const total = live.per_minute.reduce((s, m) => s + m.runs, 0);
-    $('live-runs').innerHTML = `<b>${nf.format(total)}</b> ${total === 1 ? 'tarefa' : 'tarefas'}`;
-    $('live-bars').setAttribute('aria-label', `${total} tarefas nos últimos 30 minutos`);
-    $('live-bars').innerHTML = live.per_minute.map(m => `<span title="${new Date(m.t).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}: ${m.runs} ${m.runs === 1 ? 'tarefa' : 'tarefas'}"><i style="height:${m.runs ? Math.max(8, (m.runs / max) * 100) : 3}%"${m.runs ? '' : ' class="is-zero"'}></i></span>`).join('');
-    // Eventos: os novos desde a última vez entram com destaque.
-    // Rotina pulada (fora do horário, Mac dormindo) não é acontecimento: só enchia a lista.
+    drawPulse(live.per_minute);
+
+    // Onde estão: uma linha por cidade (sem nomes), com quantos estão acordados e em quê.
+    const cities = {};
+    people.forEach(p => {
+      const k = p.where ? `${p.where.city}|${p.where.cc}` : '?';
+      const c = cities[k] ||= { city: p.where?.city || 'Lugar desconhecido', cc: p.where?.cc, n: 0, on: 0, via: {}, last: 0 };
+      c.n++; if (p.online) { c.on++; c.via[p.via] = (c.via[p.via] || 0) + 1; }
+      c.last = Math.max(c.last, p.last);
+    });
+    const list = Object.values(cities).sort((a, b) => b.on - a.on || b.n - a.n).slice(0, 12);
+    const maxN = Math.max(1, ...list.map(c => c.n));
+    $('live-online').innerHTML = list.map(c => `<li class="${c.on ? 'is-on' : ''}">
+      <span class="lv-face${c.on ? ' is-on' : ''}" aria-hidden="true"></span>
+      <div class="lv-city"><b>${flag(c.cc)} ${esc(c.city)}</b><small>${c.on ? Object.entries(c.via).map(([v, n]) => `${n} ${VIA_SHORT[v] || v}`).join(' · ') : `último sinal ${short(c.last)}`}</small>
+        <span class="lv-meter" aria-hidden="true"><i class="lv-meter__on" style="width:${(c.on / maxN) * 100}%"></i><i style="width:${((c.n - c.on) / maxN) * 100}%"></i></span></div>
+      <span class="lv-count"><b>${nf.format(c.on)}</b><small>de ${nf.format(c.n)}</small></span></li>`).join('')
+      || '<li class="lv-empty">Ninguém ainda.</li>';
+
+    // Linha do tempo: o que aconteceu, onde e quando; os novos desde a última vez entram com destaque.
     const events = live.events.filter(e => !(e.kind === 'routine_ran' && e.detail === 'skipped'));
-    $('live-events').innerHTML = events.map(e => {
+    $('live-events').innerHTML = events.slice(0, 40).map(e => {
       const k = `${e.at}|${e.kind}|${e.user_id}`, fresh = !first && !seenEvents.has(k);
       const [label, tone] = EVENT[e.kind] || [e.kind, 'go'];
       const w = e.country ? { cc: e.country, city: e.city || '' } : place(e.tz);
-      const where = w?.city ? esc(w.city) : 'Lugar desconhecido';
-      return `<li class="live__event${fresh ? ' is-fresh' : ''}" data-tone="${tone}"><i class="live__evdot"></i><b>${label}</b>
-        <small>${where}${detail(e) ? ` · ${esc(detail(e))}` : ''}</small><span class="live__flag">${flag(w?.cc)}</span><span class="live__ago">${short(e.at)}</span></li>`;
-    }).join('') || '<li class="live__empty">Nada nas últimas 24 horas.</li>';
+      const hhmm = new Date(e.at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+      return `<li class="${fresh ? 'is-fresh' : ''}" data-tone="${tone}"><time datetime="${e.at}">${hhmm}</time><i class="lv-node" aria-hidden="true">${EVENT_ICON[e.kind] || ''}</i>
+        <div><b>${label}</b><small>${flag(w?.cc)} ${w?.city ? esc(w.city) : 'Lugar desconhecido'}${detail(e) ? ` · ${esc(detail(e))}` : ''}</small></div></li>`;
+    }).join('') || '<li class="lv-empty">Nada nas últimas 24 horas.</li>';
     seenEvents = new Set(live.events.map(e => `${e.at}|${e.kind}|${e.user_id}`));
-    // Pessoas por país (todas as aprovadas; as online primeiro na conta).
-    const byCc = {};
-    people.forEach(p => { const cc = p.where?.cc; if (!cc) return; (byCc[cc] ||= { n: 0, on: 0 }).n++; if (p.online) byCc[cc].on++; });
-    const ccs = Object.entries(byCc).sort((a, b) => b[1].on - a[1].on || b[1].n - a[1].n).slice(0, 6);
-    const row = (label, items) => items.length ? `<div class="live__row"><span class="live__label">${label}</span>${items.join('')}</div>` : '';
-    $('live-countries').innerHTML =
-      row('Pessoas', ccs.map(([cc, v]) => `<span class="live__country"><span class="live__flag">${flag(cc)}</span>${esc(country(cc))} <b>${nf.format(v.n)}</b>${v.on ? `<small>${v.on} online</small>` : ''}</span>`))
-      + (site ? row('Origens', (site.referrers || []).map(r => `<span class="live__country">${esc(refName(r.referrer))} <b>${nf.format(r.visits)}</b></span>`))
-        + row('Visitas', (site.countries || []).map(c => `<span class="live__country"><span class="live__flag">${flag(c.country)}</span>${esc(country(c.country))} <b>${nf.format(c.visits)}</b></span>`)) : '');
+
+    // Visitas ao site: de onde vieram e de que país, em barras do tamanho de cada número.
+    const bars = (title, rows) => rows.length ? `<h3>${title}</h3><ul class="lv-bars">${rows.map(r => `<li><span>${r.label}</span><i style="--w:${(r.n / Math.max(...rows.map(x => x.n))) * 100}%"></i><b>${nf.format(r.n)}</b></li>`).join('')}</ul>` : '';
+    $('live-countries').innerHTML = !site ? '<p class="lv-empty">Sem visitas ainda.</p>'
+      : (bars('De onde vieram', (site.referrers || []).slice(0, 6).map(r => ({ label: esc(refName(r.referrer)), n: r.visits })))
+        + bars('De que país', (site.countries || []).slice(0, 6).map(c => ({ label: `${flag(c.country)} ${esc(country(c.country))}`, n: c.visits }))))
+        || '<p class="lv-empty">Nenhuma visita nas últimas 24 horas.</p>';
+  }
+
+  // O pulso: as tarefas que começaram a cada minuto, numa linha com área (uma série só), com a dica de cada minuto.
+  function drawPulse(rows) {
+    const W = 600, H = 120, pad = 6;
+    const max = Math.max(4, ...rows.map(r => r.runs)), total = rows.reduce((s, r) => s + r.runs, 0);
+    const x = i => pad + (i / Math.max(1, rows.length - 1)) * (W - 2 * pad), y = v => H - pad - (v / max) * (H - 2 * pad - 10);
+    const pts = rows.map((r, i) => `${x(i).toFixed(1)},${y(r.runs).toFixed(1)}`);
+    $('live-runs').innerHTML = `${nf.format(total)} ${total === 1 ? 'tarefa' : 'tarefas'}`;
+    const plot = $('live-bars');
+    plot.setAttribute('aria-label', `${total} tarefas nos últimos 30 minutos`);
+    plot.innerHTML = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+      <path class="lv-pulse__area" d="M${x(0)},${H - pad} L${pts.join(' L')} L${x(rows.length - 1)},${H - pad} Z"/>
+      <polyline class="lv-pulse__line" points="${pts.join(' ')}"/>
+      <line class="lv-pulse__cross" x1="0" x2="0" y1="0" y2="${H}" hidden/>
+      ${rows.map((r, i) => `<rect class="lv-pulse__hit" x="${x(i) - (W / rows.length) / 2}" y="0" width="${W / rows.length}" height="${H}" data-i="${i}"/>`).join('')}
+    </svg><span class="lv-pulse__dot" hidden></span>`;
+    const tip = $('live-pulse-tip'), dot = plot.querySelector('.lv-pulse__dot'), cross = plot.querySelector('.lv-pulse__cross');
+    plot.querySelectorAll('.lv-pulse__hit').forEach(h => {
+      h.addEventListener('pointerenter', () => {
+        const i = +h.dataset.i, r = rows[i], box = plot.getBoundingClientRect();
+        const px = (x(i) / W) * box.width, py = (y(r.runs) / H) * box.height;
+        cross.setAttribute('x1', x(i)); cross.setAttribute('x2', x(i)); cross.hidden = false;
+        dot.hidden = false; dot.style.left = `${px}px`; dot.style.top = `${py}px`;
+        tip.hidden = false; tip.style.left = `${px}px`; tip.style.top = `${plot.offsetTop + py}px`;
+        tip.innerHTML = `<b>${nf.format(r.runs)} ${r.runs === 1 ? 'tarefa' : 'tarefas'}</b><span>${new Date(r.t).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</span>`;
+      });
+    });
+    plot.addEventListener('pointerleave', () => { tip.hidden = true; dot.hidden = true; cross.hidden = true; });
   }
 
   // O mapa: continentes em SVG (Natural Earth, desenhado aqui mesmo), um ponto por cidade de fuso, maior quanto
@@ -1091,9 +1133,16 @@
     const groups = {};
     people.forEach(p => { if (!p.where) return; const g = groups[p.where.key] ||= { ...p.where, people: [], on: 0 }; g.people.push(p); if (p.online) g.on++; });
     const list = Object.values(groups).sort((a, b) => a.on - b.on);   // os online por cima
-    host.querySelector('.live__dots').innerHTML = list.map(g => {
-      const [x, y] = xy(g), r = 4 + Math.min(Math.sqrt(g.people.length), 3.5) * 2.4;   // em unidades da tela inteira; o CSS desfaz o zoom
-      return `<g class="live__pt${g.on ? ' is-on' : ''}" data-key="${esc(g.key)}" transform="translate(${x} ${y})">${g.on ? `<circle class="live__pulse" r="${r}"/>` : ''}<circle class="live__core" r="${r}"/></g>`;
+    // Um mascote por cidade, do tamanho de quanta gente tem lá: acordado (olhos abertos, piscando) com alguém
+    // online; dormindo (olhos fechados) sem ninguém. Em unidades da tela inteira; o CSS desfaz o zoom.
+    host.querySelector('.live__dots').innerHTML = list.map((g, n) => {
+      const [x, y] = xy(g), s = 1.15 + Math.min(Math.sqrt(g.people.length), 3.5) * 0.3;
+      const eyes = g.on
+        ? `<g class="lv-eyes" style="animation-delay:${(n % 7) * 0.7}s"><circle cx="-3.2" cy="-1" r="2.4" fill="#fff"/><circle cx="3.2" cy="-1" r="2.4" fill="#fff"/><circle cx="-2.8" cy="-0.6" r="1.25" fill="#0a0a0b"/><circle cx="3.6" cy="-0.6" r="1.25" fill="#0a0a0b"/></g>`
+        : `<path d="M-5.2 -0.6q2 1.6 4 0M1.2 -0.6q2 1.6 4 0" fill="none" stroke="#0a0a0b" stroke-width="1.2" stroke-linecap="round"/>`;
+      return `<g class="live__pt${g.on ? ' is-on' : ''}" data-key="${esc(g.key)}" transform="translate(${x} ${y})"><g class="lv-bot" style="--s:${s.toFixed(2)}">
+        ${g.on ? '<circle class="live__pulse" r="9"/>' : ''}<path class="live__core" d="M-9 4.5a9 9 0 1 1 18 0v1.5h-18z"/>${eyes}
+        ${g.people.length > 1 ? `<g class="lv-badge"><circle cx="8" cy="-8" r="4.6"/><text x="8" y="-6.3" text-anchor="middle">${g.on || g.people.length}</text></g>` : ''}</g></g>`;
     }).join('');
     host.querySelectorAll('.live__pt').forEach(el => {
       const g = groups[el.dataset.key];
@@ -1108,8 +1157,8 @@
     const box = $('live-map').getBoundingClientRect();
     const pts = list.map(xy);
     if (!pts.length || !box.width) return setView({ x: 0, y: 0, w: WORLD.width, h: WORLD.height });
-    const wide = innerWidth > 900, side = sel => wide ? (document.querySelector(sel)?.getBoundingClientRect().width || 0) + 40 : 16;
-    const padL = side('.live__left'), padR = side('.live__right'), padT = 24, padB = wide ? 110 : 24;
+    const wide = innerWidth > 900;
+    const padL = 24, padR = 24, padT = 36, padB = 44;   // o mapa agora é um cartão próprio: só a folga das bordas
     const availW = Math.max(120, box.width - padL - padR), availH = Math.max(120, box.height - padT - padB);
     const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
     const bw = Math.max(50, Math.max(...xs) - Math.min(...xs)), bh = Math.max(30, Math.max(...ys) - Math.min(...ys));

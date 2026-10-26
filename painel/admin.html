@@ -121,32 +121,43 @@
       <section class="adm-todo" aria-labelledby="t-todo"><h2 id="t-todo">Precisa de você</h2><ul id="todo"></ul></section>
     </section>
 
-    <!-- Ao vivo (migração 59): quem está com os Bots abertos agora, num mapa pelo fuso de cada um, os eventos e as
-         tarefas por minuto. Sem conteúdo e sem IP. Atualiza a cada 15 segundos enquanto esta página está aberta. -->
+    <!-- Ao vivo (migrações 59, 60 e 62): quem está com os Bots acordados agora, num mapa de mascotes (um por cidade),
+         o pulso das tarefas, a linha do tempo e as visitas do site. Sem nomes e sem conteúdo. Atualiza a cada 15 s. -->
     <section class="adm-page" data-page="aovivo" aria-labelledby="t-aovivo">
-      <h1 class="sr-only" id="t-aovivo">Ao vivo</h1>
-      <div class="live">
-        <div class="live__map" id="live-map" aria-label="Mapa de quem usa os Bots, pelo fuso horário"></div>
-        <div class="live__tip" id="live-tip" hidden></div>
-        <div class="live__left">
-          <div class="live__now"><b id="live-count">0</b><span><i class="live__dot"></i>online agora</span><small class="live__site" id="live-site" hidden></small></div>
-          <h2 class="live__label">Online agora</h2>
-          <ul class="live__list" id="live-online"></ul>
-        </div>
-        <div class="live__right">
-          <div class="live__card">
-            <div class="live__cardhead"><h2 class="live__label">Últimos 30 minutos</h2><span id="live-runs"></span></div>
-            <div class="live__bars" id="live-bars" role="img"></div>
+      <div class="lv">
+        <header class="lv-head">
+          <div class="lv-now">
+            <b id="live-count">0</b>
+            <div><h1 id="t-aovivo">acordados agora</h1><p id="live-site" hidden></p></div>
           </div>
-          <h2 class="live__label">Eventos</h2>
-          <ul class="live__list live__events" id="live-events"></ul>
-        </div>
-        <div class="live__bottom"><div id="live-countries"></div><p class="live__note">Lugar aproximado: a cidade que o agente informou (uns 10 km) ou, sem ela, a do fuso horário.</p></div>
-        <div class="live__zoom">
-          <button type="button" data-zoom="in" aria-label="Aproximar">+</button>
-          <button type="button" data-zoom="out" aria-label="Afastar">−</button>
-          <button type="button" data-zoom="fit" aria-label="Mostrar todos"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></button>
-        </div>
+          <figure class="lv-pulse">
+            <figcaption><span>Tarefas que começaram, últimos 30 min</span><b id="live-runs"></b></figcaption>
+            <div class="lv-pulse__plot" id="live-bars" role="img"></div>
+            <div class="lv-tip" id="live-pulse-tip" hidden></div>
+          </figure>
+        </header>
+        <section class="lv-map" aria-label="Mapa de quem usa os Bots">
+          <div class="live__map" id="live-map"></div>
+          <div class="lv-tip" id="live-tip" hidden></div>
+          <div class="live__zoom">
+            <button type="button" data-zoom="in" aria-label="Aproximar">+</button>
+            <button type="button" data-zoom="out" aria-label="Afastar">−</button>
+            <button type="button" data-zoom="fit" aria-label="Mostrar todos"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></button>
+          </div>
+          <p class="lv-legend"><span><i class="lv-face is-on"></i>acordado</span><span><i class="lv-face"></i>dormindo</span><span>Lugar aproximado: a cidade que o agente informou ou a do fuso.</span></p>
+        </section>
+        <section class="lv-card lv-where" aria-labelledby="t-lv-where">
+          <h2 id="t-lv-where">Onde estão</h2>
+          <ul class="lv-cities" id="live-online"></ul>
+        </section>
+        <section class="lv-card lv-site" aria-labelledby="t-lv-site">
+          <h2 id="t-lv-site">Visitas ao site <small>24 horas</small></h2>
+          <div id="live-countries"></div>
+        </section>
+        <aside class="lv-card lv-feed" aria-labelledby="t-lv-feed">
+          <h2 id="t-lv-feed">Linha do tempo</h2>
+          <ol class="lv-timeline" id="live-events"></ol>
+        </aside>
       </div>
     </section>
 
