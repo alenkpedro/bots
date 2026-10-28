@@ -1,7 +1,7 @@
 {
-  "built_at": 1793049809,
-  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1793049809/botd-1793049809.tar.gz",
-  "signature": "RYsYJ8tasShvvqrJ4Kx1VErKWQ6P+Lm21+2RGbQ2oGEtUjf0FJ/kPOKS58qBy706R4ABYMNVjXTr3VC0g3s0BA==",
+  "built_at": 1793188297,
+  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1793188297/botd-1793188297.tar.gz",
+  "signature": "3Kd4+OIYjtZ/AcU2z1+53vWhTpgKl3MiPU+9qXHgc/PSN7KqVguh3Yw8DWrcqDEEyXpy1q0F/gJjXmmgAzuiCw==",
   "lock": "539dc3c8fc1f5c46fd41c72e0bd5d5fe47366c51e8b418c5e548d6826c070d52",
-  "notes": "OpenRouter como cérebro, chaves dos Ajustes valem como cérebro, tópicos na equipe, fuso do Mac"
+  "notes": "Gasta bem menos do Supabase: os ajustes da conta só são relidos quando mudam e o tempo real escuta só o que o botd usa."
 }
