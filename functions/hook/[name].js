@@ -2,7 +2,7 @@
 // Supabase one). GitHub, Slack or any service posts to https://appbots.pages.dev/hook/<name>?…, and this Cloudflare
 // Pages Function hands the request on untouched (method, headers, body, query) to the Supabase function of the same
 // name, so signatures still check. Only the three hook functions go through; anything else is a 404.
-const FUNCTIONS = "https://tumwyqswwkhcpbuhhncv.supabase.co/functions/v1/";
+const FUNCTIONS = "https://8000-agqyj6sg7p7oqn2j2afxau7gxy.instabox.tech/functions/v1/";
 const HOOKS = new Set(["routine-hook", "github-hook", "slack-hook"]);
 
 export async function onRequest({ request, params }) {

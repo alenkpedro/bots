@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "1.3",
-          "date": "2026-10-28",
-          "localizedDescription": "Cara nova no perfil e no Editar Bot, Ofertas do dia, WhatsApp direto com fotos e Desfazer, tópicos nas equipes, Fixados na Biblioteca, app em inglês e o computador dos Bots do seu jeito.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.3/Bots.ipa",
-          "size": 20276246,
+          "version": "1.4",
+          "date": "2026-10-29",
+          "localizedDescription": "Atualize para continuar usando os Bots. Os Bots mudaram de servidor e as versões antigas não conectam mais. Depois de atualizar, entre de novo com o código que chega no seu e-mail (pode cair no spam). Suas conversas, Bots e memórias continuam lá. Os anexos antigos voltam até 17/11.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.4/Bots.ipa",
+          "size": 20487535,
           "minOSVersion": "18.0"
         }
       ]

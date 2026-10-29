@@ -1,11 +1,11 @@
 {
-  "version": "1.3",
-  "build": 98,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v1.3/Bots-mac.zip",
-  "signature": "f+xp3yk0ppjIKe37oIP8qd2gbCYGbRYpovSn8bqL64ISi3zXgwSGeU+5vSygszZ3AW+ozLydjUEI7sy3NbCXAQ==",
-  "notes": "Cara nova no perfil e no Editar Bot, Ofertas do dia, WhatsApp direto com fotos e Desfazer, tópicos nas equipes, Fixados na Biblioteca, app em inglês e o computador dos Bots do seu jeito.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.3/Bots-mac-arm64.zip",
-  "signature_arm64": "5fZTHxlhsS7gZlob5WMQKH6D3NxXeN3Gq1UV6kIC/w2lzuINhUU/1Ok+slFYrHsyEpAoSj5UGbI4wa1NukTVDQ==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.3/Bots-mac-x86_64.zip",
-  "signature_x86_64": "DdygZjgFr/HwQHIkLaN4AM1Dt0+nBXcW/5rt7WHYjQBeic3Y1ZhG3pxp7rzzn74P3jxideb34/UaigFco+XUAA=="
+  "version": "1.4",
+  "build": 99,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v1.4/Bots-mac.zip",
+  "signature": "2Rl8nBdKErwOzyy/dacGFz/c0P0t3+BUmPAVGA6An+7aEoy42fEXs/Bxfg/rwqMRm+tnl31tBp2eJupKtDXgDQ==",
+  "notes": "Atualize para continuar usando os Bots. Os Bots mudaram de servidor e as versões antigas não conectam mais. Depois de atualizar, entre de novo com o código que chega no seu e-mail (pode cair no spam). Suas conversas, Bots e memórias continuam lá. Os anexos antigos voltam até 17/11.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.4/Bots-mac-arm64.zip",
+  "signature_arm64": "uwb1k01tglYyTB/h5SrutCI/I9enVdq5gUMkIdV3W0yc9EQOjpdgMrPVunh9Ruw77kKcVlmENti1rAHocz+oBQ==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.4/Bots-mac-x86_64.zip",
+  "signature_x86_64": "P0FylLciO2ZzpPX8jTsXXKJ34M6AGGZBsalXSV8nFcLT2K9cb8xGp5Gc8SSDouhJY6ChObmRCNUhfPTzSWAGAw=="
 }
