@@ -1,7 +1,7 @@
 {
-  "built_at": 1793234742,
-  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1793234742/botd-1793234742.tar.gz",
-  "signature": "QI5q1R9+TQxIqTeCVWL+9+ZN3w8I7/co/1KjXXalIiCzrX78/5taRI2i97frwwXv4qzPidNzf8RqpzrWxDgGCA==",
+  "built_at": 1793268583,
+  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1793268583/botd-1793268583.tar.gz",
+  "signature": "bY5bwvtb6ep3yeai4Pq25Sirg5Dnr03CH80DWV7Y/nQYfJ5K+LjioJRyqxg/VwYtcmFyCEgYC3uz2V+mH35jAg==",
   "lock": "539dc3c8fc1f5c46fd41c72e0bd5d5fe47366c51e8b418c5e548d6826c070d52",
-  "notes": "Bots conferem o vídeo antes de entregar (formato, volume, pico, fala cortada, texto no rosto e na borda); equipes aprendem com os erros (Lições); diagnóstico do navegador no Codex e 60 s para ele ligar; aviso de rotina que não rodou mais claro"
+  "notes": "Bots mostram o antes e depois animado ao propor um componente, Páginas com estilo próprio e equipe ao vivo (team_activity), e o agente avisa quando não consegue falar com o servidor"
 }
