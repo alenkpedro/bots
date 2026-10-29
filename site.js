@@ -96,6 +96,47 @@
   }), { rootMargin: '0px 0px -10% 0px' });
   document.querySelectorAll('.rv').forEach(el => io.observe(el));
 
+  // ---------- abas que funcionam no teclado (o padrão de abas do WAI-ARIA) ----------
+  // Só a aba escolhida entra no Tab (as outras ficam com tabindex -1); as setas, Home e End andam entre elas e já
+  // escolhem, como o clique. A lista dos Bots é vertical no computador e uma fileira no celular, então aceita as
+  // quatro setas; as fichas das funções são uma linha, só ← e →.
+  function keyTabs(bar, pick, { upDown = false } = {}) {
+    const tabs = [...bar.querySelectorAll('[role="tab"]')];
+    const step = { ArrowRight: 1, ArrowLeft: -1, ...(upDown ? { ArrowDown: 1, ArrowUp: -1 } : {}) };
+    // Quem muda o aria-selected (clique, seta, aviso da demo) não precisa lembrar do tabindex nem do painel.
+    const sync = () => tabs.forEach(t => {
+      const on = t.getAttribute('aria-selected') === 'true';
+      t.tabIndex = on ? 0 : -1;
+      if (on) document.getElementById(t.getAttribute('aria-controls'))?.setAttribute('aria-labelledby', t.id);
+    });
+    bar.addEventListener('keydown', e => {
+      const i = tabs.indexOf(document.activeElement);
+      if (i < 0 || e.altKey || e.ctrlKey || e.metaKey) return;
+      const n = e.key in step ? (i + step[e.key] + tabs.length) % tabs.length : e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : -1;
+      if (n < 0) return;
+      e.preventDefault();
+      tabs[n].focus();
+      pick(tabs[n]);
+    });
+    new MutationObserver(sync).observe(bar, { subtree: true, attributes: true, attributeFilter: ['aria-selected'] });
+    sync();
+  }
+
+  // ---------- menu da barra no celular: os links que não cabem abrem num menu ----------
+  const menuBtn = document.querySelector('.bar__menu');
+  if (menuBtn) {
+    const more = document.getElementById(menuBtn.getAttribute('aria-controls'));
+    const toggle = open => { menuBtn.setAttribute('aria-expanded', open); more.classList.toggle('is-open', open); };
+    menuBtn.addEventListener('click', () => toggle(menuBtn.getAttribute('aria-expanded') !== 'true'));
+    more.addEventListener('click', e => { if (e.target.closest('a')) toggle(false); });   // escolheu um link: fecha
+    // Esc fecha e devolve o foco ao botão; clicar ou focar fora também fecha.
+    addEventListener('keydown', e => {
+      if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') { toggle(false); menuBtn.focus(); }
+    });
+    addEventListener('pointerdown', e => { if (!e.target.closest('.bar__links')) toggle(false); });
+    addEventListener('focusin', e => { if (!e.target.closest('.bar__links')) toggle(false); });
+  }
+
   // ---------- abas e filtros com uma pílula que desliza até o escolhido ----------
   document.querySelectorAll('.chips[role="tablist"], .rm-tabs').forEach(bar => {
     const glider = document.createElement('span');
@@ -261,6 +302,7 @@
       if (ask) work(row);
     }
     list.forEach(x => x.addEventListener('click', () => open(x.dataset.bot)));
+    keyTabs(list[0].parentElement, x => open(x.dataset.bot), { upDown: true });
     const answer = (box, ok) => {
       box.remove();
       chat.insertAdjacentHTML('beforeend', `<p class="msg-note"${ok ? '' : ' data-tone="no"'}>${ok ? '✓ ' : ''}${bots[current][ok ? 'yes' : 'no']}</p>`);
@@ -424,10 +466,12 @@
       });
       timers.push(setTimeout(finish, 500 + items.length * 1300));
     }
-    chips.forEach(c => c.addEventListener('click', () => {
+    const choose = c => {
       chips.forEach(x => x.setAttribute('aria-selected', x === c));
       run(+c.dataset.job);
-    }));
+    };
+    chips.forEach(c => c.addEventListener('click', () => choose(c)));
+    keyTabs(chips[0].parentElement, choose);
     // Começa quando o cartão aparece na tela, não antes.
     new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { o.disconnect(); run(+(chips.find(c => c.getAttribute('aria-selected') === 'true') || chips[0]).dataset.job); } }, { threshold: 0.4 }).observe(job);
   }

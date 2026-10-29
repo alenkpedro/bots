@@ -17,10 +17,14 @@
   <div class="bar__inner wrap">
     <a class="bar__name" href="./"><span data-mascot="round" data-hue="#38bdf8"></span>Bots</a>
     <nav class="bar__links" aria-label="Principal">
-      <a class="wide" href="#como">Como funciona</a>
-      <a class="wide" href="#faz">Recursos</a>
-      <a href="roadmap.html">Roadmap</a>
-      <a class="wide" href="ajuda.html">Ajuda</a>
+      <!-- No celular os links cabem num menu; o botão só aparece lá (e só com JavaScript, que é quem abre). -->
+      <button type="button" class="bar__menu" aria-expanded="false" aria-controls="bar-more">Menu</button>
+      <div class="bar__more" id="bar-more">
+        <a href="#como">Como funciona</a>
+        <a href="#faz">Recursos</a>
+        <a href="roadmap.html">Roadmap</a>
+        <a href="ajuda.html">Ajuda</a>
+      </div>
       <a class="button button--small" href="https://github.com/alenkpedro/bots/releases/latest/download/Bots.dmg" data-dl data-done="Começou">Baixar</a>
     </nav>
   </div>
@@ -38,17 +42,19 @@
 
     <!-- O app montado na página: clique num Bot da lista ou escreva um pedido. -->
     <div class="app rv" style="--i:3" data-ui>
-      <div class="app__side" role="tablist" aria-label="Bots">
+      <div class="app__side">
         <div class="app__top" aria-hidden="true"><i></i><i></i><i></i></div>
         <div class="app__search" aria-hidden="true">Buscar</div>
-        <button type="button" class="app__bot" role="tab" data-bot="caixa"><span data-mascot="ghost" data-hue="#f472b6"></span><span><b>Caixa de entrada</b><small>Caixa zerada, 4 rascunhos guardados</small></span></button>
-        <button type="button" class="app__bot" role="tab" data-bot="viagens"><span data-mascot="hex" data-hue="#22c55e"></span><span><b>Viagens</b><small data-tone="go">Comparando voos…</small></span></button>
-        <button type="button" class="app__bot" role="tab" data-bot="contas" aria-selected="true"><span data-mascot="bean" data-hue="#eab308"></span><span><b>Contas da casa</b><small data-tone="wait">Pede sua aprovação</small></span></button>
-        <button type="button" class="app__bot" role="tab" data-bot="loja"><span data-mascot="round" data-hue="#38bdf8"></span><span><b>Loja online</b><small>12 clientes respondidos</small></span></button>
-        <button type="button" class="app__bot" role="tab" data-bot="estudos" data-sleepy><span data-mascot="round" data-hue="#a78bfa"></span><span><b>Estudos</b><small>Resumo da aula pronto</small></span></button>
-        <button type="button" class="app__bot" role="tab" data-bot="saude" data-sleepy><span data-mascot="square" data-hue="#14b8a6"></span><span><b>Saúde</b><small>Consulta na terça, 15h</small></span></button>
+        <div class="app__bots" role="tablist" aria-label="Bots">
+          <button type="button" class="app__bot" role="tab" id="bot-caixa" aria-controls="app-panel" data-bot="caixa" aria-selected="false" tabindex="-1"><span data-mascot="ghost" data-hue="#f472b6"></span><span><b>Caixa de entrada</b><small>Caixa zerada, 4 rascunhos guardados</small></span></button>
+          <button type="button" class="app__bot" role="tab" id="bot-viagens" aria-controls="app-panel" data-bot="viagens" aria-selected="false" tabindex="-1"><span data-mascot="hex" data-hue="#22c55e"></span><span><b>Viagens</b><small data-tone="go">Comparando voos…</small></span></button>
+          <button type="button" class="app__bot" role="tab" id="bot-contas" aria-controls="app-panel" data-bot="contas" aria-selected="true"><span data-mascot="bean" data-hue="#eab308"></span><span><b>Contas da casa</b><small data-tone="wait">Pede sua aprovação</small></span></button>
+          <button type="button" class="app__bot" role="tab" id="bot-loja" aria-controls="app-panel" data-bot="loja" aria-selected="false" tabindex="-1"><span data-mascot="round" data-hue="#38bdf8"></span><span><b>Loja online</b><small>12 clientes respondidos</small></span></button>
+          <button type="button" class="app__bot" role="tab" id="bot-estudos" aria-controls="app-panel" data-bot="estudos" aria-selected="false" tabindex="-1" data-sleepy><span data-mascot="round" data-hue="#a78bfa"></span><span><b>Estudos</b><small>Resumo da aula pronto</small></span></button>
+          <button type="button" class="app__bot" role="tab" id="bot-saude" aria-controls="app-panel" data-bot="saude" aria-selected="false" tabindex="-1" data-sleepy><span data-mascot="square" data-hue="#14b8a6"></span><span><b>Saúde</b><small>Consulta na terça, 15h</small></span></button>
+        </div>
       </div>
-      <div class="app__main">
+      <div class="app__main" id="app-panel" role="tabpanel" aria-labelledby="bot-contas">
         <div class="toasts" id="app-toasts"></div>
         <div class="app__head" id="app-head"></div>
         <div class="app__chat" id="app-chat" aria-live="polite"></div>
@@ -135,17 +141,17 @@
         <h2 class="title rv" id="funcao">Dê uma função a cada Bot</h2>
         <p class="sub rv" style="--i:1">Crie um Bot para cada parte do trabalho e adicione outro quando a demanda crescer. Eles trabalham ao mesmo tempo, cada um no seu canto. Ou comece por um dos oito Bots prontos, que já chegam sabendo o que fazer.</p>
         <div class="chips rv" style="--i:2" role="tablist" aria-label="Funções">
-          <button type="button" role="tab" data-job="0" aria-selected="true"><span data-mascot="ghost" data-hue="#f472b6"></span>Caixa de entrada</button>
-          <button type="button" role="tab" data-job="1"><span data-mascot="hex" data-hue="#22c55e"></span>Viagens</button>
-          <button type="button" role="tab" data-job="2"><span data-mascot="bean" data-hue="#eab308"></span>Contas da casa</button>
-          <button type="button" role="tab" data-job="3"><span data-mascot="round" data-hue="#38bdf8"></span>Loja online</button>
-          <button type="button" role="tab" data-job="4"><span data-mascot="round" data-hue="#a78bfa"></span>Estudos</button>
-          <button type="button" role="tab" data-job="5"><span data-mascot="square" data-hue="#14b8a6"></span>Saúde</button>
-          <button type="button" role="tab" data-job="6"><span data-mascot="square" data-hue="#ff8a3d"></span>Redes sociais</button>
-          <button type="button" role="tab" data-job="7"><span data-mascot="round" data-hue="#a3e635"></span>Código</button>
+          <button type="button" role="tab" id="job-tab-0" aria-controls="job" data-job="0" aria-selected="true"><span data-mascot="ghost" data-hue="#f472b6"></span>Caixa de entrada</button>
+          <button type="button" role="tab" id="job-tab-1" aria-controls="job" data-job="1" aria-selected="false" tabindex="-1"><span data-mascot="hex" data-hue="#22c55e"></span>Viagens</button>
+          <button type="button" role="tab" id="job-tab-2" aria-controls="job" data-job="2" aria-selected="false" tabindex="-1"><span data-mascot="bean" data-hue="#eab308"></span>Contas da casa</button>
+          <button type="button" role="tab" id="job-tab-3" aria-controls="job" data-job="3" aria-selected="false" tabindex="-1"><span data-mascot="round" data-hue="#38bdf8"></span>Loja online</button>
+          <button type="button" role="tab" id="job-tab-4" aria-controls="job" data-job="4" aria-selected="false" tabindex="-1"><span data-mascot="round" data-hue="#a78bfa"></span>Estudos</button>
+          <button type="button" role="tab" id="job-tab-5" aria-controls="job" data-job="5" aria-selected="false" tabindex="-1"><span data-mascot="square" data-hue="#14b8a6"></span>Saúde</button>
+          <button type="button" role="tab" id="job-tab-6" aria-controls="job" data-job="6" aria-selected="false" tabindex="-1"><span data-mascot="square" data-hue="#ff8a3d"></span>Redes sociais</button>
+          <button type="button" role="tab" id="job-tab-7" aria-controls="job" data-job="7" aria-selected="false" tabindex="-1"><span data-mascot="round" data-hue="#a3e635"></span>Código</button>
         </div>
       </div>
-      <div class="job rv" style="--i:2" id="job" aria-live="polite">
+      <div class="job rv" style="--i:2" id="job" role="tabpanel" aria-labelledby="job-tab-0" tabindex="0" aria-live="polite">
         <h3>Caixa de entrada</h3>
         <p>Lê, separa e responde seus e-mails, deixa rascunhos no seu tom e só envia com o seu clique.</p>
         <ul><li>Caixa zerada<span>8h20</span></li><li>4 rascunhos guardados para você revisar<span>8h21</span></li><li>Reunião confirmada com o cliente<span>9h05</span></li></ul>
@@ -209,7 +215,7 @@
         <details><summary>O que é o computador dos Bots?</summary><p>Um pequeno computador Linux que roda dentro do seu Mac, só para os Bots: cada um tem a própria tela, com um navegador onde faz login nos sites e trabalha. Não é uma partição do disco nem mexe nos seus arquivos; você assiste à tela ao vivo e pode assumir quando quiser. Ele usa uns 4 GB de memória quando está ligado e dorme sozinho quando nenhum Bot precisa dele.</p></details>
         <details><summary>Preciso deixar o Mac ligado?</summary><p>Para os Bots trabalharem, sim: eles trabalham no seu Mac, no computador deles. Pelo iPhone você acompanha, responde e pede coisas de qualquer lugar, e as conversas abrem mesmo com o Mac desligado.</p></details>
         <details><summary>Qual a diferença para o OpenBot ou o MausBot?</summary><p>A ideia é parecida: uma equipe de agentes com o plano de IA que você já tem. Veja, lado a lado, o que muda e onde cada um vai melhor na <a href="comparar.html">página de comparação</a>.</p></details>
-        <details><summary>E no Windows?</summary><p>O app do Windows está em pausa desde 18 de outubro de 2026. Quando voltar, aparece no <a href="roadmap.html">roadmap</a>.</p></details>
+        <details><summary>E no Windows?</summary><p>Tem, na mesma versão do Mac. Por enquanto o instalador vai direto para quem está testando; quando abrir para todos, o link aparece aqui.</p></details>
       </div>
     </div>
   </section>
@@ -232,7 +238,7 @@
       <nav aria-label="Instalar"><b>Instalar</b><a href="https://github.com/alenkpedro/bots/releases/latest/download/Bots.dmg">No Mac</a><a href="fonte.html">No iPhone</a></nav>
       <nav aria-label="Ajuda"><b>Ajuda</b><a href="ajuda.html">Central de ajuda</a><a href="privacidade.html">Privacidade</a><a href="termos.html">Termos</a></nav>
     </div>
-    <div class="foot__end"><span>Bots, 2026. Mac e iPhone, versão 1.4.</span></div>
+    <div class="foot__end"><span>Bots, 2026. Mac e iPhone, versão 1.4.1.</span></div>
   </div>
 </footer>
 

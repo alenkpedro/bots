@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "1.4",
+          "version": "1.4.1",
           "date": "2026-10-29",
-          "localizedDescription": "Atualize para continuar usando os Bots. Os Bots mudaram de servidor e as versões antigas não conectam mais. Depois de atualizar, entre de novo com o código que chega no seu e-mail (pode cair no spam). Suas conversas, Bots e memórias continuam lá. Os anexos antigos voltam até 17/11.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.4/Bots.ipa",
-          "size": 20487535,
+          "localizedDescription": "Pedidos numa fila (Abrir leva direto ao pedido), menu de modelo novo, pastas de volta em Todos, o n8n e outros apps em todos os motores, atualizar já na tela de entrar e o computador dos Bots com tema escuro. Corrige o clique dos Bots no Codex e um app travado que escondia os outros.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.4.1/Bots.ipa",
+          "size": 20634561,
           "minOSVersion": "18.0"
         }
       ]

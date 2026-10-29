@@ -1,11 +1,11 @@
 {
-  "version": "1.4",
-  "build": 99,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v1.4/Bots-mac.zip",
-  "signature": "2Rl8nBdKErwOzyy/dacGFz/c0P0t3+BUmPAVGA6An+7aEoy42fEXs/Bxfg/rwqMRm+tnl31tBp2eJupKtDXgDQ==",
-  "notes": "Atualize para continuar usando os Bots. Os Bots mudaram de servidor e as versões antigas não conectam mais. Depois de atualizar, entre de novo com o código que chega no seu e-mail (pode cair no spam). Suas conversas, Bots e memórias continuam lá. Os anexos antigos voltam até 17/11.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.4/Bots-mac-arm64.zip",
-  "signature_arm64": "uwb1k01tglYyTB/h5SrutCI/I9enVdq5gUMkIdV3W0yc9EQOjpdgMrPVunh9Ruw77kKcVlmENti1rAHocz+oBQ==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.4/Bots-mac-x86_64.zip",
-  "signature_x86_64": "P0FylLciO2ZzpPX8jTsXXKJ34M6AGGZBsalXSV8nFcLT2K9cb8xGp5Gc8SSDouhJY6ChObmRCNUhfPTzSWAGAw=="
+  "version": "1.4.1",
+  "build": 104,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.1/Bots-mac.zip",
+  "signature": "f/0tlGFhusKnpen83kGpQaXeGbyB2qB9Gh7Pl4dTRCIjWcqLOWvhTiU3tq1Q6tnGtAlP6ed+qUQaA0ChrxuQDA==",
+  "notes": "Pedidos numa fila (Abrir leva direto ao pedido), menu de modelo novo, pastas de volta em Todos, o n8n e outros apps em todos os motores, atualizar já na tela de entrar e o computador dos Bots com tema escuro. Corrige o clique dos Bots no Codex e um app travado que escondia os outros.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.4.1/Bots-mac-arm64.zip",
+  "signature_arm64": "b0yzWVnGC2iMtyFTQqo58US3dwEygpA1BZyRazbokJ4ogwHxXm4hFUwBrbOWKZnn5pShRzdT2Iv4jZaoMPwAAw==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.4.1/Bots-mac-x86_64.zip",
+  "signature_x86_64": "rsOhOR10NbOV0a1GxiDs1egQnI0QU4qWZzkRQm/zxLXjJsGkUPar/akWR7OB0Hwwh1OGP+nnSi/XC+alBKweBA=="
 }

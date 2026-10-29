@@ -146,6 +146,19 @@ p { text-wrap: pretty; }
 .bar__links a:not(.button):hover, .bar__links a[aria-current] { color: var(--ink); background: var(--surface-3); }
 .bar__links .button { margin-left: 0.25rem; }
 @media (max-width: 760px) { .bar__links .wide { display: none; } }
+/* No computador os links ficam na pílula; no celular viram um menu que abre embaixo dela, para Ajuda e o
+   resto continuarem a um toque. Sem JavaScript o botão some e os links ficam à vista. */
+.bar__links { position: relative; }
+.bar__more { display: flex; align-items: center; gap: 0.125rem; }
+.bar__menu { display: none; color: var(--muted); padding: 0.45rem 0.85rem; border-radius: 999px; transition: color var(--t-hover) ease, background-color var(--t-hover) ease; }
+.bar__menu:hover, .bar__menu[aria-expanded="true"] { color: var(--ink); background: var(--surface-3); }
+@media (max-width: 760px) {
+  .js .bar__menu { display: block; }
+  .js .bar__more { display: none; position: absolute; top: calc(100% + 0.5rem); right: 0; min-width: 12rem; flex-direction: column; align-items: stretch; padding: 0.4rem; border-radius: 18px; background: rgb(28 28 31 / 0.97); border: 1px solid var(--surface-3); box-shadow: 0 12px 32px rgb(0 0 0 / 0.45); }
+  .js .bar__more.is-open { display: flex; }
+  .js .bar__more a:not(.button) { padding: 0.7rem 0.9rem; border-radius: 12px; }
+  html:not(.js) .bar__more { flex-wrap: wrap; }
+}
 
 /* ---------- mascotes (desenhados aqui, como no app) ---------- */
 .mascot { overflow: visible; }
@@ -202,6 +215,7 @@ p { text-wrap: pretty; }
 .app__top i:nth-child(2) { background: #febc2e; }
 .app__top i:nth-child(3) { background: #28c840; }
 .app__search { margin: 0 0.3em 0.8em; padding: 0.55em 0.8em; border-radius: 0.6em; background: #1d1d1d; color: #8a8a8a; }
+.app__bots { display: flex; flex-direction: column; gap: 0.2em; }
 .app__bot { display: flex; align-items: center; gap: 0.75em; width: 100%; padding: 0.65em; border-radius: 0.75em; text-align: left; transition: background-color var(--t-hover) ease; }
 .app__bot svg { width: 2.9em; height: 2.9em; }
 .app__bot span:first-child { flex: none; }
@@ -216,7 +230,9 @@ p { text-wrap: pretty; }
 .app__head { display: flex; align-items: center; justify-content: center; gap: 0.6em; padding: 1em; font-weight: 600; font-size: 1.05em; }
 .app__head svg { width: 1.7em; height: 1.7em; }
 .app__head small { font-weight: 400; color: #a3a3a3; }
-.app__chat { flex: 1; padding: 0.6em clamp(1em, 4vw, 3.5em) 1.2em; display: flex; flex-direction: column; justify-content: flex-end; gap: 0.85em; }
+/* A conversa começa pelo topo, logo abaixo do nome do Bot: alinhada embaixo, a primeira mensagem ficava fora da
+   primeira tela e a demo parecia um retângulo vazio. */
+.app__chat { flex: 1; padding: 0.6em clamp(1em, 4vw, 3.5em) 1.2em; display: flex; flex-direction: column; justify-content: flex-start; gap: 0.85em; }
 .app__chat > * { animation: rise 420ms var(--ease-out) both; }
 .msg-me { align-self: flex-end; max-width: 75%; padding: 0.7em 1.05em; border-radius: 1.3em; background: #3558c0; color: #fff; }
 .msg-bot { align-self: flex-start; max-width: 80%; padding: 0.7em 1.05em; border-radius: 1.3em; background: #262626; }
@@ -249,17 +265,22 @@ p { text-wrap: pretty; }
 .app__composer { margin: 0 clamp(1em, 4vw, 3.5em) 1.3em; display: flex; align-items: center; gap: 0.6em; padding: 0.45em 0.45em 0.45em 1.2em; border-radius: 999px; background: #222; }
 .app__composer input { flex: 1; min-width: 0; background: none; border: 0; outline: none; color: #ececec; font-size: 1em; }
 .app__composer input::placeholder { color: #8a8a8a; }
+/* O campo não tem contorno próprio: quem mostra o foco é a pílula inteira. */
+.app__composer:focus-within { box-shadow: 0 0 0 2px var(--blue); }
 .app__composer button { width: 2.4em; height: 2.4em; border-radius: 50%; background: #3558c0; color: #fff; font-size: 1em; transition: transform var(--t-press) var(--ease-out); }
 .app__composer button:active { transform: scale(0.9); }
 .app-caption { margin-top: 1rem; text-align: center; font-size: 0.875rem; color: var(--soft); }
 @media (max-width: 760px) {
   .app { grid-template-columns: 1fr; min-height: 0; font-size: 15px; }
-  .app__side { flex-direction: row; overflow-x: auto; gap: 4px; padding: 10px; scrollbar-width: none; }
+  .app__side { padding: 10px; min-width: 0; }   /* sem isso a fileira de Bots alarga a demo além da tela */
+  .app__bots { flex-direction: row; overflow-x: auto; gap: 4px; padding: 5px; margin: -5px; scrollbar-width: none; }   /* a folga deixa o contorno de foco à vista */
   .app__top, .app__search { display: none; }
   .app__bot { flex-direction: column; width: 88px; flex: none; gap: 4px; text-align: center; padding: 8px 4px; }
   .app__bot > span:last-child { width: 100%; }
   .app__bot small { display: none; }
-  .app__bot b { font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  /* O nome inteiro, em até duas linhas: cortado ("Caixa de en…") ninguém sabia qual Bot era. */
+  .app__bot { justify-content: flex-start; }
+  .app__bot b { font-size: 12px; font-weight: 500; line-height: 1.25; text-wrap: balance; }
   .app__chat { min-height: 340px; }
 }
 
@@ -418,7 +439,7 @@ p { text-wrap: pretty; }
 .faq details:has(summary:focus-visible) { outline: 2px solid var(--blue); outline-offset: 3px; }
 .faq summary::after { content: "+"; font-size: 1.5rem; font-weight: 400; color: var(--muted); transition: transform var(--t-ui) var(--ease-out); }
 .faq details[open] summary::after { transform: rotate(45deg); }
-.faq details p { padding-bottom: 1.5rem; color: var(--muted); max-width: 60rem; }
+.faq details p { padding-bottom: 1.5rem; color: var(--muted); max-width: 65ch; }   /* linhas longas cansam: ~65 letras por linha */
 .faq details a { color: var(--link); }
 
 /* Chamada final. */
@@ -1301,18 +1322,19 @@ p { text-wrap: pretty; }
 .island.is-open .island__text { flex: 1; margin-left: 0.5em; opacity: 1; filter: none; transition-delay: 220ms; }
 .island.is-open i { width: 1.4em; height: 1.4em; }
 
-/* Avisos dos outros Bots na demo do Mac: chegam no canto, se empilham (o mais novo na frente) e somem sozinhos. */
-.toasts { position: absolute; top: 3.4em; right: 1em; z-index: 5; width: min(19em, 60%); display: grid; }
-.toast { grid-area: 1 / 1; display: flex; align-items: center; gap: 0.6em; width: 100%; padding: 0.65em 0.8em; border-radius: 0.9em; background: #26262a; box-shadow: 0 8px 24px rgb(0 0 0 / 0.45), inset 0 0 0 1px rgb(255 255 255 / 0.06); text-align: left; font-size: 0.86em; color: #ececec; transform-origin: top center; transition: transform 420ms cubic-bezier(0.3, 1.25, 0.5, 1), opacity 300ms ease, filter 300ms ease; }
+/* Avisos dos outros Bots na demo do Mac: chegam no canto, se empilham (o mais novo na frente) e somem sozinhos.
+   Ficam embaixo, sobre o campo de pedido: a conversa começa no topo e eles cobririam a primeira mensagem. */
+.toasts { position: absolute; bottom: 5.3em; right: 1em; z-index: 5; width: min(19em, 60%); display: grid; }
+.toast { grid-area: 1 / 1; display: flex; align-items: center; gap: 0.6em; width: 100%; padding: 0.65em 0.8em; border-radius: 0.9em; background: #26262a; box-shadow: 0 8px 24px rgb(0 0 0 / 0.45), inset 0 0 0 1px rgb(255 255 255 / 0.06); text-align: left; font-size: 0.86em; color: #ececec; transform-origin: bottom center; transition: transform 420ms cubic-bezier(0.3, 1.25, 0.5, 1), opacity 300ms ease, filter 300ms ease; }
 .toast svg { width: 2.1em; height: 2.1em; }
 .toast > span:first-child { flex: none; }
 .toast b { display: block; font-weight: 600; }
 .toast small { display: block; color: #b4b4bd; font-size: 0.95em; }
 .toast[data-i="0"] { z-index: 3; }
-.toast[data-i="1"] { z-index: 2; transform: translateY(0.7em) scale(0.94); filter: brightness(0.7); }
-.toast[data-i="2"] { z-index: 1; transform: translateY(1.3em) scale(0.88); filter: brightness(0.5); }
-.toast[data-i="3"], .toast.is-gone { opacity: 0; filter: blur(4px); transform: translateY(1.6em) scale(0.84); pointer-events: none; }
-.toast.is-new { opacity: 0; transform: translateY(-1.2em) scale(0.96); filter: blur(4px); }
+.toast[data-i="1"] { z-index: 2; transform: translateY(-0.7em) scale(0.94); filter: brightness(0.7); }
+.toast[data-i="2"] { z-index: 1; transform: translateY(-1.3em) scale(0.88); filter: brightness(0.5); }
+.toast[data-i="3"], .toast.is-gone { opacity: 0; filter: blur(4px); transform: translateY(-1.6em) scale(0.84); pointer-events: none; }
+.toast.is-new { opacity: 0; transform: translateY(1.2em) scale(0.96); filter: blur(4px); }
 @media (max-width: 760px) { .toasts { display: none; } }
 
 /* Troca de texto com desfoque: o texto novo entra nítido saindo de um leve borrão (botões de baixar, situação do Bot,
