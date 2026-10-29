@@ -1,7 +1,7 @@
 {
-  "built_at": 1793219981,
-  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1793219981/botd-1793219981.tar.gz",
-  "signature": "cFmlB8Pdb5cp20SDc7G8Q7SzI7khrNUtbar9PP3aR/UlN5Fwgq/1DLslsBi8ciX6gCNvO+S844wui7VBT2mgAQ==",
+  "built_at": 1793234742,
+  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1793234742/botd-1793234742.tar.gz",
+  "signature": "QI5q1R9+TQxIqTeCVWL+9+ZN3w8I7/co/1KjXXalIiCzrX78/5taRI2i97frwwXv4qzPidNzf8RqpzrWxDgGCA==",
   "lock": "539dc3c8fc1f5c46fd41c72e0bd5d5fe47366c51e8b418c5e548d6826c070d52",
-  "notes": "Bots da equipe não ficam mais esperando para sempre, e o aviso de rotina que não rodou ficou mais claro."
+  "notes": "Bots conferem o vídeo antes de entregar (formato, volume, pico, fala cortada, texto no rosto e na borda); equipes aprendem com os erros (Lições); diagnóstico do navegador no Codex e 60 s para ele ligar; aviso de rotina que não rodou mais claro"
 }
