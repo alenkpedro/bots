@@ -1,7 +1,7 @@
 {
-  "built_at": 1793268583,
-  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1793268583/botd-1793268583.tar.gz",
-  "signature": "bY5bwvtb6ep3yeai4Pq25Sirg5Dnr03CH80DWV7Y/nQYfJ5K+LjioJRyqxg/VwYtcmFyCEgYC3uz2V+mH35jAg==",
+  "built_at": 1793275613,
+  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1793275613/botd-1793275613.tar.gz",
+  "signature": "1Baf6vRx5ma+WPp20gqquhp56EeNgVw61/yo120msp3NQW4BjtXdNJHZciiIFpw9IqB2v57dSxRW90+ZmhmgDg==",
   "lock": "539dc3c8fc1f5c46fd41c72e0bd5d5fe47366c51e8b418c5e548d6826c070d52",
-  "notes": "Bots mostram o antes e depois animado ao propor um componente, Páginas com estilo próprio e equipe ao vivo (team_activity), e o agente avisa quando não consegue falar com o servidor"
+  "notes": "Bots no Codex voltam a clicar e digitar no navegador: os cliques passam pelo cartão de aprovação dos Bots"
 }
