@@ -1,7 +1,7 @@
 {
-  "built_at": 1793275613,
-  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1793275613/botd-1793275613.tar.gz",
-  "signature": "1Baf6vRx5ma+WPp20gqquhp56EeNgVw61/yo120msp3NQW4BjtXdNJHZciiIFpw9IqB2v57dSxRW90+ZmhmgDg==",
+  "built_at": 1793283558,
+  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1793283558/botd-1793283558.tar.gz",
+  "signature": "jC+St+JbMyBLoeRWWogNNtbrEDCjcEA1kzCM/+CBUH2aPj7qdgTRAX1BVjbEVHwBKpXkd/b6WTOMow4dulYYDA==",
   "lock": "539dc3c8fc1f5c46fd41c72e0bd5d5fe47366c51e8b418c5e548d6826c070d52",
-  "notes": "Bots no Codex voltam a clicar e digitar no navegador: os cliques passam pelo cartão de aprovação dos Bots"
+  "notes": "Computador dos Bots com visual novo: janelas escuras, fonte Inter, barra com ícones novos e fundo com o azul do app"
 }
