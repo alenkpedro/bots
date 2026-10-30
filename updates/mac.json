@@ -1,11 +1,11 @@
 {
-  "version": "1.4.1",
-  "build": 104,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.1/Bots-mac.zip",
-  "signature": "f/0tlGFhusKnpen83kGpQaXeGbyB2qB9Gh7Pl4dTRCIjWcqLOWvhTiU3tq1Q6tnGtAlP6ed+qUQaA0ChrxuQDA==",
-  "notes": "Pedidos numa fila (Abrir leva direto ao pedido), menu de modelo novo, pastas de volta em Todos, o n8n e outros apps em todos os motores, atualizar já na tela de entrar e o computador dos Bots com tema escuro. Corrige o clique dos Bots no Codex e um app travado que escondia os outros.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.4.1/Bots-mac-arm64.zip",
-  "signature_arm64": "b0yzWVnGC2iMtyFTQqo58US3dwEygpA1BZyRazbokJ4ogwHxXm4hFUwBrbOWKZnn5pShRzdT2Iv4jZaoMPwAAw==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.4.1/Bots-mac-x86_64.zip",
-  "signature_x86_64": "rsOhOR10NbOV0a1GxiDs1egQnI0QU4qWZzkRQm/zxLXjJsGkUPar/akWR7OB0Hwwh1OGP+nnSi/XC+alBKweBA=="
+  "version": "1.4.2",
+  "build": 107,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.2/Bots-mac.zip",
+  "signature": "oA24j9Q6y2xOnM8flJT38/Lt/LIYrH0dGkthUgV6eo3LB99Zb6ypg0mWSo3J4ClHKjSI7zqrEi8/9QK795Y2Bw==",
+  "notes": "Raciocínio no Claude, etapas que acompanham você, perguntar sobre a tela no iPhone, arrastar Bots entre pastas, conversa sobe na lista, Mac sem código de recuperação, pastas no iPhone e respostas digitadas na conversa.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.4.2/Bots-mac-arm64.zip",
+  "signature_arm64": "UG33M6U/rGNh7exNjUmLyYqhRHUnBk5lKBimgY21vjk2B6VwQORjYhzOM1eCdkm7z/d5cSDHFLCfaEwYvF9+CQ==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.4.2/Bots-mac-x86_64.zip",
+  "signature_x86_64": "SLZpcHC0qQ6bLYXjeE7FI9moAp8LqsoV5EIrZDCbwRkv7CqE+esIBCgQcRtzbQivKhdIiqjM7xyJg/2JTl5fBQ=="
 }

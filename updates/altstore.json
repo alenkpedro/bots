@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "1.4.1",
-          "date": "2026-10-29",
-          "localizedDescription": "Pedidos numa fila (Abrir leva direto ao pedido), menu de modelo novo, pastas de volta em Todos, o n8n e outros apps em todos os motores, atualizar já na tela de entrar e o computador dos Bots com tema escuro. Corrige o clique dos Bots no Codex e um app travado que escondia os outros.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.4.1/Bots.ipa",
-          "size": 20634561,
+          "version": "1.4.2",
+          "date": "2026-10-30",
+          "localizedDescription": "Raciocínio no Claude, etapas que acompanham você, perguntar sobre a tela no iPhone, arrastar Bots entre pastas, conversa sobe na lista, Mac sem código de recuperação, pastas no iPhone e respostas digitadas na conversa.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.4.2/Bots.ipa",
+          "size": 20692349,
           "minOSVersion": "18.0"
         }
       ]
