@@ -1,0 +1,19 @@
+{
+  "version": "1.4.2",
+  "build": 107,
+  "notes": "Raciocínio no Claude, etapas que acompanham você, conversa sobe na lista e o n8n chegando ao Bot no Codex.",
+  "assets": {
+    "x64": {
+      "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.2/Bots-1.4.2-Setup-x64.exe",
+      "signature": "3Q+pbywY9GrbFSIDHfUZD7btFJ4+GB+priy43ZdgJNu1c7a7NRFrKLZA32cY2WCwzir7OoIJzXS6WPQvT/69Bg==",
+      "size": 177213598
+    },
+    "arm64": {
+      "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.2/Bots-1.4.2-Setup-arm64.exe",
+      "signature": "athlGrw3uxUTQ0UZZGT37zwQhtn9J0C05okFl9A6wVuYJrTe3mvZybGTGOyrZ6wjNBkgpqxBjRWCmQqCGAuvDQ==",
+      "size": 167552033
+    }
+  },
+  "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.2/Bots-1.4.2-Setup-x64.exe",
+  "signature": "3Q+pbywY9GrbFSIDHfUZD7btFJ4+GB+priy43ZdgJNu1c7a7NRFrKLZA32cY2WCwzir7OoIJzXS6WPQvT/69Bg=="
+}
