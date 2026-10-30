@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "1.4.2",
+          "version": "1.4.3",
           "date": "2026-10-30",
-          "localizedDescription": "Raciocínio no Claude, etapas que acompanham você, perguntar sobre a tela no iPhone, arrastar Bots entre pastas, conversa sobe na lista, Mac sem código de recuperação, pastas no iPhone e respostas digitadas na conversa.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.4.2/Bots.ipa",
-          "size": 20692349,
+          "localizedDescription": "Testar conexão dos apps, ninguém fica trancado (QR no PC e chave nova para quem não tem), lista como no WhatsApp e arrastar entre pastas.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.4.3/Bots.ipa",
+          "size": 20672850,
           "minOSVersion": "18.0"
         }
       ]

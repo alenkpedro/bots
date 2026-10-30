@@ -1,11 +1,11 @@
 {
-  "version": "1.4.2",
-  "build": 107,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.2/Bots-mac.zip",
-  "signature": "oA24j9Q6y2xOnM8flJT38/Lt/LIYrH0dGkthUgV6eo3LB99Zb6ypg0mWSo3J4ClHKjSI7zqrEi8/9QK795Y2Bw==",
-  "notes": "Raciocínio no Claude, etapas que acompanham você, perguntar sobre a tela no iPhone, arrastar Bots entre pastas, conversa sobe na lista, Mac sem código de recuperação, pastas no iPhone e respostas digitadas na conversa.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.4.2/Bots-mac-arm64.zip",
-  "signature_arm64": "UG33M6U/rGNh7exNjUmLyYqhRHUnBk5lKBimgY21vjk2B6VwQORjYhzOM1eCdkm7z/d5cSDHFLCfaEwYvF9+CQ==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.4.2/Bots-mac-x86_64.zip",
-  "signature_x86_64": "SLZpcHC0qQ6bLYXjeE7FI9moAp8LqsoV5EIrZDCbwRkv7CqE+esIBCgQcRtzbQivKhdIiqjM7xyJg/2JTl5fBQ=="
+  "version": "1.4.3",
+  "build": 108,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.3/Bots-mac.zip",
+  "signature": "Dr53sXMzQCKwi0QBJFZv18P9knqH//w2GNRHmL4ikDa2wrLmxbJs1/sOdCvYuGJzh84dwWcN9ONN0nfNWr7UDA==",
+  "notes": "Testar conexão dos apps, ninguém fica trancado (QR no PC e chave nova para quem não tem), lista como no WhatsApp e arrastar entre pastas.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.4.3/Bots-mac-arm64.zip",
+  "signature_arm64": "Njmu0ULK4uWaZNzy/kAG7SL/qU48IgRZ7YY6Qld2/ygtCG42leptMpEL63CPCKUYGcGoZ+SP2J/n7HAHGt9UBw==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.4.3/Bots-mac-x86_64.zip",
+  "signature_x86_64": "TYscLGDaUeAsEmFA8EodF59rQSy/TyQtaVZ/TndiFmuwjX/n6OkvYN6wVS79eEln2YGCCGIc6/8lu0meiHnJDA=="
 }
