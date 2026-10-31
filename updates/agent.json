@@ -1,7 +1,7 @@
 {
-  "built_at": 1793409224,
-  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1793409224/botd-1793409224.tar.gz",
-  "signature": "4Pbqf1tcuhAIrRGdpC0cYG4mjfZvrKhmP14J/p9uMFW8PiHUW4HaL0vn1tIRFrBgPXtnS5CkqeblTXIezag8BQ==",
+  "built_at": 1793451277,
+  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1793451277/botd-1793451277.tar.gz",
+  "signature": "T34cR201Db2keX+6s1VFr2koxDyusQVWTkhsJZvWaD+LL/glB42cDRlAQn7Db0MNH4MYDw4/n+H0nSMqK0IaBg==",
   "lock": "52d180eb39e8ed1a12e5a9ffdbec91d10b110708748737822e8654fae57d3666",
-  "notes": "Líder de equipe cria Bots, briefing da edição num cartão, etapas atualizadas no meio da tarefa, raciocínio no Claude e erros de apps no log."
+  "notes": "Bots aprendem com as suas correções, cartão de Reconectar quando um app recusa acesso, e a nuvem recebe os logins dos cérebros antes de assumir."
 }
