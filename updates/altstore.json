@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "1.4.3",
-          "date": "2026-10-30",
-          "localizedDescription": "Testar conexão dos apps, ninguém fica trancado (QR no PC e chave nova para quem não tem), lista como no WhatsApp e arrastar entre pastas.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.4.3/Bots.ipa",
-          "size": 20672850,
+          "version": "1.4.4",
+          "date": "2026-10-31",
+          "localizedDescription": "Briefing da edição num cartão só, líder de equipe contrata Bots, apps com o estado real da conexão e janelas novas.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.4.4/Bots.ipa",
+          "size": 20810377,
           "minOSVersion": "18.0"
         }
       ]

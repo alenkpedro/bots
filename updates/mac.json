@@ -1,11 +1,11 @@
 {
-  "version": "1.4.3",
-  "build": 108,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.3/Bots-mac.zip",
-  "signature": "Dr53sXMzQCKwi0QBJFZv18P9knqH//w2GNRHmL4ikDa2wrLmxbJs1/sOdCvYuGJzh84dwWcN9ONN0nfNWr7UDA==",
-  "notes": "Testar conexão dos apps, ninguém fica trancado (QR no PC e chave nova para quem não tem), lista como no WhatsApp e arrastar entre pastas.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.4.3/Bots-mac-arm64.zip",
-  "signature_arm64": "Njmu0ULK4uWaZNzy/kAG7SL/qU48IgRZ7YY6Qld2/ygtCG42leptMpEL63CPCKUYGcGoZ+SP2J/n7HAHGt9UBw==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.4.3/Bots-mac-x86_64.zip",
-  "signature_x86_64": "TYscLGDaUeAsEmFA8EodF59rQSy/TyQtaVZ/TndiFmuwjX/n6OkvYN6wVS79eEln2YGCCGIc6/8lu0meiHnJDA=="
+  "version": "1.4.4",
+  "build": 109,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.4/Bots-mac.zip",
+  "signature": "Xf28dwGDjZSQhcWe9zTqV80TLnDz9veYZj6p45dZ7WcDtTbX7FNfIwqDbmWqoSRGSyI8EprVq5VoO3A6n6Q8AQ==",
+  "notes": "Briefing da edição num cartão só, líder de equipe contrata Bots, apps com o estado real da conexão e janelas novas.",
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.4.4/Bots-mac-arm64.zip",
+  "signature_arm64": "iMjer2hdocwsT/mjkx/VYcvTqFxcGhFLXmDurOztgiZvXGY+qd/lBlf1wUaEJPevLm+mh42GFzNROfxWBjCgBw==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.4.4/Bots-mac-x86_64.zip",
+  "signature_x86_64": "xndyO2pdCyNrkgTAKkTWqL9ZF6oR8k5o+ktSSqzbgprWxppuhZ4WwNXaaOk2XKgg/bkJJaNSt5RlOSZNCEQeAQ=="
 }
