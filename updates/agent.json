@@ -1,7 +1,7 @@
 {
-  "built_at": 1793285794,
-  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1793285794/botd-1793285794.tar.gz",
-  "signature": "rGvSyNqCY2pK33MT5POARw/pCbcLBmJ4El+Hc4+wTimWpHffsVNVrItxsWQ/9EVF86AsajvIBRPhyvXXQeaLCg==",
-  "lock": "539dc3c8fc1f5c46fd41c72e0bd5d5fe47366c51e8b418c5e548d6826c070d52",
-  "notes": "Apps que travam ao abrir não escondem mais os outros: o n8n chega ao Bot no Codex e no motor grátis"
+  "built_at": 1793409224,
+  "url": "https://github.com/alenkpedro/bots/releases/download/agent-1793409224/botd-1793409224.tar.gz",
+  "signature": "4Pbqf1tcuhAIrRGdpC0cYG4mjfZvrKhmP14J/p9uMFW8PiHUW4HaL0vn1tIRFrBgPXtnS5CkqeblTXIezag8BQ==",
+  "lock": "52d180eb39e8ed1a12e5a9ffdbec91d10b110708748737822e8654fae57d3666",
+  "notes": "Líder de equipe cria Bots, briefing da edição num cartão, etapas atualizadas no meio da tarefa, raciocínio no Claude e erros de apps no log."
 }
