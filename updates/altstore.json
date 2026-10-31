@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "1.4.5",
+          "version": "1.4.6",
           "date": "2026-10-31",
           "localizedDescription": "Melhorias e correções.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.4.5/Bots.ipa",
-          "size": 20815713,
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.4.6/Bots.ipa",
+          "size": 20827245,
           "minOSVersion": "18.0"
         }
       ]

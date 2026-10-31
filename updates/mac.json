@@ -1,11 +1,11 @@
 {
-  "version": "1.4.5",
-  "build": 110,
-  "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.5/Bots-mac.zip",
-  "signature": "E0q1Lgm7zp4c1qTfiDtzwTDOYZD2cBFK8eWRQHFnaOSyk6DvIdkmoyj2Y7mmQ6h9O3KWtaVn5c0bzwQWPhaOBw==",
+  "version": "1.4.6",
+  "build": 111,
+  "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.6/Bots-mac.zip",
+  "signature": "OZJyIP8LL8AvupMa4ZF27fNI+GpP1daRurNOUQH/fqdEoWvQJls5svpQp5BsY2UHAnb77B03RbsB4etERByQDQ==",
   "notes": "Melhorias e correções.",
-  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.4.5/Bots-mac-arm64.zip",
-  "signature_arm64": "0Tf6fjY6i4OV0bJS5nqS0HD+Xr3r/f30ZZH8+48vK5T0j/P8G9Sm78fRrSqnme1n2bA8UEfTBqT3K2x9KODcBg==",
-  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.4.5/Bots-mac-x86_64.zip",
-  "signature_x86_64": "bAS7U0/P9wa/tXVoYDpi1XUaX0AZj1IQ3QNqytLgwRxYxu35qFOyGG5r7+aM56T4P4jq+KvNa68NymmqpWA8Bg=="
+  "url_arm64": "https://github.com/alenkpedro/bots/releases/download/v1.4.6/Bots-mac-arm64.zip",
+  "signature_arm64": "xjZmZGsOXZuuhP7JPL1lWlEDilnyKGFwxH9btjkhWi9toW2NE1JfX/eYGomjC4MugwtzVGKbEjSBEubdC2onDg==",
+  "url_x86_64": "https://github.com/alenkpedro/bots/releases/download/v1.4.6/Bots-mac-x86_64.zip",
+  "signature_x86_64": "+D+NI0Rop5dqNY0FQSXz0xgBqH6BUdpmlqrcQpfznTKqdqkUNcZGjw71vI9ZNEHoc8UswHu5ML7wEw80SGWbCg=="
 }
