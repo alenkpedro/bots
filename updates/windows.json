@@ -1,19 +1,18 @@
 {
-  "version": "1.4.4",
-  "build": 109,
-  "notes": "Briefing da edição, líder de equipe contrata Bots, apps com o estado real da conexão.",
+  "version": "1.4.5",
+  "build": 110,
   "assets": {
     "x64": {
-      "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.4/Bots-1.4.4-Setup-x64.exe",
-      "signature": "zMo87tFnlBecM54XjU/1wrCnxKOJMXqh5oySc8FveBjJe3PphMTaVVR/QWHJtJYpFAqX6SVevamNQvdCCWB1Ag==",
-      "size": 177227752
+      "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.5/Bots-1.4.5-Setup-x64.exe",
+      "signature": "ppjQvDDQ3vkA0Tzb8TxXmreMB7AfyR17d/XMN59nyyBC1nt9G4PrcXimuY1R40VjzBH+oNQWWcr2tvDRYratDQ==",
+      "size": 177224439
     },
     "arm64": {
-      "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.4/Bots-1.4.4-Setup-arm64.exe",
-      "signature": "OnfX8aeHelQuHwbNdLB3JaNtd1geZ7G3a4dx1eAMj436s+bUC7OzFNSLItBpgpwuvb1ES/CXO3dGceM0UxYxDg==",
-      "size": 167566162
+      "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.5/Bots-1.4.5-Setup-arm64.exe",
+      "signature": "GLzeCnFBGJdtjbANMpF5f/SMTX1x5Ojwfo0vUUWLDmMYjhIiuFtpWeQhheRvIDI5F8JWexbTVSZ7KJDVa+MuCA==",
+      "size": 167562839
     }
   },
-  "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.4/Bots-1.4.4-Setup-x64.exe",
-  "signature": "zMo87tFnlBecM54XjU/1wrCnxKOJMXqh5oySc8FveBjJe3PphMTaVVR/QWHJtJYpFAqX6SVevamNQvdCCWB1Ag=="
+  "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.5/Bots-1.4.5-Setup-x64.exe",
+  "signature": "ppjQvDDQ3vkA0Tzb8TxXmreMB7AfyR17d/XMN59nyyBC1nt9G4PrcXimuY1R40VjzBH+oNQWWcr2tvDRYratDQ=="
 }
