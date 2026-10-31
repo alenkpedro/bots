@@ -1,18 +1,18 @@
 {
-  "version": "1.4.6",
-  "build": 112,
+  "version": "1.4.7",
+  "build": 113,
   "assets": {
     "x64": {
-      "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.6/Bots-1.4.6-Setup-x64.exe",
-      "signature": "p9SsZ0yJrKDf5Qix7NaYKlPnxhBmj1/9s9J4tFOJD0DuTO6Iv6tpr7imfx8OtJlNtVk6JDRBdcqBhAEDuiD3CA==",
-      "size": 177226728
+      "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.7/Bots-1.4.7-Setup-x64.exe",
+      "signature": "WWyGvLk8jH1RnBJ0YTOAnThr27GSCu+ODwAeLxeinXA+zTonXCL+slMxcoEqybUD0yZng3CR6lgvchooadzAAg==",
+      "size": 177228539
     },
     "arm64": {
-      "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.6/Bots-1.4.6-Setup-arm64.exe",
-      "signature": "H6R88niWgYMCG2OhAgToUpIsL+O7kXUuAuw5uJWG9RYp9UYX5k7rj/BrvDjra9oglDD9PYkLZhFSCmypfkYbBQ==",
-      "size": 167565173
+      "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.7/Bots-1.4.7-Setup-arm64.exe",
+      "signature": "JOgMc5Uo9uPSEw5kzqW7T9eJS9YpzGRkuNX/vFrco5JGIfKAM9saqgddeZ0LHn+LL2buFpB7ZrZ5Cgy1YNsWCQ==",
+      "size": 167566985
     }
   },
-  "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.6/Bots-1.4.6-Setup-x64.exe",
-  "signature": "p9SsZ0yJrKDf5Qix7NaYKlPnxhBmj1/9s9J4tFOJD0DuTO6Iv6tpr7imfx8OtJlNtVk6JDRBdcqBhAEDuiD3CA=="
+  "url": "https://github.com/alenkpedro/bots/releases/download/v1.4.7/Bots-1.4.7-Setup-x64.exe",
+  "signature": "WWyGvLk8jH1RnBJ0YTOAnThr27GSCu+ODwAeLxeinXA+zTonXCL+slMxcoEqybUD0yZng3CR6lgvchooadzAAg=="
 }
