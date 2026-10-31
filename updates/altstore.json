@@ -17,11 +17,11 @@
       "tintColor": "2F6FE4",
       "versions": [
         {
-          "version": "1.4.4",
+          "version": "1.4.5",
           "date": "2026-10-31",
-          "localizedDescription": "Briefing da edição num cartão só, líder de equipe contrata Bots, apps com o estado real da conexão e janelas novas.",
-          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.4.4/Bots.ipa",
-          "size": 20810377,
+          "localizedDescription": "Melhorias e correções.",
+          "downloadURL": "https://github.com/alenkpedro/bots/releases/download/v1.4.5/Bots.ipa",
+          "size": 20815713,
           "minOSVersion": "18.0"
         }
       ]
